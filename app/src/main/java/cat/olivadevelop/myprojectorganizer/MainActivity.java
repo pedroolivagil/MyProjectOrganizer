@@ -1,14 +1,15 @@
 package cat.olivadevelop.myprojectorganizer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import cat.olivadevelop.myprojectorganizer.tools.UrlDownloader;
 
 
@@ -33,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                //Log.e("URL", "" + Tools.run(url));
+                //Snackbar.make(view, "", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, NewProject.class);
+                startActivity(intent);
             }
         });
     }
