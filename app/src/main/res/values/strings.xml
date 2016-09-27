@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">My Project Organizer</string>
     <string name="action_settings">Settings</string>
-    <string name="pgd_loading">Leyendo datos...</string>
-    <string name="item_clic_toast">Has pulsado:</string>
+    <string name="pgd_loading">Loading projects...</string>
+    <string name="p_name">Project name</string>
+    <string name="p_select_home_img_cam">Capture photo from camera</string>
+    <string name="p_select_home_img_gal">Select photo from gallery</string>
+    <string name="action_send">Create</string>
+    <string name="toolbarNewProject">New project</string>
 </resources>

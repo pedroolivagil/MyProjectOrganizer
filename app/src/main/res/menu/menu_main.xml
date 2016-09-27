@@ -1,10 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="cat.olivadevelop.myprojectorganizer.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Search, should appear as action button -->
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_send"
+        android:icon="@drawable/ic_send_white_48dp"
+        android:title="@string/action_send"
+        app:showAsAction="ifRoom" />
 </menu>

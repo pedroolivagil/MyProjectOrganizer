@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +22,6 @@ import cat.olivadevelop.myprojectorganizer.R;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static android.widget.Toast.LENGTH_LONG;
 
 /**
  * Created by Oliva on 26/09/2016.
@@ -123,6 +120,6 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(mainActivity, getString(R.string.item_clic_toast), LENGTH_LONG).show();
+        //Toast.makeText(mainActivity, getString(R.string.item_clic_toast), LENGTH_LONG).show();
     }
 }
