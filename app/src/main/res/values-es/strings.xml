@@ -4,5 +4,9 @@
     <string name="pgd_loading">Cargando proyectos...</string>
     <string name="action_settings">Opciones</string>
     <string name="p_name">Nombre del proyecto</string>
-    <string name="p_select_home_img">Seleccione o coge una foto</string>
+    <string name="fail_pjt_name">Nombre del proyecto no debe estar vacío</string>
+    <string name="action_send">Crear</string>
+    <string name="p_select_home_img_cam">Haz una foto desde la cámara</string>
+    <string name="p_select_home_img_gal">Selecciona una desde la galería</string>
+    <string name="toolbarNewProject">Nuevo proyecto</string>
 </resources>

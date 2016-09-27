@@ -7,11 +7,13 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,6 +32,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     private String filename;
     private LinearLayout lytBtnCamera;
     private LinearLayout lytBtnGallery;
+    private EditText editPjctName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
         lytBtnCamera = (LinearLayout) findViewById(R.id.btnCamera);
         lytBtnGallery = (LinearLayout) findViewById(R.id.btnGalery);
+
+        editPjctName = (EditText) findViewById(R.id.edtProjectName);
 
         File file = new File(Tools.EXTERNAL_DIR);
         file.mkdirs();
@@ -97,6 +102,11 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
+            if (!editPjctName.getText().toString().equals("")) {
+
+            } else {
+                Snackbar.make(getWindow().getCurrentFocus(), getString(R.string.fail_pjt_name), Snackbar.LENGTH_LONG).show();
+            }
             return true;
         }
 

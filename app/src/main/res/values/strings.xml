@@ -7,4 +7,5 @@
     <string name="p_select_home_img_gal">Select photo from gallery</string>
     <string name="action_send">Create</string>
     <string name="toolbarNewProject">New project</string>
+    <string name="fail_pjt_name">Project name should not be empty</string>
 </resources>
