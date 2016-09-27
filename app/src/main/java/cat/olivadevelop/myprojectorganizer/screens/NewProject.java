@@ -7,6 +7,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,7 +59,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         if (view == lytBtnCamera) {
             filename = Tools.EXTERNAL_DIR + "home" + Tools.generateID() + ".jpg";
             intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            Uri output = Uri.fromFile(new File(filename));
+            Uri output = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(filename));
             intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
             code = TAKE_PICTURE;
             new MediaScannerConnection.MediaScannerConnectionClient() {
@@ -102,14 +103,10 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
-
+                // if all correct, procedure to next step, upload image to server and
+                // create json values and send to nextspetactivity
             } else {
-                Tools.newSnackBarWithIcon(
-                        getWindow().getCurrentFocus(),
-                        this,
-                        R.string.fail_pjt_name,
-                        R.drawable.ic_warning_white_24dp
-                ).show();
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp).show();
             }
             return true;
         }
@@ -132,6 +129,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                 ImageView iv = (ImageView) findViewById(R.id.image_thumb);
                 iv.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }
