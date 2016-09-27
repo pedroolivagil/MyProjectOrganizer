@@ -7,7 +7,6 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -105,7 +104,19 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
             if (!editPjctName.getText().toString().equals("")) {
 
             } else {
-                Snackbar.make(getWindow().getCurrentFocus(), getString(R.string.fail_pjt_name), Snackbar.LENGTH_LONG).show();
+                //.show();
+                /*Snackbar snackbar = Snackbar.make(getWindow().getCurrentFocus(), R.string.fail_pjt_name, Snackbar.LENGTH_LONG);
+                View snackbarLayout = snackbar.getView();
+                TextView textView = (TextView)snackbarLayout.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_warning_white_24dp, 0, 0, 0);
+                textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.snackbar_icon_padding));
+                snackbar.show();*/
+                Tools.newSnackBarWithIcon(
+                        getWindow().getCurrentFocus(),
+                        this,
+                        R.string.fail_pjt_name,
+                        R.drawable.ic_warning_white_24dp
+                ).show();
             }
             return true;
         }

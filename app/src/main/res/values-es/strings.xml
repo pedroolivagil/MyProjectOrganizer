@@ -9,4 +9,5 @@
     <string name="p_select_home_img_cam">Haz una foto desde la cámara</string>
     <string name="p_select_home_img_gal">Selecciona una desde la galería</string>
     <string name="toolbarNewProject">Nuevo proyecto</string>
+    <string name="new_project_instructions">- Introduce un nombre para tu proyecto.\n- Haz una foto o selecciona una de la galería que represente el proyecto (opcional, puedes hacerlo más tarde).</string>
 </resources>
