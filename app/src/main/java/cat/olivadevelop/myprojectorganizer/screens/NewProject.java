@@ -104,13 +104,6 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
             if (!editPjctName.getText().toString().equals("")) {
 
             } else {
-                //.show();
-                /*Snackbar snackbar = Snackbar.make(getWindow().getCurrentFocus(), R.string.fail_pjt_name, Snackbar.LENGTH_LONG);
-                View snackbarLayout = snackbar.getView();
-                TextView textView = (TextView)snackbarLayout.findViewById(android.support.design.R.id.snackbar_text);
-                textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_warning_white_24dp, 0, 0, 0);
-                textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.snackbar_icon_padding));
-                snackbar.show();*/
                 Tools.newSnackBarWithIcon(
                         getWindow().getCurrentFocus(),
                         this,
