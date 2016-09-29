@@ -50,6 +50,12 @@
             android:name=".screens.NewProjectFinish"
             android:label="@string/toolbarNewProjectFinish"
             android:parentActivityName=".screens.NewProject" />
+
+        <activity
+            android:name=".screens.FieldManager"
+            android:parentActivityName=".screens.NewProjectFinish"
+            android:label="@string/empty"
+            android:theme="@style/Transparent" />
     </application>
 
 </manifest>

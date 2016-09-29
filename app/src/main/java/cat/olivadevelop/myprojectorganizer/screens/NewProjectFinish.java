@@ -1,5 +1,6 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,12 +40,14 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
 
         // boton añadior campo
         btnAddField = (LinearLayout) findViewById(R.id.btnAddField);
+        btnAddField.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnAddField) {
-
+            Intent fieldManager = new Intent(NewProjectFinish.this, FieldManager.class);
+            startActivity(fieldManager);
         }
     }
 }

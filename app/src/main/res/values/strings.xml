@@ -14,4 +14,6 @@
     <string name="add_question_form">Add another field</string>
     <string name="description">Add a brief description</string>
     <string name="projectIsFinalized">Project finished</string>
+    <string name="empty" />
+    <string name="newField">New field</string>
 </resources>
