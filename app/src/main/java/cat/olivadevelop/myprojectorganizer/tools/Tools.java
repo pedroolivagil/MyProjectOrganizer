@@ -3,6 +3,7 @@ package cat.olivadevelop.myprojectorganizer.tools;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
@@ -26,6 +27,8 @@ public class Tools {
 
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
+    public final static String PREFS_NAME = "prefs_organizer";
+    private static SharedPreferences prefs;
 
     public static String getMD5(String input) {
         try {
@@ -97,5 +100,17 @@ public class Tools {
         String result = cursor.getString(column_index);
         cursor.close();
         return result;
+    }
+
+    public static SharedPreferences getPrefs() {
+        return prefs;
+    }
+
+    public static SharedPreferences.Editor putInPrefs() {
+        return prefs.edit();
+    }
+
+    public static void setPrefs(SharedPreferences prefs) {
+        Tools.prefs = prefs;
     }
 }
