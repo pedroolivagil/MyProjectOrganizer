@@ -13,5 +13,5 @@
     <string name="toolbarNewProjectFinish">Last step</string>
     <string name="add_question_form">Add another field</string>
     <string name="description">Add a brief description</string>
-    <string name="projectIsFinalized">Project finished?</string>
+    <string name="projectIsFinalized">Project finished</string>
 </resources>

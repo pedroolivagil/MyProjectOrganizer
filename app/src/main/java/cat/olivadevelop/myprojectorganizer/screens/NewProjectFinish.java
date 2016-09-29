@@ -3,7 +3,9 @@ package cat.olivadevelop.myprojectorganizer.screens;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -11,16 +13,18 @@ import java.io.File;
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-public class NewProjectFinish extends AppCompatActivity {
+public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
 
     private String projectName;
     private String projectImag;
+    private LinearLayout btnAddField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_project_finish);
 
+        //cabecera de proyecto
         projectName = getIntent().getExtras().getString("nameProject");
         projectImag = getIntent().getExtras().getString("imageProject");
 
@@ -33,5 +37,14 @@ public class NewProjectFinish extends AppCompatActivity {
             iv.setImageURI(Tools.getImageContentUri(this, new File(projectImag)));
         }
 
+        // boton añadior campo
+        btnAddField = (LinearLayout) findViewById(R.id.btnAddField);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnAddField) {
+
+        }
     }
 }

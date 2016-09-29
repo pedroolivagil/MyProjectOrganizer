@@ -43,21 +43,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/projectIsFinalized" />
+
         <EditText
             android:id="@+id/projectDescript"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/description" />
-
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/projectIsFinalized"/>
     </LinearLayout>
 
     <!--// boton añadir otro campo //-->
     <LinearLayout
-        android:id="@+id/btnAddQuestion"
+        android:id="@+id/btnAddField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
