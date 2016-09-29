@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,9 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     private LinearLayout lytBtnCamera;
     private LinearLayout lytBtnGallery;
     private EditText editPjctName;
+    public static final String id_client = "c508260d3dd0d72608864428f71b4571";
+    private String url = "http://projects.codeduo.cat/" + id_client + "/projects.json";
+    private ImageView image_thumb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
         lytBtnCamera = (LinearLayout) findViewById(R.id.btnCamera);
         lytBtnGallery = (LinearLayout) findViewById(R.id.btnGalery);
+        image_thumb = (ImageView) findViewById(R.id.image_thumb);
 
         editPjctName = (EditText) findViewById(R.id.edtProjectName);
 
@@ -104,7 +109,12 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
                 // if all correct, procedure to next step, upload image to server and
-                // create json values and send to nextspetactivity
+                Intent nextStep = new Intent(NewProject.this, NewProjectFinish.class);
+                nextStep.putExtra("nameProject", editPjctName.getText().toString());
+                Log.i("Filename", "" + filename);
+                nextStep.putExtra("imageProject", filename);
+
+                startActivity(nextStep);
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp).show();
             }
@@ -128,6 +138,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                 Bitmap bitmap = BitmapFactory.decodeStream(bis);
                 ImageView iv = (ImageView) findViewById(R.id.image_thumb);
                 iv.setImageBitmap(bitmap);
+                filename = Tools.getRealPathFromURI(this, selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

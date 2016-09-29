@@ -15,7 +15,6 @@ import cat.olivadevelop.myprojectorganizer.tools.UrlDownloader;
 public class MainActivity extends AppCompatActivity {
 
     public static final String id_client = "c508260d3dd0d72608864428f71b4571";
-
     private String url = "http://projects.codeduo.cat/" + id_client + "/projects.json";
 
     @Override
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // cargamos los projects del usuario
-        UrlDownloader.mainActivity = MainActivity.this;
+        UrlDownloader.activity = MainActivity.this;
         new UrlDownloader().execute(url);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

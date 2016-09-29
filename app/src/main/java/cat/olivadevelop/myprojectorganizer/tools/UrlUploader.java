@@ -5,9 +5,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,10 +12,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -26,7 +27,7 @@ import okhttp3.Response;
 /**
  * Created by Oliva on 26/09/2016.
  */
-public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implements AdapterView.OnItemClickListener {
+public class UrlUploader extends AsyncTask<String, Void, JSONObject> implements AdapterView.OnItemClickListener {
     ProgressDialog progressDialog;
     public static Activity activity;
     private ArrayList<HashMap<String, String>> arLstProjectList = new ArrayList<HashMap<String, String>>();
@@ -67,42 +68,59 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-
         try {
-            HashMap<String, String> hashmap;
-
             // despues de ejecutar el codigo: doInBackground(String... params)
             progressDialog.dismiss();
-            // cojer el array que queremos desde el archivo JSON
 
-            JSONArray category;
-            JSONObject jsonObjectLine;
+            // seleccionamos la etiqueta proyecto
+            JSONArray category = jsonObject.getJSONArray(CATEGORY);
 
-            category = jsonObject.getJSONArray(CATEGORY);
-            for (int z = 0; z < category.length(); z++) {
-                jsonObjectLine = category.getJSONObject(z);
+            /*
+            "id_project" : 1,
+			"name" : "La tortuga verde de ganchillo número 3",
+			"create_data" : "20-09-2016",
+			"last_update" : "23-09-2016",
+			"dir_files" : "http://projects.codeduo.cat/c508260d3dd0d72608864428f71b4571/project1",
+			"home_img" : "home.jpg",
+			"images" : [
+				"img1.jpg",
+				"img2.jpg"
+			],
+			"form" : {
+				"Tipo de pregunta 1" : "respuesta 1",
+				"Tipo de pregunta 2" : "respuesta 2",
+				"Tipo de pregunta 3" : "respuesta 3",
+				"Tipo de pregunta 4" : "respuesta 4",
+				"Tipo de pregunta 5" : "respuesta 5"
+			}*/
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
+            sdf.setTimeZone(TimeZone.getDefault());
+            String currentDate = sdf.format(new Date());
 
-                // añadir la clave-valor a un objeto HashMap
-                hashmap = new HashMap<String, String>();
-                hashmap.put(json_project_name, jsonObjectLine.getString(json_project_name));
-                hashmap.put(json_project_last_update, jsonObjectLine.getString(json_project_last_update));
-                hashmap.put(json_project_home_img, jsonObjectLine.getString(json_project_dir_files) + "/" + jsonObjectLine.getString(json_project_home_img)
-                );
+            JSONArray jsnImages = new JSONArray();
+            jsnImages.put(0, "url 1");
+            jsnImages.put(1, "url 2");
+            jsnImages.put(2, "url 3");
 
-                // añadir en la osList los valores
-                arLstProjectList.add(hashmap);
+            JSONObject jsnForm = new JSONObject();
+            jsnForm.put("Question 1", "answer 1");
+            jsnForm.put("Question 2", "answer 2");
+            jsnForm.put("Question 3", "answer 3");
+            jsnForm.put("Question 4", "answer 4");
 
-                ListView projectList = (ListView) activity.findViewById(R.id.projectList);
-                ListAdapter adapter = new SimpleAdapter(
-                        activity,              // Context
-                        arLstProjectList,                         // Lista de claves-valor
-                        R.layout.project_list,                 // view a la que queremos enlazar
-                        new String[]{json_project_name, json_project_last_update/*, json_project_home_img*/},    // array de los campos a insertar
-                        new int[]{R.id.projectName, R.id.projectLastUpdate/*, R.id.projectHomeImg*/}           // valores de los campos a insertar
-                );
-                projectList.setAdapter(adapter);
-                projectList.setOnItemClickListener(this);
-            }
+            JSONObject newjsonObject = new JSONObject();
+            newjsonObject.put("id_project", category.length());
+            newjsonObject.put("name", "");
+            newjsonObject.put("create_data", currentDate);
+            newjsonObject.put("last_update", currentDate);
+            newjsonObject.put("dir_files", "http://projects.codeduo.cat/" + NewProject.id_client + "/project1");
+            newjsonObject.put("home_img", "home.jpg");
+            newjsonObject.put("images", jsnImages);
+            newjsonObject.put("form", jsnForm);
+
+            // añadimos un nuevo proyecto con un nuevo jsonobject
+            category.put(category.length(), newjsonObject);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -112,7 +130,7 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage(getString(R.string.pgd_loading));
+        progressDialog.setMessage(getString(R.string.pgd_creating_project));
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(true);
         progressDialog.show();
