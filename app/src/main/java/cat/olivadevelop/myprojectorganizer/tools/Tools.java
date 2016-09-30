@@ -28,8 +28,11 @@ public class Tools {
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public final static String PREFS_NAME = "prefs_organizer";
-    public final static String USER_EMAIL = "email";
-    public final static String USER_URL = "url";
+    public static final String PREFS_USER_ID = "id_user";
+    public final static String PREFS_USER_EMAIL = "email";
+    public final static String PREFS_USER_URL = "url";
+    public final static String PROJECT_NAME = "nameProject";
+    public final static String PROJECT_IMG = "imageProject";
     private static SharedPreferences prefs;
 
     public static void init(Context c) {

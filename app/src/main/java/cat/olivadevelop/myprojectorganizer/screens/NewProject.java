@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,6 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     private LinearLayout lytBtnCamera;
     private LinearLayout lytBtnGallery;
     private EditText editPjctName;
-    public static final String id_client = "c508260d3dd0d72608864428f71b4571";
-    private String url = "http://projects.codeduo.cat/" + id_client + "/projects.json";
     private ImageView image_thumb;
 
     @Override
@@ -49,6 +46,9 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         image_thumb = (ImageView) findViewById(R.id.image_thumb);
 
         editPjctName = (EditText) findViewById(R.id.edtProjectName);
+        if (Tools.getPrefs().getString(Tools.PROJECT_NAME, null) != null) {
+            editPjctName.setText(Tools.getPrefs().getString(Tools.PROJECT_NAME, null));
+        }
 
         File file = new File(Tools.EXTERNAL_DIR);
         file.mkdirs();
@@ -108,12 +108,12 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
-                // if all correct, procedure to next step, upload image to server and
-                Intent nextStep = new Intent(this, NewProjectFinish.class);
-                nextStep.putExtra("nameProject", editPjctName.getText().toString());
-                Log.i("Filename", "" + filename);
-                nextStep.putExtra("imageProject", filename);
+                //procedure to next step
 
+                Tools.putInPrefs().putString(Tools.PROJECT_NAME, editPjctName.getText().toString()).apply();
+                Tools.putInPrefs().putString(Tools.PROJECT_IMG, filename).apply();
+
+                Intent nextStep = new Intent(this, NewProjectFinish.class);
                 startActivity(nextStep);
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp).show();

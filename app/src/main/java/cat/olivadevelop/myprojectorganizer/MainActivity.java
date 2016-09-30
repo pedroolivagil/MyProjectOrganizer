@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +15,9 @@ import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UrlDownloader;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /*public static final String id_client = "c508260d3dd0d72608864428f71b4571";
-
-    private String url = "http://projects.codeduo.cat/" + id_client + "/projects.json";*/
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,34 +25,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewProject.class);
-                startActivity(intent);
-            }
-        });
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == fab) {
+            Intent intent = new Intent(this, NewProject.class);
+            startActivity(intent);
+        }
     }
 
     @Override
     protected void onResume() {
-        if (Tools.getPrefs().getString(Tools.USER_EMAIL, null) == null) {
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
         }
-        
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        Log.i("email", "" + Tools.getPrefs().getString("email", ""));
-
         if (Tools.getPrefs().getString("url", null) != null) {
             // cargamos los projects del usuario
             UrlDownloader.activity = MainActivity.this;
             new UrlDownloader().execute(Tools.getPrefs().getString("url", null));
         }
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
         super.onResume();
     }
 

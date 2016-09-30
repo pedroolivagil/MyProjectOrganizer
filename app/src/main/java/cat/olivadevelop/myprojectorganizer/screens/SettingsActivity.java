@@ -24,8 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
 
         putEmailInPrefs = (EditText) findViewById(R.id.putEmailInPrefs);
-        if (Tools.getPrefs().getString(Tools.USER_EMAIL, null) != null){
-            putEmailInPrefs.setText(Tools.getPrefs().getString(Tools.USER_EMAIL, null));
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) != null){
+            putEmailInPrefs.setText(Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null));
         }
         super.onResume();
     }
@@ -48,8 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
             if (!putEmailInPrefs.getText().toString().equals("")) {
-                Tools.putInPrefs().putString(Tools.USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
-                Tools.putInPrefs().putString(Tools.USER_URL, "http://projects.codeduo.cat/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
+                Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
+                Tools.putInPrefs().putString(Tools.PREFS_USER_ID,Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
+                Tools.putInPrefs().putString(Tools.PREFS_USER_URL, "http://projects.codeduo.cat/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
 
                 //Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
                 Toast.makeText(this,R.string.settings_updated,Toast.LENGTH_LONG).show();

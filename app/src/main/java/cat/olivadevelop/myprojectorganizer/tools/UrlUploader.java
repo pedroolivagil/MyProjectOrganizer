@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -113,7 +112,7 @@ public class UrlUploader extends AsyncTask<String, Void, JSONObject> implements 
             newjsonObject.put("name", "");
             newjsonObject.put("create_data", currentDate);
             newjsonObject.put("last_update", currentDate);
-            newjsonObject.put("dir_files", "http://projects.codeduo.cat/" + NewProject.id_client + "/project1");
+            newjsonObject.put("dir_files", "http://projects.codeduo.cat/" + Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) + "/project1");
             newjsonObject.put("home_img", "home.jpg");
             newjsonObject.put("images", jsnImages);
             newjsonObject.put("form", jsnForm);
