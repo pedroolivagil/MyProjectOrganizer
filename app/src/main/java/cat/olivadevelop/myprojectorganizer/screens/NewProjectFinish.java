@@ -46,7 +46,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnAddField) {
-            Intent fieldManager = new Intent(NewProjectFinish.this, FieldManager.class);
+            Intent fieldManager = new Intent(this, FieldManager.class);
             startActivity(fieldManager);
         }
     }

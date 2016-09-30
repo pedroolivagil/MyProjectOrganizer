@@ -14,6 +14,13 @@
     <string name="add_question_form">Add another field</string>
     <string name="description">Add a brief description</string>
     <string name="projectIsFinalized">Project finished</string>
-    <string name="empty" />
+    <string name="empty" translatable="false" />
     <string name="newField">New field</string>
+    <string name="add_email">Add an email account</string>
+    <string name="headerEmail">Set up your account</string>
+    <string name="headerOtherConfigs">Other settings</string>
+    <string name="soon">Coming soon</string>
+    <string name="action_save">Save</string>
+    <string name="notnull_field">Email is required</string>
+    <string name="settings_updated">Configuration has been updated</string>
 </resources>

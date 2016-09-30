@@ -28,7 +28,13 @@ public class Tools {
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public final static String PREFS_NAME = "prefs_organizer";
+    public final static String USER_EMAIL = "email";
+    public final static String USER_URL = "url";
     private static SharedPreferences prefs;
+
+    public static void init(Context c) {
+        prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
+    }
 
     public static String getMD5(String input) {
         try {

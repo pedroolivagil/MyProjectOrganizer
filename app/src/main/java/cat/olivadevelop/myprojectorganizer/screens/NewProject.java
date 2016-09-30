@@ -94,7 +94,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_send_project, menu);
         return true;
     }
 
@@ -109,7 +109,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
                 // if all correct, procedure to next step, upload image to server and
-                Intent nextStep = new Intent(NewProject.this, NewProjectFinish.class);
+                Intent nextStep = new Intent(this, NewProjectFinish.class);
                 nextStep.putExtra("nameProject", editPjctName.getText().toString());
                 Log.i("Filename", "" + filename);
                 nextStep.putExtra("imageProject", filename);

@@ -15,4 +15,11 @@
     <string name="add_question_form">Añade otro campo</string>
     <string name="description">Añade una breve descripción</string>
     <string name="projectIsFinalized">Proyecto terminado</string>
+    <string name="add_email">Añade una cuenta de correo</string>
+    <string name="headerEmail">Configura tu cuenta</string>
+    <string name="headerOtherConfigs">Otras configuraciones</string>
+    <string name="soon">Próximamente</string>
+    <string name="action_save">Guardar</string>
+    <string name="notnull_field">El email es obligatorio</string>
+    <string name="settings_updated">La configuración ha sido actualizada</string>
 </resources>
