@@ -23,4 +23,6 @@
     <string name="action_save">Save</string>
     <string name="notnull_field">Email is required</string>
     <string name="settings_updated">Configuration has been updated</string>
+    <string name="detail_user_email">We do not ship or store your mail account. Encrypt your mail to serve as a handle for your projects.</string>
+    <string name="noProjectTitle">No projects found</string>
 </resources>

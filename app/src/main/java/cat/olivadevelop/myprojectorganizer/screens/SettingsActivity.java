@@ -1,33 +1,53 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
+import android.accounts.AccountManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText putEmailInPrefs;
+    private int REQUEST_CODE = 1;
+    private TextView putEmailInPrefs;
+    private LinearLayout changeEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-    }
 
-    @Override
-    protected void onResume() {
-
-        putEmailInPrefs = (EditText) findViewById(R.id.putEmailInPrefs);
-        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) != null){
+        putEmailInPrefs = (TextView) findViewById(R.id.putEmailInPrefs);
+        changeEmail = (LinearLayout) findViewById(R.id.changeEmail);
+        changeEmail.setOnClickListener(this);
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
+            setEmail();
+        } else {
             putEmailInPrefs.setText(Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null));
         }
-        super.onResume();
+    }
+
+    private void setEmail() {
+        Intent googlePicker = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE}, true, null, null, null, null);
+        startActivityForResult(googlePicker, REQUEST_CODE);
+    }
+
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+            putEmailInPrefs.setText(accountName);
+        }
     }
 
     @Override
@@ -49,11 +69,11 @@ public class SettingsActivity extends AppCompatActivity {
         if (id == R.id.action_save) {
             if (!putEmailInPrefs.getText().toString().equals("")) {
                 Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
-                Tools.putInPrefs().putString(Tools.PREFS_USER_ID,Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
+                Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
                 Tools.putInPrefs().putString(Tools.PREFS_USER_URL, "http://projects.codeduo.cat/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
 
                 //Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
-                Toast.makeText(this,R.string.settings_updated,Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.settings_updated, Toast.LENGTH_LONG).show();
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp).show();
             }
@@ -61,5 +81,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == changeEmail) {
+            setEmail();
+        }
     }
 }

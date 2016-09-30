@@ -19,12 +19,36 @@
         android:text="@string/headerEmail"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/putEmailInPrefs"
+    <LinearLayout
+        android:id="@+id/changeEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/add_email"
-        android:inputType="textEmailAddress" />
+        android:background="@color/gray_e"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:src="@drawable/ic_settings_white_48dp"
+            android:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/putEmailInPrefs"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/icon_size"
+            android:hint="@string/add_email"
+            android:textSize="@dimen/titleSize"
+            android:gravity="center"
+            android:minLines="1"
+            android:paddingLeft="@dimen/padding10" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detail_user_email"
+        android:textSize="@dimen/min_text" />
 
     <TextView
         android:layout_width="match_parent"

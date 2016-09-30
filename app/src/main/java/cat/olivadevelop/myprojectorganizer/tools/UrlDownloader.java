@@ -3,6 +3,7 @@ package cat.olivadevelop.myprojectorganizer.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -67,10 +68,8 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-
         try {
             HashMap<String, String> hashmap;
-
             // despues de ejecutar el codigo: doInBackground(String... params)
             progressDialog.dismiss();
             // cojer el array que queremos desde el archivo JSON
@@ -79,15 +78,36 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
             JSONObject jsonObjectLine;
 
             category = jsonObject.getJSONArray(CATEGORY);
-            for (int z = 0; z < category.length(); z++) {
-                jsonObjectLine = category.getJSONObject(z);
+            if (category.length() > 0) {
+                Log.i("CategoryLength +0", "" + category.length());
+                for (int z = 0; z < category.length(); z++) {
+                    jsonObjectLine = category.getJSONObject(z);
 
+                    // añadir la clave-valor a un objeto HashMap
+                    hashmap = new HashMap<String, String>();
+                    hashmap.put(json_project_name, jsonObjectLine.getString(json_project_name));
+                    hashmap.put(json_project_last_update, jsonObjectLine.getString(json_project_last_update));
+                    hashmap.put(json_project_home_img, jsonObjectLine.getString(json_project_dir_files) + "/" + jsonObjectLine.getString(json_project_home_img));
+
+                    // añadir en la osList los valores
+                    arLstProjectList.add(hashmap);
+
+                    ListView projectList = (ListView) activity.findViewById(R.id.projectList);
+                    ListAdapter adapter = new SimpleAdapter(
+                            activity,              // Context
+                            arLstProjectList,                         // Lista de claves-valor
+                            R.layout.project_list,                 // view a la que queremos enlazar
+                            new String[]{json_project_name, json_project_last_update/*, json_project_home_img*/},    // array de los campos a insertar
+                            new int[]{R.id.projectName, R.id.projectLastUpdate/*, R.id.projectHomeImg*/}           // valores de los campos a insertar
+                    );
+                    projectList.setAdapter(adapter);
+                    projectList.setOnItemClickListener(this);
+                }
+            } else {
+                Log.i("CategoryLength 0", "" + category.length());
                 // añadir la clave-valor a un objeto HashMap
                 hashmap = new HashMap<String, String>();
-                hashmap.put(json_project_name, jsonObjectLine.getString(json_project_name));
-                hashmap.put(json_project_last_update, jsonObjectLine.getString(json_project_last_update));
-                hashmap.put(json_project_home_img, jsonObjectLine.getString(json_project_dir_files) + "/" + jsonObjectLine.getString(json_project_home_img)
-                );
+                hashmap.put(json_project_name, getString(R.string.noProjectTitle));
 
                 // añadir en la osList los valores
                 arLstProjectList.add(hashmap);
@@ -96,9 +116,9 @@ public class UrlDownloader extends AsyncTask<String, Void, JSONObject> implement
                 ListAdapter adapter = new SimpleAdapter(
                         activity,              // Context
                         arLstProjectList,                         // Lista de claves-valor
-                        R.layout.project_list,                 // view a la que queremos enlazar
-                        new String[]{json_project_name, json_project_last_update/*, json_project_home_img*/},    // array de los campos a insertar
-                        new int[]{R.id.projectName, R.id.projectLastUpdate/*, R.id.projectHomeImg*/}           // valores de los campos a insertar
+                        R.layout.project_empty,                 // view a la que queremos enlazar
+                        new String[]{json_project_name},    // array de los campos a insertar
+                        new int[]{R.id.projectName}           // valores de los campos a insertar
                 );
                 projectList.setAdapter(adapter);
                 projectList.setOnItemClickListener(this);

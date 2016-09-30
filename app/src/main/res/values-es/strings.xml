@@ -22,4 +22,7 @@
     <string name="action_save">Guardar</string>
     <string name="notnull_field">El email es obligatorio</string>
     <string name="settings_updated">La configuración ha sido actualizada</string>
+    <string name="detail_user_email">No enviamos ni guardamos tu cuenta de correo. Encriptamos tu correo para servir de identificador para tus proyectos.</string>
+    <string name="newField">Nuevo campo</string>
+    <string name="noProjectTitle">No hay proyectos</string>
 </resources>

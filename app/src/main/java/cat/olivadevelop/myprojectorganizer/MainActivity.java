@@ -40,14 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
+        } else {
+            if (Tools.getPrefs().getString("url", null) != null) {
+                // cargamos los projects del usuario
+                UrlDownloader.activity = MainActivity.this;
+                new UrlDownloader().execute(Tools.getPrefs().getString("url", null));
+            }
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(this);
         }
-        if (Tools.getPrefs().getString("url", null) != null) {
-            // cargamos los projects del usuario
-            UrlDownloader.activity = MainActivity.this;
-            new UrlDownloader().execute(Tools.getPrefs().getString("url", null));
-        }
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
         super.onResume();
     }
 
