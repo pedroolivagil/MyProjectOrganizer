@@ -26,6 +26,7 @@ import cat.olivadevelop.myprojectorganizer.R;
 public class Tools {
 
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
+    public static final String HOSTNAME = "http://projects.codeduo.cat";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public final static String PREFS_NAME = "prefs_organizer";
     public static final String PREFS_USER_ID = "id_user";
