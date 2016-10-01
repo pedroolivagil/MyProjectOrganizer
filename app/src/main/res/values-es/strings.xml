@@ -25,4 +25,5 @@
     <string name="detail_user_email">No enviamos ni guardamos tu cuenta de correo. Encriptamos tu correo para servir de identificador para tus proyectos.</string>
     <string name="newField">Nuevo campo</string>
     <string name="noProjectTitle">No hay proyectos</string>
+    <string name="pgd_updating">Actualizando datos...</string>
 </resources>

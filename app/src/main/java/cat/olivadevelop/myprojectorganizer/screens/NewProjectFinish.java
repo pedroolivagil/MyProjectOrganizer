@@ -1,6 +1,5 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,8 +25,8 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_new_project_finish);
 
         //cabecera de proyecto
-        projectName = getIntent().getExtras().getString("nameProject");
-        projectImag = getIntent().getExtras().getString("imageProject");
+        projectName = Tools.getPrefs().getString(Tools.PROJECT_NAME,null);
+        projectImag = Tools.getPrefs().getString(Tools.PROJECT_IMG,null);
 
         TextView textView = (TextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
@@ -46,8 +45,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btnAddField) {
-            Intent fieldManager = new Intent(this, FieldManager.class);
-            startActivity(fieldManager);
+
         }
     }
 }

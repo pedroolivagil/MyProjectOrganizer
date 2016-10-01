@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             if (Tools.getPrefs().getString("url", null) != null) {
                 // cargamos los projects del usuario
-                UrlDownloader.activity = MainActivity.this;
-                new UrlDownloader().execute(Tools.getPrefs().getString("url", null));
+                new UrlDownloader(this).execute(Tools.getPrefs().getString("url", null));
             }
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);

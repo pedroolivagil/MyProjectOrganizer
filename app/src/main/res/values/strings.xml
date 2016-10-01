@@ -25,4 +25,5 @@
     <string name="settings_updated">Configuration has been updated</string>
     <string name="detail_user_email">We do not ship or store your mail account. Encrypt your mail to serve as a handle for your projects.</string>
     <string name="noProjectTitle">No projects found</string>
+    <string name="pgd_updating">Updating data</string>
 </resources>

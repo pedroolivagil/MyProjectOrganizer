@@ -111,7 +111,9 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                 //procedure to next step
 
                 Tools.putInPrefs().putString(Tools.PROJECT_NAME, editPjctName.getText().toString()).apply();
-                Tools.putInPrefs().putString(Tools.PROJECT_IMG, filename).apply();
+                if (filename != null) {
+                    Tools.putInPrefs().putString(Tools.PROJECT_IMG, filename).apply();
+                }
 
                 Intent nextStep = new Intent(this, NewProjectFinish.class);
                 startActivity(nextStep);

@@ -26,15 +26,15 @@ import cat.olivadevelop.myprojectorganizer.R;
 public class Tools {
 
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
-    public static final String HOSTNAME = "http://projects.codeduo.cat";
+    private static SharedPreferences prefs;
+    public final static String HOSTNAME = "http://projects.codeduo.cat";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public final static String PREFS_NAME = "prefs_organizer";
-    public static final String PREFS_USER_ID = "id_user";
+    public final static String PREFS_USER_ID = "id_user";
     public final static String PREFS_USER_EMAIL = "email";
     public final static String PREFS_USER_URL = "url";
     public final static String PROJECT_NAME = "nameProject";
     public final static String PROJECT_IMG = "imageProject";
-    private static SharedPreferences prefs;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -116,11 +116,11 @@ public class Tools {
         return prefs;
     }
 
-    public static SharedPreferences.Editor putInPrefs() {
-        return prefs.edit();
-    }
-
     public static void setPrefs(SharedPreferences prefs) {
         Tools.prefs = prefs;
+    }
+
+    public static SharedPreferences.Editor putInPrefs() {
+        return prefs.edit();
     }
 }

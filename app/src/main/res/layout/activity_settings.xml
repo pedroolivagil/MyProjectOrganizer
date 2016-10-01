@@ -36,11 +36,11 @@
             android:id="@+id/putEmailInPrefs"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/icon_size"
-            android:hint="@string/add_email"
-            android:textSize="@dimen/titleSize"
             android:gravity="center"
+            android:hint="@string/add_email"
             android:minLines="1"
-            android:paddingLeft="@dimen/padding10" />
+            android:paddingLeft="@dimen/padding10"
+            android:textSize="@dimen/titleSize" />
 
     </LinearLayout>
 
