@@ -23,6 +23,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
+
 /**
  * Created by Oliva on 26/09/2016.
  */
@@ -112,7 +114,7 @@ public class UrlUploader extends AsyncTask<String, Void, JSONObject> implements 
             newjsonObject.put("name", "");
             newjsonObject.put("create_data", currentDate);
             newjsonObject.put("last_update", currentDate);
-            newjsonObject.put("dir_files", "http://projects.codeduo.cat/" + Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) + "/project1");
+            newjsonObject.put("dir_files", HOSTNAME + "/" + Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) + "/project1");
             newjsonObject.put("home_img", "home.jpg");
             newjsonObject.put("images", jsnImages);
             newjsonObject.put("form", jsnForm);
