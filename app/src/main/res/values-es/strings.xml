@@ -32,4 +32,7 @@
     <string name="action_publish">Crear proyecto</string>
     <string name="action_start">Empezar proyecto</string>
     <string name="err_max_fields">Máximo 10 celdas</string>
+    <string name="action_clear_prefs">Restablecer</string>
+    <string name="prefs_clean">Se han restablecido las preferencias</string>
+    <string name="update">Actualizar lista</string>
 </resources>

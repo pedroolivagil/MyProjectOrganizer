@@ -32,7 +32,7 @@
     <string name="unableToConnect">Could not connect to server</string>
     <string name="action_publish">Create project</string>
     <string name="err_max_fields">Maximum 10 cells</string>
-    <string name="update">Update</string>
-    <string name="action_clear_prefs">Clear Prefs</string>
-    <string name="prefs_clean">Preferences is now empty</string>
+    <string name="update">Update list</string>
+    <string name="action_clear_prefs">Restore</string>
+    <string name="prefs_clean">Preferences have been reset</string>
 </resources>
