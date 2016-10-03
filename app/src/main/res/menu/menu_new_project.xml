@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_send"
-        android:icon="@drawable/ic_send_white_48dp"
+        android:icon="@drawable/ic_arrow_forward_white_24dp"
         android:title="@string/action_start"
         app:showAsAction="ifRoom" />
 </menu>

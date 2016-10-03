@@ -2,12 +2,14 @@ package cat.olivadevelop.myprojectorganizer.tools;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
 import java.net.URL;
 
+import cat.olivadevelop.myprojectorganizer.MainActivity;
 import cat.olivadevelop.myprojectorganizer.R;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -38,16 +40,17 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
         URL url;
         try {
             RequestBody formBody = params[0];
-            url = new URL(HOSTNAME + "/create_project.php");
+            url = new URL(HOSTNAME + "/php/create_project.php");
             Log.i("URL", url.toString());
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
-                    .post(formBody)
+                    .method("POST", formBody)
+                    //.post(formBody)
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();
-            Log.i("RESULT", "" + resStr);
+            Log.i("RESULT FINAL", "" + response.message());
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +62,9 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         progressDialog.dismiss();
-        //Tools.cleanProjectPrefs();
+        Tools.cleanProjectPrefs();
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override

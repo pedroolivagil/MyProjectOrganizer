@@ -33,4 +33,6 @@
     <string name="action_publish">Create project</string>
     <string name="err_max_fields">Maximum 10 cells</string>
     <string name="update">Update</string>
+    <string name="action_clear_prefs">Clear Prefs</string>
+    <string name="prefs_clean">Preferences is now empty</string>
 </resources>

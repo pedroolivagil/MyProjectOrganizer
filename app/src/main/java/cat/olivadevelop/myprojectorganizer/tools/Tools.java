@@ -29,6 +29,7 @@ public class Tools {
     private static SharedPreferences prefs;
     public final static String HOSTNAME = "http://projects.codeduo.cat";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
+    public static final String PROJECTS_FILENAME = "projects.json";
     public final static String PREFS_NAME = "prefs_organizer";
     public final static String PREFS_USER_ID = "id_user";
     public final static String PREFS_USER_EMAIL = "email";
@@ -131,5 +132,9 @@ public class Tools {
 
     public static String getUserID() {
         return Tools.getPrefs().getString(Tools.PREFS_USER_ID, "");
+    }
+
+    public static String getUserEmail() {
+        return Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, "");
     }
 }

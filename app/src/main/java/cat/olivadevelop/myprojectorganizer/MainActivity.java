@@ -15,7 +15,7 @@ import cat.olivadevelop.myprojectorganizer.screens.SettingsActivity;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.PREFS_USER_URL;
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,30 +31,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
+        Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
+
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
+            Intent settings = new Intent(this, SettingsActivity.class);
+            startActivity(settings);
+        } else {
+            // cargamos los projects del usuario
+            loadProjects();
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(this);
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == fab) {
             Intent intent = new Intent(this, NewProject.class);
             startActivity(intent);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
-            Intent settings = new Intent(this, SettingsActivity.class);
-            startActivity(settings);
-        } else {
-            if (Tools.getPrefs().getString("url", null) != null) {
-                // cargamos los projects del usuario
-                new MainLoader(this).execute(Tools.getPrefs().getString(PREFS_USER_URL, null));
-            }
-            fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(this);
-        }
-        Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
-        Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
-        Log.i(Tools.PREFS_USER_URL, Tools.getPrefs().getString(Tools.PREFS_USER_URL, ""));
-        super.onResume();
     }
 
     @Override
@@ -77,9 +75,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if (id == R.id.action_auto_update) {
-            new MainLoader(this).execute(Tools.getPrefs().getString(PREFS_USER_URL, null));
+            loadProjects();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadProjects() {
+        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
     }
 }

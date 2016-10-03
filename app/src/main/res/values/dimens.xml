@@ -8,6 +8,7 @@
     <dimen name="titleSize">20sp</dimen>
     <dimen name="min_text">12sp</dimen>
     <dimen name="icon_size">40dp</dimen>
+    <dimen name="icon_size_60">60dp</dimen>
     <dimen name="padding10">10dp</dimen>
     <dimen name="label_width">10dp</dimen>
     <dimen name="fields_height">2dp</dimen>

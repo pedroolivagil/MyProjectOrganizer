@@ -25,7 +25,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.PREFS_USER_URL;
 
 /**
  * Created by Oliva on 26/09/2016.
@@ -62,8 +61,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     @Override
     protected RequestBody doInBackground(Void... urls) {
         try {
-            Log.i("URL", Tools.getPrefs().getString(PREFS_USER_URL, null));
-            URL url = new URL(Tools.getPrefs().getString(PREFS_USER_URL, null));
+            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
@@ -98,7 +96,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             newjsonObject.put("name", pjtName);
             newjsonObject.put("create_data", currentDate);
             newjsonObject.put("last_update", currentDate);
-            newjsonObject.put("dir_files", HOSTNAME + "/" + Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) + "/project" + (category.length()));
+            newjsonObject.put("dir_files", "/project" + ((category.length()) - 1));
             newjsonObject.put("home_img", "home.jpg");
             newjsonObject.put("images", jsnImages);
             newjsonObject.put("form", jsnForm);
@@ -114,27 +112,8 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             RequestBody formBody = new FormBody.Builder()
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
-                    .add("projectName", "project" + (category.length()))
+                    .add("projectName", "project" + ((category.length()) - 1))
                     .build();
-
-
-            // insertamos el proyecto en la web
-            /*URL url2 = new URL(HOSTNAME + "/create_pjt.php");
-            HttpURLConnection con = (HttpURLConnection) url2.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            OutputStream OS = con.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-            String data = URLEncoder.encode("id_client", "UTF-8") + "=" + URLEncoder.encode("" + Tools.getUserID(), "UTF-8") + "&" +
-                    URLEncoder.encode("projectName", "UTF-8") + "=" + URLEncoder.encode("project" + category.length(), "UTF-8") + "&" +
-                    URLEncoder.encode("jsonObject", "UTF-8") + "=" + URLEncoder.encode(json.toString(), "UTF-8");
-            bufferedWriter.write(data);
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            OS.close();
-            InputStream IS = con.getInputStream();
-            IS.close();*/
-
             return formBody;
         } catch (IOException | JSONException e) {
             e.printStackTrace();

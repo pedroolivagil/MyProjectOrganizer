@@ -16,14 +16,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.File;
 import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
 
@@ -75,7 +76,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         int id = item.getItemId();
         if (id == R.id.action_publish_project) {
             HashMap<String, String> values = new HashMap<>();
-            values.put(CreateProject.FINISH_PJT, String.valueOf(((CheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
+            values.put("" + CreateProject.FINISH_PJT, String.valueOf(((CheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
             //values.put(getString(R.string.label_description), ((EditText) findViewById(R.id.projectDescript)).getText().toString()); // descript
             for (int x = 1; x <= countFields; x++) {
                 LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
@@ -103,12 +104,20 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
             if (countFields >= 10) {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.err_max_fields, R.drawable.ic_warning_white_24dp).show();
             } else {
+                final ScrollView scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
                 generateNewField(countFields, R.string.type_field, R.string.value_field, true);
+                scrollview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                });
             }
         }
     }
 
     private void generateNewField(int id, int idStringLabel, int idStringValue, boolean labelText) {
+
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT

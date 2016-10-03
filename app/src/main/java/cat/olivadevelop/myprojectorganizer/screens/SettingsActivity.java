@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
@@ -17,8 +16,6 @@ import com.google.android.gms.common.AccountPicker;
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
-
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -50,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
             putEmailInPrefs.setText(accountName);
+            saveEmail();
         }
     }
 
@@ -68,13 +66,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) {
             if (!putEmailInPrefs.getText().toString().equals("")) {
                 saveEmail();
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp).show();
             }
+            return true;
+        }
+        if (id == R.id.action_clear_prefs) {
+            Tools.putInPrefs().clear().apply();
+            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.prefs_clean, R.drawable.ic_warning_white_24dp).show();
             return true;
         }
 
@@ -91,10 +93,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public void saveEmail() {
         Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
         Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
-        Tools.putInPrefs().putString(Tools.PREFS_USER_URL, HOSTNAME + "/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
+        //Tools.putInPrefs().putString(Tools.PREFS_USER_URL, HOSTNAME + "/clients/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
 
-        //Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
-        Toast.makeText(this, R.string.settings_updated, Toast.LENGTH_LONG).show();
+        Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
+        //Toast.makeText(this, R.string.settings_updated, Toast.LENGTH_LONG).show();
         new UploadToServer(this).execute();
     }
 }
