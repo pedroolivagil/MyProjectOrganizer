@@ -123,4 +123,13 @@ public class Tools {
     public static SharedPreferences.Editor putInPrefs() {
         return prefs.edit();
     }
+
+    public static void cleanProjectPrefs() {
+        Tools.putInPrefs().putString(Tools.PROJECT_NAME, "").apply();
+        Tools.putInPrefs().putString(Tools.PROJECT_IMG, "").apply();
+    }
+
+    public static String getUserID() {
+        return Tools.getPrefs().getString(Tools.PREFS_USER_ID, "");
+    }
 }

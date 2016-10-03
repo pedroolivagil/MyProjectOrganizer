@@ -94,7 +94,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_send_project, menu);
+        getMenuInflater().inflate(R.menu.menu_new_project, menu);
         return true;
     }
 
@@ -128,21 +128,23 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == TAKE_PICTURE) {
-            ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-            iv.setImageBitmap(BitmapFactory.decodeFile(filename));
-        } else if (requestCode == SELECT_PICTURE) {
-            try {
-                Uri selectedImage = data.getData();
-                InputStream is;
-                is = getContentResolver().openInputStream(selectedImage);
-                BufferedInputStream bis = new BufferedInputStream(is);
-                Bitmap bitmap = BitmapFactory.decodeStream(bis);
+        if (data != null) {
+            if (requestCode == TAKE_PICTURE) {
                 ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-                iv.setImageBitmap(bitmap);
-                filename = Tools.getRealPathFromURI(this, selectedImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                iv.setImageBitmap(BitmapFactory.decodeFile(filename));
+            } else if (requestCode == SELECT_PICTURE) {
+                try {
+                    Uri selectedImage = data.getData();
+                    InputStream is;
+                    is = getContentResolver().openInputStream(selectedImage);
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    Bitmap bitmap = BitmapFactory.decodeStream(bis);
+                    ImageView iv = (ImageView) findViewById(R.id.image_thumb);
+                    iv.setImageBitmap(bitmap);
+                    filename = Tools.getRealPathFromURI(this, selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

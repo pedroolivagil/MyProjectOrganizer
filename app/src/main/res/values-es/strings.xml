@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Organizador de proyectos</string>
-    <string name="pgd_loading">Cargando proyectos...</string>
+    <string name="pgd_loading">Cargando proyectos…</string>
     <string name="action_settings">Opciones</string>
     <string name="p_name">Nombre del proyecto</string>
     <string name="fail_pjt_name">Nombre del proyecto no debe estar vacío</string>
-    <string name="action_send">Crear</string>
     <string name="p_select_home_img_cam">Haz una foto desde la cámara</string>
     <string name="p_select_home_img_gal">Selecciona una desde la galería</string>
     <string name="toolbarNewProject">Nuevo proyecto</string>
     <string name="new_project_instructions">- Introduce un nombre para tu proyecto.\n- Haz una foto o selecciona una de la galería que represente el proyecto (opcional, puedes hacerlo más tarde).</string>
-    <string name="pgd_creating_project">Creando proyecto...</string>
+    <string name="pgd_creating_project">Creando proyecto…</string>
     <string name="toolbarNewProjectFinish">Último paso</string>
     <string name="add_question_form">Añade otro campo</string>
     <string name="description">Añade una breve descripción</string>
@@ -25,5 +24,12 @@
     <string name="detail_user_email">No enviamos ni guardamos tu cuenta de correo. Encriptamos tu correo para servir de identificador para tus proyectos.</string>
     <string name="newField">Nuevo campo</string>
     <string name="noProjectTitle">No hay proyectos</string>
-    <string name="pgd_updating">Actualizando datos...</string>
+    <string name="pgd_updating">Actualizando datos…</string>
+    <string name="type_field">Tipo de valor, ej: Tiempo de proyecto</string>
+    <string name="value_field">Entra un valor, ej: 2h</string>
+    <string name="label_description">Descripción</string>
+    <string name="unableToConnect">No se pudo conectar con el servidor</string>
+    <string name="action_publish">Crear proyecto</string>
+    <string name="action_start">Empezar proyecto</string>
+    <string name="err_max_fields">Máximo 10 celdas</string>
 </resources>

@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import cat.olivadevelop.myprojectorganizer.screens.SettingsActivity;
+import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
-import cat.olivadevelop.myprojectorganizer.tools.UrlDownloader;
+
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.PREFS_USER_URL;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,11 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             if (Tools.getPrefs().getString("url", null) != null) {
                 // cargamos los projects del usuario
-                new UrlDownloader(this).execute(Tools.getPrefs().getString("url", null));
+                new MainLoader(this).execute(Tools.getPrefs().getString(PREFS_USER_URL, null));
             }
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
         }
+        Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
+        Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
+        Log.i(Tools.PREFS_USER_URL, Tools.getPrefs().getString(Tools.PREFS_USER_URL, ""));
         super.onResume();
     }
 
@@ -69,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        }
+        if (id == R.id.action_auto_update) {
+            new MainLoader(this).execute(Tools.getPrefs().getString(PREFS_USER_URL, null));
         }
 
         return super.onOptionsItemSelected(item);
