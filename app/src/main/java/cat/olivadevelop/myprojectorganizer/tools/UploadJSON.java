@@ -46,7 +46,6 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
             Request request = new Request.Builder()
                     .url(url)
                     .method("POST", formBody)
-                    //.post(formBody)
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();

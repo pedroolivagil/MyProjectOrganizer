@@ -43,6 +43,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     public static final String FINISH_PJT = "finished";
     private String clsPjtName;
     private String pjtName;
+    private String ba1;
     private Activity activity;
     private ProgressDialog progressDialog;
     private HashMap<String, String> values = new HashMap<String, String>();
@@ -52,6 +53,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
         this.clsPjtName = pjtName.toLowerCase().replaceAll("\\W\\s", "");
         this.activity = activity;
         this.values = values;
+        this.ba1 = "";
     }
 
     private String getString(int id_string) {
@@ -96,7 +98,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             newjsonObject.put("name", pjtName);
             newjsonObject.put("create_data", currentDate);
             newjsonObject.put("last_update", currentDate);
-            newjsonObject.put("dir_files", "/project" + ((category.length()) - 1));
+            newjsonObject.put("dir_files", "/project" + (category.length()));
             newjsonObject.put("home_img", "home.jpg");
             newjsonObject.put("images", jsnImages);
             newjsonObject.put("form", jsnForm);
@@ -115,6 +117,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     .add("projectName", "project" + ((category.length()) - 1))
                     .build();
             return formBody;
+
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

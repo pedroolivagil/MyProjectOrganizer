@@ -3,7 +3,6 @@ package cat.olivadevelop.myprojectorganizer.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -83,7 +82,6 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
 
                 category = jsonObject.getJSONArray(CATEGORY);
                 if (category.length() > 0) {
-                    Log.i("CategoryLength +0", "" + category.length());
                     for (int z = 0; z < category.length(); z++) {
                         jsonObjectLine = category.getJSONObject(z);
 
@@ -108,7 +106,6 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                         projectList.setOnItemClickListener(this);
                     }
                 } else {
-                    Log.i("CategoryLength 0", "" + category.length());
                     // añadir la clave-valor a un objeto HashMap
                     hashmap = new HashMap<String, String>();
                     hashmap.put(json_project_name, getString(R.string.noProjectTitle));
@@ -131,7 +128,6 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                 e.printStackTrace();
             }
         } else {
-            Log.i("CategoryNULL", "");
             // añadir la clave-valor a un objeto HashMap
             hashmap = new HashMap<String, String>();
             hashmap.put(json_project_name, getString(R.string.unableToConnect));

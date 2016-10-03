@@ -109,7 +109,6 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
                 //procedure to next step
-
                 Tools.putInPrefs().putString(Tools.PROJECT_NAME, editPjctName.getText().toString()).apply();
                 if (filename != null) {
                     Tools.putInPrefs().putString(Tools.PROJECT_IMG, filename).apply();
@@ -128,11 +127,11 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            if (requestCode == TAKE_PICTURE) {
-                ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-                iv.setImageBitmap(BitmapFactory.decodeFile(filename));
-            } else if (requestCode == SELECT_PICTURE) {
+        if (requestCode == TAKE_PICTURE) {
+            ImageView iv = (ImageView) findViewById(R.id.image_thumb);
+            iv.setImageBitmap(BitmapFactory.decodeFile(filename));
+        } else if (requestCode == SELECT_PICTURE) {
+            if (data != null) {
                 try {
                     Uri selectedImage = data.getData();
                     InputStream is;
