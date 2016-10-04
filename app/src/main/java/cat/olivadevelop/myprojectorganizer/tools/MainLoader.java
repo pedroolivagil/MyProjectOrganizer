@@ -85,11 +85,11 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                     for (int z = 0; z < category.length(); z++) {
                         jsonObjectLine = category.getJSONObject(z);
 
+
                         // añadir la clave-valor a un objeto HashMap
                         hashmap = new HashMap<String, String>();
                         hashmap.put(json_project_name, jsonObjectLine.getString(json_project_name));
                         hashmap.put(json_project_last_update, jsonObjectLine.getString(json_project_last_update));
-                        hashmap.put(json_project_home_img, jsonObjectLine.getString(json_project_dir_files) + "/" + jsonObjectLine.getString(json_project_home_img));
 
                         // añadir en la osList los valores
                         arLstProjectList.add(hashmap);
@@ -99,8 +99,8 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                                 activity,              // Context
                                 arLstProjectList,                         // Lista de claves-valor
                                 R.layout.project_list,                 // view a la que queremos enlazar
-                                new String[]{json_project_name, json_project_last_update/*, json_project_home_img*/},    // array de los campos a insertar
-                                new int[]{R.id.projectName, R.id.projectLastUpdate/*, R.id.projectHomeImg*/}           // valores de los campos a insertar
+                                new String[]{json_project_name, json_project_last_update},    // array de los campos a insertar
+                                new int[]{R.id.projectName, R.id.projectLastUpdate}           // valores de los campos a insertar
                         );
                         projectList.setAdapter(adapter);
                         projectList.setOnItemClickListener(this);

@@ -2,13 +2,17 @@ package cat.olivadevelop.myprojectorganizer.tools;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -110,11 +114,24 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             Log.i("JSON", URLEncoder.encode(json.toString(), "UTF-8"));
             Log.i("IDCLIENT", Tools.getUserID());
 
+            Log.e("path", "----------------" + Tools.getPicturePath());
+            if (Tools.getPicturePath() != null) {
+                // Image
+                Bitmap bm = BitmapFactory.decodeFile(Tools.getPicturePath());
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+                byte[] ba = bao.toByteArray();
+                ba1 = Base64.encodeToString(ba, Base64.DEFAULT);
+
+                Log.e("base64", "-----" + ba1);
+            }
+
             // actualizamos el json del server
             RequestBody formBody = new FormBody.Builder()
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
                     .add("projectName", "project" + ((category.length()) - 1))
+                    .add("img_base64", ba1)
                     .build();
             return formBody;
 

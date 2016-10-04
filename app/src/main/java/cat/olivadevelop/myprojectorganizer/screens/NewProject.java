@@ -1,6 +1,7 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -127,13 +129,15 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Uri selectedImage = null;
         if (requestCode == TAKE_PICTURE) {
             ImageView iv = (ImageView) findViewById(R.id.image_thumb);
             iv.setImageBitmap(BitmapFactory.decodeFile(filename));
+            selectedImage = Tools.getImageContentUri(this, new File(filename));
         } else if (requestCode == SELECT_PICTURE) {
             if (data != null) {
                 try {
-                    Uri selectedImage = data.getData();
+                    selectedImage = data.getData();
                     InputStream is;
                     is = getContentResolver().openInputStream(selectedImage);
                     BufferedInputStream bis = new BufferedInputStream(is);
@@ -144,6 +148,18 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+        if (selectedImage != null) {
+            // Cursor to get image uri to display
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                Log.i("Cursor", "" + cursor.getString(columnIndex));
+                Tools.setPicturePath(cursor.getString(columnIndex));
+                cursor.close();
             }
         }
     }

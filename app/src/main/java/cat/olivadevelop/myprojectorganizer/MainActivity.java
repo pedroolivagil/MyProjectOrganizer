@@ -21,6 +21,7 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     FloatingActionButton fab;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        this.menu = menu;
         return true;
     }
 

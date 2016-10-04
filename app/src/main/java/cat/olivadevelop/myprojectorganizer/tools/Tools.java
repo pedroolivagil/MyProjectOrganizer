@@ -26,6 +26,7 @@ import cat.olivadevelop.myprojectorganizer.R;
 public class Tools {
 
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
+    private static final String PICTURE_PATH = "picture_path";
     private static SharedPreferences prefs;
     public final static String HOSTNAME = "http://projects.codeduo.cat";
     public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
@@ -36,6 +37,7 @@ public class Tools {
     public final static String PREFS_USER_URL = "url";
     public final static String PROJECT_NAME = "nameProject";
     public final static String PROJECT_IMG = "imageProject";
+    private static String picturePath;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -87,6 +89,7 @@ public class Tools {
                 MediaStore.Images.Media.DATA + "=? ",
                 new String[]{filePath}, null);
         if (cursor != null && cursor.moveToFirst()) {
+
             int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
             cursor.close();
             return Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + id);
@@ -136,5 +139,13 @@ public class Tools {
 
     public static String getUserEmail() {
         return Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, "");
+    }
+
+    public static void setPicturePath(String picturePath) {
+        Tools.putInPrefs().putString(Tools.PICTURE_PATH, picturePath).apply();
+    }
+
+    public static String getPicturePath() {
+        return Tools.getPrefs().getString(Tools.PICTURE_PATH, null);
     }
 }

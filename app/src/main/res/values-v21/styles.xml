@@ -6,4 +6,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <!-- displays the overflow menu below the toolbar-->
+    <style name="OverflowMenu" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:dropDownVerticalOffset">4dp</item>
+        <item name="overlapAnchor">false</item>
+    </style>
 </resources>
