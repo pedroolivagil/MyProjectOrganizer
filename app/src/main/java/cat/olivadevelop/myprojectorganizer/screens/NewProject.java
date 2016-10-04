@@ -132,7 +132,10 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         Uri selectedImage = null;
         if (requestCode == TAKE_PICTURE) {
             ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-            iv.setImageBitmap(BitmapFactory.decodeFile(filename));
+            //iv.setImageBitmap(BitmapFactory.decodeFile(filename));
+            Bitmap b = BitmapFactory.decodeFile(filename);
+            b = Tools.getResizedBitmap(b, .7f);
+            iv.setImageBitmap(b);
             selectedImage = Tools.getImageContentUri(this, new File(filename));
         } else if (requestCode == SELECT_PICTURE) {
             if (data != null) {
@@ -141,9 +144,10 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                     InputStream is;
                     is = getContentResolver().openInputStream(selectedImage);
                     BufferedInputStream bis = new BufferedInputStream(is);
-                    Bitmap bitmap = BitmapFactory.decodeStream(bis);
+                    Bitmap b = BitmapFactory.decodeStream(bis);
+                    b = Tools.getResizedBitmap(b, .7f);
                     ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-                    iv.setImageBitmap(bitmap);
+                    iv.setImageBitmap(b);
                     filename = Tools.getRealPathFromURI(this, selectedImage);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

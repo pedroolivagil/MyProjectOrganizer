@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -147,5 +149,21 @@ public class Tools {
 
     public static String getPicturePath() {
         return Tools.getPrefs().getString(Tools.PICTURE_PATH, null);
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap bm, float scaleXY) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        //matrix.postScale(scaleWidth, scaleHeight);
+        matrix.postScale(scaleXY, scaleXY);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 }

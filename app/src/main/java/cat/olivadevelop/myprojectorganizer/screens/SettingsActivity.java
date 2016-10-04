@@ -70,16 +70,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             if (!putEmailInPrefs.getText().toString().equals("")) {
                 saveEmail();
             } else {
-                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp).show();
+                Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp).show();
             }
             return true;
-        }
-        if (id == R.id.action_clear_prefs) {
+        } else if (id == R.id.action_clear_prefs) {
             Tools.putInPrefs().clear().apply();
             Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.prefs_clean, R.drawable.ic_warning_white_24dp).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -93,10 +91,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public void saveEmail() {
         Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
         Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
-        //Tools.putInPrefs().putString(Tools.PREFS_USER_URL, HOSTNAME + "/clients/" + Tools.encrypt(putEmailInPrefs.getText().toString()) + "/projects.json").apply();
 
         Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
-        //Toast.makeText(this, R.string.settings_updated, Toast.LENGTH_LONG).show();
         new UploadToServer(this).execute();
     }
 }

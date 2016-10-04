@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:scaleType="center"
-                android:src="@drawable/ic_crop_free_black_48dp" />
+                android:src="@drawable/ic_crop_free_black_48dp"/>
         </LinearLayout>
 
     </LinearLayout>
