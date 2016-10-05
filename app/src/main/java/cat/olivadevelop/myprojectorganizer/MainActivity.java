@@ -3,6 +3,7 @@ package cat.olivadevelop.myprojectorganizer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FloatingActionButton fab;
     ListView list;
     LazyAdapter adapter;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loadProjects();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
+            // Obtener el refreshLayout
+            refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+
+            // Iniciar la tarea asíncrona al revelar el indicador
+            refreshLayout.setOnRefreshListener(
+                    new SwipeRefreshLayout.OnRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+                            if (refreshLayout.isRefreshing()) {
+                                Tools.newSnackBar(getCurrentFocus(), MainActivity.this, R.string.reloading);
+                            }
+                            loadProjects();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    refreshLayout.setRefreshing(false);
+                                }
+                            });
+                        }
+                    }
+            );
         }
     }
 

@@ -59,4 +59,12 @@ public class LazyAdapter extends BaseAdapter {
         imageLoader.DisplayImage(data[position], image);
         return vi;
     }
+
+    /*
+    Permite limpiar todos los elementos del recycler
+     */
+    public void clear(){
+        notifyDataSetChanged();
+    }
+
 }
