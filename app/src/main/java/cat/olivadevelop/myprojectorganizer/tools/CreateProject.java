@@ -34,6 +34,7 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
  * Created by Oliva on 26/09/2016.
  */
 public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
+    public static final String FINISH_PJT = "finished";
     // claves fichero json
     private static final String ID_USER = "id_user";
     private static final String CATEGORY = "project";
@@ -44,7 +45,6 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     private static final String json_project_home_img = "home_img";
     private static final String json_project_images = "images";
     private static final String json_project_form = "form";
-    public static final String FINISH_PJT = "finished";
     private String clsPjtName;
     private String pjtName;
     private String ba1;

@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import cat.olivadevelop.myprojectorganizer.screens.SettingsActivity;
+import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -21,7 +23,8 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     FloatingActionButton fab;
-    private Menu menu;
+    ListView list;
+    LazyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    @Override
-    protected void onResume() {
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
 
@@ -45,7 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
         }
+    }
+
+    @Override
+    protected void onResume() {
         super.onResume();
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) != null) {
+        }
     }
 
     @Override
@@ -60,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        this.menu = menu;
         return true;
     }
 
@@ -85,5 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadProjects() {
         new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
+        list = (ListView) findViewById(R.id.projectList);
+        adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray());
+        list.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        list.setAdapter(null);
+        super.onDestroy();
     }
 }

@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,19 +29,23 @@ import cat.olivadevelop.myprojectorganizer.R;
  */
 public class Tools {
 
+    public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
+    public final static String PREFS_USER_ID = "id_user";
+    public final static String PREFS_USER_EMAIL = "email";
+    public final static String PROJECT_NAME = "nameProject";
+    public final static String PROJECT_IMG = "imageProject";
+    public final static String HOSTNAME = "http://projects.codeduo.cat";
+    public static final String PROJECTS_FILENAME = "projects.json";
+    private final static String PREFS_NAME = "prefs_organizer";
+    private final static String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
+    private final static String PREFS_IMG_URL_ARRAY = "urlImgArray";
+    private static final String PREFS_TITLE_PROJECT_ARRAY_SIZE = "mainTitleProject_size";
+    private static final String PREFS_TITLE_PROJECT_ARRAY = "mainTitleProject";
+    private static final String PREFS_DATE_PROJECT_ARRAY_SIZE = "mainDateProject_size";
+    private static final String PREFS_DATE_PROJECT_ARRAY = "mainDateProject";
     private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
     private static SharedPreferences prefs;
-    public final static String HOSTNAME = "http://projects.codeduo.cat";
-    public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
-    public static final String PROJECTS_FILENAME = "projects.json";
-    public final static String PREFS_NAME = "prefs_organizer";
-    public final static String PREFS_USER_ID = "id_user";
-    public final static String PREFS_USER_EMAIL = "email";
-    public final static String PREFS_USER_URL = "url";
-    public final static String PROJECT_NAME = "nameProject";
-    public final static String PROJECT_IMG = "imageProject";
-    private static String picturePath;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -143,12 +149,12 @@ public class Tools {
         return Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, "");
     }
 
-    public static void setPicturePath(String picturePath) {
-        Tools.putInPrefs().putString(Tools.PICTURE_PATH, picturePath).apply();
-    }
-
     public static String getPicturePath() {
         return Tools.getPrefs().getString(Tools.PICTURE_PATH, null);
+    }
+
+    public static void setPicturePath(String picturePath) {
+        Tools.putInPrefs().putString(Tools.PICTURE_PATH, picturePath).apply();
     }
 
     public static Bitmap getResizedBitmap(Bitmap bm, float scaleXY) {
@@ -165,5 +171,67 @@ public class Tools {
                 bm, 0, 0, width, height, matrix, false);
         bm.recycle();
         return resizedBitmap;
+    }
+
+    public static String[] getUrlImgArray() {
+        int size = prefs.getInt(PREFS_IMG_URL_ARRAY_SIZE, 0);
+        String array[] = new String[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = prefs.getString(PREFS_IMG_URL_ARRAY + "_" + i, null);
+        }
+        return array;
+    }
+
+    public static void setUrlImgArray(String[] urlImgArray) {
+        Tools.putInPrefs().putInt(PREFS_IMG_URL_ARRAY_SIZE, urlImgArray.length).apply();
+        for (int i = 0; i < urlImgArray.length; i++) {
+            Tools.putInPrefs().putString(PREFS_IMG_URL_ARRAY + "_" + i, urlImgArray[i]).apply();
+        }
+    }
+
+    public static String[] getTitlePrjctArray() {
+        int size = prefs.getInt(PREFS_TITLE_PROJECT_ARRAY_SIZE, 0);
+        String array[] = new String[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = prefs.getString(PREFS_TITLE_PROJECT_ARRAY + "_" + i, null);
+        }
+        return array;
+    }
+
+    public static void setTitlePrjctArray(String[] urlImgArray) {
+        Tools.putInPrefs().putInt(PREFS_TITLE_PROJECT_ARRAY_SIZE, urlImgArray.length).apply();
+        for (int i = 0; i < urlImgArray.length; i++) {
+            Tools.putInPrefs().putString(PREFS_TITLE_PROJECT_ARRAY + "_" + i, urlImgArray[i]).apply();
+        }
+    }
+
+    public static String[] getDatePrjctArray() {
+        int size = prefs.getInt(PREFS_DATE_PROJECT_ARRAY_SIZE, 0);
+        String array[] = new String[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = prefs.getString(PREFS_DATE_PROJECT_ARRAY + "_" + i, null);
+        }
+        return array;
+    }
+
+    public static void setDatePrjctArray(String[] urlImgArray) {
+        Tools.putInPrefs().putInt(PREFS_DATE_PROJECT_ARRAY_SIZE, urlImgArray.length).apply();
+        for (int i = 0; i < urlImgArray.length; i++) {
+            Tools.putInPrefs().putString(PREFS_DATE_PROJECT_ARRAY + "_" + i, urlImgArray[i]).apply();
+        }
+    }
+
+    public static void CopyStream(InputStream is, OutputStream os) {
+        final int buffer_size = 1024;
+        try {
+            byte[] bytes = new byte[buffer_size];
+            for (; ; ) {
+                int count = is.read(bytes, 0, buffer_size);
+                if (count == -1)
+                    break;
+                os.write(bytes, 0, count);
+            }
+        } catch (Exception ex) {
+        }
     }
 }

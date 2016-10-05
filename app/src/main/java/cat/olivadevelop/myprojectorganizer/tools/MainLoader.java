@@ -3,11 +3,9 @@ package cat.olivadevelop.myprojectorganizer.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,76 +73,41 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
             try {
                 // despues de ejecutar el codigo: doInBackground(String... params)
                 progressDialog.dismiss();
-                // cojer el array que queremos desde el archivo JSON
-
                 JSONArray category;
                 JSONObject jsonObjectLine;
 
                 category = jsonObject.getJSONArray(CATEGORY);
+                String[] img_url = new String[category.length()];
+                String[] title_arr = new String[category.length()];
+                String[] date_arr = new String[category.length()];
+
                 if (category.length() > 0) {
                     for (int z = 0; z < category.length(); z++) {
                         jsonObjectLine = category.getJSONObject(z);
 
+                        title_arr[z] = jsonObjectLine.getString(json_project_name);
+                        date_arr[z] = jsonObjectLine.getString(json_project_last_update);
+                        img_url[z] = Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
+                                jsonObjectLine.getString(json_project_dir_files) + "/" +
+                                jsonObjectLine.getString(json_project_home_img);
 
-                        // añadir la clave-valor a un objeto HashMap
-                        hashmap = new HashMap<String, String>();
-                        hashmap.put(json_project_name, jsonObjectLine.getString(json_project_name));
-                        hashmap.put(json_project_last_update, jsonObjectLine.getString(json_project_last_update));
-
-                        // añadir en la osList los valores
-                        arLstProjectList.add(hashmap);
-
-                        ListView projectList = (ListView) activity.findViewById(R.id.projectList);
-                        ListAdapter adapter = new SimpleAdapter(
-                                activity,              // Context
-                                arLstProjectList,                         // Lista de claves-valor
-                                R.layout.project_list,                 // view a la que queremos enlazar
-                                new String[]{json_project_name, json_project_last_update},    // array de los campos a insertar
-                                new int[]{R.id.projectName, R.id.projectLastUpdate}           // valores de los campos a insertar
-                        );
-                        projectList.setAdapter(adapter);
-                        projectList.setOnItemClickListener(this);
                     }
+                    Log.i("LENGTH img_url", img_url.length + "");
+                    Tools.setUrlImgArray(img_url);
+                    Tools.setTitlePrjctArray(title_arr);
+                    Tools.setDatePrjctArray(date_arr);
                 } else {
-                    // añadir la clave-valor a un objeto HashMap
-                    hashmap = new HashMap<String, String>();
-                    hashmap.put(json_project_name, getString(R.string.noProjectTitle));
-
-                    // añadir en la osList los valores
-                    arLstProjectList.add(hashmap);
-
-                    ListView projectList = (ListView) activity.findViewById(R.id.projectList);
-                    ListAdapter adapter = new SimpleAdapter(
-                            activity,              // Context
-                            arLstProjectList,                         // Lista de claves-valor
-                            R.layout.project_empty,                 // view a la que queremos enlazar
-                            new String[]{json_project_name},    // array de los campos a insertar
-                            new int[]{R.id.projectName}           // valores de los campos a insertar
-                    );
-                    projectList.setAdapter(adapter);
-                    projectList.setOnItemClickListener(this);
+                    Tools.setUrlImgArray(new String[]{"http://projects.codeduo.cat/logo.png"});
+                    Tools.setTitlePrjctArray(new String[]{getString(R.string.noProjectTitle)});
+                    Tools.setDatePrjctArray(new String[]{"Empty"});
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else {
-            // añadir la clave-valor a un objeto HashMap
-            hashmap = new HashMap<String, String>();
-            hashmap.put(json_project_name, getString(R.string.unableToConnect));
-
-            // añadir en la osList los valores
-            arLstProjectList.add(hashmap);
-
-            ListView projectList = (ListView) activity.findViewById(R.id.projectList);
-            ListAdapter adapter = new SimpleAdapter(
-                    activity,              // Context
-                    arLstProjectList,                         // Lista de claves-valor
-                    R.layout.project_empty,                 // view a la que queremos enlazar
-                    new String[]{json_project_name},    // array de los campos a insertar
-                    new int[]{R.id.projectName}           // valores de los campos a insertar
-            );
-            projectList.setAdapter(adapter);
-            projectList.setOnItemClickListener(this);
+            Tools.setUrlImgArray(new String[]{"http://projects.codeduo.cat/logo.png"});
+            Tools.setTitlePrjctArray(new String[]{getString(R.string.unableToConnect)});
+            Tools.setDatePrjctArray(new String[]{"Empty"});
         }
     }
 
