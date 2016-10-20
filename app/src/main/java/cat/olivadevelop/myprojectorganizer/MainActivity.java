@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import cat.olivadevelop.myprojectorganizer.screens.NewProject;
@@ -21,12 +22,12 @@ import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     FloatingActionButton fab;
     ListView list;
     LazyAdapter adapter;
-    private SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,31 +42,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
         } else {
+            //Obtenemos una referencia al viewgroup SwipeLayout
+            swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+
+            //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
+
+            swipeLayout.setOnRefreshListener(this);
+            //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
+            swipeLayout.setColorSchemeResources(
+                    R.color.colorAccent,
+                    R.color.colorPrimary,
+                    R.color.colorPrimaryDark,
+                    android.R.color.holo_orange_light
+            );
+
             // cargamos los projects del usuario
             loadProjects();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
-            // Obtener el refreshLayout
-            refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-
-            // Iniciar la tarea asíncrona al revelar el indicador
-            refreshLayout.setOnRefreshListener(
-                    new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override
-                        public void onRefresh() {
-                            if (refreshLayout.isRefreshing()) {
-                                Tools.newSnackBar(getCurrentFocus(), MainActivity.this, R.string.reloading);
-                            }
-                            loadProjects();
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    refreshLayout.setRefreshing(false);
-                                }
-                            });
-                        }
-                    }
-            );
         }
     }
 
@@ -115,11 +109,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list = (ListView) findViewById(R.id.projectList);
         adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray());
         list.setAdapter(adapter);
+        list.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int filaSuperior = (list == null || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();//Estamos en el elemento superior
+                swipeLayout.setEnabled(filaSuperior >= 0); //Activamos o desactivamos el swipe layout segun corresponda
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         list.setAdapter(null);
         super.onDestroy();
+    }
+
+    @Override
+    public void onRefresh() {
+        //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayout.setRefreshing(true);
+        loadProjects();
+        list.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 1500);
     }
 }
