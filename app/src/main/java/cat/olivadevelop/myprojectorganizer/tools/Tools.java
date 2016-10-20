@@ -243,7 +243,7 @@ public class Tools {
         }
     }
 
-    public static JSONArray sortJSON(JSONArray jsonArray, final String key) throws JSONException {
+    public static JSONArray sortJSON(JSONArray jsonArray, final String key, final boolean asc) throws JSONException {
         JSONArray sortedJsonArray = new JSONArray();
 
         List<JSONObject> jsonValues = new ArrayList<JSONObject>();
@@ -262,10 +262,12 @@ public class Tools {
                 } catch (JSONException e) {
                     //do something
                 }
-
-                return -valA.compareTo(valB);
                 //if you want to change the sort order, simply use the following:
-                //return -valA.compareTo(valB);
+                if (asc) {
+                    return valA.compareTo(valB);
+                } else {
+                    return -valA.compareTo(valB);
+                }
             }
         });
 

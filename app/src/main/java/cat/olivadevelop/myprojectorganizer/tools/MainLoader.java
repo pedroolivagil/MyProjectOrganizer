@@ -78,7 +78,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                 JSONArray category;
                 JSONObject jsonObjectLine;
 
-                category = sortJSON(jsonObject.getJSONArray(CATEGORY), json_project_id_project);
+                category = sortJSON(jsonObject.getJSONArray(CATEGORY), json_project_id_project, false);
                 String[] img_url = new String[category.length()];
                 String[] title_arr = new String[category.length()];
                 String[] date_arr = new String[category.length()];
