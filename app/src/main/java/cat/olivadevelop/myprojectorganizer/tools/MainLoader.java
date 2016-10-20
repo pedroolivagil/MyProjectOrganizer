@@ -21,6 +21,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.sortJSON;
+
 /**
  * Created by Oliva on 26/09/2016.
  */
@@ -28,6 +30,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
     // claves fichero json
     private static final String ID_USER = "id_user";
     private static final String CATEGORY = "project";
+    private static final String json_project_id_project = "id_project";
     private static final String json_project_name = "name";
     private static final String json_project_last_update = "last_update";
     private static final String json_project_create_data = "create_data";
@@ -75,7 +78,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                 JSONArray category;
                 JSONObject jsonObjectLine;
 
-                category = jsonObject.getJSONArray(CATEGORY);
+                category = sortJSON(jsonObject.getJSONArray(CATEGORY), json_project_id_project);
                 String[] img_url = new String[category.length()];
                 String[] title_arr = new String[category.length()];
                 String[] date_arr = new String[category.length()];
@@ -89,7 +92,6 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                         img_url[z] = Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
                                 jsonObjectLine.getString(json_project_dir_files) + "/" +
                                 jsonObjectLine.getString(json_project_home_img);
-
                     }
                     Log.i("LENGTH img_url", img_url.length + "");
                     Tools.setUrlImgArray(img_url);

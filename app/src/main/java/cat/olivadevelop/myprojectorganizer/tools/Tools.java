@@ -14,12 +14,20 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -233,5 +241,37 @@ public class Tools {
             }
         } catch (Exception ex) {
         }
+    }
+
+    public static JSONArray sortJSON(JSONArray jsonArray, final String key) throws JSONException {
+        JSONArray sortedJsonArray = new JSONArray();
+
+        List<JSONObject> jsonValues = new ArrayList<JSONObject>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            jsonValues.add(jsonArray.getJSONObject(i));
+        }
+        Collections.sort(jsonValues, new Comparator<JSONObject>() {
+            @Override
+            public int compare(JSONObject a, JSONObject b) {
+                String valA = "";
+                String valB = "";
+
+                try {
+                    valA = String.valueOf(a.get(key));
+                    valB = String.valueOf(b.get(key));
+                } catch (JSONException e) {
+                    //do something
+                }
+
+                return -valA.compareTo(valB);
+                //if you want to change the sort order, simply use the following:
+                //return -valA.compareTo(valB);
+            }
+        });
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            sortedJsonArray.put(jsonValues.get(i));
+        }
+        return sortedJsonArray;
     }
 }

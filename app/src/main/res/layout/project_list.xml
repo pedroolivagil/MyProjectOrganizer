@@ -41,7 +41,7 @@
             android:background="@color/colorPrimary"
             android:maxLines="1"
             android:padding="8dp"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/primary_light"
             android:textSize="@dimen/titleSize"
             android:textStyle="bold" />
 
@@ -52,14 +52,15 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/linearLayout"
-            android:alpha=".7"
-            android:background="@color/secondary_light"
+            android:alpha="1"
+            android:background="@color/colorPrimary"
             android:gravity="right"
             android:maxLines="1"
             android:paddingBottom="2dp"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
-            android:paddingTop="3dp" />
+            android:paddingTop="3dp"
+            android:textColor="@color/primary_light" />
 
     </RelativeLayout>
 </LinearLayout>
