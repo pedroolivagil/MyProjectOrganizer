@@ -44,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             //Obtenemos una referencia al viewgroup SwipeLayout
             swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-
             //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
-
             swipeLayout.setOnRefreshListener(this);
             //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
             swipeLayout.setColorSchemeResources(
@@ -55,9 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     R.color.colorPrimaryDark,
                     android.R.color.holo_orange_light
             );
-
             // cargamos los projects del usuario
-            loadProjects();
+            autoRefresh();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
         }
@@ -66,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) != null) {
-        }
+        autoRefresh();
     }
 
     @Override
@@ -98,10 +94,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
         if (id == R.id.action_auto_update) {
-            loadProjects();
+            autoRefresh();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void refreshAdapterLazy() {
+        if (list != null) {
+            adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray());
+            list.setAdapter(adapter);
+        }
     }
 
     private void loadProjects() {
@@ -117,8 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int filaSuperior = (list == null || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();//Estamos en el elemento superior
-                swipeLayout.setEnabled(filaSuperior >= 0); //Activamos o desactivamos el swipe layout segun corresponda
+                int filaSuperior = (list == null || list.getChildCount() == 0) ?
+                        0 : list.getChildAt(0).getTop();    //Estamos en el elemento superior
+                swipeLayout.setEnabled(filaSuperior >= 0);  //Activamos o desactivamos el swipe layout segun corresponda
             }
         });
     }
@@ -131,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRefresh() {
+        autoRefresh();
+    }
+
+    public void autoRefresh() {
         //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
         swipeLayout.setRefreshing(true);
@@ -140,6 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
                 swipeLayout.setRefreshing(false);
             }
-        }, 1500);
+        }, 2000);
     }
 }

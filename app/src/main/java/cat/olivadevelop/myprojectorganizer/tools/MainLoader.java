@@ -110,7 +110,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
             Tools.setTitlePrjctArray(new String[]{getString(R.string.unableToConnect)});
             Tools.setDatePrjctArray(new String[]{"Empty"});
         }
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 
     @Override
@@ -120,7 +120,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
         progressDialog.setMessage(getString(R.string.pgd_loading));
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(true);
-        progressDialog.show();
+        //progressDialog.show();
     }
 
     @Override

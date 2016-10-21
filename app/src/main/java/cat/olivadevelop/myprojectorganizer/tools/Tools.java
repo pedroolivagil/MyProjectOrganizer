@@ -166,19 +166,22 @@ public class Tools {
     }
 
     public static Bitmap getResizedBitmap(Bitmap bm, float scaleXY) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        //matrix.postScale(scaleWidth, scaleHeight);
-        matrix.postScale(scaleXY, scaleXY);
+        if (bm != null) {
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+            // CREATE A MATRIX FOR THE MANIPULATION
+            Matrix matrix = new Matrix();
+            // RESIZE THE BIT MAP
+            //matrix.postScale(scaleWidth, scaleHeight);
+            matrix.postScale(scaleXY, scaleXY);
 
-        // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
-                bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
-        return resizedBitmap;
+            // "RECREATE" THE NEW BITMAP
+            Bitmap resizedBitmap = Bitmap.createBitmap(
+                    bm, 0, 0, width, height, matrix, false);
+            bm.recycle();
+            return resizedBitmap;
+        }
+        return null;
     }
 
     public static String[] getUrlImgArray() {
