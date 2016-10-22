@@ -7,18 +7,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:layout_weight="1"
+        android:background="@drawable/elevation_pre21"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="120dp"
             android:layout_height="100dp"
-            android:background="@color/gray_e"
             android:orientation="horizontal"
-            android:padding="2dp">
+            android:theme="@style/ImgProjectMain">
 
             <ImageView
                 android:id="@+id/projectHomeImg"
@@ -32,7 +31,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView

@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
+import cat.olivadevelop.myprojectorganizer.tools.Project;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
@@ -43,8 +44,8 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //cabecera de proyecto
-        projectName = Tools.getPrefs().getString(Tools.PROJECT_NAME, null);
-        projectImag = Tools.getPrefs().getString(Tools.PROJECT_IMG, null);
+        projectName = Tools.getPrefs().getString(Project.PROJECT_NAME, null);
+        projectImag = Tools.getPrefs().getString(Project.PROJECT_IMG, null);
 
         TextView textView = (TextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);

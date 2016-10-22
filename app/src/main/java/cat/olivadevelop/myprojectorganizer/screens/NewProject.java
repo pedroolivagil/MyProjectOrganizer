@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.Project;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProject extends AppCompatActivity implements View.OnClickListener {
@@ -48,8 +49,8 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         image_thumb = (ImageView) findViewById(R.id.image_thumb);
 
         editPjctName = (EditText) findViewById(R.id.edtProjectName);
-        if (Tools.getPrefs().getString(Tools.PROJECT_NAME, null) != null) {
-            editPjctName.setText(Tools.getPrefs().getString(Tools.PROJECT_NAME, null));
+        if (Tools.getPrefs().getString(Project.PROJECT_NAME, null) != null) {
+            editPjctName.setText(Tools.getPrefs().getString(Project.PROJECT_NAME, null));
         }
 
         File file = new File(Tools.EXTERNAL_DIR);
@@ -111,9 +112,9 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.action_send) {
             if (!editPjctName.getText().toString().equals("")) {
                 //procedure to next step
-                Tools.putInPrefs().putString(Tools.PROJECT_NAME, editPjctName.getText().toString()).apply();
+                Tools.putInPrefs().putString(Project.PROJECT_NAME, editPjctName.getText().toString()).apply();
                 if (filename != null) {
-                    Tools.putInPrefs().putString(Tools.PROJECT_IMG, filename).apply();
+                    Tools.putInPrefs().putString(Project.PROJECT_IMG, filename).apply();
                 }
 
                 Intent nextStep = new Intent(this, NewProjectFinish.class);

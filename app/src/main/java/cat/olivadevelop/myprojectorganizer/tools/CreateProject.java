@@ -59,7 +59,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     @Override
     protected RequestBody doInBackground(Void... urls) {
         try {
-            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
+            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Project.PROJECTS_FILENAME);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
@@ -79,6 +79,9 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             sdf.setTimeZone(TimeZone.getDefault());
             String currentDate = sdf.format(new Date());
 
+            /* Hay que implementar las acciones de captura y/o recogida de imágenes dentro del
+             * proyecto y subirlas igual que la imagen de cabecera
+             */
             JSONArray jsnImages = new JSONArray();
             jsnImages.put("url 1");
             jsnImages.put("url 2");

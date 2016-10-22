@@ -6,6 +6,9 @@ package cat.olivadevelop.myprojectorganizer.tools;
 
 public abstract class Project {
     public static final String CATEGORY = "project";
+    public static final String PROJECT_NAME = "nameProject";
+    public static final String PROJECT_IMG = "imageProject";
+    public static final String PROJECTS_FILENAME = "projects.json";
     public static final String json_project_id_project = "id_project";
     public static final String json_project_name = "name";
     public static final String json_project_last_update = "last_update";

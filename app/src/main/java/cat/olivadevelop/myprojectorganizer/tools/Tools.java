@@ -37,16 +37,13 @@ import cat.olivadevelop.myprojectorganizer.R;
  */
 public class Tools {
 
-    public final static String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
-    public final static String PREFS_USER_ID = "id_user";
-    public final static String PREFS_USER_EMAIL = "email";
-    public final static String PROJECT_NAME = "nameProject";
-    public final static String PROJECT_IMG = "imageProject";
-    public final static String HOSTNAME = "http://projects.codeduo.cat";
-    public static final String PROJECTS_FILENAME = "projects.json";
-    private final static String PREFS_NAME = "prefs_organizer";
-    private final static String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
-    private final static String PREFS_IMG_URL_ARRAY = "urlImgArray";
+    public static final String HOSTNAME = "http://projects.codeduo.cat";
+    public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
+    public static final String PREFS_USER_ID = "id_user";
+    public static final String PREFS_USER_EMAIL = "email";
+    private static final String PREFS_NAME = "prefs_organizer";
+    private static final String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
+    private static final String PREFS_IMG_URL_ARRAY = "urlImgArray";
     private static final String PREFS_TITLE_PROJECT_ARRAY_SIZE = "mainTitleProject_size";
     private static final String PREFS_TITLE_PROJECT_ARRAY = "mainTitleProject";
     private static final String PREFS_DATE_PROJECT_ARRAY_SIZE = "mainDateProject_size";
@@ -147,8 +144,8 @@ public class Tools {
     }
 
     public static void cleanProjectPrefs() {
-        Tools.putInPrefs().putString(Tools.PROJECT_NAME, "").apply();
-        Tools.putInPrefs().putString(Tools.PROJECT_IMG, "").apply();
+        Tools.putInPrefs().putString(Project.PROJECT_NAME, "").apply();
+        Tools.putInPrefs().putString(Project.PROJECT_IMG, "").apply();
     }
 
     public static String getUserID() {

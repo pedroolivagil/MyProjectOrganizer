@@ -17,6 +17,7 @@ import cat.olivadevelop.myprojectorganizer.screens.NewProject;
 import cat.olivadevelop.myprojectorganizer.screens.SettingsActivity;
 import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
+import cat.olivadevelop.myprojectorganizer.tools.Project;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadProjects() {
-        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
+        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Project.PROJECTS_FILENAME);
         list = (ListView) findViewById(R.id.projectList);
         adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray(), Tools.getDescriptPrjctArray());
         list.setAdapter(adapter);

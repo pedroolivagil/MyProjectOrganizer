@@ -43,14 +43,21 @@
     <item name="android:backgroundDimEnabled">false</item>
 </style>//-->
 
-    <style name="TitleProjectMain" parent="AppTheme">
+    <style name="CommonBackground" parent="AppTheme">
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="ImgProjectMain" parent="CommonBackground">
+        <item name="android:padding">@dimen/pad5</item>
+    </style>
+
+    <style name="TitleProjectMain" parent="CommonBackground">
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size16</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
         <item name="android:padding">@dimen/pad8</item>
-        <item name="android:background">@color/gray_e</item>
     </style>
 
     <style name="DescriptionProjectMain" parent="AppTheme">
