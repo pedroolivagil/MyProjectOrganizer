@@ -30,9 +30,9 @@
                 android:layout_gravity="center"
                 android:gravity="left"
                 android:maxLines="1"
-                android:paddingLeft="@dimen/padding10"
+                android:paddingLeft="@dimen/pad10"
                 android:textColor="@color/secondary_text"
-                android:textSize="@dimen/titleSize"
+                android:textSize="@dimen/size16"
                 android:textStyle="bold" />
         </LinearLayout>
 

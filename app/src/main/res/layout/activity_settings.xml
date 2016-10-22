@@ -39,8 +39,8 @@
             android:gravity="center"
             android:hint="@string/add_email"
             android:minLines="1"
-            android:paddingLeft="@dimen/padding10"
-            android:textSize="@dimen/titleSize" />
+            android:paddingLeft="@dimen/pad10"
+            android:textSize="@dimen/size16" />
 
     </LinearLayout>
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/detail_user_email"
-        android:textSize="@dimen/min_text" />
+        android:textSize="@dimen/size12" />
 
     <TextView
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/soon"
-        android:textSize="@dimen/titleSize"
+        android:textSize="@dimen/size16"
         android:textStyle="italic" />
 
 </LinearLayout>

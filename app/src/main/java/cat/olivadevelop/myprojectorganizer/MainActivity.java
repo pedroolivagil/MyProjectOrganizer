@@ -100,17 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    public void refreshAdapterLazy() {
-        if (list != null) {
-            adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray());
-            list.setAdapter(adapter);
-        }
-    }
-
     private void loadProjects() {
         new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Tools.PROJECTS_FILENAME);
         list = (ListView) findViewById(R.id.projectList);
-        adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray());
+        adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray(), Tools.getDescriptPrjctArray());
         list.setAdapter(adapter);
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

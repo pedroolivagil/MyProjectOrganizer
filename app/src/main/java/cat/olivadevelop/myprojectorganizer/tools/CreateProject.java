@@ -28,6 +28,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static cat.olivadevelop.myprojectorganizer.tools.Project.CATEGORY;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
@@ -36,15 +37,6 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     public static final String FINISH_PJT = "finished";
     // claves fichero json
-    private static final String ID_USER = "id_user";
-    private static final String CATEGORY = "project";
-    private static final String json_project_name = "name";
-    private static final String json_project_last_update = "last_update";
-    private static final String json_project_create_data = "create_data";
-    private static final String json_project_dir_files = "dir_files";
-    private static final String json_project_home_img = "home_img";
-    private static final String json_project_images = "images";
-    private static final String json_project_form = "form";
     private String clsPjtName;
     private String pjtName;
     private String ba1;

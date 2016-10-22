@@ -33,13 +33,43 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Transparent" parent="Theme.AppCompat">
-        <item name="android:windowIsTranslucent">true</item>
-        <!--//<item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>//-->
-        <item name="android:windowBackground">@color/blackAlpha9</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
+    <!-- <style name="Transparent" parent="Theme.AppCompat">
+        <item name="android:windowIsTranslucent">true</item> -->
+    <!--//<item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowNoTitle">true</item>//-->
+    <!--//<item name="android:windowBackground">@color/blackAlpha9</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
+</style>//-->
+
+    <style name="TitleProjectMain" parent="AppTheme">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size16</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">@dimen/pad8</item>
+        <item name="android:background">@color/gray_e</item>
+    </style>
+
+    <style name="DescriptionProjectMain" parent="AppTheme">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/size12</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:paddingTop">@dimen/pad0</item>
+        <item name="android:paddingBottom">@dimen/pad0</item>
+        <item name="android:paddingLeft">@dimen/pad5</item>
+        <item name="android:paddingRight">@dimen/pad5</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="LastUpdateProjectMain" parent="AppTheme">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size12</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">@dimen/pad0</item>
+        <item name="android:paddingBottom">@dimen/pad0</item>
+        <item name="android:gravity">right</item>
     </style>
 </resources>

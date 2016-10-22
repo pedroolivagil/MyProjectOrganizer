@@ -21,20 +21,22 @@ public class LazyAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
     private Activity activity;
-    private String[] data;
-    private String[] da;
-    private String[] t;
+    private String[] description;
+    private String[] img;
+    private String[] lstUpdt;
+    private String[] txt;
 
-    public LazyAdapter(Activity a, String[] d, String[] t, String[] da) {
+    public LazyAdapter(Activity a, String[] img, String[] txt, String[] lstUpdt, String[] description) {
         activity = a;
-        data = d;
-        this.t = t;
-        this.da = da;
+        this.img = img;
+        this.txt = txt;
+        this.lstUpdt = lstUpdt;
+        this.description = description;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
-        return data.length;
+        return img.length;
     }
 
     public Object getItem(int position) {
@@ -53,13 +55,15 @@ public class LazyAdapter extends BaseAdapter {
 
         TextView title = (TextView) vi.findViewById(R.id.projectName);
         TextView date = (TextView) vi.findViewById(R.id.projectLastUpdate);
+        TextView descrip = (TextView) vi.findViewById(R.id.projectMainDescript);
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
-        title.setText(this.t[position]);
-        date.setText(this.da[position]);
+        title.setText(this.txt[position]);
+        date.setText(this.lstUpdt[position]);
+        descrip.setText(this.description[position]);
         Picasso.with(activity)
-                .load(this.data[position])
+                .load(this.img[position])
                 .placeholder(R.drawable.ic_camera_black_48dp)
-                .error(R.drawable.cast_album_art_placeholder)
+                .error(R.drawable.ic_close_light)
                 .into(image);
         return vi;
     }

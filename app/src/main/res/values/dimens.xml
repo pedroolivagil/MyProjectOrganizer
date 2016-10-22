@@ -1,15 +1,27 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!--// TEXT //-->
+    <dimen name="size16">16sp</dimen>
+    <dimen name="size14">14sp</dimen>
+    <dimen name="size12">12sp</dimen>
+    <dimen name="size10">10sp</dimen>
+
+    <!--// PADDINGS //-->
+    <dimen name="pad0">0dp</dimen>
+    <dimen name="pad5">5dp</dimen>
+    <dimen name="pad8">8dp</dimen>
+    <dimen name="pad10">10dp</dimen>
+    <dimen name="pad15">15dp</dimen>
+    <dimen name="snackbar_icon_padding">10dp</dimen>
+
+    <!--// MARGINS //-->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_margin_0">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="snackbar_icon_padding">10dp</dimen>
-    <dimen name="titleSize">20sp</dimen>
-    <dimen name="min_text">12sp</dimen>
+
+    <!--// SIZES //-->
     <dimen name="icon_size">40dp</dimen>
     <dimen name="icon_size_60">50dp</dimen>
-    <dimen name="padding10">10dp</dimen>
     <dimen name="label_width">10dp</dimen>
     <dimen name="fields_height">2dp</dimen>
 </resources>

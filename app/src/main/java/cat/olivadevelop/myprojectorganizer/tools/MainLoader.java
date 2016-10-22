@@ -21,6 +21,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static cat.olivadevelop.myprojectorganizer.tools.Project.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_descript;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_home_img;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_id_project;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_last_update;
+import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_name;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.sortJSON;
 
 /**
@@ -28,16 +36,6 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.sortJSON;
  */
 public class MainLoader extends AsyncTask<String, Void, JSONObject> implements AdapterView.OnItemClickListener {
     // claves fichero json
-    private static final String ID_USER = "id_user";
-    private static final String CATEGORY = "project";
-    private static final String json_project_id_project = "id_project";
-    private static final String json_project_name = "name";
-    private static final String json_project_last_update = "last_update";
-    private static final String json_project_create_data = "create_data";
-    private static final String json_project_dir_files = "dir_files";
-    private static final String json_project_home_img = "home_img";
-    private static final String json_project_images = "images";
-    private static final String json_project_form = "form";
     ProgressDialog progressDialog;
     private Activity activity;
     private ArrayList<HashMap<String, String>> arLstProjectList = new ArrayList<HashMap<String, String>>();
@@ -81,6 +79,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                 category = sortJSON(jsonObject.getJSONArray(CATEGORY), json_project_id_project, false);
                 String[] img_url = new String[category.length()];
                 String[] title_arr = new String[category.length()];
+                String[] descrip_arr = new String[category.length()];
                 String[] date_arr = new String[category.length()];
 
                 if (category.length() > 0) {
@@ -89,6 +88,8 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
 
                         title_arr[z] = jsonObjectLine.getString(json_project_name);
                         date_arr[z] = jsonObjectLine.getString(json_project_last_update);
+                        descrip_arr[z] = jsonObjectLine.getJSONObject(json_project_form).getString(json_project_descript);
+                        Log.i("PRJCT DESCRIPT JSON", "" + descrip_arr[z]);
                         img_url[z] = Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
                                 jsonObjectLine.getString(json_project_dir_files) + "/" +
                                 jsonObjectLine.getString(json_project_home_img);
@@ -96,11 +97,13 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                     Log.i("LENGTH img_url", img_url.length + "");
                     Tools.setUrlImgArray(img_url);
                     Tools.setTitlePrjctArray(title_arr);
+                    Tools.setDescriptPrjctArray(descrip_arr);
                     Tools.setDatePrjctArray(date_arr);
                 } else {
                     Tools.setUrlImgArray(new String[]{"http://projects.codeduo.cat/logo.png"});
                     Tools.setTitlePrjctArray(new String[]{getString(R.string.noProjectTitle)});
-                    Tools.setDatePrjctArray(new String[]{"Empty"});
+                    Tools.setDescriptPrjctArray(new String[]{getString(R.string.descript_pjct404)});
+                    Tools.setDatePrjctArray(new String[]{getString(R.string.empty)});
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -108,7 +111,8 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
         } else {
             Tools.setUrlImgArray(new String[]{"http://projects.codeduo.cat/logo.png"});
             Tools.setTitlePrjctArray(new String[]{getString(R.string.unableToConnect)});
-            Tools.setDatePrjctArray(new String[]{"Empty"});
+            Tools.setDescriptPrjctArray(new String[]{getString(R.string.descript_pjct404)});
+            Tools.setDatePrjctArray(new String[]{getString(R.string.empty)});
         }
         //progressDialog.dismiss();
     }

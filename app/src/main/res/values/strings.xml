@@ -14,7 +14,7 @@
     <string name="add_question_form">Add another field</string>
     <string name="description">Add a brief description</string>
     <string name="projectIsFinalized">Project finished</string>
-    <string name="empty" translatable="false" />
+    <string name="empty_char" translatable="false" />
     <string name="newField">New field</string>
     <string name="add_email">Add an email account</string>
     <string name="headerEmail">Set up your account</string>
@@ -37,4 +37,6 @@
     <string name="prefs_clean">Preferences have been reset</string>
     <string name="more_options">More options</string>
     <string name="reloading">Reloading...</string>
+    <string name="descript_pjct404">Crate a new project and add a description</string>
+    <string name="empty">Empty</string>
 </resources>

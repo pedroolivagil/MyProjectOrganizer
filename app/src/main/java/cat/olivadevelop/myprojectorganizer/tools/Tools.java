@@ -51,7 +51,9 @@ public class Tools {
     private static final String PREFS_TITLE_PROJECT_ARRAY = "mainTitleProject";
     private static final String PREFS_DATE_PROJECT_ARRAY_SIZE = "mainDateProject_size";
     private static final String PREFS_DATE_PROJECT_ARRAY = "mainDateProject";
-    private final static String CRYPT_KEY = "myprojectorganizerolivadevelop";
+    private static final String PREFS_DESCRIPT_PROJECT_ARRAY_SIZE = "mainDescriptProject_size";
+    private static final String PREFS_DESCRIPT_PROJECT_ARRAY = "mainDescriptProject";
+    private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
     private static SharedPreferences prefs;
 
@@ -216,6 +218,22 @@ public class Tools {
         }
     }
 
+    public static String[] getDescriptPrjctArray() {
+        int size = prefs.getInt(PREFS_DESCRIPT_PROJECT_ARRAY_SIZE, 0);
+        String array[] = new String[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = prefs.getString(PREFS_DESCRIPT_PROJECT_ARRAY + "_" + i, null);
+        }
+        return array;
+    }
+
+    public static void setDescriptPrjctArray(String[] descriptPrjctArray) {
+        Tools.putInPrefs().putInt(PREFS_DESCRIPT_PROJECT_ARRAY_SIZE, descriptPrjctArray.length).apply();
+        for (int i = 0; i < descriptPrjctArray.length; i++) {
+            Tools.putInPrefs().putString(PREFS_DESCRIPT_PROJECT_ARRAY + "_" + i, descriptPrjctArray[i]).apply();
+        }
+    }
+
     public static String[] getDatePrjctArray() {
         int size = prefs.getInt(PREFS_DATE_PROJECT_ARRAY_SIZE, 0);
         String array[] = new String[size];
@@ -278,5 +296,11 @@ public class Tools {
             sortedJsonArray.put(jsonValues.get(i));
         }
         return sortedJsonArray;
+    }
+    public static void clearMainScreenListViewPrefs(){
+        setDatePrjctArray(new String[]{});
+        setDescriptPrjctArray(new String[]{});
+        setTitlePrjctArray(new String[]{});
+        setUrlImgArray(new String[]{});
     }
 }
