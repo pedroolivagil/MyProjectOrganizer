@@ -18,10 +18,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_margin_0">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_margin">10dp</dimen>
 
     <!--// SIZES //-->
     <dimen name="icon_size">40dp</dimen>
     <dimen name="icon_size_60">50dp</dimen>
     <dimen name="label_width">10dp</dimen>
     <dimen name="fields_height">2dp</dimen>
+    <dimen name="card_img_height">100dp</dimen>
+    <dimen name="card_img_width">120dp</dimen>
 </resources>

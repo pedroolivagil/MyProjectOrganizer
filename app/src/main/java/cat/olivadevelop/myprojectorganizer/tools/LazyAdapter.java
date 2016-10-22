@@ -2,6 +2,7 @@ package cat.olivadevelop.myprojectorganizer.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import cat.olivadevelop.myprojectorganizer.R;
 
@@ -68,10 +71,19 @@ public class LazyAdapter extends BaseAdapter {
         } else {
             descrip.setText(activity.getString(R.string.description_empty));
         }
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.BLACK)
+                .borderWidthDp(0)
+                .cornerRadiusDp(3)
+                .oval(false)
+                .build();
+
         Picasso.with(activity)
                 .load(this.img[position])
                 .placeholder(R.drawable.ic_camera_black_48dp)
                 .error(R.drawable.ic_close_light)
+                .fit()
+                .transform(transformation)
                 .into(image);
         return vi;
     }

@@ -40,4 +40,5 @@
     <string name="descript_pjct404">Crate a new project and add a description</string>
     <string name="empty">Empty</string>
     <string name="description_empty">Description is empty</string>
+    <string name="card_img">Image card</string>
 </resources>
