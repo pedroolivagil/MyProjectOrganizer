@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import cat.olivadevelop.myprojectorganizer.R;
 
 /**
@@ -18,7 +20,6 @@ import cat.olivadevelop.myprojectorganizer.R;
 public class LazyAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-    public ImageLoader imageLoader;
     private Activity activity;
     private String[] data;
     private String[] da;
@@ -30,7 +31,6 @@ public class LazyAdapter extends BaseAdapter {
         this.t = t;
         this.da = da;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageLoader = new ImageLoader(activity.getBaseContext());
     }
 
     public int getCount() {
@@ -56,14 +56,18 @@ public class LazyAdapter extends BaseAdapter {
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
         title.setText(this.t[position]);
         date.setText(this.da[position]);
-        imageLoader.DisplayImage(data[position], image);
+        Picasso.with(activity)
+                .load(this.data[position])
+                .placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.cast_album_art_placeholder)
+                .into(image);
         return vi;
     }
 
     /*
     Permite limpiar todos los elementos del recycler
      */
-    public void clear(){
+    public void clear() {
         notifyDataSetChanged();
     }
 
