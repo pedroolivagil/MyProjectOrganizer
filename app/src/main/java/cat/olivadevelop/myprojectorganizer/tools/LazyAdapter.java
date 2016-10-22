@@ -57,7 +57,11 @@ public class LazyAdapter extends BaseAdapter {
         TextView date = (TextView) vi.findViewById(R.id.projectLastUpdate);
         TextView descrip = (TextView) vi.findViewById(R.id.projectMainDescript);
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
-        title.setText(this.txt[position]);
+        if (this.txt[position].replaceAll(" ", "").length() > 17) {
+            title.setText(this.txt[position].substring(0, 16).concat("..."));
+        } else {
+            title.setText(this.txt[position]);
+        }
         date.setText(this.lstUpdt[position]);
         if (this.description.length > 0) {
             descrip.setText(this.description[position]);
