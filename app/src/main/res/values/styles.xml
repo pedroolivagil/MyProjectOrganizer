@@ -35,6 +35,11 @@
 
     <style name="CommonBackground" parent="AppTheme">
         <!--// <item name="android:background">@color/colorPrimaryLight</item> //-->
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="UnderlineTitle" parent="AppTheme">
+        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:paddingBottom">1dp</item>
     </style>
 
     <style name="ImgProjectMain" parent="CommonBackground">
