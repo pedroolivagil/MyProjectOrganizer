@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pad10"
-            android:background="@color/gray_e"
+            android:background="@color/EEE"
             android:gravity="left"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/gray_e"
+            android:background="@color/EEE"
             android:gravity="left"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -80,7 +80,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@color/secondary_light"
+            android:background="@color/secondaryLight"
             android:padding="2dp">
 
             <ImageView

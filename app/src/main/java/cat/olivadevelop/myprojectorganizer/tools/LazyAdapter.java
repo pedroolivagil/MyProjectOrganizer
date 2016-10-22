@@ -65,7 +65,7 @@ public class LazyAdapter extends BaseAdapter {
         } else {
             title.setText(this.txt[position]);
         }
-        date.setText(this.lstUpdt[position]);
+        date.setText(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
         if (this.description.length > 0) {
             descrip.setText(this.description[position]);
         } else {
@@ -76,6 +76,7 @@ public class LazyAdapter extends BaseAdapter {
                 .borderWidthDp(0)
                 .cornerRadiusDp(3)
                 .oval(false)
+                //.scaleType(ImageView.ScaleType.CENTER_INSIDE)
                 .build();
 
         Picasso.with(activity)
@@ -84,6 +85,7 @@ public class LazyAdapter extends BaseAdapter {
                 .error(R.drawable.ic_close_light)
                 .fit()
                 .transform(transformation)
+                .centerCrop()
                 .into(image);
         return vi;
     }

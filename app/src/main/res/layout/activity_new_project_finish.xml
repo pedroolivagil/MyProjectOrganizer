@@ -37,7 +37,7 @@
                 android:gravity="center|left"
                 android:paddingLeft="@dimen/fab_margin"
                 android:textAlignment="gravity"
-                android:textColor="@color/secondary_text"
+                android:textColor="@color/secondaryText"
                 android:textSize="@dimen/size16"
                 android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/gray_e"
+            android:background="@color/EEE"
             android:gravity="left"
             android:orientation="horizontal"
             android:padding="5dp">

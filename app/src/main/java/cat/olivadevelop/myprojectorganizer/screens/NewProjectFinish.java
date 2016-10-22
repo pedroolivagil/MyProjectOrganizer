@@ -129,7 +129,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         lyExtern.setLayoutParams(layoutParams);
         lyExtern.setOrientation(LinearLayout.VERTICAL);
         lyExtern.setPadding(10, 10, 10, 10);
-        lyExtern.setBackgroundResource(R.color.secondary_light);
+        lyExtern.setBackgroundResource(R.color.secondaryLight);
 
 
         LinearLayout ly = new LinearLayout(this);
@@ -155,7 +155,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         label.setEllipsize(TextUtils.TruncateAt.END);
         label.setMaxLines(1);
         label.setGravity(Gravity.CENTER);
-        label.setBackgroundResource(R.color.secondary_light);
+        label.setBackgroundResource(R.color.secondaryLight);
         label.setTypeface(null, Typeface.BOLD);
         if (labelText) {
             label.setHint(getString(idStringLabel));

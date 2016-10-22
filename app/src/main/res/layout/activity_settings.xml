@@ -23,7 +23,7 @@
         android:id="@+id/changeEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_e"
+        android:background="@color/EEE"
         android:padding="5dp">
 
         <ImageView

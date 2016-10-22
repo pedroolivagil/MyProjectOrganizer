@@ -37,8 +37,9 @@
     <string name="prefs_clean">Preferences have been reset</string>
     <string name="more_options">More options</string>
     <string name="reloading">Reloading...</string>
-    <string name="descript_pjct404">Crate a new project and add a description</string>
+    <string name="descript_pjct404">Create a new project and add a description</string>
     <string name="empty">Empty</string>
     <string name="description_empty">Description is empty</string>
     <string name="card_img">Image card</string>
+    <string name="card_last_update">Last update:</string>
 </resources>

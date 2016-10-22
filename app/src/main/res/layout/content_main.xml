@@ -9,17 +9,12 @@
     tools:context="cat.olivadevelop.myprojectorganizer.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <!-- <LinearLayout
-        android:id="@+id/main_layout_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_e"
+        android:background="@color/EEE"
         tools:ignore="MergeRootFrame">
 
         <ListView
@@ -31,5 +26,4 @@
             android:divider="@android:drawable/divider_horizontal_dim_dark" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-    <!-- </LinearLayout> -->
 </RelativeLayout>
