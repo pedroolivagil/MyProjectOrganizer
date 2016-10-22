@@ -59,7 +59,11 @@ public class LazyAdapter extends BaseAdapter {
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
         title.setText(this.txt[position]);
         date.setText(this.lstUpdt[position]);
-        descrip.setText(this.description[position]);
+        if (this.description != null) {
+            descrip.setText(this.description[position]);
+        } else {
+            descrip.setText(activity.getString(R.string.description_empty));
+        }
         Picasso.with(activity)
                 .load(this.img[position])
                 .placeholder(R.drawable.ic_camera_black_48dp)
