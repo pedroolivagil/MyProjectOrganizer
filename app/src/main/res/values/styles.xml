@@ -57,7 +57,10 @@
         <item name="android:textSize">@dimen/size16</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
-        <item name="android:padding">@dimen/pad8</item>
+        <item name="android:paddingTop">@dimen/pad0</item>
+        <item name="android:paddingBottom">@dimen/pad0</item>
+        <item name="android:paddingLeft">@dimen/pad5</item>
+        <item name="android:paddingRight">@dimen/pad0</item>
     </style>
 
     <style name="DescriptionProjectMain" parent="AppTheme">
@@ -77,5 +80,6 @@
         <item name="android:maxLines">1</item>
         <item name="android:padding">@dimen/pad0</item>
         <item name="android:gravity">center</item>
+        <item name="android:background">@color/cardview_light_background</item>
     </style>
 </resources>

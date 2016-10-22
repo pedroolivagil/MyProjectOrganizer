@@ -27,4 +27,5 @@
     <dimen name="fields_height">2dp</dimen>
     <dimen name="card_img_height">100dp</dimen>
     <dimen name="card_img_width">120dp</dimen>
+    <dimen name="card_height">105dp</dimen>
 </resources>
