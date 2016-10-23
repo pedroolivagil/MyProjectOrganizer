@@ -66,7 +66,7 @@ public class LazyAdapter extends BaseAdapter {
             title.setText(this.txt[position]);
         }
         date.setText(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
-        if (this.description.length > 0) {
+        if (this.description.toString().trim().length() > 0) {
             descrip.setText(this.description[position]);
         } else {
             descrip.setText(activity.getString(R.string.description_empty));
@@ -76,7 +76,6 @@ public class LazyAdapter extends BaseAdapter {
                 .borderWidthDp(0)
                 .cornerRadiusDp(3)
                 .oval(false)
-                //.scaleType(ImageView.ScaleType.CENTER_INSIDE)
                 .build();
 
         Picasso.with(activity)
