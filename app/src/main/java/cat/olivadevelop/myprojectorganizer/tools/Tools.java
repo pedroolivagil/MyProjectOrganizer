@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -294,10 +295,17 @@ public class Tools {
         }
         return sortedJsonArray;
     }
-    public static void clearMainScreenListViewPrefs(){
-        setDatePrjctArray(new String[]{});
-        setDescriptPrjctArray(new String[]{});
-        setTitlePrjctArray(new String[]{});
-        setUrlImgArray(new String[]{});
+
+    public static Bitmap checkResizedBitmap(Bitmap b) {
+        Log.i("IMAGE SIZES", "H->" + b.getHeight() + "; W->" + b.getWidth());
+        while (b.getHeight() > 4096 || b.getWidth() > 4096) {
+            b = Tools.getResizedBitmap(b, .9f);
+        }
+        Log.i("IMAGE SIZES", "H->" + b.getHeight() + "; W->" + b.getWidth());
+        return b;
+    }
+
+    public static boolean checkBitmapSize(Bitmap b, int limit) {
+        return (b.getHeight() > limit || b.getWidth() > limit);
     }
 }

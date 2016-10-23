@@ -42,4 +42,5 @@
     <string name="description_empty">Description is empty</string>
     <string name="card_img">Image card</string>
     <string name="card_last_update">Last update:</string>
+    <string name="use_image10mb">Use an image equal to or less than 12M</string>
 </resources>

@@ -42,4 +42,5 @@
     <string name="empty">Vacío</string>
     <string name="more_options">Más opciones</string>
     <string name="reloading">Recargando...</string>
+    <string name="use_image10mb">Use una imagen igual o inferior a 12M</string>
 </resources>

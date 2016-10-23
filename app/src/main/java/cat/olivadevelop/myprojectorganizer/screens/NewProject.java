@@ -135,9 +135,12 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
             ImageView iv = (ImageView) findViewById(R.id.image_thumb);
             //iv.setImageBitmap(BitmapFactory.decodeFile(filename));
             Bitmap b = BitmapFactory.decodeFile(filename);
-            b = Tools.getResizedBitmap(b, .7f);
-            iv.setImageBitmap(b);
-            selectedImage = Tools.getImageContentUri(this, new File(filename));
+            if (Tools.checkBitmapSize(b, 4096)) {
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.use_image10mb, R.drawable.ic_warning_white_24dp).show();
+            } else {
+                iv.setImageBitmap(b);
+                selectedImage = Tools.getImageContentUri(this, new File(filename));
+            }
         } else if (requestCode == SELECT_PICTURE) {
             if (data != null) {
                 try {
@@ -146,10 +149,13 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
                     is = getContentResolver().openInputStream(selectedImage);
                     BufferedInputStream bis = new BufferedInputStream(is);
                     Bitmap b = BitmapFactory.decodeStream(bis);
-                    b = Tools.getResizedBitmap(b, .7f);
-                    ImageView iv = (ImageView) findViewById(R.id.image_thumb);
-                    iv.setImageBitmap(b);
-                    filename = Tools.getRealPathFromURI(this, selectedImage);
+                    if (Tools.checkBitmapSize(b, 4096)) {
+                        Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.use_image10mb, R.drawable.ic_warning_white_24dp).show();
+                    } else {
+                        ImageView iv = (ImageView) findViewById(R.id.image_thumb);
+                        iv.setImageBitmap(b);
+                        filename = Tools.getRealPathFromURI(this, selectedImage);
+                    }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
