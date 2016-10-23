@@ -11,9 +11,11 @@
     <color name="CCC">#CCCCCC</color>
     <color name="DDD">#DDDDDD</color>
     <color name="EEE">#EEEEEE</color>
+    <color name="FAF">#FAFAFA</color>
 
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="colorPrimary">#795548</color>
+    <color name="colorPrimaryAlpha">#99795548</color>
     <color name="colorPrimaryLight">#CBA06C</color>
     <color name="colorAccent">#009688</color>
     <color name="primaryText">#212121</color>

@@ -77,4 +77,38 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@color/cardview_light_background</item>
     </style>
+
+    <style name="previewProjectTitleImg" parent="AppTheme">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size16</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">@dimen/pad0</item>
+        <item name="android:paddingBottom">@dimen/pad0</item>
+        <item name="android:paddingLeft">@dimen/pad5</item>
+        <item name="android:paddingRight">@dimen/pad0</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:background">@color/FAF</item>
+    </style>
+
+    <style name="layoutPreviewStyle" parent="AppTheme">
+        <item name="android:paddingTop">@dimen/pad0</item>
+        <item name="android:paddingBottom">@dimen/pad2</item>
+        <item name="android:paddingLeft">@dimen/pad0</item>
+        <item name="android:paddingRight">@dimen/pad0</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="targetLastStep" parent="AppTheme">
+        <item name="android:padding">@dimen/pad5</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <!--
+            android:layout_marginTop="10dp"
+            android:background="@color/EEE"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="5dp" -->
+    </style>
+
 </resources>

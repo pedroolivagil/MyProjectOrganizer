@@ -7,6 +7,8 @@
 
     <!--// PADDINGS //-->
     <dimen name="pad0">0dp</dimen>
+    <dimen name="pad1">1dp</dimen>
+    <dimen name="pad2">2dp</dimen>
     <dimen name="pad5">5dp</dimen>
     <dimen name="pad8">8dp</dimen>
     <dimen name="pad10">10dp</dimen>
@@ -19,6 +21,9 @@
     <dimen name="activity_margin_0">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="card_margin">8dp</dimen>
+    <dimen name="mar5">5dp</dimen>
+    <dimen name="mar10">10dp</dimen>
+    <dimen name="mar20">20dp</dimen>
 
     <!--// SIZES //-->
     <dimen name="icon_size">40dp</dimen>
@@ -28,4 +33,5 @@
     <dimen name="card_img_height">100dp</dimen>
     <dimen name="card_img_width">120dp</dimen>
     <dimen name="card_height">105dp</dimen>
+    <dimen name="layoutPreviewHeight">40dp</dimen>
 </resources>

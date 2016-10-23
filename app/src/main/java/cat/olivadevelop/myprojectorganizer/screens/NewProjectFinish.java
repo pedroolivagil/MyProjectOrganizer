@@ -50,9 +50,11 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         TextView textView = (TextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
 
-        if (projectImag != null) {
-            ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
+        ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
+        if (projectImag == null) {
             iv.setImageURI(Tools.getImageContentUri(this, new File(projectImag)));
+        }else {
+            iv.setVisibility(View.GONE);
         }
 
         // boton añadir campo
@@ -129,7 +131,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         lyExtern.setLayoutParams(layoutParams);
         lyExtern.setOrientation(LinearLayout.VERTICAL);
         lyExtern.setPadding(10, 10, 10, 10);
-        lyExtern.setBackgroundResource(R.color.secondaryLight);
+        lyExtern.setBackgroundResource(R.color.colorPrimaryAlpha);
 
 
         LinearLayout ly = new LinearLayout(this);
@@ -155,14 +157,15 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         label.setEllipsize(TextUtils.TruncateAt.END);
         label.setMaxLines(1);
         label.setGravity(Gravity.CENTER);
-        label.setBackgroundResource(R.color.secondaryLight);
+        label.setBackgroundResource(R.color.colorPrimaryAlpha);
         label.setTypeface(null, Typeface.BOLD);
         if (labelText) {
             label.setHint(getString(idStringLabel));
+            label.setHintTextColor(getResources().getColor(R.color.white));
         } else {
             label.setText(getString(idStringLabel));
             label.setEnabled(false);
-            label.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            label.setTextColor(getResources().getColor(R.color.white));
         }
 
         // Valor del nuevo campo
