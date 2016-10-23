@@ -306,6 +306,9 @@ public class Tools {
     }
 
     public static boolean checkBitmapSize(Bitmap b, int limit) {
+        if (b == null) {
+            return false;
+        }
         return (b.getHeight() > limit || b.getWidth() > limit);
     }
 }

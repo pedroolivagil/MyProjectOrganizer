@@ -100,15 +100,20 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
-    <style name="targetLastStep" parent="AppTheme">
+    <style name="Button" parent="AppTheme">
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:padding">@dimen/pad5</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <!--
-            android:layout_marginTop="10dp"
-            android:background="@color/EEE"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:padding="5dp" -->
+        <item name="android:minWidth">210dp</item>
+    </style>
+
+    <style name="Button.ImageView" parent="AppTheme">
+        <item name="android:height">50dp</item>
+        <item name="android:width">50dp</item>
+    </style>
+
+    <style name="Button.TextView" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
 </resources>

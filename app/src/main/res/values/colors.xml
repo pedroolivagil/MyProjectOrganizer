@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#009688</color>-->
-    <!--<color name="colorPrimaryDark">#00796B</color>-->
-    <!--<color name="colorAccent">#795548</color>-->
-    <!--<color name="primary_light">#B2DFDB</color>-->
-    <!--<color name="primary_text">#212121</color>-->
-    <!--<color name="secondary_text">#757575</color>-->
-    <!--<color name="icons">#FFFFFF</color>-->
-    <!--<color name="divider">#BDBDBD</color>-->
     <color name="CCC">#CCCCCC</color>
     <color name="DDD">#DDDDDD</color>
     <color name="EEE">#EEEEEE</color>
@@ -15,15 +7,15 @@
 
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="colorPrimary">#795548</color>
-    <color name="colorPrimaryAlpha">#99795548</color>
+    <color name="colorPrimaryAlpha">#55795548</color>
     <color name="colorPrimaryLight">#CBA06C</color>
     <color name="colorAccent">#009688</color>
     <color name="primaryText">#212121</color>
     <color name="primaryLight">#D7CCC8</color>
     <color name="secondaryText">#757575</color>
     <color name="secondaryLight">#ceedea</color>
-    <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+    <color name="icons">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
 
 </resources>

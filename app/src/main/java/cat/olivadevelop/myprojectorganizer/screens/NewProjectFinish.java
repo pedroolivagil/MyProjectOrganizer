@@ -1,6 +1,5 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
@@ -65,7 +64,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         fieldsContainer = (LinearLayout) findViewById(R.id.fieldsContainer);
         // iniciamos el contador de celdas
         countFields = 0;
-        generateNewField(R.id.projectDescript, R.string.label_description, R.string.description, false);
+        generateNewField(-1, R.string.description, false);
     }
 
     @Override
@@ -108,7 +107,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.err_max_fields, R.drawable.ic_warning_white_24dp).show();
             } else {
                 final ScrollView scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
-                generateNewField(countFields, R.string.type_field, R.string.value_field, true);
+                generateNewField(R.string.type_field, R.string.value_field, true);
                 scrollview.post(new Runnable() {
                     @Override
                     public void run() {
@@ -119,7 +118,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void generateNewField(int id, int idStringLabel, int idStringValue, boolean labelText) {
+    private void generateNewField(int idStringLabel, int idStringValue, boolean labelText) {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -153,19 +152,18 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
                         RelativeLayout.LayoutParams.WRAP_CONTENT
                 )
         );
-        label.setEms(6);
         label.setEllipsize(TextUtils.TruncateAt.END);
         label.setMaxLines(1);
         label.setGravity(Gravity.CENTER);
         label.setBackgroundResource(R.color.colorPrimaryAlpha);
-        label.setTypeface(null, Typeface.BOLD);
         if (labelText) {
             label.setHint(getString(idStringLabel));
             label.setHintTextColor(getResources().getColor(R.color.white));
+            label.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            label.setPadding(0, 10, 0, 10);
         } else {
-            label.setText(getString(idStringLabel));
-            label.setEnabled(false);
-            label.setTextColor(getResources().getColor(R.color.white));
+            label.setVisibility(View.GONE);
+            label.setText(Project.json_project_descript);
         }
 
         // Valor del nuevo campo

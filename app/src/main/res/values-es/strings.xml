@@ -11,7 +11,7 @@
     <string name="new_project_instructions">- Introduce un nombre para tu proyecto.\n- Haz una foto o selecciona una de la galería que represente el proyecto (opcional, puedes hacerlo más tarde).</string>
     <string name="pgd_creating_project">Creando proyecto…</string>
     <string name="toolbarNewProjectFinish">Último paso</string>
-    <string name="add_question_form">Añade otro campo</string>
+    <string name="add_question_form">Añade otro campo al proyecto</string>
     <string name="description">Añade una breve descripción</string>
     <string name="projectIsFinalized">Proyecto terminado</string>
     <string name="add_email">Añade una cuenta de correo</string>

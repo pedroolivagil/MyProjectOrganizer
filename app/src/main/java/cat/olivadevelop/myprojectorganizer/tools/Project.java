@@ -17,5 +17,6 @@ public abstract class Project {
     public static final String json_project_home_img = "home_img";
     public static final String json_project_images = "images";
     public static final String json_project_form = "form";
-    public static final String json_project_descript = "Descripción";
+    public static final String json_project_descript = "description";
+
 }

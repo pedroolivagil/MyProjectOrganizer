@@ -34,4 +34,8 @@
     <dimen name="card_img_width">120dp</dimen>
     <dimen name="card_height">105dp</dimen>
     <dimen name="layoutPreviewHeight">40dp</dimen>
+    <dimen name="height10">10dp</dimen>
+    <dimen name="height50">50dp</dimen>
+    <dimen name="buttonHeight">40dp</dimen>
+    <dimen name="imageButtonHeight">30dp</dimen>
 </resources>

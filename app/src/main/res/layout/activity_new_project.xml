@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,11 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="cat.olivadevelop.myprojectorganizer.screens.NewProject">
 
         <EditText
@@ -26,62 +24,84 @@
             android:layout_height="wrap_content"
             android:text="@string/new_project_instructions" />
 
-        <LinearLayout
-            android:id="@+id/btnCamera"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/pad10"
-            android:background="@color/EEE"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_height="@dimen/height10" />
 
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:src="@drawable/ic_camera_black_48dp"
-                android:tint="@color/colorPrimaryDark" />
+        <!--// boton usar camara //-->
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:theme="@style/Button"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/icon_size"
-                android:gravity="center"
-                android:paddingLeft="@dimen/pad10"
-                android:text="@string/p_select_home_img_cam" />
+            <LinearLayout
+                android:id="@+id/btnGalery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/imageButtonHeight"
+                    android:layout_height="@dimen/imageButtonHeight"
+                    android:src="@drawable/ic_apps_white_48dp"
+                    android:theme="@style/Button.ImageView" />
 
-        <LinearLayout
-            android:id="@+id/btnGalery"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:text="@string/p_select_home_img_gal"
+                    android:theme="@style/Button.TextView" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/EEE"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:layout_height="@dimen/height10" />
+        <!--// boton añadir desde galeria //-->
 
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:src="@drawable/ic_apps_black_48dp"
-                android:tint="@color/colorPrimaryDark" />
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:theme="@style/Button"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/icon_size"
-                android:gravity="center"
-                android:paddingLeft="@dimen/pad10"
-                android:text="@string/p_select_home_img_gal" />
+            <LinearLayout
+                android:id="@+id/btnCamera"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/imageButtonHeight"
+                    android:layout_height="@dimen/imageButtonHeight"
+                    android:src="@drawable/ic_camera_white_48dp"
+                    android:theme="@style/Button.ImageView" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:text="@string/p_select_home_img_cam"
+                    android:theme="@style/Button.TextView" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@color/secondaryLight"
+            android:background="@color/colorPrimary"
             android:padding="2dp">
 
             <ImageView
@@ -90,9 +110,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:scaleType="center"
-                android:src="@drawable/ic_crop_free_black_48dp"/>
+                android:src="@drawable/ic_crop_free_black_48dp" />
         </LinearLayout>
-
     </LinearLayout>
 
 </ScrollView>

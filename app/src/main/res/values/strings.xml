@@ -11,7 +11,7 @@
     <string name="new_project_instructions">- Enter a name for your project.\n- Take a picture or select one of the gallery that represents the project (optional, you can do this later).</string>
     <string name="pgd_creating_project">Creating project…</string>
     <string name="toolbarNewProjectFinish">Last step</string>
-    <string name="add_question_form">Add another field</string>
+    <string name="add_question_form">Add another field in the project</string>
     <string name="description">Add a brief description</string>
     <string name="projectIsFinalized">Project finished</string>
     <string name="empty_char" translatable="false" />
