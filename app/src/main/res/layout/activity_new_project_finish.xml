@@ -5,8 +5,8 @@
     android:id="@+id/scroll_project_finish"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/FAF"
     android:orientation="vertical"
+    android:theme="@style/CommonActivity"
     tools:context="cat.olivadevelop.myprojectorganizer.screens.NewProjectFinish">
 
 
@@ -26,7 +26,8 @@
             <ImageView
                 android:id="@+id/imgProjectPreview"
                 android:layout_width="@dimen/layoutPreviewHeight"
-                android:layout_height="@dimen/layoutPreviewHeight" />
+                android:layout_height="@dimen/layoutPreviewHeight"
+                android:theme="@style/CommonActivity"/>
 
             <TextView
                 android:id="@+id/nameProjectPreview"

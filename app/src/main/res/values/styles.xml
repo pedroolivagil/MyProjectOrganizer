@@ -33,6 +33,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CommonActivity" parent="AppTheme">
+        <item name="android:background">@color/EEE</item>
+    </style>
+
     <style name="CommonBackground" parent="AppTheme">
         <item name="android:background">@color/white</item>
     </style>
@@ -89,7 +93,7 @@
         <item name="android:paddingLeft">@dimen/pad5</item>
         <item name="android:paddingRight">@dimen/pad0</item>
         <item name="android:gravity">center|left</item>
-        <item name="android:background">@color/FAF</item>
+        <item name="android:background">@color/EEE</item>
     </style>
 
     <style name="layoutPreviewStyle" parent="AppTheme">

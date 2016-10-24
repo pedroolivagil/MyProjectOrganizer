@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     android.R.color.holo_orange_light
             );
             // cargamos los projects del usuario
-            autoRefresh();
+            loadProjects();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
         }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        autoRefresh();
+        loadProjects();
     }
 
     @Override
@@ -123,7 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        list.setAdapter(null);
+        if(list != null) {
+            list.setAdapter(null);
+        }
         super.onDestroy();
     }
 
@@ -133,15 +135,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void autoRefresh() {
-        //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
-        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
-        swipeLayout.setRefreshing(true);
-        loadProjects();
-        list.postDelayed(new Runnable() {
-            public void run() {
-                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
-                swipeLayout.setRefreshing(false);
-            }
-        }, 2000);
+        if (swipeLayout != null) {
+            //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
+            //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+            swipeLayout.setRefreshing(true);
+            loadProjects();
+            list.postDelayed(new Runnable() {
+                public void run() {
+                    //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                    swipeLayout.setRefreshing(false);
+                }
+            }, 2000);
+        }
     }
 }

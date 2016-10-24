@@ -5,6 +5,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/CommonActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="cat.olivadevelop.myprojectorganizer.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -14,7 +15,6 @@
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/EEE"
         tools:ignore="MergeRootFrame">
 
         <ListView

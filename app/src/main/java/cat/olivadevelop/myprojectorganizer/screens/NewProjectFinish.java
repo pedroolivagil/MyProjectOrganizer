@@ -28,12 +28,12 @@ import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
 
+    static ScrollView scrollview;
     private String projectName;
     private String projectImag;
     private LinearLayout btnAddField;
     private LinearLayout fieldsContainer;
     private int countFields;
-    private int ID_LABEL_EXTRA = 10;
     private int LIMIT_EDTEXT = 150;
 
     @Override
@@ -41,6 +41,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_project_finish);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
         //cabecera de proyecto
         projectName = Tools.getPrefs().getString(Project.PROJECT_NAME, null);
@@ -50,7 +51,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         textView.setText(projectName);
 
         ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
-        if (projectImag == null) {
+        if (projectImag != null) {
             iv.setImageURI(Tools.getImageContentUri(this, new File(projectImag)));
         }else {
             iv.setVisibility(View.GONE);
@@ -106,7 +107,6 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
             if (countFields >= 10) {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.err_max_fields, R.drawable.ic_warning_white_24dp).show();
             } else {
-                final ScrollView scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
                 generateNewField(R.string.type_field, R.string.value_field, true);
                 scrollview.post(new Runnable() {
                     @Override
