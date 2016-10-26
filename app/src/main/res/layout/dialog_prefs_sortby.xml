@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/pad24">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/pad10"
+        android:text="@string/selectColumnSort" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/pad10"
+        android:layout_marginTop="@dimen/pad10"
+        android:background="@color/divider" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/pad10"
+        android:text="@string/sortByType" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/pad10"
+        android:layout_marginTop="@dimen/pad10"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action_cancel_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/mar5"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:theme="@style/Button"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonHeight"
+                android:text="@string/btn_cancel"
+                android:theme="@style/Button.TextView.Center" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action_accept_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/mar5"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:theme="@style/ButtonWithoutMin"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonHeight"
+                android:text="@string/btn_save"
+                android:theme="@style/Button.TextView.Center" />
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>

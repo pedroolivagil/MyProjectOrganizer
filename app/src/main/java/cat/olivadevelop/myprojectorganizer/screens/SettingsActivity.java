@@ -3,7 +3,10 @@ package cat.olivadevelop.myprojectorganizer.screens;
 import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +25,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private int REQUEST_CODE = 1;
     private TextView putEmailInPrefs;
     private LinearLayout changeEmail;
+    private TextView optionCleanPrefs;
+    private TextView optionChangeAccount;
+    private LinearLayout optionDelAllProjects;
+    private LinearLayout optionSortBy;
+    private TextView resultOrderBy;
+    private AlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +40,23 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         putEmailInPrefs = (TextView) findViewById(R.id.putEmailInPrefs);
         changeEmail = (LinearLayout) findViewById(R.id.changeEmail);
         changeEmail.setOnClickListener(this);
+        resultOrderBy = (TextView) findViewById(R.id.resultOrderBy);
+        resultOrderBy.setOnClickListener(this);
+        optionCleanPrefs = (TextView) findViewById(R.id.optionCleanPrefs);
+        optionCleanPrefs.setOnClickListener(this);
+        optionChangeAccount = (TextView) findViewById(R.id.optionChangeAccount);
+        optionChangeAccount.setOnClickListener(this);
+        optionDelAllProjects = (LinearLayout) findViewById(R.id.optionDelAllProjects);
+        optionDelAllProjects.setOnClickListener(this);
+        optionSortBy = (LinearLayout) findViewById(R.id.optionSortBy);
+        optionSortBy.setOnClickListener(this);
+
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             setEmail();
         } else {
             putEmailInPrefs.setText(Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null));
         }
+        alert = orderByDialog();
     }
 
     private void setEmail() {
@@ -83,8 +104,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v == changeEmail) {
+        if (v == changeEmail || v == optionChangeAccount) {
             setEmail();
+        }
+        if (v == optionSortBy) {
+            alert.show();
+        }
+        if (v == optionDelAllProjects) {
+        }
+        if (v == optionCleanPrefs) { // desactiva
         }
     }
 
@@ -94,5 +122,46 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
         new UploadToServer(this).execute();
+    }
+
+    /**
+     * Crea un diálogo con personalizado para comportarse
+     * como formulario de login
+     *
+     * @return Diálogo
+     */
+    public AlertDialog orderByDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_prefs_sortby, null);
+        builder.setView(v);
+        final CardView cancel = (CardView) v.findViewById(R.id.action_cancel_dialog);
+        CardView accept = (CardView) v.findViewById(R.id.action_accept_dialog);
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                }
+        );
+        accept.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setOrderByPrefs();
+                    }
+                }
+
+        );
+        return builder.create();
+    }
+
+    private void dismiss() {
+        alert.cancel();
+    }
+
+    private void setOrderByPrefs() {
+
     }
 }

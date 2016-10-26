@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer;
+package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import cat.olivadevelop.myprojectorganizer.screens.NewProject;
-import cat.olivadevelop.myprojectorganizer.screens.SettingsActivity;
+import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Project;
@@ -38,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
+
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
@@ -94,9 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.action_auto_update) {
+        /*if (id == R.id.action_auto_update) {
             autoRefresh();
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

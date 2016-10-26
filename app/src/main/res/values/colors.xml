@@ -10,11 +10,12 @@
     <color name="colorPrimaryAlpha">#55795548</color>
     <color name="colorPrimaryLight">#CBA06C</color>
     <color name="colorAccent">#009688</color>
+    <color name="colorAlert">#c04f5a</color>
     <color name="primaryText">#212121</color>
     <color name="primaryLight">#D7CCC8</color>
     <color name="secondaryText">#757575</color>
     <color name="secondaryLight">#ceedea</color>
-    <color name="divider">#BDBDBD</color>
+    <color name="divider">#DDDDDD</color>
     <color name="icons">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
 

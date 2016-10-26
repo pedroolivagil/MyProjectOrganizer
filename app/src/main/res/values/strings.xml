@@ -43,4 +43,14 @@
     <string name="card_img">Image card</string>
     <string name="card_last_update">Last update:</string>
     <string name="use_image10mb">Use an image equal to or less than 12M</string>
+    <string name="accountSettings">Account settings</string>
+    <string name="optionCleanPrefs">Clean application preferences</string>
+    <string name="optionOrderBy">Sort projects by ...</string>
+    <string name="optionChangeAccount">Change email account</string>
+    <string name="optionDeleteAllProjects">Delete all projects</string>
+    <string name="optionDeleteAllProjectsExtra">(cannot be undone)</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Accept</string>
+    <string name="sortByType">Type of order</string>
+    <string name="selectColumnSort">Select the order</string>
 </resources>

@@ -1,11 +1,10 @@
-package cat.olivadevelop.myprojectorganizer.screens;
+package cat.olivadevelop.myprojectorganizer;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import cat.olivadevelop.myprojectorganizer.MainActivity;
-import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.screens.MainActivity;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class SplashScreen extends AppCompatActivity {

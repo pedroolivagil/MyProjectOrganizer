@@ -104,6 +104,16 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="ButtonGeneric" parent="AppTheme">
+        <item name="android:background">@color/colorAccent</item>
+        <!-- <item name="android:padding">@dimen/pad5</item> -->
+    </style>
+
+    <style name="ButtonWithoutMin" parent="AppTheme">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:padding">@dimen/pad5</item>
+    </style>
+
     <style name="Button" parent="AppTheme">
         <item name="android:background">@color/colorAccent</item>
         <item name="android:padding">@dimen/pad5</item>
@@ -118,6 +128,42 @@
     <style name="Button.TextView" parent="AppTheme">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Button.TextView.Center" parent="AppTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/size18</item>
+        <item name="android:gravity">center|center_horizontal</item>
+    </style>
+
+    <style name="ButtonOption" parent="AppTheme">
+        <item name="android:textSize">@dimen/size18</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">@dimen/pad15</item>
+        <item name="android:paddingBottom">@dimen/pad15</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="ButtonOptionLayout" parent="AppTheme">
+        <item name="android:textSize">@dimen/size18</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">@dimen/pad8</item>
+        <item name="android:paddingBottom">@dimen/pad8</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="ButtonOptionMini" parent="AppTheme">
+        <item name="android:textSize">@dimen/size12</item>
+        <item name="android:paddingLeft">@dimen/pad5</item>
+    </style>
+
+    <style name="ButtonOptionMiniAlert" parent="ButtonOptionMini">
+        <item name="android:textColor">@color/colorAlert</item>
+    </style>
+
+    <style name="DividerOptions" parent="AppTheme">
+        <item name="android:background">@color/divider</item>
     </style>
 
 </resources>

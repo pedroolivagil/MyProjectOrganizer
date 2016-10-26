@@ -43,4 +43,14 @@
     <string name="more_options">Más opciones</string>
     <string name="reloading">Recargando...</string>
     <string name="use_image10mb">Use una imagen igual o inferior a 12M</string>
+    <string name="accountSettings">Opciones de cuenta</string>
+    <string name="optionCleanPrefs">Limpiar preferéncias de aplicación</string>
+    <string name="optionChangeAccount">Cambiar cuenta de email</string>
+    <string name="optionDeleteAllProjects">Borrar proyectos</string>
+    <string name="optionOrderBy">Ordenar proyectos por...</string>
+    <string name="optionDeleteAllProjectsExtra">(no se puede deshacer)</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_save">Aceptar</string>
+    <string name="selectColumnSort">Selecciona el orden</string>
+    <string name="sortByType">Tipo de orden</string>
 </resources>

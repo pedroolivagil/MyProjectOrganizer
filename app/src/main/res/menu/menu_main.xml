@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--//
     <item
         android:id="@+id/action_show_menu"
         android:icon="@drawable/ic_more_vert_white_24dp"
@@ -19,4 +20,10 @@
                 app:showAsAction="ifRoom|withText" />
         </menu>
     </item>
+    //-->
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_white_24dp"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom|withText" />
 </menu>

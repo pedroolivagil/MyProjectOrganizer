@@ -1,5 +1,6 @@
 <resources>
     <!--// TEXT //-->
+    <dimen name="size18">18sp</dimen>
     <dimen name="size16">16sp</dimen>
     <dimen name="size14">14sp</dimen>
     <dimen name="size12">12sp</dimen>
@@ -38,4 +39,5 @@
     <dimen name="height50">50dp</dimen>
     <dimen name="buttonHeight">40dp</dimen>
     <dimen name="imageButtonHeight">30dp</dimen>
+    <dimen name="pad24">24dp</dimen>
 </resources>
