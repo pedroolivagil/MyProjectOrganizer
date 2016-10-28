@@ -57,6 +57,7 @@ public class Tools {
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
+        Project.setDefaultPrefs();
     }
 
     public static String getMD5(String input) {

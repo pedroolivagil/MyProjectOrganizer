@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/alertDialogSortBy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,27 +15,27 @@
         android:text="@string/selectColumnSort" />
 
     <RadioGroup
+        android:id="@+id/sortByGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/checkboxSortByIdPrjct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="RadioButton" />
+            android:text="@string/sortByIdProject" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/checkboxSortByLatUpdt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/sortByLastUpdate" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/checkboxSortByPrjctName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/sortByNameProject" />
     </RadioGroup>
 
     <View
@@ -52,21 +53,21 @@
         android:text="@string/sortByType" />
 
     <RadioGroup
+        android:id="@+id/typeSortByGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/checkboxTypeSortByASC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="RadioButton" />
+            android:text="@string/typeOrderAscendant" />
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/checkboxTypeSortByDESC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/typeOrderDescendant" />
     </RadioGroup>
 
     <View

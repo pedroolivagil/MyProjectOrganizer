@@ -4,7 +4,7 @@
     <string name="pgd_loading">Cargando proyectos…</string>
     <string name="action_settings">Opciones</string>
     <string name="p_name">Nombre del proyecto</string>
-    <string name="fail_pjt_name">Nombre del proyecto no debe estar vacío</string>
+    <string name="fail_pjt_name">Proyecto: min 5 letras y no debe estar vacío</string>
     <string name="p_select_home_img_cam">Haz una foto desde la cámara</string>
     <string name="p_select_home_img_gal">Selecciona una desde la galería</string>
     <string name="toolbarNewProject">Nuevo proyecto</string>
@@ -53,4 +53,9 @@
     <string name="btn_save">Aceptar</string>
     <string name="selectColumnSort">Selecciona el orden</string>
     <string name="sortByType">Tipo de orden</string>
+    <string name="typeOrderAscendant">Ascendente (A - Z)</string>
+    <string name="typeOrderDescendant">Descendente (Z - A)</string>
+    <string name="sortByIdProject">Fecha de creación</string>
+    <string name="sortByLastUpdate">Última actualización</string>
+    <string name="sortByNameProject">Nombre de proyecto</string>
 </resources>

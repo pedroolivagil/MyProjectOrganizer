@@ -26,7 +26,6 @@ import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_des
 import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_dir_files;
 import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_form;
 import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_home_img;
-import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_id_project;
 import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_last_update;
 import static cat.olivadevelop.myprojectorganizer.tools.Project.json_project_name;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.sortJSON;
@@ -76,7 +75,7 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> implements A
                 JSONArray category;
                 JSONObject jsonObjectLine;
 
-                category = sortJSON(jsonObject.getJSONArray(CATEGORY), json_project_id_project, false);
+                category = sortJSON(jsonObject.getJSONArray(CATEGORY), Project.getSortBy(), Project.getTypeSortBy());
                 String[] img_url = new String[category.length()];
                 String[] title_arr = new String[category.length()];
                 String[] descrip_arr = new String[category.length()];

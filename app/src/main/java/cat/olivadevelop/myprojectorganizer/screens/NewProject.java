@@ -110,13 +110,12 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
-            if (!editPjctName.getText().toString().equals("")) {
+            if (!editPjctName.getText().toString().equals("") && editPjctName.getText().toString().length() > 5) {
                 //procedure to next step
                 Tools.putInPrefs().putString(Project.PROJECT_NAME, editPjctName.getText().toString()).apply();
                 if (filename != null) {
                     Tools.putInPrefs().putString(Project.PROJECT_IMG, filename).apply();
                 }
-
                 Intent nextStep = new Intent(this, NewProjectFinish.class);
                 startActivity(nextStep);
             } else {

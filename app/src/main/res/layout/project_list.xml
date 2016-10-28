@@ -21,7 +21,7 @@
 
             <FrameLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="@dimen/card_img_width"
+                android:layout_width="130dp"
                 android:layout_height="@dimen/card_img_height">
 
                 <ImageView

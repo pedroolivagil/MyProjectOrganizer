@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
 
-        Intent i = new Intent(this, SettingsActivity.class);
-        startActivity(i);
-
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
@@ -53,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             swipeLayout.setColorSchemeResources(
                     R.color.colorAccent,
                     R.color.colorPrimary,
-                    R.color.colorPrimaryDark,
-                    android.R.color.holo_orange_light
+                    android.R.color.holo_orange_light,
+                    R.color.colorPrimaryDark
             );
             // cargamos los projects del usuario
             loadProjects();

@@ -6,17 +6,21 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.Project;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
 
@@ -31,6 +35,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout optionSortBy;
     private TextView resultOrderBy;
     private AlertDialog alert;
+    private RadioGroup sortBy;
+    private RadioGroup typeSortBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,35 +114,63 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             setEmail();
         }
         if (v == optionSortBy) {
-            alert.show();
+            showAlert();
         }
         if (v == optionDelAllProjects) {
+            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.soon, R.drawable.ic_warning_white_24dp).show();
         }
-        if (v == optionCleanPrefs) { // desactiva
+        if (v == optionCleanPrefs) { // desactivado
+        }
+    }
+
+    private void showAlert() {
+        if (alert != null) {
+            alert.show();
+            // order by
+            RadioButton c1 = (RadioButton) alert.findViewById(R.id.checkboxSortByIdPrjct);
+            RadioButton c2 = (RadioButton) alert.findViewById(R.id.checkboxSortByLatUpdt);
+            RadioButton c3 = (RadioButton) alert.findViewById(R.id.checkboxSortByPrjctName);
+            if ((c1 != null) && (c2 != null) && (c3 != null)) {
+                if (Project.getSortBy().equals(Project.json_project_id_project)) {
+                    c1.setChecked(true);
+                } else if (Project.getSortBy().equals(Project.json_project_last_update)) {
+                    c2.setChecked(true);
+                } else if (Project.getSortBy().equals(Project.json_project_last_update)) {
+                    c3.setChecked(true);
+                } else {
+                    c1.setChecked(true);
+                }
+            }
+
+            // typeorder by
+            RadioButton c4 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByASC);
+            RadioButton c5 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByDESC);
+            if ((c4 != null) && (c5 != null)) {
+                if (Project.getTypeSortBy()) {
+                    c4.setChecked(true);
+                } else if (Project.getTypeSortBy()) {
+                    c5.setChecked(true);
+                } else {
+                    c5.setChecked(true);
+                }
+            }
         }
     }
 
     public void saveEmail() {
         Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
         Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
-
-        Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
+        msgSuccess();
         new UploadToServer(this).execute();
     }
 
-    /**
-     * Crea un diálogo con personalizado para comportarse
-     * como formulario de login
-     *
-     * @return Diálogo
-     */
     public AlertDialog orderByDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_prefs_sortby, null);
-        builder.setView(v);
-        final CardView cancel = (CardView) v.findViewById(R.id.action_cancel_dialog);
-        CardView accept = (CardView) v.findViewById(R.id.action_accept_dialog);
+        final View view = inflater.inflate(R.layout.dialog_prefs_sortby, null);
+        builder.setView(view);
+        final CardView cancel = (CardView) view.findViewById(R.id.action_cancel_dialog);
+        CardView accept = (CardView) view.findViewById(R.id.action_accept_dialog);
         cancel.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -149,7 +183,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setOrderByPrefs();
+                        setOrderByPrefs(view);
                     }
                 }
 
@@ -158,10 +192,47 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void dismiss() {
-        alert.cancel();
+        alert.dismiss();
     }
 
-    private void setOrderByPrefs() {
+    private void setOrderByPrefs(View v) {
+        sortBy = (RadioGroup) v.findViewById(R.id.sortByGroup);
+        typeSortBy = (RadioGroup) v.findViewById(R.id.typeSortByGroup);
 
+        // order by
+        switch (sortBy.getCheckedRadioButtonId()) {
+            default:
+            case R.id.checkboxSortByIdPrjct:
+                Project.setSortBy(Project.json_project_id_project);
+                Log.i("ORDER", getString(R.string.sortByIdProject));
+                break;
+            case R.id.checkboxSortByLatUpdt:
+                Project.setSortBy(Project.json_project_last_update);
+                Log.i("ORDER", getString(R.string.sortByLastUpdate));
+                break;
+            case R.id.checkboxSortByPrjctName:
+                Project.setSortBy(Project.json_project_name);
+                Log.i("ORDER", getString(R.string.sortByNameProject));
+                break;
+        }
+
+        // type order by
+        switch (typeSortBy.getCheckedRadioButtonId()) {
+            case R.id.checkboxTypeSortByASC:
+                Project.setTypeSortBy(Project.TYPE_SORT_BY_ASC);
+                Log.i("ORDER", getString(R.string.typeOrderAscendant));
+                break;
+            default:
+            case R.id.checkboxTypeSortByDESC:
+                Project.setTypeSortBy(Project.TYPE_SORT_BY_DESC);
+                Log.i("ORDER", getString(R.string.typeOrderDescendant));
+                break;
+        }
+        alert.dismiss();
+        msgSuccess();
+    }
+
+    public void msgSuccess(){
+        Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
     }
 }

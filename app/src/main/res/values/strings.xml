@@ -7,7 +7,7 @@
     <string name="p_select_home_img_gal">Select photo from gallery</string>
     <string name="action_start">Start project</string>
     <string name="toolbarNewProject">New project</string>
-    <string name="fail_pjt_name">Project name should not be empty</string>
+    <string name="fail_pjt_name">Project: min 5 chars and should not be empty</string>
     <string name="new_project_instructions">- Enter a name for your project.\n- Take a picture or select one of the gallery that represents the project (optional, you can do this later).</string>
     <string name="pgd_creating_project">Creating project…</string>
     <string name="toolbarNewProjectFinish">Last step</string>
@@ -53,4 +53,9 @@
     <string name="btn_save">Accept</string>
     <string name="sortByType">Type of order</string>
     <string name="selectColumnSort">Select the order</string>
+    <string name="typeOrderAscendant">Ascendant (A - Z)</string>
+    <string name="typeOrderDescendant">Descendent (Z - A)</string>
+    <string name="sortByLastUpdate">Last updated project</string>
+    <string name="sortByNameProject">Project name</string>
+    <string name="sortByIdProject">Creation date</string>
 </resources>
