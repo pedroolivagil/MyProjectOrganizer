@@ -19,4 +19,31 @@ public abstract class Project {
     public static final String json_project_form = "form";
     public static final String json_project_descript = "description";
 
+    public static final String SORT_BY = "sortBy";
+    public static final String TYPE_SORT_BY = "typeSortBy";
+    public static final boolean TYPE_SORT_BY_ASC = true;
+    public static final boolean TYPE_SORT_BY_DESC = false;
+
+    public static void setDefaultPrefs() {
+        if (Tools.getPrefs().getString(SORT_BY, "").equals("")) {
+            Tools.putInPrefs().putString(SORT_BY, json_project_id_project).apply();
+            Tools.putInPrefs().putBoolean(TYPE_SORT_BY, TYPE_SORT_BY_DESC).apply();
+        }
+    }
+
+    public static String getSortBy() {
+        return Tools.getPrefs().getString(SORT_BY, json_project_id_project);
+    }
+
+    public static void setSortBy(String sortBy) {
+        Tools.putInPrefs().putString(SORT_BY, sortBy).apply();
+    }
+
+    public static boolean getTypeSortBy() {
+        return Tools.getPrefs().getBoolean(TYPE_SORT_BY, TYPE_SORT_BY_DESC);
+    }
+
+    public static void setTypeSortBy(boolean typeSortBy) {
+        Tools.putInPrefs().putBoolean(TYPE_SORT_BY, typeSortBy).apply();
+    }
 }
