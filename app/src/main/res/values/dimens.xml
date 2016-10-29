@@ -40,4 +40,5 @@
     <dimen name="buttonHeight">40dp</dimen>
     <dimen name="imageButtonHeight">30dp</dimen>
     <dimen name="pad24">24dp</dimen>
+    <dimen name="headerImgSelecPrj">200dp</dimen>
 </resources>
