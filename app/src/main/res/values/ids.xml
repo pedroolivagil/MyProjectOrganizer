@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="projectDescript" type="id">projectDescript</item>
+    <array name="fields_ids">
+        <item>fieldFinish_0</item>
+        <item>fieldFinish_1</item>
+        <item>fieldFinish_2</item>
+        <item>fieldFinish_3</item>
+        <item>fieldFinish_4</item>
+        <item>fieldFinish_5</item>
+        <item>fieldFinish_6</item>
+        <item>fieldFinish_7</item>
+        <item>fieldFinish_8</item>
+        <item>fieldFinish_9</item>
+    </array>
 </resources>

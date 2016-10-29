@@ -20,7 +20,7 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.tools.Project;
+import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
 
@@ -131,11 +131,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             RadioButton c2 = (RadioButton) alert.findViewById(R.id.checkboxSortByLatUpdt);
             RadioButton c3 = (RadioButton) alert.findViewById(R.id.checkboxSortByPrjctName);
             if ((c1 != null) && (c2 != null) && (c3 != null)) {
-                if (Project.getSortBy().equals(Project.json_project_id_project)) {
+                if (ProjectManager.getSortBy().equals(ProjectManager.json_project_id_project)) {
                     c1.setChecked(true);
-                } else if (Project.getSortBy().equals(Project.json_project_last_update)) {
+                } else if (ProjectManager.getSortBy().equals(ProjectManager.json_project_last_update)) {
                     c2.setChecked(true);
-                } else if (Project.getSortBy().equals(Project.json_project_last_update)) {
+                } else if (ProjectManager.getSortBy().equals(ProjectManager.json_project_last_update)) {
                     c3.setChecked(true);
                 } else {
                     c1.setChecked(true);
@@ -146,9 +146,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             RadioButton c4 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByASC);
             RadioButton c5 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByDESC);
             if ((c4 != null) && (c5 != null)) {
-                if (Project.getTypeSortBy()) {
+                if (ProjectManager.getTypeSortBy()) {
                     c4.setChecked(true);
-                } else if (Project.getTypeSortBy()) {
+                } else if (ProjectManager.getTypeSortBy()) {
                     c5.setChecked(true);
                 } else {
                     c5.setChecked(true);
@@ -203,15 +203,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         switch (sortBy.getCheckedRadioButtonId()) {
             default:
             case R.id.checkboxSortByIdPrjct:
-                Project.setSortBy(Project.json_project_id_project);
+                ProjectManager.setSortBy(ProjectManager.json_project_id_project);
                 Log.i("ORDER", getString(R.string.sortByIdProject));
                 break;
             case R.id.checkboxSortByLatUpdt:
-                Project.setSortBy(Project.json_project_last_update);
+                ProjectManager.setSortBy(ProjectManager.json_project_last_update);
                 Log.i("ORDER", getString(R.string.sortByLastUpdate));
                 break;
             case R.id.checkboxSortByPrjctName:
-                Project.setSortBy(Project.json_project_name);
+                ProjectManager.setSortBy(ProjectManager.json_project_name);
                 Log.i("ORDER", getString(R.string.sortByNameProject));
                 break;
         }
@@ -219,12 +219,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         // type order by
         switch (typeSortBy.getCheckedRadioButtonId()) {
             case R.id.checkboxTypeSortByASC:
-                Project.setTypeSortBy(Project.TYPE_SORT_BY_ASC);
+                ProjectManager.setTypeSortBy(ProjectManager.TYPE_SORT_BY_ASC);
                 Log.i("ORDER", getString(R.string.typeOrderAscendant));
                 break;
             default:
             case R.id.checkboxTypeSortByDESC:
-                Project.setTypeSortBy(Project.TYPE_SORT_BY_DESC);
+                ProjectManager.setTypeSortBy(ProjectManager.TYPE_SORT_BY_DESC);
                 Log.i("ORDER", getString(R.string.typeOrderDescendant));
                 break;
         }

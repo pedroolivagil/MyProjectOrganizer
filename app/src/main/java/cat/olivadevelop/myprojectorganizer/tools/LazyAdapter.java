@@ -20,7 +20,7 @@ import cat.olivadevelop.myprojectorganizer.R;
  * Created by Oliva on 05/10/2016.
  */
 
-public class LazyAdapter extends BaseAdapter {
+public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
 
     private static LayoutInflater inflater = null;
     private Activity activity;
@@ -28,9 +28,11 @@ public class LazyAdapter extends BaseAdapter {
     private String[] img;
     private String[] lstUpdt;
     private String[] txt;
+    private int[] ids;
 
-    public LazyAdapter(Activity a, String[] img, String[] txt, String[] lstUpdt, String[] description) {
+    public LazyAdapter(Activity a, String[] img, String[] txt, String[] lstUpdt, String[] description, int[] ids) {
         activity = a;
+        this.ids = ids;
         this.img = img;
         this.txt = txt;
         this.lstUpdt = lstUpdt;
@@ -55,7 +57,8 @@ public class LazyAdapter extends BaseAdapter {
         if (convertView == null) {
             vi = inflater.inflate(R.layout.project_list, null);
         }
-
+        vi.setOnClickListener(this);
+        vi.setId(this.ids[position]);
         TextView title = (TextView) vi.findViewById(R.id.projectName);
         TextView date = (TextView) vi.findViewById(R.id.projectLastUpdate);
         TextView descrip = (TextView) vi.findViewById(R.id.projectMainDescript);
@@ -89,11 +92,9 @@ public class LazyAdapter extends BaseAdapter {
         return vi;
     }
 
-    /*
-    Permite limpiar todos los elementos del recycler
-     */
-    public void clear() {
-        notifyDataSetChanged();
+    @Override
+    public void onClick(View v) {
+        if (v.getId() >= 0) {
+        }
     }
-
 }

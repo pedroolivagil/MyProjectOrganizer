@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
-import cat.olivadevelop.myprojectorganizer.tools.Project;
+import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
@@ -44,8 +44,8 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
         //cabecera de proyecto
-        projectName = Tools.getPrefs().getString(Project.PROJECT_NAME, null);
-        projectImag = Tools.getPrefs().getString(Project.PROJECT_IMG, null);
+        projectName = Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null);
+        projectImag = Tools.getPrefs().getString(ProjectManager.PROJECT_IMG, null);
 
         TextView textView = (TextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
@@ -53,7 +53,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
         if (projectImag != null) {
             iv.setImageURI(Tools.getImageContentUri(this, new File(projectImag)));
-        }else {
+        } else {
             iv.setVisibility(View.GONE);
         }
 
@@ -163,7 +163,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
             label.setPadding(0, 10, 0, 10);
         } else {
             label.setVisibility(View.GONE);
-            label.setText(Project.json_project_descript);
+            label.setText(ProjectManager.json_project_descript);
         }
 
         // Valor del nuevo campo
@@ -188,5 +188,15 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
 
         fieldsContainer.addView(lyExtern);
         countFields++;
+    }
+
+    private boolean checkAllFields() {
+        /**
+         * comprobamos que las celdas, label no estan vacía si su value esta rellenado.
+         */
+        for (int x = 0; x < countFields; x++) {
+
+        }
+        return true;
     }
 }

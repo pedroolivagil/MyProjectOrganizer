@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.IOException;
 import java.net.URL;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -20,6 +19,7 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
  * Created by Oliva on 03/10/2016.
+ * Sube el proyecto creado a la web. El proyecto es pasado por parámetro formbody
  */
 
 public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
@@ -35,6 +35,9 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
         return activity.getBaseContext().getString(id_string);
     }
 
+    /**
+     * @param params contiene el formbody creado en CreateProject. Contiene el JSON y otros parámetros
+     */
     @Override
     protected Boolean doInBackground(RequestBody... params) {
         URL url;
@@ -51,8 +54,13 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
             String resStr = response.body().string();
             Log.i("RESULT FINAL", "" + response.message());
             return true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //e.printStackTrace();
+            progressDialog.dismiss();
+            Tools.newSnackBarWithIcon(activity.findViewById(R.id.scroll_project_finish),
+                    activity, R.string.cannot_be_connect,
+                    R.drawable.ic_signal_cellular_connected_no_internet_4_bar_white_24dp)
+                    .show();
         }
         return false;
     }
@@ -70,9 +78,9 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage(getString(R.string.pgd_creating_project));
+        progressDialog.setMessage(getString(R.string.pgd_uploading_project));
         progressDialog.setIndeterminate(false);
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 }

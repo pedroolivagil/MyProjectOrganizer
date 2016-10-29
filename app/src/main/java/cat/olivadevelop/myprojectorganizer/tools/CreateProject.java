@@ -28,11 +28,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static cat.olivadevelop.myprojectorganizer.tools.Project.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.CATEGORY;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
  * Created by Oliva on 26/09/2016.
+ * Inicializa el proyecto, con el nombre y el JSON que contiene la información del proyecto
+ * Al finalizar, envía el formbody a UploadJSON
  */
 public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     public static final String FINISH_PJT = "finished";
@@ -59,7 +61,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     @Override
     protected RequestBody doInBackground(Void... urls) {
         try {
-            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Project.PROJECTS_FILENAME);
+            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
@@ -122,13 +124,12 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             }
 
             // actualizamos el json del server
-            RequestBody formBody = new FormBody.Builder()
+            return new FormBody.Builder()
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
                     .add("projectName", "project" + ((category.length()) - 1))
                     .add("img_base64", ba1)
                     .build();
-            return formBody;
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -149,7 +150,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
         progressDialog = new ProgressDialog(activity);
         progressDialog.setMessage(getString(R.string.pgd_creating_project));
         progressDialog.setIndeterminate(false);
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 }

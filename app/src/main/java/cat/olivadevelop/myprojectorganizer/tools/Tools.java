@@ -51,13 +51,15 @@ public class Tools {
     private static final String PREFS_DATE_PROJECT_ARRAY = "mainDateProject";
     private static final String PREFS_DESCRIPT_PROJECT_ARRAY_SIZE = "mainDescriptProject_size";
     private static final String PREFS_DESCRIPT_PROJECT_ARRAY = "mainDescriptProject";
+    private static final String PREFS_IDS_PROJECT_ARRAY_SIZE = "mainIdsProject_size";
+    private static final String PREFS_IDS_PROJECT_ARRAY = "mainIdsProject";
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
     private static SharedPreferences prefs;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
-        Project.setDefaultPrefs();
+        ProjectManager.setDefaultPrefs();
     }
 
     public static String getMD5(String input) {
@@ -137,17 +139,13 @@ public class Tools {
         return prefs;
     }
 
-    public static void setPrefs(SharedPreferences prefs) {
-        Tools.prefs = prefs;
-    }
-
     public static SharedPreferences.Editor putInPrefs() {
         return prefs.edit();
     }
 
     public static void cleanProjectPrefs() {
-        Tools.putInPrefs().putString(Project.PROJECT_NAME, "").apply();
-        Tools.putInPrefs().putString(Project.PROJECT_IMG, "").apply();
+        Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, "").apply();
+        Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, "").apply();
     }
 
     public static String getUserID() {
@@ -249,6 +247,22 @@ public class Tools {
         }
     }
 
+    public static int[] getIDSPrjctArray() {
+        int size = prefs.getInt(PREFS_IDS_PROJECT_ARRAY_SIZE, 0);
+        int array[] = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = prefs.getInt(PREFS_IDS_PROJECT_ARRAY + "_" + i, -1);
+        }
+        return array;
+    }
+
+    public static void setIDSPrjctArray(int[] IDSPrjctArray) {
+        Tools.putInPrefs().putInt(PREFS_IDS_PROJECT_ARRAY_SIZE, IDSPrjctArray.length).apply();
+        for (int i = 0; i < IDSPrjctArray.length; i++) {
+            Tools.putInPrefs().putInt(PREFS_IDS_PROJECT_ARRAY + "_" + i, IDSPrjctArray[i]).apply();
+        }
+    }
+
     public static void CopyStream(InputStream is, OutputStream os) {
         final int buffer_size = 1024;
         try {
@@ -311,5 +325,10 @@ public class Tools {
             return false;
         }
         return (b.getHeight() > limit || b.getWidth() > limit);
+    }
+
+    public static String capitalize(String string) {
+        StringBuilder st = new StringBuilder(string);
+        return st.substring(0, 1).toUpperCase().concat(st.substring(1));
     }
 }

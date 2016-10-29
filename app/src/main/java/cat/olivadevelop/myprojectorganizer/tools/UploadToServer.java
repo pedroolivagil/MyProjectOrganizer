@@ -20,6 +20,7 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
  * Created by Oliva on 01/10/2016.
+ * Crea la raiz del usuario en el server.
  */
 
 public class UploadToServer extends AsyncTask<Void, Void, String> {
@@ -39,6 +40,8 @@ public class UploadToServer extends AsyncTask<Void, Void, String> {
         super.onPreExecute();
         pd = new ProgressDialog(context);
         pd.setMessage(getString(R.string.pgd_updating));
+        pd.setIndeterminate(false);
+        pd.setCancelable(false);
         pd.show();
     }
 
@@ -50,7 +53,7 @@ public class UploadToServer extends AsyncTask<Void, Void, String> {
                     .add("id_client", "" + Tools.getPrefs().getString(Tools.PREFS_USER_ID, null))
                     .build();
 
-            url = new URL(HOSTNAME + "/new_projects_file.php");
+            url = new URL(HOSTNAME + "/php/new_projects_file.php");
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()

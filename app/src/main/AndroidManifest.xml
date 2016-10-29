@@ -27,7 +27,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <!--// Screens //-->
+        <!-- // Screens // -->
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -53,6 +53,10 @@
             android:name=".screens.NewProjectFinish"
             android:label="@string/toolbarNewProjectFinish"
             android:parentActivityName=".screens.NewProject" />
+        <activity
+            android:name=".screens.ProjectSelected"
+            android:label="@string/toolbarProjetSelected"
+            android:parentActivityName=".screens.MainActivity" />
     </application>
 
 </manifest>

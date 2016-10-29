@@ -16,7 +16,7 @@ import android.widget.ListView;
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
-import cat.olivadevelop.myprojectorganizer.tools.Project;
+import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
+
+        Intent projectSelected = new Intent(this, ProjectSelected.class);
+        projectSelected.putExtra(ProjectManager.NEW_SELECTED, 0);
+        startActivity(projectSelected);
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
@@ -101,9 +105,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadProjects() {
-        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + Project.PROJECTS_FILENAME);
+        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
         list = (ListView) findViewById(R.id.projectList);
-        adapter = new LazyAdapter(this, Tools.getUrlImgArray(), Tools.getTitlePrjctArray(), Tools.getDatePrjctArray(), Tools.getDescriptPrjctArray());
+        adapter = new LazyAdapter(this,
+                Tools.getUrlImgArray(),
+                Tools.getTitlePrjctArray(),
+                Tools.getDatePrjctArray(),
+                Tools.getDescriptPrjctArray(),
+                Tools.getIDSPrjctArray()
+        );
         list.setAdapter(adapter);
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -113,16 +123,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int filaSuperior = (list == null || list.getChildCount() == 0) ?
-                        0 : list.getChildAt(0).getTop();    //Estamos en el elemento superior
-                swipeLayout.setEnabled(filaSuperior >= 0);  //Activamos o desactivamos el swipe layout segun corresponda
+                int filaSuperior = (list == null || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();    //Estamos en el elemento superior
+                if (swipeLayout != null) {
+                    swipeLayout.setEnabled(filaSuperior >= 0);  //Activamos o desactivamos el swipe layout segun corresponda
+                }
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        if(list != null) {
+        if (list != null) {
             list.setAdapter(null);
         }
         super.onDestroy();

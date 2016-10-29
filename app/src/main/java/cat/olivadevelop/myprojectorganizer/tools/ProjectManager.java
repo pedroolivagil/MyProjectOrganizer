@@ -1,10 +1,13 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 /**
  * Created by Oliva on 22/10/2016.
  */
 
-public abstract class Project {
+public abstract class ProjectManager {
     public static final String CATEGORY = "project";
     public static final String PROJECT_NAME = "nameProject";
     public static final String PROJECT_IMG = "imageProject";
@@ -18,7 +21,7 @@ public abstract class Project {
     public static final String json_project_images = "images";
     public static final String json_project_form = "form";
     public static final String json_project_descript = "description";
-
+    public static final String NEW_SELECTED = "new_selected";
     public static final String SORT_BY = "sortBy";
     public static final String TYPE_SORT_BY = "typeSortBy";
     public static final boolean TYPE_SORT_BY_ASC = true;
@@ -45,5 +48,13 @@ public abstract class Project {
 
     public static void setTypeSortBy(boolean typeSortBy) {
         Tools.putInPrefs().putBoolean(TYPE_SORT_BY, typeSortBy).apply();
+    }
+
+    public static JSONArray getProjects() throws JSONException {
+        return new JSONArray(Tools.getPrefs().getString(ProjectManager.NEW_SELECTED, "[]"));
+    }
+
+    public static void setProjects(JSONArray projects) {
+        Tools.putInPrefs().putString(ProjectManager.NEW_SELECTED, projects.toString()).apply();
     }
 }

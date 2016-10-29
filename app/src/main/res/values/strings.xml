@@ -2,6 +2,9 @@
     <string name="app_name">My Project Organizer</string>
     <string name="action_settings">Settings</string>
     <string name="pgd_loading">Loading projects…</string>
+    <string name="pgd_creating_project">Creating project…</string>
+    <string name="pgd_updating">Updating data…</string>
+    <string name="pgd_uploading_project">Uploading project…</string>
     <string name="p_name">Project name</string>
     <string name="p_select_home_img_cam">Take a picture from camera</string>
     <string name="p_select_home_img_gal">Select photo from gallery</string>
@@ -9,7 +12,6 @@
     <string name="toolbarNewProject">New project</string>
     <string name="fail_pjt_name">Project: min 5 chars and should not be empty</string>
     <string name="new_project_instructions">- Enter a name for your project.\n- Take a picture or select one of the gallery that represents the project (optional, you can do this later).</string>
-    <string name="pgd_creating_project">Creating project…</string>
     <string name="toolbarNewProjectFinish">Last step</string>
     <string name="add_question_form">Add another field in the project</string>
     <string name="description">Add a brief description</string>
@@ -25,9 +27,8 @@
     <string name="settings_updated">Configuration has been updated</string>
     <string name="detail_user_email">We do not ship or store your mail account. Encrypt your mail to serve as a handle for your projects.</string>
     <string name="noProjectTitle">No projects found</string>
-    <string name="pgd_updating">Updating data</string>
     <string name="value_field">Enter any value, ex: 2h</string>
-    <string name="type_field">Type of value, ex: Time project, …</string>
+    <string name="type_field">Type of value, ex: Project Time</string>
     <string name="label_description">Description</string>
     <string name="unableToConnect">Could not connect to server</string>
     <string name="action_publish">Create project</string>
@@ -36,7 +37,7 @@
     <string name="action_clear_prefs">Restore</string>
     <string name="prefs_clean">Preferences have been reset</string>
     <string name="more_options">More options</string>
-    <string name="reloading">Reloading...</string>
+    <string name="reloading">Reloading…</string>
     <string name="descript_pjct404">Create a new project and add a description</string>
     <string name="empty">Empty</string>
     <string name="description_empty">Description is empty</string>
@@ -45,7 +46,7 @@
     <string name="use_image10mb">Use an image equal to or less than 12M</string>
     <string name="accountSettings">Account settings</string>
     <string name="optionCleanPrefs">Clean application preferences</string>
-    <string name="optionOrderBy">Sort projects by ...</string>
+    <string name="optionOrderBy">Sort projects by…</string>
     <string name="optionChangeAccount">Change email account</string>
     <string name="optionDeleteAllProjects">Delete all projects</string>
     <string name="optionDeleteAllProjectsExtra">(cannot be undone)</string>
@@ -54,8 +55,11 @@
     <string name="sortByType">Type of order</string>
     <string name="selectColumnSort">Select the order</string>
     <string name="typeOrderAscendant">Ascendant (A - Z)</string>
-    <string name="typeOrderDescendant">Descendent (Z - A)</string>
+    <string name="typeOrderDescendant">Descendant (Z - A)</string>
     <string name="sortByLastUpdate">Last updated project</string>
     <string name="sortByNameProject">Project name</string>
     <string name="sortByIdProject">Creation date</string>
+    <string name="cannot_be_connect">Check your internet connection</string>
+    <string name="toolbarProjetSelected">Project selected</string>
+    <string name="error_project_selected">Unexpected error with selected project</string>
 </resources>
