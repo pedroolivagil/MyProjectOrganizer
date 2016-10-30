@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
 
-        Intent projectSelected = new Intent(this, ProjectSelected.class);
-        projectSelected.putExtra(ProjectManager.NEW_SELECTED, 0);
-        startActivity(projectSelected);
+        /*Intent projectSelected = new Intent(this, ProjectSelected.class);
+        projectSelected.putExtra(ProjectManager.NEW_SELECTED, 2);
+        startActivity(projectSelected);*/
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);

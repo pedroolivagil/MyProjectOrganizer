@@ -2,6 +2,7 @@ package cat.olivadevelop.myprojectorganizer.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.screens.ProjectSelected;
 
 /**
  * Created by Oliva on 05/10/2016.
@@ -58,7 +60,9 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
             vi = inflater.inflate(R.layout.project_list, null);
         }
         vi.setOnClickListener(this);
-        vi.setId(this.ids[position]);
+        if (this.ids.length > 0) {
+            vi.setId(this.ids[position]);
+        }
         TextView title = (TextView) vi.findViewById(R.id.projectName);
         TextView date = (TextView) vi.findViewById(R.id.projectLastUpdate);
         TextView descrip = (TextView) vi.findViewById(R.id.projectMainDescript);
@@ -95,6 +99,9 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() >= 0) {
+            Intent projectSelected = new Intent(activity, ProjectSelected.class);
+            projectSelected.putExtra(ProjectManager.NEW_SELECTED, v.getId());
+            activity.startActivity(projectSelected);
         }
     }
 }

@@ -166,4 +166,24 @@
         <item name="android:background">@color/divider</item>
     </style>
 
+    <style name="ProjectSelectedBackgroundTransparent" parent="AppTheme">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:paddingLeft">@dimen/mar10</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">@color/primaryText</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+    </style>
+
+    <style name="TextViewTitleProjectSelected" parent="ProjectSelectedBackgroundTransparent">
+        <item name="android:background">@color/transparentAll</item>
+        <item name="android:textSize">@dimen/size24</item>
+        <item name="android:shadowRadius">3</item>
+    </style>
+
+    <style name="TextViewSubTitleProjectSelected" parent="ProjectSelectedBackgroundTransparent">
+        <item name="android:background">@color/transparentAll</item>
+        <item name="android:textSize">@dimen/size14</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
 </resources>

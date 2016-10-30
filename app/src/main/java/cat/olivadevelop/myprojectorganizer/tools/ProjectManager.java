@@ -8,10 +8,16 @@ import org.json.JSONException;
  */
 
 public abstract class ProjectManager {
+    public static final boolean TYPE_SORT_BY_ASC = true;
+    public static final boolean TYPE_SORT_BY_DESC = false;
     public static final String CATEGORY = "project";
     public static final String PROJECT_NAME = "nameProject";
     public static final String PROJECT_IMG = "imageProject";
     public static final String PROJECTS_FILENAME = "projects.json";
+    public static final String NEW_SELECTED = "new_selected";
+    public static final String SORT_BY = "sortBy";
+    public static final String TYPE_SORT_BY = "typeSortBy";
+    public static final String FINISH_PJT = "finished";
     public static final String json_project_id_project = "id_project";
     public static final String json_project_name = "name";
     public static final String json_project_last_update = "last_update";
@@ -21,11 +27,6 @@ public abstract class ProjectManager {
     public static final String json_project_images = "images";
     public static final String json_project_form = "form";
     public static final String json_project_descript = "description";
-    public static final String NEW_SELECTED = "new_selected";
-    public static final String SORT_BY = "sortBy";
-    public static final String TYPE_SORT_BY = "typeSortBy";
-    public static final boolean TYPE_SORT_BY_ASC = true;
-    public static final boolean TYPE_SORT_BY_DESC = false;
 
     public static void setDefaultPrefs() {
         if (Tools.getPrefs().getString(SORT_BY, "").equals("")) {

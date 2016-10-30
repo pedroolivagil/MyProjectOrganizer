@@ -76,12 +76,12 @@ public class MainLoader extends AsyncTask<String, Void, JSONObject> {
 
                 projects = sortJSON(jsonObject.getJSONArray(CATEGORY), ProjectManager.getSortBy(), ProjectManager.getTypeSortBy());
 
-                ProjectManager.setProjects(projects);
                 String[] img_url = new String[projects.length()];
                 String[] title_arr = new String[projects.length()];
                 String[] descrip_arr = new String[projects.length()];
                 String[] date_arr = new String[projects.length()];
                 int[] ids_arr = new int[projects.length()];
+                ProjectManager.setProjects(projects);
 
                 if (projects.length() > 0) {
                     for (int z = 0; z < projects.length(); z++) {

@@ -37,7 +37,6 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
  * Al finalizar, envía el formbody a UploadJSON
  */
 public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
-    public static final String FINISH_PJT = "finished";
     // claves fichero json
     private String clsPjtName;
     private String pjtName;

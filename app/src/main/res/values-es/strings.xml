@@ -36,7 +36,7 @@
     <string name="prefs_clean">Se han restablecido las preferencias</string>
     <string name="update">Actualizar lista</string>
     <string name="card_img">Imagen de tarjeta</string>
-    <string name="card_last_update">"Modificado el: "</string>
+    <string name="card_last_update">Modificado el:</string>
     <string name="descript_pjct404">Crea un nuevo proyecto y añade una descripción</string>
     <string name="description_empty">La descripción esta vacía</string>
     <string name="empty">Vacío</string>
@@ -61,4 +61,7 @@
     <string name="pgd_uploading_project">Subiendo el proyecto...</string>
     <string name="cannot_be_connect">Verifique su conexión a internet</string>
     <string name="error_project_selected">Error inesperado con el proyecto seleccionado</string>
+    <string name="toolbarProjetSelected">Proyecto seleccionado</string>
+    <string name="falseValue">No</string>
+    <string name="trueValue">Si</string>
 </resources>

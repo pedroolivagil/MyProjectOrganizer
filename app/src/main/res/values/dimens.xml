@@ -1,5 +1,8 @@
 <resources>
     <!--// TEXT //-->
+    <dimen name="size24">24sp</dimen>
+    <dimen name="size22">22sp</dimen>
+    <dimen name="size20">20sp</dimen>
     <dimen name="size18">18sp</dimen>
     <dimen name="size16">16sp</dimen>
     <dimen name="size14">14sp</dimen>
@@ -35,7 +38,10 @@
     <dimen name="card_img_width">120dp</dimen>
     <dimen name="card_height">105dp</dimen>
     <dimen name="layoutPreviewHeight">40dp</dimen>
+    <dimen name="height2">2dp</dimen>
+    <dimen name="height5">5dp</dimen>
     <dimen name="height10">10dp</dimen>
+    <dimen name="height30">30dp</dimen>
     <dimen name="height50">50dp</dimen>
     <dimen name="buttonHeight">40dp</dimen>
     <dimen name="imageButtonHeight">30dp</dimen>

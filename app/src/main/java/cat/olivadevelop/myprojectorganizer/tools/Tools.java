@@ -56,6 +56,7 @@ public class Tools {
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
     private static SharedPreferences prefs;
+    private static boolean currentBooleanValue;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -330,5 +331,34 @@ public class Tools {
     public static String capitalize(String string) {
         StringBuilder st = new StringBuilder(string);
         return st.substring(0, 1).toUpperCase().concat(st.substring(1));
+    }
+
+    public static int getDP(Context context, float dp) {
+        return (int) (dp * context.getResources().getDisplayMetrics().density);
+    }
+
+    public static boolean isBooleanValue(String valueStr) {
+        /** Revisar la funcion para que solo devuelva true en caso de que pueda convertirlo */
+        try {
+            boolean value = Boolean.parseBoolean(valueStr);
+            Tools.setCurrentBooleanValue(value);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String getCurrentBooleanValueAsString(Context c) {
+        String result;
+        if (Tools.currentBooleanValue) {
+            result = c.getString(R.string.falseValue);
+        }else {
+            result = c.getString(R.string.trueValue);
+        }
+        return result;
+    }
+
+    public static void setCurrentBooleanValue(boolean currentBooleanValue) {
+        Tools.currentBooleanValue = currentBooleanValue;
     }
 }

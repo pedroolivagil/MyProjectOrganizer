@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,7 +78,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         int id = item.getItemId();
         if (id == R.id.action_publish_project) {
             HashMap<String, String> values = new HashMap<>();
-            values.put("" + CreateProject.FINISH_PJT, String.valueOf(((CheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
+            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
             //values.put(getString(R.string.label_description), ((EditText) findViewById(R.id.projectDescript)).getText().toString()); // descript
             for (int x = 1; x <= countFields; x++) {
                 LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
@@ -95,7 +94,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
                 }
             }
             // button clicked
-            Log.i("Button create", "Clicked");
+            //Log.i("Button create", "Clicked");
             new CreateProject(this, projectName, values).execute();
         }
         return super.onOptionsItemSelected(item);
