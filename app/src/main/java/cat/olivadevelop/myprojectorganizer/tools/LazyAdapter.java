@@ -74,7 +74,7 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
         }
         date.setText(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
         if (this.description.toString().trim().length() > 0) {
-            descrip.setText(this.description[position]);
+            descrip.setText(Tools.capitalize(this.description[position]));
         } else {
             descrip.setText(activity.getString(R.string.description_empty));
         }

@@ -55,8 +55,10 @@ public class Tools {
     private static final String PREFS_IDS_PROJECT_ARRAY = "mainIdsProject";
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
+    private static final String FALSE = "false";
+    private static final String TRUE = "true";
     private static SharedPreferences prefs;
-    private static boolean currentBooleanValue;
+    private static String currentBooleanValue;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -339,26 +341,33 @@ public class Tools {
 
     public static boolean isBooleanValue(String valueStr) {
         /** Revisar la funcion para que solo devuelva true en caso de que pueda convertirlo */
-        try {
-            boolean value = Boolean.parseBoolean(valueStr);
-            Tools.setCurrentBooleanValue(value);
+        if ("1".equalsIgnoreCase(valueStr)
+                || "0".equalsIgnoreCase(valueStr)
+                || "true".equalsIgnoreCase(valueStr)
+                || "false".equalsIgnoreCase(valueStr)) {
+            Tools.setCurrentBooleanValue(valueStr);
             return true;
-        } catch (Exception e) {
+        } else {
             return false;
         }
     }
 
     public static String getCurrentBooleanValueAsString(Context c) {
         String result;
-        if (Tools.currentBooleanValue) {
+        if (Tools.currentBooleanValue.equalsIgnoreCase(FALSE)) {
             result = c.getString(R.string.falseValue);
-        }else {
+        } else {
             result = c.getString(R.string.trueValue);
         }
         return result;
     }
 
-    public static void setCurrentBooleanValue(boolean currentBooleanValue) {
+    public static void setCurrentBooleanValue(String currentBooleanValue) {
         Tools.currentBooleanValue = currentBooleanValue;
+    }
+
+    public static float getPX(Context context, float dimension) {
+            float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+            return dimension/scaledDensity;
     }
 }

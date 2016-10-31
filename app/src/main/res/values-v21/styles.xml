@@ -12,4 +12,17 @@
         <item name="android:dropDownVerticalOffset">4dp</item>
         <item name="overlapAnchor">false</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--To change the text styling of options menu items</item>-->
+        <item name="android:itemTextAppearance">@style/MyActionBar.MenuTextStyle</item>
+        <!--To change the background of options menu-->
+        <item name="android:itemBackground">@color/colorPrimary</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+    </style>
 </resources>

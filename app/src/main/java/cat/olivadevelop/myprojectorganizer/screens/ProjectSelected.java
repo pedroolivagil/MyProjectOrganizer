@@ -90,6 +90,7 @@ public class ProjectSelected extends AppCompatActivity {
                     target.setBackgroundResource(R.color.white);
 
                     tvLabel = new TextView(this);
+                    tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
                     if (labelStr.equals(ProjectManager.json_project_descript)) {
                         tvLabel.setText(getString(R.string.label_description));
                     } else if (labelStr.equals(ProjectManager.FINISH_PJT)) {
@@ -98,10 +99,17 @@ public class ProjectSelected extends AppCompatActivity {
                         tvLabel.setText(labelStr);
                     }
 
+                    LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    tvParams.setMargins(0, Tools.getDP(this, 8), 0, 0);
+
                     tvValue = new TextView(this);
-                    if(Tools.isBooleanValue(valueStr)){
+                    tvValue.setLayoutParams(tvParams);
+                    if (Tools.isBooleanValue(valueStr)) {
                         tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
-                    }else {
+                    } else {
                         tvValue.setText(valueStr);
                     }
 
