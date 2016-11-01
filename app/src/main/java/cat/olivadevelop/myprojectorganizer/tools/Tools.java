@@ -42,6 +42,9 @@ public class Tools {
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public static final String PREFS_USER_ID = "id_user";
     public static final String PREFS_USER_EMAIL = "email";
+    public static final String FONT_DEFAULT = "fonts/TitilliumWeb-Regular.ttf";
+    public static final String FONT_BOLD = "fonts/TitilliumWeb-Bold.ttf";
+    public static final String FONT_ITALIC = "fonts/TitilliumWeb-Italic.ttf";
     private static final String PREFS_NAME = "prefs_organizer";
     private static final String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
     private static final String PREFS_IMG_URL_ARRAY = "urlImgArray";
@@ -367,7 +370,7 @@ public class Tools {
     }
 
     public static float getPX(Context context, float dimension) {
-            float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
-            return dimension/scaledDensity;
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return dimension / scaledDensity;
     }
 }

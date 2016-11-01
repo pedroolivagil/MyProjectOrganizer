@@ -13,7 +13,7 @@
     android:theme="@style/CommonActivity"
     tools:context="cat.olivadevelop.myprojectorganizer.screens.SettingsActivity">
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -51,7 +51,7 @@
                 android:src="@drawable/ic_person_white_36dp"
                 android:theme="@style/Button.ImageView" />
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:id="@+id/putEmailInPrefs"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/buttonHeight"
@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height10" />
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/detail_user_email"
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height50" />
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:id="@+id/optionCleanPrefs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:layout_height="1dp"
             android:theme="@style/DividerOptions" />
 
-        <TextView
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:id="@+id/optionChangeAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,12 +119,12 @@
             android:orientation="horizontal"
             android:theme="@style/ButtonOptionLayout">
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/optionOrderBy" />
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:id="@+id/resultOrderBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,12 +144,12 @@
             android:orientation="horizontal"
             android:theme="@style/ButtonOptionLayout">
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/optionDeleteAllProjects" />
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/optionDeleteAllProjectsExtra"
@@ -164,7 +164,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"

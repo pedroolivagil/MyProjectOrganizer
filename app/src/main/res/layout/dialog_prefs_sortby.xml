@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="@dimen/pad24">
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,19 +19,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
             android:id="@+id/checkboxSortByIdPrjct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sortByIdProject" />
 
-        <RadioButton
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
             android:id="@+id/checkboxSortByLatUpdt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sortByLastUpdate" />
 
-        <RadioButton
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
             android:id="@+id/checkboxSortByPrjctName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_marginTop="@dimen/pad10"
         android:background="@color/divider" />
 
-    <TextView
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,13 +57,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
             android:id="@+id/checkboxTypeSortByASC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/typeOrderAscendant" />
 
-        <RadioButton
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
             android:id="@+id/checkboxTypeSortByDESC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             app:cardElevation="3dp"
             app:contentPadding="0dp">
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonHeight"
                 android:text="@string/btn_cancel"
@@ -116,7 +116,7 @@
             app:cardElevation="3dp"
             app:contentPadding="0dp">
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonHeight"
                 android:text="@string/btn_save"

@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.bluejamesbond.text.DocumentView;
+import com.bluejamesbond.text.style.TextAlignment;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -59,17 +61,17 @@ public class ProjectSelected extends AppCompatActivity {
                         .centerCrop()
                         .into(image);
 
-                TextView title = (TextView) findViewById(R.id.titleProjectSelected);
+                CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
                 title.setText(Tools.capitalize(selected_project.getString(ProjectManager.json_project_name)));
 
-                TextView subTitle = (TextView) findViewById(R.id.subTitleProjectSelected);
+                CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
                 subTitle.setText(getString(R.string.card_last_update).concat(" ").concat(selected_project.getString(ProjectManager.json_project_last_update)));
 
                 LinearLayout target;
                 String labelStr;
                 String valueStr;
-                TextView tvLabel;
-                TextView tvValue;
+                CustomTextView tvLabel;
+                DocumentView tvValue;
                 JSONObject form = selected_project.getJSONObject(json_project_form);
                 Iterator<String> allLabels = form.keys();
                 while (allLabels.hasNext()) {
@@ -89,7 +91,8 @@ public class ProjectSelected extends AppCompatActivity {
                     target.setPadding(Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24));
                     target.setBackgroundResource(R.color.white);
 
-                    tvLabel = new TextView(this);
+                    tvLabel = new CustomTextView(this);
+                    tvLabel.setBold();
                     tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
                     if (labelStr.equals(ProjectManager.json_project_descript)) {
                         tvLabel.setText(getString(R.string.label_description));
@@ -105,8 +108,12 @@ public class ProjectSelected extends AppCompatActivity {
                     );
                     tvParams.setMargins(0, Tools.getDP(this, 8), 0, 0);
 
-                    tvValue = new TextView(this);
-                    tvValue.setLayoutParams(tvParams);
+                    /*tvValue = new TextView(this);
+                    tvValue.setLayoutParams(tvParams);*/
+                    // Create DocumentView and set plain text
+                    // Important: Use DocumentLayout.class
+                    tvValue = new DocumentView(this, DocumentView.PLAIN_TEXT);  // Support plain text
+                    tvValue.getDocumentLayoutParams().setTextAlignment(TextAlignment.JUSTIFIED);
                     if (Tools.isBooleanValue(valueStr)) {
                         tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
                     } else {

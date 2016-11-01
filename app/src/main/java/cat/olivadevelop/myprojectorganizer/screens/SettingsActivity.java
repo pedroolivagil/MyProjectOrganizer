@@ -12,14 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton;
+import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
@@ -27,13 +27,13 @@ import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int REQUEST_CODE = 1;
-    private TextView putEmailInPrefs;
+    private CustomTextView putEmailInPrefs;
     private LinearLayout changeEmail;
-    private TextView optionCleanPrefs;
-    private TextView optionChangeAccount;
+    private CustomTextView optionCleanPrefs;
+    private CustomTextView optionChangeAccount;
     private LinearLayout optionDelAllProjects;
     private LinearLayout optionSortBy;
-    private TextView resultOrderBy;
+    private CustomTextView resultOrderBy;
     private AlertDialog alert;
     private RadioGroup sortBy;
     private RadioGroup typeSortBy;
@@ -43,14 +43,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        putEmailInPrefs = (TextView) findViewById(R.id.putEmailInPrefs);
+        putEmailInPrefs = (CustomTextView) findViewById(R.id.putEmailInPrefs);
         changeEmail = (LinearLayout) findViewById(R.id.changeEmail);
         changeEmail.setOnClickListener(this);
-        resultOrderBy = (TextView) findViewById(R.id.resultOrderBy);
+        resultOrderBy = (CustomTextView) findViewById(R.id.resultOrderBy);
         resultOrderBy.setOnClickListener(this);
-        optionCleanPrefs = (TextView) findViewById(R.id.optionCleanPrefs);
+        optionCleanPrefs = (CustomTextView) findViewById(R.id.optionCleanPrefs);
         optionCleanPrefs.setOnClickListener(this);
-        optionChangeAccount = (TextView) findViewById(R.id.optionChangeAccount);
+        optionChangeAccount = (CustomTextView) findViewById(R.id.optionChangeAccount);
         optionChangeAccount.setOnClickListener(this);
         optionDelAllProjects = (LinearLayout) findViewById(R.id.optionDelAllProjects);
         optionDelAllProjects.setOnClickListener(this);
@@ -127,9 +127,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (alert != null) {
             alert.show();
             // order by
-            RadioButton c1 = (RadioButton) alert.findViewById(R.id.checkboxSortByIdPrjct);
-            RadioButton c2 = (RadioButton) alert.findViewById(R.id.checkboxSortByLatUpdt);
-            RadioButton c3 = (RadioButton) alert.findViewById(R.id.checkboxSortByPrjctName);
+            CustomRadioButton c1 = (CustomRadioButton) alert.findViewById(R.id.checkboxSortByIdPrjct);
+            CustomRadioButton c2 = (CustomRadioButton) alert.findViewById(R.id.checkboxSortByLatUpdt);
+            CustomRadioButton c3 = (CustomRadioButton) alert.findViewById(R.id.checkboxSortByPrjctName);
             if ((c1 != null) && (c2 != null) && (c3 != null)) {
                 if (ProjectManager.getSortBy().equals(ProjectManager.json_project_id_project)) {
                     c1.setChecked(true);
@@ -143,8 +143,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
 
             // typeorder by
-            RadioButton c4 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByASC);
-            RadioButton c5 = (RadioButton) alert.findViewById(R.id.checkboxTypeSortByDESC);
+            CustomRadioButton c4 = (CustomRadioButton) alert.findViewById(R.id.checkboxTypeSortByASC);
+            CustomRadioButton c5 = (CustomRadioButton) alert.findViewById(R.id.checkboxTypeSortByDESC);
             if ((c4 != null) && (c5 != null)) {
                 if (ProjectManager.getTypeSortBy()) {
                     c4.setChecked(true);
@@ -232,7 +232,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         msgSuccess();
     }
 
-    public void msgSuccess(){
+    public void msgSuccess() {
         Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
     }
 }

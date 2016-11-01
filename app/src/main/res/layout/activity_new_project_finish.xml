@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/layoutPreviewHeight"
                 android:theme="@style/CommonActivity"/>
 
-            <TextView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:id="@+id/nameProjectPreview"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layoutPreviewHeight"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <CheckBox
+            <cat.olivadevelop.myprojectorganizer.tools.CustomCheckBox
                 android:id="@+id/isFinished"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:src="@drawable/ic_add_white_48dp"
                     android:theme="@style/Button.ImageView" />
 
-                <TextView
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/buttonHeight"
                     android:text="@string/add_question_form"

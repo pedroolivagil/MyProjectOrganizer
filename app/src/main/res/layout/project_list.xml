@@ -31,7 +31,7 @@
                     android:contentDescription="@string/card_img"
                     android:scaleType="center" />
 
-                <TextView
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                     android:id="@+id/projectLastUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,14 +51,14 @@
                     android:layout_height="wrap_content"
                     android:theme="@style/UnderlineTitle">
 
-                    <TextView
+                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                         android:id="@+id/projectName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/TitleProjectMain" />
                 </LinearLayout>
 
-                <TextView
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                     android:id="@+id/projectMainDescript"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

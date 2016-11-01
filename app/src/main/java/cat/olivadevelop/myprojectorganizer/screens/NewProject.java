@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -25,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -35,7 +35,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
     private String filename;
     private LinearLayout lytBtnCamera;
     private LinearLayout lytBtnGallery;
-    private EditText editPjctName;
+    private CustomEditText editPjctName;
     private ImageView image_thumb;
 
     @Override
@@ -48,7 +48,7 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         lytBtnGallery = (LinearLayout) findViewById(R.id.btnGalery);
         image_thumb = (ImageView) findViewById(R.id.image_thumb);
 
-        editPjctName = (EditText) findViewById(R.id.edtProjectName);
+        editPjctName = (CustomEditText) findViewById(R.id.edtProjectName);
         if (Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null) != null) {
             editPjctName.setText(Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null));
         }

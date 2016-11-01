@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -63,9 +62,9 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
         if (this.ids.length > 0) {
             vi.setId(this.ids[position]);
         }
-        TextView title = (TextView) vi.findViewById(R.id.projectName);
-        TextView date = (TextView) vi.findViewById(R.id.projectLastUpdate);
-        TextView descrip = (TextView) vi.findViewById(R.id.projectMainDescript);
+        CustomTextView title = (CustomTextView) vi.findViewById(R.id.projectName);
+        CustomTextView date = (CustomTextView) vi.findViewById(R.id.projectLastUpdate);
+        CustomTextView descrip = (CustomTextView) vi.findViewById(R.id.projectMainDescript);
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
         if (this.txt[position].replaceAll(" ", "").length() > 17) {
             title.setText(this.txt[position].substring(0, 16).concat("..."));

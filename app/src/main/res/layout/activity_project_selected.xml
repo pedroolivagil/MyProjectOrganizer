@@ -37,13 +37,13 @@
                     android:layout_height="@dimen/height2"
                     android:background="@color/transparent" />
 
-                <TextView
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                     android:id="@+id/titleProjectSelected"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/TextViewTitleProjectSelected" />
 
-                <TextView
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                     android:id="@+id/subTitleProjectSelected"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

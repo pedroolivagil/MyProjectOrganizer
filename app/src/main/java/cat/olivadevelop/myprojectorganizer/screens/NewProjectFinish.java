@@ -9,19 +9,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
+import cat.olivadevelop.myprojectorganizer.tools.CustomCheckBox;
+import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
+import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -46,7 +46,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         projectName = Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null);
         projectImag = Tools.getPrefs().getString(ProjectManager.PROJECT_IMG, null);
 
-        TextView textView = (TextView) findViewById(R.id.nameProjectPreview);
+        CustomTextView textView = (CustomTextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
 
         ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
@@ -78,15 +78,15 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         int id = item.getItemId();
         if (id == R.id.action_publish_project) {
             HashMap<String, String> values = new HashMap<>();
-            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
-            //values.put(getString(R.string.label_description), ((EditText) findViewById(R.id.projectDescript)).getText().toString()); // descript
+            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CustomCheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
+            //values.put(getString(R.string.label_description), ((CustomEditText) findViewById(R.id.projectDescript)).getText().toString()); // descript
             for (int x = 1; x <= countFields; x++) {
                 LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
                 LinearLayout lyChild = (LinearLayout) ly.getChildAt(x); // container cells
                 lyChild = (LinearLayout) lyChild.getChildAt(0); // container cells
 
-                EditText label = (EditText) lyChild.getChildAt(0); // label
-                EditText value = (EditText) lyChild.getChildAt(1); // value
+                CustomEditText label = (CustomEditText) lyChild.getChildAt(0); // label
+                CustomEditText value = (CustomEditText) lyChild.getChildAt(1); // value
 
                 // si ninguno de las dos celdas estan vacías agregamos los valores al hashmap
                 if (!(label.getText().toString().equals("") && value.getText().toString().equals(""))) {
@@ -144,7 +144,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         ly.setBackgroundResource(R.color.white);
 
         // Label del nuevo campo
-        EditText label = new EditText(this);
+        CustomEditText label = new CustomEditText(this);
         label.setLayoutParams(
                 new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -166,7 +166,7 @@ public class NewProjectFinish extends AppCompatActivity implements View.OnClickL
         }
 
         // Valor del nuevo campo
-        EditText value = new EditText(this);
+        CustomEditText value = new CustomEditText(this);
         value.setLayoutParams(
                 new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
