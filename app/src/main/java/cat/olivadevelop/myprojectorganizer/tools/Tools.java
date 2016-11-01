@@ -42,9 +42,12 @@ public class Tools {
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public static final String PREFS_USER_ID = "id_user";
     public static final String PREFS_USER_EMAIL = "email";
-    public static final String FONT_DEFAULT = "fonts/TitilliumWeb-Regular.ttf";
-    public static final String FONT_BOLD = "fonts/TitilliumWeb-Bold.ttf";
-    public static final String FONT_ITALIC = "fonts/TitilliumWeb-Italic.ttf";
+
+    public static final String FONT_DEFAULT = "fonts/Ubuntu-Regular.ttf";
+    public static final String FONT_BOLD = "fonts/Ubuntu-Bold.ttf";
+    public static final String FONT_ITALIC = "fonts/Ubuntu-Italic.ttf";
+    public static final String FONT_BOLD_ITALIC = "fonts/Ubuntu-BoldItalic.ttf";
+
     private static final String PREFS_NAME = "prefs_organizer";
     private static final String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
     private static final String PREFS_IMG_URL_ARRAY = "urlImgArray";
@@ -56,10 +59,10 @@ public class Tools {
     private static final String PREFS_DESCRIPT_PROJECT_ARRAY = "mainDescriptProject";
     private static final String PREFS_IDS_PROJECT_ARRAY_SIZE = "mainIdsProject_size";
     private static final String PREFS_IDS_PROJECT_ARRAY = "mainIdsProject";
+
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String PICTURE_PATH = "picture_path";
     private static final String FALSE = "false";
-    private static final String TRUE = "true";
     private static SharedPreferences prefs;
     private static String currentBooleanValue;
 
