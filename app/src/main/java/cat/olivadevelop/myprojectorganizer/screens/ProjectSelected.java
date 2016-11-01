@@ -6,8 +6,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bluejamesbond.text.DocumentView;
-import com.bluejamesbond.text.style.TextAlignment;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -17,6 +15,7 @@ import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
+import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -67,62 +66,21 @@ public class ProjectSelected extends AppCompatActivity {
                 CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
                 subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(selected_project.getString(ProjectManager.json_project_last_update)));
 
-                LinearLayout target;
-                String labelStr;
-                String valueStr;
-                CustomTextView tvLabel;
-                DocumentView tvValue;
                 JSONObject form = selected_project.getJSONObject(json_project_form);
+
+                //añadimos la tarjetas de información obligatorias, descripción y terminado
+                container.addView(getTarget(ProjectManager.FINISH_PJT, form));
+                container.addView(getTarget(ProjectManager.json_project_descript, form));
+
+                // añadimos las tarjetas de información creadas por el usuario
+                String labelStr;
                 Iterator<String> allLabels = form.keys();
                 while (allLabels.hasNext()) {
                     labelStr = allLabels.next();
-                    valueStr = form.getString(labelStr);
-                    Log.e("FORM", "" + labelStr + "; " + valueStr);
-
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    layoutParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
-
-                    target = new LinearLayout(this);
-                    target.setLayoutParams(layoutParams);
-                    target.setOrientation(LinearLayout.VERTICAL);
-                    target.setPadding(Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24));
-                    target.setBackgroundResource(R.color.white);
-
-                    tvLabel = new CustomTextView(this);
-                    tvLabel.setBold();
-                    tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
-                    if (labelStr.equals(ProjectManager.json_project_descript)) {
-                        tvLabel.setTextCapitalized(getString(R.string.label_description));
-                    } else if (labelStr.equals(ProjectManager.FINISH_PJT)) {
-                        tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
-                    } else {
-                        tvLabel.setTextCapitalized(labelStr);
+                    if ((!labelStr.equals(ProjectManager.json_project_descript))
+                            && (!labelStr.equals(ProjectManager.FINISH_PJT))) {
+                        container.addView(getTarget(labelStr, form));
                     }
-
-                    LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    tvParams.setMargins(0, Tools.getDP(this, 8), 0, 0);
-
-                    /*tvValue = new TextView(this);
-                    tvValue.setLayoutParams(tvParams);*/
-                    // Create DocumentView and set plain text
-                    // Important: Use DocumentLayout.class
-                    tvValue = new DocumentView(this, DocumentView.PLAIN_TEXT);  // Support plain text
-                    tvValue.getDocumentLayoutParams().setTextAlignment(TextAlignment.JUSTIFIED);
-                    if (Tools.isBooleanValue(valueStr)) {
-                        tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
-                    } else {
-                        tvValue.setText(valueStr);
-                    }
-
-                    target.addView(tvLabel);
-                    target.addView(tvValue);
-                    container.addView(target);
                 }
 
             } else {
@@ -138,5 +96,54 @@ public class ProjectSelected extends AppCompatActivity {
                 R.string.error_project_selected,
                 R.drawable.ic_warning_white_24dp)
                 .show();
+    }
+
+    private LinearLayout getTarget(String labelStr, JSONObject form) throws JSONException {
+        String valueStr = form.getString(labelStr);
+        Log.e("FORM", "" + labelStr + "; " + valueStr);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+
+        LinearLayout target = new LinearLayout(this);
+        target.setLayoutParams(layoutParams);
+        target.setOrientation(LinearLayout.VERTICAL);
+        target.setPadding(Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24));
+        target.setBackgroundResource(R.color.white);
+
+        CustomTextView tvLabel = new CustomTextView(this);
+        tvLabel.setBold();
+        tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
+        if (labelStr.equals(ProjectManager.json_project_descript)) {
+            tvLabel.setTextCapitalized(getString(R.string.label_description));
+        } else if (labelStr.equals(ProjectManager.FINISH_PJT)) {
+            tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
+        } else {
+            tvLabel.setTextCapitalized(labelStr);
+        }
+
+        LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        tvParams.setMargins(0, Tools.getDP(this, 8), 0, 0);
+
+        CustomWebView webView = new CustomWebView(this);
+        webView.setLayoutParams(tvParams);
+        if (Tools.isBooleanValue(valueStr)) {
+            //tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
+            webView.setText(Tools.getCurrentBooleanValueAsString(this));
+        } else {
+            //tvValue.setText(Tools.capitalize(valueStr));
+            webView.setText(valueStr);
+        }
+
+        target.addView(tvLabel);
+        //target.addView(tvValue);
+        target.addView(webView);
+        return target;
     }
 }
