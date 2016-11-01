@@ -333,7 +333,7 @@ public class Tools {
         return (b.getHeight() > limit || b.getWidth() > limit);
     }
 
-    public static String capitalize(String string) {
+    public static CharSequence capitalize(String string) {
         StringBuilder st = new StringBuilder(string);
         return st.substring(0, 1).toUpperCase().concat(st.substring(1));
     }

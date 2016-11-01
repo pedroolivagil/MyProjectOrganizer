@@ -40,4 +40,8 @@ public class CustomTextView extends TextView {
     public void setBold() {
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_BOLD));
     }
+
+    public void setTextCapitalized(String text){
+        setText(Tools.capitalize(text));
+    }
 }

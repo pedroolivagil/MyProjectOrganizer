@@ -62,10 +62,10 @@ public class ProjectSelected extends AppCompatActivity {
                         .into(image);
 
                 CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
-                title.setText(Tools.capitalize(selected_project.getString(ProjectManager.json_project_name)));
+                title.setTextCapitalized(selected_project.getString(ProjectManager.json_project_name));
 
                 CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
-                subTitle.setText(getString(R.string.card_last_update).concat(" ").concat(selected_project.getString(ProjectManager.json_project_last_update)));
+                subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(selected_project.getString(ProjectManager.json_project_last_update)));
 
                 LinearLayout target;
                 String labelStr;
@@ -95,11 +95,11 @@ public class ProjectSelected extends AppCompatActivity {
                     tvLabel.setBold();
                     tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
                     if (labelStr.equals(ProjectManager.json_project_descript)) {
-                        tvLabel.setText(getString(R.string.label_description));
+                        tvLabel.setTextCapitalized(getString(R.string.label_description));
                     } else if (labelStr.equals(ProjectManager.FINISH_PJT)) {
-                        tvLabel.setText(getString(R.string.projectIsFinalized));
+                        tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
                     } else {
-                        tvLabel.setText(labelStr);
+                        tvLabel.setTextCapitalized(labelStr);
                     }
 
                     LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(

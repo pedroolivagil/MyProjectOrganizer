@@ -67,15 +67,15 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
         CustomTextView descrip = (CustomTextView) vi.findViewById(R.id.projectMainDescript);
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
         if (this.txt[position].replaceAll(" ", "").length() > 17) {
-            title.setText(this.txt[position].substring(0, 16).concat("..."));
+            title.setTextCapitalized(this.txt[position].substring(0, 16).concat("..."));
         } else {
-            title.setText(this.txt[position]);
+            title.setTextCapitalized(this.txt[position]);
         }
-        date.setText(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
+        date.setTextCapitalized(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
         if (this.description.toString().trim().length() > 0) {
-            descrip.setText(Tools.capitalize(this.description[position]));
+            descrip.setTextCapitalized(this.description[position]);
         } else {
-            descrip.setText(activity.getString(R.string.description_empty));
+            descrip.setTextCapitalized(activity.getString(R.string.description_empty));
         }
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)
