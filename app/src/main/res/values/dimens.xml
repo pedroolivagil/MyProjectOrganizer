@@ -17,6 +17,7 @@
     <dimen name="pad8">8dp</dimen>
     <dimen name="pad10">10dp</dimen>
     <dimen name="pad15">15dp</dimen>
+    <dimen name="pad24">24dp</dimen>
     <dimen name="snackbar_icon_padding">10dp</dimen>
 
     <!--// MARGINS //-->
@@ -30,21 +31,25 @@
     <dimen name="mar20">20dp</dimen>
 
     <!--// SIZES //-->
+    <dimen name="buttonHeight">40dp</dimen>
+    <dimen name="fields_height">2dp</dimen>
     <dimen name="icon_size">40dp</dimen>
     <dimen name="icon_size_60">50dp</dimen>
-    <dimen name="label_width">10dp</dimen>
-    <dimen name="fields_height">2dp</dimen>
+
+    <dimen name="card_height">105dp</dimen>
     <dimen name="card_img_height">100dp</dimen>
     <dimen name="card_img_width">120dp</dimen>
-    <dimen name="card_height">105dp</dimen>
+
+    <dimen name="label_width">10dp</dimen>
     <dimen name="layoutPreviewHeight">40dp</dimen>
+
+    <dimen name="headerImgSelecPrj">200dp</dimen>
     <dimen name="height2">2dp</dimen>
     <dimen name="height5">5dp</dimen>
+    <dimen name="height7">7dp</dimen>
     <dimen name="height10">10dp</dimen>
     <dimen name="height30">30dp</dimen>
     <dimen name="height50">50dp</dimen>
-    <dimen name="buttonHeight">40dp</dimen>
+
     <dimen name="imageButtonHeight">30dp</dimen>
-    <dimen name="pad24">24dp</dimen>
-    <dimen name="headerImgSelecPrj">200dp</dimen>
 </resources>

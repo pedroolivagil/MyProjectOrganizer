@@ -68,8 +68,8 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
+        ProjectManager.cleanTempPrefs();
         progressDialog.dismiss();
-        Tools.cleanProjectPrefs();
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
     }

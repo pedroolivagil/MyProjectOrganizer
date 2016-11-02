@@ -36,10 +36,11 @@ public class CustomWebView extends WebView {
     }
 
     public void setText(String str) {
-        setText(str, (int) getResources().getDimension(R.dimen.size16));
+        setText(str, R.dimen.size16);
     }
 
     public void setText(String str, int sizeDP) {
+        sizeDP = (int) getResources().getDimension(sizeDP);
         String htmlText = " %s ";
         String data;
         data = String.format(htmlText,

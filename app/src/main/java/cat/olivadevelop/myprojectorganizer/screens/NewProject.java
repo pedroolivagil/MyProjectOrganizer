@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +24,11 @@ import java.io.InputStream;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
+import cat.olivadevelop.myprojectorganizer.tools.GeneralActivity;
 import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-public class NewProject extends AppCompatActivity implements View.OnClickListener {
+public class NewProject extends GeneralActivity implements View.OnClickListener {
 
     private static int TAKE_PICTURE = 1;
     private static int SELECT_PICTURE = 2;
@@ -54,7 +54,9 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         }
 
         File file = new File(Tools.EXTERNAL_DIR);
-        file.mkdirs();
+        if (havePermissionStorage()) {
+            file.mkdirs();
+        }
 
         lytBtnCamera.setOnClickListener(this);
         lytBtnGallery.setOnClickListener(this);
@@ -65,33 +67,43 @@ public class NewProject extends AppCompatActivity implements View.OnClickListene
         int code = 0;
         Intent intent = null;
         if (view == lytBtnCamera) {
-            filename = Tools.EXTERNAL_DIR + "home" + Tools.generateID() + ".jpg";
-            intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            Uri output = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(filename));
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
-            code = TAKE_PICTURE;
-            new MediaScannerConnection.MediaScannerConnectionClient() {
-                private MediaScannerConnection msc = null;
+            if (havePermissionCamera() && havePermissionStorage()) {
+                filename = Tools.EXTERNAL_DIR + "home" + Tools.generateID() + ".jpg";
+                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Uri output = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(filename));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
+                code = TAKE_PICTURE;
+                new MediaScannerConnection.MediaScannerConnectionClient() {
+                    private MediaScannerConnection msc = null;
 
-                {
-                    msc = new MediaScannerConnection(getApplicationContext(), this);
-                    msc.connect();
-                }
+                    {
+                        msc = new MediaScannerConnection(getApplicationContext(), this);
+                        msc.connect();
+                    }
 
-                public void onMediaScannerConnected() {
-                    msc.scanFile(filename, null);
-                }
+                    public void onMediaScannerConnected() {
+                        msc.scanFile(filename, null);
+                    }
 
-                public void onScanCompleted(String path, Uri uri) {
-                    msc.disconnect();
-                }
-            };
+                    public void onScanCompleted(String path, Uri uri) {
+                        msc.disconnect();
+                    }
+                };
+            } else {
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this,
+                        R.string.fail_perms_camera_storage,
+                        R.drawable.ic_warning_white_24dp).show();
+                setPermissionCamera();
+                setPermissionStorage();
+            }
         }
         if (view == lytBtnGallery) {
             intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             code = SELECT_PICTURE;
         }
-        startActivityForResult(intent, code);
+        if (intent != null && code != 0) {
+            startActivityForResult(intent, code);
+        }
     }
 
     @Override

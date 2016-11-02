@@ -133,6 +133,8 @@ public class ProjectSelected extends AppCompatActivity {
 
         CustomWebView webView = new CustomWebView(this);
         webView.setLayoutParams(tvParams);
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
         if (Tools.isBooleanValue(valueStr)) {
             //tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
             webView.setText(Tools.getCurrentBooleanValueAsString(this));

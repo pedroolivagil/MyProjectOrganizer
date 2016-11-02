@@ -152,11 +152,6 @@ public class Tools {
         return prefs.edit();
     }
 
-    public static void cleanProjectPrefs() {
-        Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, "").apply();
-        Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, "").apply();
-    }
-
     public static String getUserID() {
         return Tools.getPrefs().getString(Tools.PREFS_USER_ID, "");
     }

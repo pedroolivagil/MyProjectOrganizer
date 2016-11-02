@@ -2,7 +2,9 @@ package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.accounts.AccountManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -29,7 +31,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private int REQUEST_CODE = 1;
     private CustomTextView putEmailInPrefs;
     private LinearLayout changeEmail;
-    private CustomTextView optionCleanPrefs;
+    private CustomTextView optionSeeAllPermissions;
     private CustomTextView optionChangeAccount;
     private LinearLayout optionDelAllProjects;
     private LinearLayout optionSortBy;
@@ -48,8 +50,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         changeEmail.setOnClickListener(this);
         resultOrderBy = (CustomTextView) findViewById(R.id.resultOrderBy);
         resultOrderBy.setOnClickListener(this);
-        optionCleanPrefs = (CustomTextView) findViewById(R.id.optionCleanPrefs);
-        optionCleanPrefs.setOnClickListener(this);
+        optionSeeAllPermissions = (CustomTextView) findViewById(R.id.optionSeeAllPermissions);
+        optionSeeAllPermissions.setOnClickListener(this);
         optionChangeAccount = (CustomTextView) findViewById(R.id.optionChangeAccount);
         optionChangeAccount.setOnClickListener(this);
         optionDelAllProjects = (LinearLayout) findViewById(R.id.optionDelAllProjects);
@@ -119,7 +121,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (v == optionDelAllProjects) {
             Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.soon, R.drawable.ic_warning_white_24dp).show();
         }
-        if (v == optionCleanPrefs) { // desactivado
+        if (v == optionSeeAllPermissions) { // desactivado
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
         }
     }
 

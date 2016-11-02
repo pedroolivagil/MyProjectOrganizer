@@ -64,4 +64,6 @@
     <string name="error_project_selected">Unexpected error with selected project</string>
     <string name="falseValue">No</string>
     <string name="trueValue">Yes</string>
+    <string name="optionSeeAppInfo">Application information</string>
+    <string name="fail_perms_camera_storage">You cannot use the camera for lack of permits</string>
 </resources>

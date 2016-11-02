@@ -64,4 +64,6 @@
     <string name="toolbarProjetSelected">Proyecto seleccionado</string>
     <string name="falseValue">No</string>
     <string name="trueValue">Si</string>
+    <string name="optionSeeAppInfo">Información de la aplicación</string>
+    <string name="fail_perms_camera_storage">No se puede usar la cámara por falta de permisos</string>
 </resources>

@@ -64,7 +64,7 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
         }
         CustomTextView title = (CustomTextView) vi.findViewById(R.id.projectName);
         CustomTextView date = (CustomTextView) vi.findViewById(R.id.projectLastUpdate);
-        CustomTextView descrip = (CustomTextView) vi.findViewById(R.id.projectMainDescript);
+        CustomWebView descrip = (CustomWebView) vi.findViewById(R.id.projectMainDescript);
         ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
         if (this.txt[position].replaceAll(" ", "").length() > 17) {
             title.setTextCapitalized(this.txt[position].substring(0, 16).concat("..."));
@@ -73,9 +73,9 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
         }
         date.setTextCapitalized(activity.getString(R.string.card_last_update) + " " + this.lstUpdt[position]);
         if (this.description.toString().trim().length() > 0) {
-            descrip.setTextCapitalized(this.description[position]);
+            descrip.setText(this.description[position], R.dimen.size12);
         } else {
-            descrip.setTextCapitalized(activity.getString(R.string.description_empty));
+            descrip.setText(activity.getString(R.string.description_empty), R.dimen.size12);
         }
         Transformation transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)

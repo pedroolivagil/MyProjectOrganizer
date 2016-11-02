@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (list != null) {
             list.setAdapter(null);
         }
+        ProjectManager.cleanTempPrefs();
         super.onDestroy();
     }
 

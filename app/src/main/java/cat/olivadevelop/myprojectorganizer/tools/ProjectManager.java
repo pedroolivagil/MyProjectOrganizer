@@ -58,4 +58,9 @@ public abstract class ProjectManager {
     public static void setProjects(JSONArray projects) {
         Tools.putInPrefs().putString(ProjectManager.NEW_SELECTED, projects.toString()).apply();
     }
+
+    public static void cleanTempPrefs(){
+        Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, null).apply();
+        Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, null).apply();
+    }
 }
