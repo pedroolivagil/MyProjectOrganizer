@@ -15,19 +15,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.CATEGORY;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_descript;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_dir_files;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_form;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_home_img;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_id_project;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_last_update;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_name;
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.sortJSON;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_descript;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_last_update;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_name;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.sortJSON;
 
 /**
  * Created by Oliva on 26/09/2016.

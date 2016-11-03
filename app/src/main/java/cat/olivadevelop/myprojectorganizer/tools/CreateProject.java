@@ -22,13 +22,14 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**

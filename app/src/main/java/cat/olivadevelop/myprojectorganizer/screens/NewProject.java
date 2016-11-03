@@ -23,9 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
 import cat.olivadevelop.myprojectorganizer.tools.GeneralActivity;
-import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProject extends GeneralActivity implements View.OnClickListener {

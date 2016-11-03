@@ -14,14 +14,14 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
-import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_dir_files;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_form;
-import static cat.olivadevelop.myprojectorganizer.tools.ProjectManager.json_project_home_img;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
 
 public class ProjectSelected extends AppCompatActivity {
 

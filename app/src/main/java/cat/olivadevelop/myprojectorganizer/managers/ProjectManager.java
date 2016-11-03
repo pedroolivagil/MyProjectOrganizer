@@ -1,7 +1,15 @@
-package cat.olivadevelop.myprojectorganizer.tools;
+package cat.olivadevelop.myprojectorganizer.managers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 /**
  * Created by Oliva on 22/10/2016.
@@ -62,5 +70,39 @@ public abstract class ProjectManager {
     public static void cleanTempPrefs(){
         Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, null).apply();
         Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, null).apply();
+    }
+
+    public static JSONArray sortJSON(JSONArray jsonArray, final String key, final boolean asc) throws JSONException {
+        JSONArray sortedJsonArray = new JSONArray();
+
+        List<JSONObject> jsonValues = new ArrayList<JSONObject>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            jsonValues.add(jsonArray.getJSONObject(i));
+        }
+        Collections.sort(jsonValues, new Comparator<JSONObject>() {
+            @Override
+            public int compare(JSONObject a, JSONObject b) {
+                String valA = "";
+                String valB = "";
+
+                try {
+                    valA = String.valueOf(a.get(key));
+                    valB = String.valueOf(b.get(key));
+                } catch (JSONException e) {
+                    //do something
+                }
+                //if you want to change the sort order, simply use the following:
+                if (asc) {
+                    return valA.compareToIgnoreCase(valB);
+                } else {
+                    return -valA.compareToIgnoreCase(valB);
+                }
+            }
+        });
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            sortedJsonArray.put(jsonValues.get(i));
+        }
+        return sortedJsonArray;
     }
 }

@@ -14,9 +14,9 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
-import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;

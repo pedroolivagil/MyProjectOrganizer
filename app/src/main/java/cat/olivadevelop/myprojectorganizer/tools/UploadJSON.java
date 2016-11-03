@@ -9,6 +9,7 @@ import android.util.Log;
 import java.net.URL;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.MainActivity;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

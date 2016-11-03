@@ -20,9 +20,9 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
-import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
 
@@ -142,7 +142,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                     c1.setChecked(true);
                 } else if (ProjectManager.getSortBy().equals(ProjectManager.json_project_last_update)) {
                     c2.setChecked(true);
-                } else if (ProjectManager.getSortBy().equals(ProjectManager.json_project_last_update)) {
+                } else if (ProjectManager.getSortBy().equals(ProjectManager.json_project_name)) {
                     c3.setChecked(true);
                 } else {
                     c1.setChecked(true);

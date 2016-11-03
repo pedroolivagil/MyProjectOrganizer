@@ -18,11 +18,11 @@ import java.io.File;
 import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
 import cat.olivadevelop.myprojectorganizer.tools.CustomCheckBox;
 import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
-import cat.olivadevelop.myprojectorganizer.tools.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {

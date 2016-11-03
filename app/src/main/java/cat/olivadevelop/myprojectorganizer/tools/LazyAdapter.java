@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.ProjectSelected;
 
 /**
@@ -32,6 +33,16 @@ public class LazyAdapter extends BaseAdapter implements View.OnClickListener {
     private int[] ids;
 
     public LazyAdapter(Activity a, String[] img, String[] txt, String[] lstUpdt, String[] description, int[] ids) {
+        activity = a;
+        this.ids = ids;
+        this.img = img;
+        this.txt = txt;
+        this.lstUpdt = lstUpdt;
+        this.description = description;
+        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public LazyAdapter(Activity a, int[] ids, String[]... k) {
         activity = a;
         this.ids = ids;
         this.img = img;
