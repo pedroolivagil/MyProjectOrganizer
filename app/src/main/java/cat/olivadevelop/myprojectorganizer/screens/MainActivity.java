@@ -15,18 +15,15 @@ import android.widget.ListView;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
-import cat.olivadevelop.myprojectorganizer.tools.LazyAdapter;
-import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
+import cat.olivadevelop.myprojectorganizer.tools.MainAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
-
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     FloatingActionButton fab;
     ListView list;
-    LazyAdapter adapter;
+    MainAdapter adapter;
     private SwipeRefreshLayout swipeLayout;
 
     @Override
@@ -37,10 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
         Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
-
-        /*Intent projectSelected = new Intent(this, ProjectSelected.class);
-        projectSelected.putExtra(ProjectManager.NEW_SELECTED, 2);
-        startActivity(projectSelected);*/
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
@@ -53,21 +46,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
             swipeLayout.setColorSchemeResources(
                     R.color.colorAccent,
-                    R.color.colorPrimary,
                     android.R.color.holo_orange_light,
-                    R.color.colorPrimaryDark
+                    R.color.colorPrimary
             );
-            // cargamos los projects del usuario
-            loadProjects();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
+            autoRefresh();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadProjects();
     }
 
     @Override
@@ -80,19 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -105,15 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loadProjects() {
-        new MainLoader(this).execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
+        // descargamos los proyectos y obtenemos el estado
+        ProjectManager.downloadProjects();
         list = (ListView) findViewById(R.id.projectList);
-        adapter = new LazyAdapter(this,
-                Tools.getUrlImgArray(),
-                Tools.getTitlePrjctArray(),
-                Tools.getDatePrjctArray(),
-                Tools.getDescriptPrjctArray(),
-                Tools.getIDSPrjctArray()
-        );
+        // My AsyncTask is done and onPostExecute was called
+        adapter = new MainAdapter(MainActivity.this, ProjectManager.getProjectList());
         list.setAdapter(adapter);
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -129,12 +105,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+        list.postDelayed(new Runnable() {
+            public void run() {
+                // Se supone que aqui hemos realizado las tareas necesarias de refresco,
+                // y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 1000);
     }
 
     @Override
     protected void onDestroy() {
         if (list != null) {
-            list.setAdapter(null);
+            //list.setAdapter(null);
         }
         ProjectManager.cleanTempPrefs();
         super.onDestroy();
@@ -151,12 +134,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
             swipeLayout.setRefreshing(true);
             loadProjects();
-            list.postDelayed(new Runnable() {
-                public void run() {
-                    //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
-                    swipeLayout.setRefreshing(false);
-                }
-            }, 2000);
         }
     }
 }

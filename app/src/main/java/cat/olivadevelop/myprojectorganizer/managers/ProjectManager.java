@@ -9,7 +9,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
+
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
  * Created by Oliva on 22/10/2016.
@@ -35,6 +38,7 @@ public abstract class ProjectManager {
     public static final String json_project_images = "images";
     public static final String json_project_form = "form";
     public static final String json_project_descript = "description";
+    private static ArrayList<Project> projectList;
 
     public static void setDefaultPrefs() {
         if (Tools.getPrefs().getString(SORT_BY, "").equals("")) {
@@ -63,18 +67,18 @@ public abstract class ProjectManager {
         return new JSONArray(Tools.getPrefs().getString(ProjectManager.NEW_SELECTED, "[]"));
     }
 
+    @Deprecated
     public static void setProjects(JSONArray projects) {
         Tools.putInPrefs().putString(ProjectManager.NEW_SELECTED, projects.toString()).apply();
     }
 
-    public static void cleanTempPrefs(){
+    public static void cleanTempPrefs() {
         Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, null).apply();
         Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, null).apply();
     }
 
     public static JSONArray sortJSON(JSONArray jsonArray, final String key, final boolean asc) throws JSONException {
         JSONArray sortedJsonArray = new JSONArray();
-
         List<JSONObject> jsonValues = new ArrayList<JSONObject>();
         for (int i = 0; i < jsonArray.length(); i++) {
             jsonValues.add(jsonArray.getJSONObject(i));
@@ -82,9 +86,7 @@ public abstract class ProjectManager {
         Collections.sort(jsonValues, new Comparator<JSONObject>() {
             @Override
             public int compare(JSONObject a, JSONObject b) {
-                String valA = "";
-                String valB = "";
-
+                String valA = "", valB = "";
                 try {
                     valA = String.valueOf(a.get(key));
                     valB = String.valueOf(b.get(key));
@@ -104,5 +106,18 @@ public abstract class ProjectManager {
             sortedJsonArray.put(jsonValues.get(i));
         }
         return sortedJsonArray;
+    }
+
+    public static void downloadProjects() {
+        MainLoader loader = new MainLoader();
+        loader.execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
+    }
+
+    public static ArrayList<Project> getProjectList() {
+        return projectList;
+    }
+
+    public static void setProjectList(ArrayList<Project> projectList) {
+        ProjectManager.projectList = projectList;
     }
 }

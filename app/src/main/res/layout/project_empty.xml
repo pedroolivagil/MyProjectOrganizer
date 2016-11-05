@@ -32,6 +32,7 @@
                 android:gravity="left"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/pad10"
+                android:text="@string/project_empty"
                 android:textColor="@color/secondaryText"
                 android:textSize="@dimen/size16"
                 android:textStyle="bold" />
