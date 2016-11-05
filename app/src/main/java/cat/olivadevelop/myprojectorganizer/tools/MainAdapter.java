@@ -61,7 +61,8 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                 if (convertView == null) {
                     vi = inflater.inflate(R.layout.project_list, null);
                 }
-                vi.setId(currentProject.getId());
+                ImageView btnSelectProject = (ImageView) vi.findViewById(R.id.btnSelectProject);
+                btnSelectProject.setId(currentProject.getId());
                 CustomTextView title = (CustomTextView) vi.findViewById(R.id.projectName);
                 CustomTextView lastUpdate = (CustomTextView) vi.findViewById(R.id.projectLastUpdate);
                 CustomWebView descrip = (CustomWebView) vi.findViewById(R.id.projectMainDescript);
@@ -72,9 +73,9 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                     title.setTextCapitalized(currentProject.getName());
                 }
                 if (currentProject.getDescription() != null) {
-                    descrip.setText(currentProject.getDescription(), R.dimen.size12);
+                    descrip.setText(currentProject.getDescription(), R.dimen.size14);
                 } else {
-                    descrip.setText(activity.getString(R.string.description_empty), R.dimen.size12);
+                    descrip.setText(activity.getString(R.string.description_empty), R.dimen.size14);
                 }
                 lastUpdate.setTextCapitalized(activity.getString(R.string.card_last_update)
                         .concat(" ")
@@ -88,8 +89,7 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                         .placeholder(R.drawable.ic_camera_black_48dp)
                         .error(R.drawable.ic_close_light).fit()
                         .transform(transformation).centerCrop().into(image);
-
-                vi.setOnClickListener(this);
+                btnSelectProject.setOnClickListener(this);
             } else { // cargamos un layout diferente para el proyecto vacío
                 if (convertView == null) {
                     vi = inflater.inflate(R.layout.project_empty, null);
