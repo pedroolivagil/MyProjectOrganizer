@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.MainActivity;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -45,5 +46,6 @@ public class SplashScreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Tools.init(this);
+        ProjectManager.downloadProjects();
     }
 }
