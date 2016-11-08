@@ -83,7 +83,6 @@
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         app:srcCompat="@color/transparentAll" />
-    <!--android:layout_alignStart="@id/card"-->
 
 
 </RelativeLayout>

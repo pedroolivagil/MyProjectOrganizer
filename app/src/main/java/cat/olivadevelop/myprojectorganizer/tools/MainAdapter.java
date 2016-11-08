@@ -62,7 +62,6 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                     vi = inflater.inflate(R.layout.project_list, null);
                 }
                 ImageView btnSelectProject = (ImageView) vi.findViewById(R.id.btnSelectProject);
-                btnSelectProject.setId(currentProject.getId());
                 CustomTextView title = (CustomTextView) vi.findViewById(R.id.projectName);
                 CustomTextView lastUpdate = (CustomTextView) vi.findViewById(R.id.projectLastUpdate);
                 CustomWebView descrip = (CustomWebView) vi.findViewById(R.id.projectMainDescript);
@@ -89,6 +88,10 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                         .placeholder(R.drawable.ic_camera_black_48dp)
                         .error(R.drawable.ic_close_light).fit()
                         .transform(transformation).centerCrop().into(image);
+
+                if (!String.valueOf(currentProject.getId()).equals("")) {
+                    btnSelectProject.setTag(currentProject.getId());
+                }
                 btnSelectProject.setOnClickListener(this);
             } else { // cargamos un layout diferente para el proyecto vacío
                 if (convertView == null) {
@@ -105,9 +108,9 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() >= 0) {
+        if ((Integer) v.getTag() >= 0) {
             Intent projectSelected = new Intent(activity, ProjectSelected.class);
-            projectSelected.putExtra(ProjectManager.NEW_SELECTED, v.getId());
+            projectSelected.putExtra(ProjectManager.NEW_SELECTED, (Integer) v.getTag());
             activity.startActivity(projectSelected);
         }
     }

@@ -18,6 +18,8 @@ import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.MainAdapter;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
+import static cat.olivadevelop.myprojectorganizer.tools.Tools.verificaConexion;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setOnClickListener(this);
+
             autoRefresh();
         }
     }
@@ -129,11 +132,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void autoRefresh() {
-        if (swipeLayout != null) {
-            //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
-            //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
-            swipeLayout.setRefreshing(true);
-            loadProjects();
+        if (!verificaConexion(this)) {
+            Tools.newSnackBar(this.getCurrentFocus(), this, R.string.cannot_be_connect).show();
+        } else {
+            if (swipeLayout != null) {
+                //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
+                //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+                swipeLayout.setRefreshing(true);
+                loadProjects();
+            }
+
         }
     }
 }

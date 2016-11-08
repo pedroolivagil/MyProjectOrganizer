@@ -27,7 +27,7 @@
                 android:id="@+id/imgProjectPreview"
                 android:layout_width="@dimen/layoutPreviewHeight"
                 android:layout_height="@dimen/layoutPreviewHeight"
-                android:theme="@style/CommonActivity"/>
+                android:theme="@style/CommonActivity" />
 
             <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:id="@+id/nameProjectPreview"

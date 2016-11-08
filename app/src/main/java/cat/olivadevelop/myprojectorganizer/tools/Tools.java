@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,8 +19,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +26,9 @@ import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 /**
  * Created by Oliva on 26/09/2016.
@@ -180,100 +184,6 @@ public class Tools {
         return null;
     }
 
-    public static String[] getUrlImgArray() {
-        int size = prefs.getInt(PREFS_IMG_URL_ARRAY_SIZE, 0);
-        String array[] = new String[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = prefs.getString(PREFS_IMG_URL_ARRAY + "_" + i, null);
-        }
-        return array;
-    }
-
-    public static void setUrlImgArray(String[] urlImgArray) {
-        Tools.putInPrefs().putInt(PREFS_IMG_URL_ARRAY_SIZE, urlImgArray.length).apply();
-        for (int i = 0; i < urlImgArray.length; i++) {
-            Tools.putInPrefs().putString(PREFS_IMG_URL_ARRAY + "_" + i, urlImgArray[i]).apply();
-        }
-    }
-
-    public static String[] getTitlePrjctArray() {
-        int size = prefs.getInt(PREFS_TITLE_PROJECT_ARRAY_SIZE, 0);
-        String array[] = new String[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = prefs.getString(PREFS_TITLE_PROJECT_ARRAY + "_" + i, null);
-        }
-        return array;
-    }
-
-    public static void setTitlePrjctArray(String[] urlImgArray) {
-        Tools.putInPrefs().putInt(PREFS_TITLE_PROJECT_ARRAY_SIZE, urlImgArray.length).apply();
-        for (int i = 0; i < urlImgArray.length; i++) {
-            Tools.putInPrefs().putString(PREFS_TITLE_PROJECT_ARRAY + "_" + i, urlImgArray[i]).apply();
-        }
-    }
-
-    public static String[] getDescriptPrjctArray() {
-        int size = prefs.getInt(PREFS_DESCRIPT_PROJECT_ARRAY_SIZE, 0);
-        String array[] = new String[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = prefs.getString(PREFS_DESCRIPT_PROJECT_ARRAY + "_" + i, null);
-        }
-        return array;
-    }
-
-    public static void setDescriptPrjctArray(String[] descriptPrjctArray) {
-        Tools.putInPrefs().putInt(PREFS_DESCRIPT_PROJECT_ARRAY_SIZE, descriptPrjctArray.length).apply();
-        for (int i = 0; i < descriptPrjctArray.length; i++) {
-            Tools.putInPrefs().putString(PREFS_DESCRIPT_PROJECT_ARRAY + "_" + i, descriptPrjctArray[i]).apply();
-        }
-    }
-
-    public static String[] getDatePrjctArray() {
-        int size = prefs.getInt(PREFS_DATE_PROJECT_ARRAY_SIZE, 0);
-        String array[] = new String[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = prefs.getString(PREFS_DATE_PROJECT_ARRAY + "_" + i, null);
-        }
-        return array;
-    }
-
-    public static void setDatePrjctArray(String[] urlImgArray) {
-        Tools.putInPrefs().putInt(PREFS_DATE_PROJECT_ARRAY_SIZE, urlImgArray.length).apply();
-        for (int i = 0; i < urlImgArray.length; i++) {
-            Tools.putInPrefs().putString(PREFS_DATE_PROJECT_ARRAY + "_" + i, urlImgArray[i]).apply();
-        }
-    }
-
-    public static int[] getIDSPrjctArray() {
-        int size = prefs.getInt(PREFS_IDS_PROJECT_ARRAY_SIZE, 0);
-        int array[] = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = prefs.getInt(PREFS_IDS_PROJECT_ARRAY + "_" + i, -1);
-        }
-        return array;
-    }
-
-    public static void setIDSPrjctArray(int[] IDSPrjctArray) {
-        Tools.putInPrefs().putInt(PREFS_IDS_PROJECT_ARRAY_SIZE, IDSPrjctArray.length).apply();
-        for (int i = 0; i < IDSPrjctArray.length; i++) {
-            Tools.putInPrefs().putInt(PREFS_IDS_PROJECT_ARRAY + "_" + i, IDSPrjctArray[i]).apply();
-        }
-    }
-
-    public static void CopyStream(InputStream is, OutputStream os) {
-        final int buffer_size = 1024;
-        try {
-            byte[] bytes = new byte[buffer_size];
-            for (; ; ) {
-                int count = is.read(bytes, 0, buffer_size);
-                if (count == -1)
-                    break;
-                os.write(bytes, 0, count);
-            }
-        } catch (Exception ex) {
-        }
-    }
-
     public static Bitmap checkResizedBitmap(Bitmap b) {
         Log.i("IMAGE SIZES", "H->" + b.getHeight() + "; W->" + b.getWidth());
         while (b.getHeight() > 4096 || b.getWidth() > 4096) {
@@ -297,6 +207,11 @@ public class Tools {
 
     public static int getDP(Context context, float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density);
+    }
+
+    public static float getPX(Context context, float dimension) {
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return dimension / scaledDensity;
     }
 
     public static boolean isBooleanValue(String valueStr) {
@@ -326,8 +241,28 @@ public class Tools {
         Tools.currentBooleanValue = currentBooleanValue;
     }
 
-    public static float getPX(Context context, float dimension) {
-        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
-        return dimension / scaledDensity;
+
+    public static boolean verificaConexion(Context ctx) {
+        boolean bConectado = false;
+        ConnectivityManager connec = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (SDK_INT >= LOLLIPOP) {
+            Network[] redes = connec.getAllNetworks();
+            for (Network red : redes) {
+                NetworkInfo subRed = connec.getNetworkInfo(red);
+                // ¿Tenemos conexión? ponemos a true
+                if (subRed.getState() == NetworkInfo.State.CONNECTED) {
+                    bConectado = true;
+                }
+            }
+        } else {
+            NetworkInfo[] redes = connec.getAllNetworkInfo();
+            for (NetworkInfo red : redes) {
+                // ¿Tenemos conexión? ponemos a true
+                if (red.getState() == NetworkInfo.State.CONNECTED) {
+                    bConectado = true;
+                }
+            }
+        }
+        return bConectado;
     }
 }
