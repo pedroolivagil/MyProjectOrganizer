@@ -63,16 +63,6 @@ public abstract class ProjectManager {
         Tools.putInPrefs().putBoolean(TYPE_SORT_BY, typeSortBy).apply();
     }
 
-    @Deprecated
-    public static JSONArray getProjects() throws JSONException {
-        return new JSONArray(Tools.getPrefs().getString(ProjectManager.NEW_SELECTED, "[]"));
-    }
-
-    @Deprecated
-    public static void setProjects(JSONArray projects) {
-        Tools.putInPrefs().putString(ProjectManager.NEW_SELECTED, projects.toString()).apply();
-    }
-
     public static void cleanTempPrefs() {
         Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, null).apply();
         Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, null).apply();

@@ -14,24 +14,23 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
-
 public class ProjectSelected extends AppCompatActivity {
 
+    private static final String TAG = "PROJECT_SELECTED";
     private int id_project_selected;
-    private JSONObject selected_project;
+    private Project project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_selected);
+
         id_project_selected = getIntent().getExtras().getInt(ProjectManager.NEW_SELECTED);
         init();
     }
@@ -39,21 +38,18 @@ public class ProjectSelected extends AppCompatActivity {
     private void init() {
         try {
             if (id_project_selected >= 0) {
-                for (int x = 0; x < ProjectManager.getProjects().length(); x++) {
-                    if (ProjectManager.getProjects().getJSONObject(x).getInt(ProjectManager.json_project_id_project) == id_project_selected) {
-                        selected_project = ProjectManager.getProjects().getJSONObject(x);
+                for (int x = 0; x < ProjectManager.getProjectList().size(); x++) {
+                    if (ProjectManager.getProjectList().get(x).getId() == id_project_selected) {
+                        project = ProjectManager.getProjectList().get(x);
                     }
                 }
-                setTitle(Tools.capitalize(selected_project.getString(ProjectManager.json_project_name)));
+                setTitle(Tools.capitalize(project.getName()));
+                setTitle("");
                 LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
-
-                String imageUrl = Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
-                        selected_project.getString(json_project_dir_files) + "/" +
-                        selected_project.getString(json_project_home_img);
 
                 ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
                 Picasso.with(this)
-                        .load(imageUrl)
+                        .load(project.getHomeImage())
                         .placeholder(R.drawable.ic_camera_black_48dp)
                         .error(R.drawable.ic_close_light)
                         .fit()
@@ -61,12 +57,12 @@ public class ProjectSelected extends AppCompatActivity {
                         .into(image);
 
                 CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
-                title.setTextCapitalized(selected_project.getString(ProjectManager.json_project_name));
+                title.setTextCapitalized(project.getName());
 
                 CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
-                subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(selected_project.getString(ProjectManager.json_project_last_update)));
+                subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(project.getLastUpdate()));
 
-                JSONObject form = selected_project.getJSONObject(json_project_form);
+                JSONObject form = project.getForm();
 
                 //añadimos la tarjetas de información obligatorias, descripción y terminado
                 container.addView(getTarget(ProjectManager.FINISH_PJT, form));
