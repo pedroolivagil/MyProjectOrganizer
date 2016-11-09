@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
-import cat.olivadevelop.myprojectorganizer.screens.MainActivity;
+import cat.olivadevelop.myprojectorganizer.screens.MainScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 public class SplashScreen extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     finish();
-                    startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                    startActivity(new Intent(SplashScreen.this, MainScreen.class));
                 }
             }
         };

@@ -21,7 +21,7 @@ import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.verificaConexion;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainScreen extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     FloatingActionButton fab;
     ListView list;
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ProjectManager.downloadProjects();
         list = (ListView) findViewById(R.id.projectList);
         // My AsyncTask is done and onPostExecute was called
-        adapter = new MainAdapter(MainActivity.this, ProjectManager.getProjectList());
+        adapter = new MainAdapter(MainScreen.this, ProjectManager.getProjectList());
         list.setAdapter(adapter);
         list.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override

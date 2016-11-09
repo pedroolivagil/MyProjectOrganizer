@@ -10,7 +10,7 @@ import java.net.URL;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
-import cat.olivadevelop.myprojectorganizer.screens.MainActivity;
+import cat.olivadevelop.myprojectorganizer.screens.MainScreen;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -71,7 +71,7 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
         super.onPostExecute(aBoolean);
         ProjectManager.cleanTempPrefs();
         progressDialog.dismiss();
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, MainScreen.class);
         activity.startActivity(intent);
     }
 

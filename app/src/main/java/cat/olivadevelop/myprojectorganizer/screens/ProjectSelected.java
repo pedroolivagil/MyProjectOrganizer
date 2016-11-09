@@ -1,10 +1,14 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +24,11 @@ import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-public class ProjectSelected extends AppCompatActivity {
+@RequiresApi(api = Build.VERSION_CODES.M)
+public class ProjectSelected extends AppCompatActivity implements View.OnScrollChangeListener {
 
     private static final String TAG = "PROJECT_SELECTED";
+    int alpha;
     private int id_project_selected;
     private Project project;
 
@@ -44,7 +50,8 @@ public class ProjectSelected extends AppCompatActivity {
                     }
                 }
                 setTitle(Tools.capitalize(project.getName()));
-                setTitle("");
+                ScrollView mainContainer = (ScrollView) findViewById(R.id.activity_project_selected);
+                mainContainer.setOnScrollChangeListener(this);
                 LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
 
                 ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
@@ -143,5 +150,14 @@ public class ProjectSelected extends AppCompatActivity {
         //target.addView(tvValue);
         target.addView(webView);
         return target;
+    }
+
+    @Override
+    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        //Log.e(TAG, "x->" + scrollX + "; y->" + scrollY + "; ox->" + oldScrollX + "; xy->" + oldScrollY);
+        if (scrollY < 600) {
+            alpha = ((scrollY * 100) / 600);
+            Log.e(TAG, "" + alpha);
+        }
     }
 }
