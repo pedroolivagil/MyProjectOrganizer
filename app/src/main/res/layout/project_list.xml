@@ -5,6 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/label_bg1_finished_pjct_list"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:id="@+id/label_bg2_finished_pjct_list"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="52dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal" />
+
     <RelativeLayout
         android:id="@+id/card"
         android:layout_width="match_parent"
@@ -79,7 +97,7 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/height20"
+                            android:layout_height="@dimen/height15"
                             android:layout_gravity="bottom"
                             android:src="@drawable/gradient_alpha_white" />
                     </FrameLayout>
@@ -94,7 +112,32 @@
         android:layout_height="@dimen/card_height"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        app:srcCompat="@color/transparentAll" />
+        app:srcCompat="@color/transparentFull" />
+
+    <RelativeLayout
+        android:id="@+id/label_finished_pjct_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="-25dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/gradient_project_finish"
+        android:elevation="5dp"
+        android:rotation="-45">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/finalized"
+            android:textAlignment="gravity"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

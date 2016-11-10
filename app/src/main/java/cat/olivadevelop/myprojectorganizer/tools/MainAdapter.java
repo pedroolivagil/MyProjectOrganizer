@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -89,6 +91,20 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                         .placeholder(R.drawable.ic_camera_black_48dp)
                         .error(R.drawable.ic_close_light).fit()
                         .transform(transformation).centerCrop().into(image);
+
+                LinearLayout label_bg1_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg1_finished_pjct_list);
+                LinearLayout label_bg2_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg2_finished_pjct_list);
+                RelativeLayout label_finished_pjct_list = (RelativeLayout) vi.findViewById(R.id.label_finished_pjct_list);
+
+                if(currentProject.isFinished()){
+                    label_bg1_finished_pjct_list.setVisibility(View.VISIBLE);
+                    label_bg2_finished_pjct_list.setVisibility(View.VISIBLE);
+                    label_finished_pjct_list.setVisibility(View.VISIBLE);
+                }else{
+                    label_bg1_finished_pjct_list.setVisibility(View.GONE);
+                    label_bg2_finished_pjct_list.setVisibility(View.GONE);
+                    label_finished_pjct_list.setVisibility(View.GONE);
+                }
 
                 if (!String.valueOf(currentProject.getId()).equals("")) {
                     btnSelectProject.setTag(currentProject.getId());

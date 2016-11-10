@@ -30,6 +30,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FLAG_ACTIVO;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
@@ -68,10 +69,10 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();
-            JSONObject json = new JSONObject(resStr);
             // close response
             response.close();
 
+            JSONObject json = new JSONObject(resStr);
             Log.i("RESULT", "" + resStr);
 
             // insertamos el nuevo proyecto en el JSON
@@ -97,6 +98,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             JSONObject newjsonObject = new JSONObject();
             newjsonObject.put("id_project", category.length());
             newjsonObject.put("name", pjtName);
+            newjsonObject.put(FLAG_ACTIVO, true);
             newjsonObject.put("create_data", currentDate);
             newjsonObject.put("last_update", currentDate);
             newjsonObject.put("dir_files", "/project" + (category.length()));

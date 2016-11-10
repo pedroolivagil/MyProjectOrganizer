@@ -45,8 +45,19 @@ public class Project {
     private JSONArray urlImages;
     private JSONObject form;
     private boolean empty;
+    private boolean flag_activo;
 
     public Project() {
+    }
+
+    /* Getters y Setters*/
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isEmpty() {
@@ -55,15 +66,6 @@ public class Project {
 
     public void setEmpty(boolean empty) {
         this.empty = empty;
-    }
-
-    /* Getters y Setters*/
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -138,5 +140,13 @@ public class Project {
         } catch (JSONException e) {
             return false;
         }
+    }
+
+    public boolean isFlag_activo() {
+        return flag_activo;
+    }
+
+    public void setFlag_activo(boolean flag_activo) {
+        this.flag_activo = flag_activo;
     }
 }

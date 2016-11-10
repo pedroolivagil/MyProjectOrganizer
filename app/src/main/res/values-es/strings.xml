@@ -66,4 +66,6 @@
     <string name="trueValue">Si</string>
     <string name="optionSeeAppInfo">Información de la aplicación</string>
     <string name="fail_perms_camera_storage">No se puede usar la cámara por falta de permisos</string>
+    <string name="project_empty">No tienes proyectos</string>
+    <string name="finalized">Terminado</string>
 </resources>

@@ -29,6 +29,7 @@ public abstract class ProjectManager {
     public static final String SORT_BY = "sortBy";
     public static final String TYPE_SORT_BY = "typeSortBy";
     public static final String FINISH_PJT = "finished";
+    public static final String FLAG_ACTIVO = "flag_activo";
     public static final String json_project_id_project = "id_project";
     public static final String json_project_name = "name";
     public static final String json_project_last_update = "last_update";

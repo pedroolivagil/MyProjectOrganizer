@@ -67,4 +67,5 @@
     <string name="optionSeeAppInfo">Application information</string>
     <string name="fail_perms_camera_storage">You cannot use the camera for lack of permits</string>
     <string name="project_empty">You don\'t have projects</string>
+    <string name="finalized">Finalized</string>
 </resources>

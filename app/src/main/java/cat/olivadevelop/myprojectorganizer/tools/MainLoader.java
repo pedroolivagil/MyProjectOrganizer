@@ -18,6 +18,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FLAG_ACTIVO;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
@@ -59,17 +60,19 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                     if (jProjects.length() > 0) { // si t0do es correcto
                         for (int z = 0; z < jProjects.length(); z++) {
                             jsonObjectLine = jProjects.getJSONObject(z);
-                            p = new Project();
-                            p.setEmpty(false);
-                            p.setId(jsonObjectLine.getInt(json_project_id_project));
-                            p.setName(jsonObjectLine.getString(json_project_name));
-                            p.setCreateDate(jsonObjectLine.getString(json_project_create_data));
-                            p.setLastUpdate(jsonObjectLine.getString(json_project_last_update));
-                            p.setHomeDir(jsonObjectLine.getString(json_project_dir_files));
-                            p.setHomeImage(jsonObjectLine.getString(json_project_home_img));
-                            p.setUrlImages(jsonObjectLine.getJSONArray(json_project_images));
-                            p.setForm(jsonObjectLine.getJSONObject(json_project_form));
-                            projectList.add(p);
+                            if(jsonObjectLine.getBoolean(FLAG_ACTIVO)) {
+                                p = new Project();
+                                p.setEmpty(false);
+                                p.setId(jsonObjectLine.getInt(json_project_id_project));
+                                p.setName(jsonObjectLine.getString(json_project_name));
+                                p.setCreateDate(jsonObjectLine.getString(json_project_create_data));
+                                p.setLastUpdate(jsonObjectLine.getString(json_project_last_update));
+                                p.setHomeDir(jsonObjectLine.getString(json_project_dir_files));
+                                p.setHomeImage(jsonObjectLine.getString(json_project_home_img));
+                                p.setUrlImages(jsonObjectLine.getJSONArray(json_project_images));
+                                p.setForm(jsonObjectLine.getJSONObject(json_project_form));
+                                projectList.add(p);
+                            }
                         }
                     } else { // si no hay proyectos
                         p = new Project();
