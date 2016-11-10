@@ -13,27 +13,29 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_height"
-            android:layout_margin="@dimen/card_margin"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="4dp"
-            app:contentPadding="3dp">
+            android:layout_marginBottom="@dimen/card_margin_top_bottom"
+            android:layout_marginLeft="@dimen/card_margin_left_right"
+            android:layout_marginRight="@dimen/card_margin_left_right"
+            android:layout_marginTop="@dimen/card_margin_top_bottom"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:contentPadding="@dimen/card_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <FrameLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="130dp"
-                    android:layout_height="@dimen/card_img_height">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/projectHomeImg"
                         android:layout_width="match_parent"
-                        android:layout_height="95dp"
+                        android:layout_height="100dp"
                         android:contentDescription="@string/card_img"
-                        android:scaleType="center" />
+                        android:scaleType="centerCrop" />
 
                     <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                         android:id="@+id/projectLastUpdate"
@@ -41,7 +43,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:theme="@style/LastUpdateProjectMain" />
-
                 </FrameLayout>
 
                 <LinearLayout
@@ -66,11 +67,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height7" />
 
-                    <cat.olivadevelop.myprojectorganizer.tools.CustomWebView
-                        android:id="@+id/projectMainDescript"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="none" />
+                        android:layout_height="wrap_content">
+
+                        <cat.olivadevelop.myprojectorganizer.tools.CustomWebView
+                            android:id="@+id/projectMainDescript"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height50"
+                            android:scrollbars="none" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height20"
+                            android:layout_gravity="bottom"
+                            android:src="@drawable/gradient_alpha_white" />
+                    </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>

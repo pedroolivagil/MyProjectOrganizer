@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -101,7 +102,7 @@ public class ProjectSelected extends AppCompatActivity implements View.OnScrollC
                 .show();
     }
 
-    private LinearLayout getTarget(String labelStr, JSONObject form) throws JSONException {
+    private CardView getTarget(String labelStr, JSONObject form) throws JSONException {
         String valueStr = form.getString(labelStr);
         Log.e("FORM", "" + labelStr + "; " + valueStr);
 
@@ -109,7 +110,7 @@ public class ProjectSelected extends AppCompatActivity implements View.OnScrollC
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+        //layoutParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
 
         LinearLayout target = new LinearLayout(this);
         target.setLayoutParams(layoutParams);
@@ -120,12 +121,16 @@ public class ProjectSelected extends AppCompatActivity implements View.OnScrollC
         CustomTextView tvLabel = new CustomTextView(this);
         tvLabel.setBold();
         tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
-        if (labelStr.equals(ProjectManager.json_project_descript)) {
-            tvLabel.setTextCapitalized(getString(R.string.label_description));
-        } else if (labelStr.equals(ProjectManager.FINISH_PJT)) {
-            tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
-        } else {
-            tvLabel.setTextCapitalized(labelStr);
+        switch (labelStr) {
+            case ProjectManager.json_project_descript:
+                tvLabel.setTextCapitalized(getString(R.string.label_description));
+                break;
+            case ProjectManager.FINISH_PJT:
+                tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
+                break;
+            default:
+                tvLabel.setTextCapitalized(labelStr);
+                break;
         }
 
         LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
@@ -139,17 +144,26 @@ public class ProjectSelected extends AppCompatActivity implements View.OnScrollC
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
         if (Tools.isBooleanValue(valueStr)) {
-            //tvValue.setText(Tools.getCurrentBooleanValueAsString(this));
             webView.setText(Tools.getCurrentBooleanValueAsString(this));
         } else {
-            //tvValue.setText(Tools.capitalize(valueStr));
             webView.setText(valueStr);
         }
 
         target.addView(tvLabel);
-        //target.addView(tvValue);
         target.addView(webView);
-        return target;
+
+        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        cardParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+
+        CardView cardView = new CardView(this);
+        cardView.setContentPadding(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+        cardView.setCardElevation(Tools.getDP(this, 5));
+        cardView.setLayoutParams(cardParams);
+        cardView.addView(target);
+        return cardView;
     }
 
     @Override

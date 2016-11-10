@@ -42,7 +42,7 @@
     </style>
 
     <style name="UnderlineTitle" parent="AppTheme">
-        <item name="android:background">@color/colorPrimaryLight</item>
+        <!--<item name="android:background">@color/colorPrimaryLight</item>-->
         <item name="android:paddingBottom">1dp</item>
     </style>
 
@@ -63,12 +63,12 @@
     </style>
 
     <style name="LastUpdateProjectMain" parent="AppTheme">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/size10</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/size12</item>
         <item name="android:maxLines">1</item>
         <item name="android:padding">@dimen/pad0</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@color/cardview_light_background</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
     <style name="previewProjectTitleImg" parent="AppTheme">

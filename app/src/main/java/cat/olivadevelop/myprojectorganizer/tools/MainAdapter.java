@@ -63,11 +63,12 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                 }
                 ImageView btnSelectProject = (ImageView) vi.findViewById(R.id.btnSelectProject);
                 CustomTextView title = (CustomTextView) vi.findViewById(R.id.projectName);
+                title.setBold();
                 CustomTextView lastUpdate = (CustomTextView) vi.findViewById(R.id.projectLastUpdate);
                 CustomWebView descrip = (CustomWebView) vi.findViewById(R.id.projectMainDescript);
                 ImageView image = (ImageView) vi.findViewById(R.id.projectHomeImg);
-                if (currentProject.getName().trim().length() > 20) {
-                    title.setTextCapitalized(currentProject.getName().substring(0, 16).concat("..."));
+                if (currentProject.getName().trim().length() > 28) {
+                    title.setTextCapitalized(currentProject.getName().substring(0, 25).concat("..."));
                 } else {
                     title.setTextCapitalized(currentProject.getName());
                 }
