@@ -106,7 +106,7 @@
     <style name="Button" parent="AppTheme">
         <item name="android:background">@color/colorAccent</item>
         <item name="android:padding">@dimen/pad5</item>
-        <item name="android:minWidth">210dp</item>
+        <item name="android:minWidth">120dp</item>
     </style>
 
     <style name="Button.ImageView" parent="AppTheme">
@@ -117,6 +117,10 @@
     <style name="Button.TextView" parent="AppTheme">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ButtonRight" parent="Button.TextView">
+        <item name="android:gravity">right</item>
     </style>
 
     <style name="Button.TextView.Center" parent="AppTheme">

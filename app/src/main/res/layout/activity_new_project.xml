@@ -29,76 +29,84 @@
             android:layout_height="@dimen/height10" />
 
         <!--// boton usar camara //-->
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/buttonHeight"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/white"
-            android:theme="@style/Button"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="3dp"
-            app:contentPadding="0dp">
-
-            <LinearLayout
-                android:id="@+id/btnGalery"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/imageButtonHeight"
-                    android:layout_height="@dimen/imageButtonHeight"
-                    android:src="@drawable/ic_apps_white_48dp"
-                    android:theme="@style/Button.ImageView" />
-
-                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/buttonHeight"
-                    android:text="@string/p_select_home_img_gal"
-                    android:theme="@style/Button.TextView" />
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height10" />
-        <!--// boton añadir desde galeria //-->
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/buttonHeight"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/white"
-            android:theme="@style/Button"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="3dp"
-            app:contentPadding="0dp">
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:theme="@style/Button"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:contentPadding="0dp">
 
-            <LinearLayout
-                android:id="@+id/btnCamera"
-                android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/btnCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/imageButtonHeight"
+                        android:layout_height="@dimen/imageButtonHeight"
+                        android:src="@drawable/ic_camera_white_48dp"
+                        android:theme="@style/Button.ImageView" />
+
+                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="@string/p_select_home_img_cam"
+                        android:theme="@style/Button.TextView" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1" />
 
-                <ImageView
-                    android:layout_width="@dimen/imageButtonHeight"
-                    android:layout_height="@dimen/imageButtonHeight"
-                    android:src="@drawable/ic_camera_white_48dp"
-                    android:theme="@style/Button.ImageView" />
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:theme="@style/Button"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:contentPadding="0dp">
 
-                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                <LinearLayout
+                    android:id="@+id/btnGalery"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buttonHeight"
-                    android:text="@string/p_select_home_img_cam"
-                    android:theme="@style/Button.TextView" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="@string/p_select_home_img_gal"
+                        android:theme="@style/ButtonRight" />
+
+                    <ImageView
+                        android:layout_width="@dimen/imageButtonHeight"
+                        android:layout_height="@dimen/imageButtonHeight"
+                        android:src="@drawable/ic_apps_white_48dp"
+                        android:theme="@style/Button.ImageView" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <!--// boton añadir desde galeria //-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="90dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
