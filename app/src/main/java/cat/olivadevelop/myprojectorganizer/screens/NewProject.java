@@ -122,13 +122,13 @@ public class NewProject extends GeneralActivity implements View.OnClickListener 
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
-            if (!editPjctName.getText().toString().equals("") && editPjctName.getText().toString().length() > 5) {
+            if (!editPjctName.getText().toString().trim().equals("") && editPjctName.getText().toString().trim().length() > 5) {
                 //procedure to next step
-                Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, editPjctName.getText().toString()).apply();
-                if (filename != null) {
-                    Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, filename).apply();
-                }
                 Intent nextStep = new Intent(this, NewProjectFinish.class);
+                nextStep.putExtra(ProjectManager.PROJECT_NAME, editPjctName.getText().toString().trim());
+                if (filename != null) {
+                    nextStep.putExtra(ProjectManager.PROJECT_IMG, filename);
+                }
                 startActivity(nextStep);
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp).show();

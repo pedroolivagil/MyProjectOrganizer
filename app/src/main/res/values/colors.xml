@@ -38,5 +38,6 @@
     <color name="transparentFull">#00000000</color>
     <color name="transparentBlack">#66000000</color>
     <color name="transparentWhite">#CCFFFFFF</color>
+    <color name="black">#000000</color>
 
 </resources>

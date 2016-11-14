@@ -56,9 +56,10 @@
     <dimen name="height5">5dp</dimen>
     <dimen name="height7">7dp</dimen>
     <dimen name="height10">10dp</dimen>
+    <dimen name="height15">15dp</dimen>
     <dimen name="height20">20dp</dimen>
     <dimen name="height30">30dp</dimen>
     <dimen name="height50">50dp</dimen>
-    <dimen name="height15">15dp</dimen>
+    <dimen name="height200">200dp</dimen>
 
 </resources>
