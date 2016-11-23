@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.tools;
+package cat.olivadevelop.myprojectorganizer.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +22,8 @@ import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.ProjectSelected;
+import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
+import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 
 /**
  * Created by Oliva on 05/10/2016.

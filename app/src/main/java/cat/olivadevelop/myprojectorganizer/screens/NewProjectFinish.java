@@ -1,7 +1,6 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -23,9 +22,10 @@ import cat.olivadevelop.myprojectorganizer.tools.CreateProject;
 import cat.olivadevelop.myprojectorganizer.tools.CustomCheckBox;
 import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
+import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-public class NewProjectFinish extends AppCompatActivity implements View.OnClickListener {
+public class NewProjectFinish extends GenericScreen implements View.OnClickListener {
 
     static ScrollView scrollview;
     private String projectName;

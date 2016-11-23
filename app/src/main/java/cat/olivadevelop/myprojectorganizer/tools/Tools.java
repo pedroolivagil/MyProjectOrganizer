@@ -97,6 +97,10 @@ public class Tools {
         return Snackbar.make(v, cnxt.getString(string), Snackbar.LENGTH_LONG);
     }
 
+    public static Snackbar newSnackBar(View v, String string) {
+        return Snackbar.make(v, string, Snackbar.LENGTH_LONG);
+    }
+
     public static Snackbar newSnackBarWithIcon(View v, Context cnxt, int string, int icon) {
         Snackbar snackbar = Snackbar.make(v, string, Snackbar.LENGTH_LONG);
         View snackbarLayout = snackbar.getView();

@@ -13,197 +13,160 @@
         android:orientation="vertical"
         tools:context="cat.olivadevelop.myprojectorganizer.screens.NewProject">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height20"
+            android:layout_weight="1" />
+
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
             android:id="@+id/edtProjectName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/p_name" />
+            android:background="@drawable/border_black"
+            android:hint="@string/p_name"
+            android:padding="@dimen/card_margin" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height20"
+            android:layout_weight="1" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:theme="@style/Button"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
+
+            <LinearLayout
+                android:id="@+id/btnSelectTakePicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/imageButtonHeight"
+                    android:layout_height="@dimen/imageButtonHeight"
+                    android:src="@drawable/ic_camera_white_48dp"
+                    android:theme="@style/Button.ImageView" />
+
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/btn_take_select_img"
+                    android:theme="@style/Button.TextView" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_project_instructions"
-            android:visibility="gone" />
+            android:text="@string/add_header_picture_to_project"
+            android:textSize="@dimen/size16" />
 
-        <!--// boton usar camara //-->
         <Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/height10"
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/btnSelectHeaderTakePicture"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height50"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/height100"
+            android:background="@drawable/border_black"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:theme="@style/Button"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:contentPadding="0dp">
+                android:background="@color/transparentFull"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_aspect_ratio_black_48dp" />
 
-                <LinearLayout
-                    android:id="@+id/btnCamera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/imageButtonHeight"
-                        android:layout_height="@dimen/imageButtonHeight"
-                        android:src="@drawable/ic_camera_white_48dp"
-                        android:theme="@style/Button.ImageView" />
-
-                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/p_select_home_img_cam"
-                        android:theme="@style/Button.TextView" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <android.support.v7.widget.CardView
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:theme="@style/Button"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:contentPadding="0dp">
-
-                <LinearLayout
-                    android:id="@+id/btnGalery"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/p_select_home_img_gal"
-                        android:theme="@style/ButtonRight" />
-
-                    <ImageView
-                        android:layout_width="@dimen/imageButtonHeight"
-                        android:layout_height="@dimen/imageButtonHeight"
-                        android:src="@drawable/ic_apps_white_48dp"
-                        android:theme="@style/Button.ImageView" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                android:background="@color/transparentFull"
+                android:text="@string/click_here"
+                android:textSize="@dimen/size16" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height20"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_gravity="center"
-            android:background="@drawable/border_black"
-            android:padding="2dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/image_thumb"
-                android:layout_width="match_parent"
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_crop_free_black_48dp" />
+                android:gravity="bottom"
+                android:text="@string/add_more_pictures_to_project"
+                android:textSize="@dimen/size16" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/addPicToGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/buttonHeight"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:theme="@style/ButtonWithoutMin"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:contentPadding="0dp">
+
+                <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/buttonHeight"
+                    android:text="@string/add_photo"
+                    android:theme="@style/Button.TextView.Center" />
+
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height10" />
+            android:layout_height="@dimen/height5"
+            android:layout_weight="1" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height50"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:theme="@style/Button"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:contentPadding="0dp">
-
-                <LinearLayout
-                    android:id="@+id/btnCamera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/imageButtonHeight"
-                        android:layout_height="@dimen/imageButtonHeight"
-                        android:src="@drawable/ic_camera_white_48dp"
-                        android:theme="@style/Button.ImageView" />
-
-                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/p_select_home_img_cam"
-                        android:theme="@style/Button.TextView" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:theme="@style/Button"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:contentPadding="0dp">
-
-                <LinearLayout
-                    android:id="@+id/btnGalery"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:text="@string/p_select_home_img_gal"
-                        android:theme="@style/ButtonRight" />
-
-                    <ImageView
-                        android:layout_width="@dimen/imageButtonHeight"
-                        android:layout_height="@dimen/imageButtonHeight"
-                        android:src="@drawable/ic_apps_white_48dp"
-                        android:theme="@style/Button.ImageView" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/projectExtraImages"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height200"
             android:background="@drawable/border_black"
-            android:orientation="horizontal" />
+            android:orientation="horizontal">
 
+            <GridView
+                android:id="@+id/gvImgBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparentFull"
+                android:columnWidth="@dimen/width90"
+                android:gravity="center"
+                android:horizontalSpacing="@dimen/mar5"
+                android:numColumns="auto_fit"
+                android:padding="@dimen/pad5"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="@dimen/mar5">
+
+            </GridView>
+
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

@@ -5,10 +5,10 @@
     <string name="action_settings">Opciones</string>
     <string name="p_name">Nombre del proyecto</string>
     <string name="fail_pjt_name">Proyecto: min 5 letras y no debe estar vacío</string>
-    <string name="p_select_home_img_cam">Haz una foto</string>
-    <string name="p_select_home_img_gal">Selecciona una...</string>
+    <string name="btn_take_select_img">Haz o selecciona una foto</string>
+    <string name="p_select_an_option">Selecciona una opción</string>
     <string name="toolbarNewProject">Nuevo proyecto</string>
-    <string name="new_project_instructions">- Introduce un nombre para tu proyecto.\n- Haz una foto o selecciona una de la galería que represente el proyecto (opcional, puedes hacerlo más tarde).</string>
+    <!--<string name="new_project_instructions">- Introduce un nombre para tu proyecto.\n- Haz una foto o selecciona una de la galería que represente el proyecto (opcional, puedes hacerlo más tarde).</string>-->
     <string name="pgd_creating_project">Creando proyecto…</string>
     <string name="toolbarNewProjectFinish">Último paso</string>
     <string name="add_question_form">Añade otro campo al proyecto</string>
@@ -68,4 +68,11 @@
     <string name="fail_perms_camera_storage">No se puede usar la cámara por falta de permisos</string>
     <string name="project_empty">No tienes proyectos</string>
     <string name="finalized">Terminado</string>
+    <string name="opt_select_picture">Selecciona de la galería</string>
+    <string name="opt_take_picture">Haz una con la cámara</string>
+    <string name="add_more_pictures_to_project">Añade más imágenes al proyecto</string>
+    <string name="add_header_picture_to_project">Añade una imagen de cabecera al proyecto</string>
+    <string name="click_here">Haz clic aquí</string>
+    <string name="add_photo">Añadir</string>
+    <string name="fail_max_pictures_project">Máx. 12 imágenes por proyecto</string>
 </resources>

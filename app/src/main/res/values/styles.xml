@@ -109,6 +109,11 @@
         <item name="android:minWidth">120dp</item>
     </style>
 
+    <style name="ButtonWhite" parent="Button">
+        <item name="android:background">@color/transparentFull</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
     <style name="Button.ImageView" parent="AppTheme">
         <item name="android:height">50dp</item>
         <item name="android:width">50dp</item>
@@ -128,6 +133,10 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/size18</item>
         <item name="android:gravity">center|center_horizontal</item>
+    </style>
+
+    <style name="Button.TextView.Center.Black" parent="Button.TextView.Center">
+        <item name="android:textColor">@color/primaryText</item>
     </style>
 
     <style name="ButtonOption" parent="AppTheme">

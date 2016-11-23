@@ -60,6 +60,16 @@
     <dimen name="height20">20dp</dimen>
     <dimen name="height30">30dp</dimen>
     <dimen name="height50">50dp</dimen>
+    <dimen name="height70">70dp</dimen>
+    <dimen name="height100">100dp</dimen>
+    <dimen name="height150">150dp</dimen>
     <dimen name="height200">200dp</dimen>
+
+    <dimen name="width50">50dp</dimen>
+    <dimen name="width70">70dp</dimen>
+    <dimen name="width100">100dp</dimen>
+    <dimen name="width200">200dp</dimen>
+    <dimen name="width90">90dp</dimen>
+    <dimen name="width20">20dp</dimen>
 
 </resources>

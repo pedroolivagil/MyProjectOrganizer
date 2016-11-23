@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -14,14 +13,15 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.adapters.MainAdapter;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
-import cat.olivadevelop.myprojectorganizer.tools.MainAdapter;
+import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.verificaConexion;
 
 
-public class MainScreen extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainScreen extends GenericScreen implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     FloatingActionButton fab;
     ListView list;

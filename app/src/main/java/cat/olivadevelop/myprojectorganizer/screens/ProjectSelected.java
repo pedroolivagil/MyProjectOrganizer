@@ -3,7 +3,6 @@ package cat.olivadevelop.myprojectorganizer.screens;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +22,11 @@ import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
+import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class ProjectSelected extends AppCompatActivity implements View.OnScrollChangeListener {
+public class ProjectSelected extends GenericScreen implements View.OnScrollChangeListener {
 
     private static final String TAG = "PROJECT_SELECTED";
     int alpha;

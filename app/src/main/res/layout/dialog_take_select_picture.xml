@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/alertDialogSortBy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/pad24">
+
+    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/pad10"
+        android:text="@string/p_select_an_option" />
+
+    <RadioGroup
+        android:id="@+id/takeSelectPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
+            android:id="@+id/checkboxTakePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/opt_take_picture" />
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton
+            android:id="@+id/checkboxSelectPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/opt_select_picture" />
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height20" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action_cancel_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/mar5"
+            android:layout_weight="1"
+            android:background="@color/transparentFull"
+            android:theme="@style/ButtonWhite"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:contentPadding="0dp">
+
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonHeight"
+                android:background="@color/transparentFull"
+                android:text="@string/btn_cancel"
+                android:theme="@style/Button.TextView.Center.Black" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action_accept_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/mar5"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:theme="@style/ButtonWithoutMin"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:contentPadding="0dp">
+
+            <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/buttonHeight"
+                android:text="@string/btn_save"
+                android:theme="@style/Button.TextView.Center" />
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>
