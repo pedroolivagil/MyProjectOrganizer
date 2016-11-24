@@ -46,9 +46,11 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     private CardView btnPicToGrid;
     private AlertDialog alertHeader;
     private AlertDialog alertBody;
+    private AlertDialog alertSiNo;
     private LinearLayout btnSelectHeaderTakePicture;
     private GridView gvImgBody;
     private boolean option;
+    private File selectedHeaderImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,9 +309,9 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 0) {
-            File selectedImage = null;
-            btnSelectHeaderTakePicture.removeAllViewsInLayout();
+            selectedHeaderImage = null;
             if (option) { // imagen de header
+                btnSelectHeaderTakePicture.removeAllViewsInLayout();
                 LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT
@@ -320,23 +322,20 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
 
                 if (requestCode == TAKE_PICTURE) { // si capturamos una foto
                     if (headerFilename != null) {
-                        selectedImage = new File(headerFilename);
+                        selectedHeaderImage = new File(headerFilename);
                     }
                 } else if (requestCode == SELECT_PICTURE) {
                     if (data != null) {
-                        selectedImage = new File(Tools.getRealPathFromURI(this, data.getData()));
+                        selectedHeaderImage = new File(Tools.getRealPathFromURI(this, data.getData()));
                     }
                 }
-                Picasso.with(this).load(selectedImage)
+                Picasso.with(this).load(selectedHeaderImage)
                         .placeholder(R.drawable.ic_camera_black_48dp)
                         .error(R.drawable.ic_close_light)
                         .fit().centerCrop()
                         .into(iv);
             } else { // montar el gridview
-                LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                );
+                File selectedImage = null;
                 if (requestCode == TAKE_PICTURE) { // si capturamos una foto
                     if (bodyFilename != null) {
                         selectedImage = new File(bodyFilename);
@@ -348,20 +347,53 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 }
                 adapterFilenames.add(selectedImage);
                 setGrid();
-                Log.e("ADAPTER IMG", "" + adapterFilenames.toString());
             }
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("ITEM CLICK","POS: " + position + ";   ID: " + id);
-        adapterFilenames.remove(position);
-        setGrid();
+        alertSiNo = getAlertSiNo(position);
+        alertSiNo.show();
     }
 
-    private void setGrid(){
+    private void setGrid() {
         gvImgBody.setAdapter(new GridViewAdapter(this, adapterFilenames));
         gvImgBody.setOnItemClickListener(this);
+    }
+
+    public AlertDialog getAlertSiNo(final int idPhoto) {
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_sino, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        CardView cancel = (CardView) view.findViewById(R.id.action_no_dialog);
+        CardView accept = (CardView) view.findViewById(R.id.action_si_dialog);
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismissSiNo();
+                    }
+                }
+        );
+        accept.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        adapterFilenames.remove(idPhoto);
+                        dismissSiNo();
+                        setGrid();
+                    }
+                }
+        );
+        return builder.create();
+    }
+
+    private void dismissSiNo() {
+        if (alertSiNo != null) {
+            alertSiNo.dismiss();
+        }
     }
 }
