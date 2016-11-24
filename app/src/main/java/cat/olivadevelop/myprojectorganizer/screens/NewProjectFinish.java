@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import java.io.File;
 import java.util.HashMap;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -29,7 +28,8 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
 
     static ScrollView scrollview;
     private String projectName;
-    private String projectImag;
+    private String projectHeaderImag;
+    private String projectBodyImag;
     private LinearLayout btnAddField;
     private LinearLayout fieldsContainer;
     private int countFields;
@@ -43,18 +43,18 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
         //cabecera de proyecto
-        projectName = Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null);
-        projectImag = Tools.getPrefs().getString(ProjectManager.PROJECT_IMG, null);
+        /*projectName = Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null);
+        projectImag = Tools.getPrefs().getString(ProjectManager.PROJECT_IMG, null);*/
+
+        projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
+        projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
+        projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
 
         CustomTextView textView = (CustomTextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
 
         ImageView iv = (ImageView) findViewById(R.id.imgProjectPreview);
-        if (projectImag != null) {
-            iv.setImageURI(Tools.getImageContentUri(this, new File(projectImag)));
-        } else {
-            iv.setVisibility(View.GONE);
-        }
+        iv.setVisibility(View.GONE);
 
         // boton añadir campo
         btnAddField = (LinearLayout) findViewById(R.id.btnAddField);
