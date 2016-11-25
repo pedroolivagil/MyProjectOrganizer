@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -136,7 +135,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     }
 
     private void selectOrTakeHeader(View view) {
-        Log.i("ActionSelectOrTake", "Accept");
         option = true;
         Intent intent = null;
         int code = 0;
@@ -145,7 +143,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         switch (select.getCheckedRadioButtonId()) {
             default:
             case R.id.checkboxTakePicture:
-                Log.i("Type", "TAKE");
                 if (havePermissionCamera() && havePermissionStorage()) {
                     headerFilename = Tools.EXTERNAL_DIR + "home" + Tools.generateID() + ".jpg";
                     intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -160,7 +157,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 }
                 break;
             case R.id.checkboxSelectPicture:
-                Log.i("Type", "SELECT");
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 code = SELECT_PICTURE;
                 break;
@@ -180,7 +176,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         switch (select.getCheckedRadioButtonId()) {
             default:
             case R.id.checkboxTakePicture:
-                Log.i("Type", "TAKE");
                 if (havePermissionCamera() && havePermissionStorage()) {
                     bodyFilename = Tools.EXTERNAL_DIR + "body" + Tools.generateID() + ".jpg";
                     intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -195,7 +190,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 }
                 break;
             case R.id.checkboxSelectPicture:
-                Log.i("Type", "SELECT");
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 code = SELECT_PICTURE;
                 break;
@@ -219,7 +213,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     }
 
     private void showAlertHeader() {
-        Log.e("SHOW", "HEADER");
         if (alertHeader != null) {
             alertHeader.show();
         }
@@ -227,7 +220,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
 
     private void showAlertBody() {
         if (adapterFilenames != null && adapterFilenames.size() < MAX_IMAGES_PROJECT) {
-            Log.e("SHOW", "BODY");
             if (alertBody != null) {
                 alertBody.show();
             }
@@ -280,8 +272,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 //procedure to next step
                 Intent nextStep = new Intent(this, NewProjectFinish.class);
                 nextStep.putExtra(ProjectManager.PROJECT_NAME, editPjctName.getText().toString().trim());
-                if (headerFilename != null) {
-                    nextStep.putExtra(ProjectManager.PROJECT_IMG, headerFilename);
+                if (selectedHeaderImage != null) {
+                    nextStep.putExtra(ProjectManager.PROJECT_IMG, selectedHeaderImage.toString());
                 }
                 if (adapterFilenames != null) {
                     nextStep.putExtra(ProjectManager.PROJECT_IMG_BODY, adapterFilenames.toString());
@@ -309,8 +301,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != 0) {
-            selectedHeaderImage = null;
             if (option) { // imagen de header
+                selectedHeaderImage = null;
                 btnSelectHeaderTakePicture.removeAllViewsInLayout();
                 LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,

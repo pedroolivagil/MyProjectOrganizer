@@ -42,13 +42,13 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
-        //cabecera de proyecto
-        /*projectName = Tools.getPrefs().getString(ProjectManager.PROJECT_NAME, null);
-        projectImag = Tools.getPrefs().getString(ProjectManager.PROJECT_IMG, null);*/
-
         projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
-        projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
-        projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
+        if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG) != null) {
+            projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
+        }
+        if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY) != null) {
+            projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
+        }
 
         CustomTextView textView = (CustomTextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
