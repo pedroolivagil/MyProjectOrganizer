@@ -31,7 +31,7 @@ public abstract class ProjectManager {
     public static final String SORT_BY = "sortBy";
     public static final String TYPE_SORT_BY = "typeSortBy";
     public static final String FINISH_PJT = "finished";
-    public static final String FLAG_ACTIVO = "flag_activo";
+    public static final String json_project_flag_activo = "flag_activo";
     public static final String json_project_id_project = "id_project";
     public static final String json_project_name = "name";
     public static final String json_project_last_update = "last_update";
@@ -39,6 +39,8 @@ public abstract class ProjectManager {
     public static final String json_project_dir_files = "dir_files";
     public static final String json_project_home_img = "home_img";
     public static final String json_project_images = "images";
+    public static final String json_project_images_url = "url";
+    public static final String json_project_images_descript = "description";
     public static final String json_project_form = "form";
     public static final String json_project_descript = "description";
     private static ArrayList<Project> projectList;

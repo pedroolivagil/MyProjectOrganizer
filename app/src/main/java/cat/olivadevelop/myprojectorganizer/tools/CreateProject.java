@@ -1,24 +1,22 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -30,7 +28,15 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FLAG_ACTIVO;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_last_update;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_name;
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
@@ -46,13 +52,22 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     private Activity activity;
     private ProgressDialog progressDialog;
     private HashMap<String, String> values = new HashMap<String, String>();
+    private String projectHeaderImag;
+    private List<String> listFileString;
+    private List<String> listStringFilesBase64;
+    private ArrayList<String> listStringFilesNames;
 
-    public CreateProject(Activity activity, String pjtName, HashMap<String, String> values) {
+
+    public CreateProject(Activity activity, String pjtName, HashMap<String, String> values, String projectHeaderImag, List<String> listFileString) {
         this.pjtName = pjtName;
         this.clsPjtName = pjtName.toLowerCase().replaceAll("\\W\\s", "");
         this.activity = activity;
         this.values = values;
         this.ba1 = "";
+        this.projectHeaderImag = projectHeaderImag;
+        this.listFileString = listFileString;
+        this.listStringFilesBase64 = new ArrayList<String>();
+        this.listStringFilesNames = new ArrayList<String>();
     }
 
     private String getString(int id_string) {
@@ -78,6 +93,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             // insertamos el nuevo proyecto en el JSON
             JSONArray category = json.getJSONArray(CATEGORY);
 
+            @SuppressLint("SimpleDateFormat")
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             sdf.setTimeZone(TimeZone.getDefault());
             String currentDate = sdf.format(new Date());
@@ -85,10 +101,20 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             /* Hay que implementar las acciones de captura y/o recogida de imágenes dentro del
              * proyecto y subirlas igual que la imagen de cabecera
              */
-            JSONArray jsnImages = new JSONArray();
-            jsnImages.put("url 1");
-            jsnImages.put("url 2");
-            jsnImages.put("url 3");
+            JSONArray jsnArrImages = new JSONArray();
+            if (listFileString != null) {
+                JSONObject jsnImages;
+                for (String str : listFileString) {
+                    jsnImages = new JSONObject();
+                    String name = str.replace("\\", "").replace(Tools.EXTERNAL_DIR, "").trim();
+                    jsnImages.put(ProjectManager.json_project_images_url, name.trim());
+                    jsnImages.put(ProjectManager.json_project_images_descript, "");
+                    jsnArrImages.put(jsnImages);
+                    listStringFilesBase64.add(Tools.getImageBase64(str.replace("\\", "").trim()));
+                    listStringFilesNames.add(name);
+                    Log.e("Name", "" + name);
+                }
+            }
 
             JSONObject jsnForm = new JSONObject();
             for (String key : values.keySet()) {
@@ -96,42 +122,36 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             }
 
             JSONObject newjsonObject = new JSONObject();
-            newjsonObject.put("id_project", category.length());
-            newjsonObject.put("name", pjtName);
-            newjsonObject.put(FLAG_ACTIVO, true);
-            newjsonObject.put("create_data", currentDate);
-            newjsonObject.put("last_update", currentDate);
-            newjsonObject.put("dir_files", "/project" + (category.length()));
-            newjsonObject.put("home_img", "home.jpg");
-            newjsonObject.put("images", jsnImages);
-            newjsonObject.put("form", jsnForm);
+            newjsonObject.put(json_project_id_project, category.length());
+            newjsonObject.put(json_project_name, pjtName);
+            newjsonObject.put(json_project_flag_activo, true);
+            newjsonObject.put(json_project_create_data, currentDate);
+            newjsonObject.put(json_project_last_update, currentDate);
+            newjsonObject.put(json_project_dir_files, "/project" + (category.length()));
+            newjsonObject.put(json_project_home_img, "home.jpg");
+            newjsonObject.put(json_project_images, jsnArrImages);
+            newjsonObject.put(json_project_form, jsnForm);
 
             // añadimos un nuevo proyecto con un nuevo jsonobject
             category.put(category.length(), newjsonObject);
 
-            Log.i("JSON", json.toString());
-            Log.i("JSON", URLEncoder.encode(json.toString(), "UTF-8"));
-            Log.i("IDCLIENT", Tools.getUserID());
-
-            Log.e("path", "----------------" + Tools.getPicturePath());
-            if (Tools.getPicturePath() != null) {
-                // Image
-                Bitmap bm = BitmapFactory.decodeFile(Tools.getPicturePath());
-                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
-                byte[] ba = bao.toByteArray();
-                ba1 = Base64.encodeToString(ba, Base64.DEFAULT);
-
-                Log.e("base64", "-----" + ba1);
-            }
-
+            /**
+             * Terminar de dubir las imágenes a la carpeta
+             */
             // actualizamos el json del server
-            return new FormBody.Builder()
+            FormBody.Builder form = new FormBody.Builder()
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
                     .add("projectName", "project" + ((category.length()) - 1))
-                    .add("img_base64", ba1)
-                    .build();
+                    .add("img_base64", Tools.getImageBase64(projectHeaderImag))
+                    .add("images_body_base64", listStringFilesBase64.toString())
+                    .add("image_names_body_base64", listStringFilesNames.toString());
+
+            for (String str : listStringFilesBase64) {
+                Log.e("images_body_base64", str);
+            }
+
+            return form.build();
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();

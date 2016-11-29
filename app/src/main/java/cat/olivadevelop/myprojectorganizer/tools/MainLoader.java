@@ -18,9 +18,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FLAG_ACTIVO;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
@@ -60,7 +60,7 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                     if (jProjects.length() > 0) { // si t0do es correcto
                         for (int z = 0; z < jProjects.length(); z++) {
                             jsonObjectLine = jProjects.getJSONObject(z);
-                            if(jsonObjectLine.getBoolean(FLAG_ACTIVO)) {
+                            if(jsonObjectLine.getBoolean(json_project_flag_activo)) {
                                 p = new Project();
                                 p.setEmpty(false);
                                 p.setId(jsonObjectLine.getInt(json_project_id_project));

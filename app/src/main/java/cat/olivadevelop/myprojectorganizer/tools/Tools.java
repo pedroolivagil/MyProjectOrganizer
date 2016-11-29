@@ -6,6 +6,7 @@ import android.content.CursorLoader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -14,10 +15,11 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -35,7 +37,8 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
  */
 public class Tools {
 
-    public static final String HOSTNAME = "http://projects.codeduo.cat";
+    //public static final String HOSTNAME = "http://projects.codeduo.cat";
+    public static final String HOSTNAME = "http://10.0.2.2/myprojectsorg";
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public static final String PREFS_USER_ID = "id_user";
     public static final String PREFS_USER_EMAIL = "email";
@@ -58,7 +61,6 @@ public class Tools {
     private static final String PREFS_IDS_PROJECT_ARRAY = "mainIdsProject";
 
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
-    private static final String PICTURE_PATH = "picture_path";
     private static final String FALSE = "false";
     private static SharedPreferences prefs;
     private static String currentBooleanValue;
@@ -161,14 +163,6 @@ public class Tools {
         return Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, "");
     }
 
-    public static String getPicturePath() {
-        return Tools.getPrefs().getString(Tools.PICTURE_PATH, null);
-    }
-
-    public static void setPicturePath(String picturePath) {
-        Tools.putInPrefs().putString(Tools.PICTURE_PATH, picturePath).apply();
-    }
-
     public static Bitmap getResizedBitmap(Bitmap bm, float scaleXY) {
         if (bm != null) {
             int width = bm.getWidth();
@@ -188,12 +182,10 @@ public class Tools {
         return null;
     }
 
-    public static Bitmap checkResizedBitmap(Bitmap b) {
-        Log.i("IMAGE SIZES", "H->" + b.getHeight() + "; W->" + b.getWidth());
+    public static Bitmap resizeBitmap(Bitmap b) {
         while (b.getHeight() > 4096 || b.getWidth() > 4096) {
             b = Tools.getResizedBitmap(b, .9f);
         }
-        Log.i("IMAGE SIZES", "H->" + b.getHeight() + "; W->" + b.getWidth());
         return b;
     }
 
@@ -268,5 +260,17 @@ public class Tools {
             }
         }
         return bConectado;
+    }
+
+    public static String getImageBase64(String url){
+        if (url != null) {
+            Bitmap bm = Tools.resizeBitmap(BitmapFactory.decodeFile(url.trim()));
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+            byte[] ba = bao.toByteArray();
+            return Base64.encodeToString(ba, Base64.DEFAULT);
+        }else{
+            return null;
+        }
     }
 }

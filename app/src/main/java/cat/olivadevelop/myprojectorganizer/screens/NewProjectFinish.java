@@ -3,6 +3,7 @@ package cat.olivadevelop.myprojectorganizer.screens;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
@@ -30,6 +34,8 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     private String projectName;
     private String projectHeaderImag;
     private String projectBodyImag;
+    private List<String> listFileString;
+    private List<File> listFile;
     private LinearLayout btnAddField;
     private LinearLayout fieldsContainer;
     private int countFields;
@@ -43,11 +49,24 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
         projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
+        listFile = new ArrayList<File>();
+        listFileString = new ArrayList<String>();
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG) != null) {
             projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
+        } else {
+            projectHeaderImag = null;
         }
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY) != null) {
             projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
+            int x = 0;
+            for (String str : projectBodyImag.split(",")) {
+                Log.e("Images", x + " -> " + str.replace("[", "").replace("]", "").trim());
+                listFile.add(new File(str.replace("[", "").replace("]", "").trim()));
+                listFileString.add(str.replace("[", "").replace("]", "").trim());
+                x++;
+            }
+        } else {
+            projectBodyImag = null;
         }
 
         CustomTextView textView = (CustomTextView) findViewById(R.id.nameProjectPreview);
@@ -65,6 +84,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         // iniciamos el contador de celdas
         countFields = 0;
         generateNewField(-1, R.string.description, false);
+
     }
 
     @Override
@@ -95,7 +115,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
             }
             // button clicked
             //Log.i("Button create", "Clicked");
-            new CreateProject(this, projectName, values).execute();
+            new CreateProject(this, projectName, values, projectHeaderImag, listFileString).execute();
         }
         return super.onOptionsItemSelected(item);
     }
