@@ -100,6 +100,11 @@ public class Project {
         this.homeDir = homeDir;
     }
 
+    public String mountUrlImage(String name) {
+        //return homeImage;
+        return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
+                getHomeDir() + "/img/" + name;
+    }
     public String getHomeImage() {
         //return homeImage;
         return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +

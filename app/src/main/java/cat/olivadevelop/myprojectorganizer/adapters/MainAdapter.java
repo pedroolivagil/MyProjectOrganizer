@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
-import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.ProjectSelected;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 /**
  * Created by Oliva on 05/10/2016.
@@ -89,10 +89,7 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                         .borderColor(Color.BLACK).borderWidthDp(0)
                         .cornerRadiusDp(3).oval(false).build();
 
-                Picasso.with(activity).load(currentProject.getHomeImage())
-                        .placeholder(R.drawable.ic_camera_black_48dp)
-                        .error(R.drawable.ic_close_light).fit()
-                        .transform(transformation).centerCrop().into(image);
+                Tools.picassoImage(activity,currentProject.getHomeImage(), image, transformation);
 
                 LinearLayout label_bg1_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg1_finished_pjct_list);
                 LinearLayout label_bg2_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg2_finished_pjct_list);

@@ -71,5 +71,6 @@
     <dimen name="width200">200dp</dimen>
     <dimen name="width90">90dp</dimen>
     <dimen name="width20">20dp</dimen>
+    <dimen name="pad12">12dp</dimen>
 
 </resources>

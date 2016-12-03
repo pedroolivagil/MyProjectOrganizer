@@ -19,8 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -321,11 +319,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                         selectedHeaderImage = new File(Tools.getRealPathFromURI(this, data.getData()));
                     }
                 }
-                Picasso.with(this).load(selectedHeaderImage)
-                        .placeholder(R.drawable.ic_camera_black_48dp)
-                        .error(R.drawable.ic_close_light)
-                        .fit().centerCrop()
-                        .into(iv);
+
+                Tools.picassoImage(this, selectedHeaderImage, iv);
             } else { // montar el gridview
                 File selectedImage = null;
                 if (requestCode == TAKE_PICTURE) { // si capturamos una foto

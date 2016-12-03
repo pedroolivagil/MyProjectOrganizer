@@ -17,7 +17,12 @@ import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -262,15 +267,35 @@ public class Tools {
         return bConectado;
     }
 
-    public static String getImageBase64(String url){
+    public static String getImageBase64(String url) {
         if (url != null) {
             Bitmap bm = Tools.resizeBitmap(BitmapFactory.decodeFile(url.trim()));
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
             byte[] ba = bao.toByteArray();
             return Base64.encodeToString(ba, Base64.DEFAULT);
-        }else{
+        } else {
             return null;
         }
+    }
+
+    public static void picassoImage(Context c, File url, ImageView view) {
+        Tools.picassoImage(c, url, view, new RoundedTransformationBuilder().build());
+    }
+
+    public static void picassoImage(Context c, String url, ImageView view) {
+        Tools.picassoImage(c, url, view, new RoundedTransformationBuilder().build());
+    }
+
+    public static void picassoImage(Context c, String url, ImageView view, Transformation transformation) {
+        Picasso.with(c).load(url).placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light).fit().transform(transformation)
+                .centerCrop().into(view);
+    }
+
+    public static void picassoImage(Context c, File url, ImageView view, Transformation transformation) {
+        Picasso.with(c).load(url).placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light).fit().transform(transformation)
+                .centerCrop().into(view);
     }
 }

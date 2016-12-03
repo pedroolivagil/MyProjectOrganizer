@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +23,8 @@ import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_url;
+
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class ProjectSelected extends GenericScreen implements View.OnScrollChangeListener {
 
@@ -32,6 +32,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
     int alpha;
     private int id_project_selected;
     private Project project;
+    private LinearLayout frameProjectGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
 
                 ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
-                Picasso.with(this)
-                        .load(project.getHomeImage())
-                        .placeholder(R.drawable.ic_camera_black_48dp)
-                        .error(R.drawable.ic_close_light)
-                        .fit()
-                        .centerCrop()
-                        .into(image);
+                Tools.picassoImage(this, project.getHomeImage(), image);
 
                 CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
                 title.setTextCapitalized(project.getName());
@@ -70,6 +65,23 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
                 subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(project.getLastUpdate()));
 
+                // Array de imagenes frameProjectGallery
+                frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
+                for (int x = 0; x < project.getUrlImages().length(); x++) {
+                    JSONObject urlImages = project.getUrlImages().getJSONObject(x);
+                    String url = urlImages.getString(json_project_images_url);
+                    ImageView ivProject = new ImageView(this);
+                    LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    ivParams.setMargins(0, 0, Tools.getDP(this, 5), 0);
+                    ivProject.setLayoutParams(ivParams);
+                    Tools.picassoImage(this, project.mountUrlImage(url), ivProject);
+                    frameProjectGallery.addView(ivProject);
+                }
+
+                // creamos las tarjetas del proyecto
                 JSONObject form = project.getForm();
 
                 //añadimos la tarjetas de información obligatorias, descripción y terminado
@@ -86,6 +98,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                         container.addView(getTarget(labelStr, form));
                     }
                 }
+
 
             } else {
                 msgFailReadProject();

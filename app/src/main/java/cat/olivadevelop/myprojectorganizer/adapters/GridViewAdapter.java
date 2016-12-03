@@ -10,13 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
-import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.io.File;
 import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 /**
  * Created by Oliva on 17/11/2016.
@@ -69,10 +69,7 @@ public class GridViewAdapter extends BaseAdapter {
                 Transformation transformation = new RoundedTransformationBuilder()
                         .borderColor(Color.BLACK).borderWidthDp(0)
                         .cornerRadiusDp(3).oval(false).build();
-                Picasso.with(activity).load(urlsImages.get(position))
-                        .placeholder(R.drawable.ic_camera_black_48dp)
-                        .error(R.drawable.ic_close_light).fit()
-                        .transform(transformation).centerCrop().into(image);
+                Tools.picassoImage(activity, urlsImages.get(position), image, transformation);
             }
             return vi;
         }
