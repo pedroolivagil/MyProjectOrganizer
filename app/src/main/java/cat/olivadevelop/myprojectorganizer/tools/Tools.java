@@ -43,7 +43,8 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
 public class Tools {
 
     //public static final String HOSTNAME = "http://projects.codeduo.cat";
-    public static final String HOSTNAME = "http://10.0.2.2/myprojectsorg";
+    //public static final String HOSTNAME = "http://10.0.2.2/myprojectsorg";
+    public static final String HOSTNAME = "http://192.168.1.43/myprojectsorg";
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public static final String PREFS_USER_ID = "id_user";
     public static final String PREFS_USER_EMAIL = "email";
@@ -54,16 +55,6 @@ public class Tools {
     public static final String FONT_BOLD_ITALIC = "fonts/Ubuntu-BoldItalic.ttf";
 
     private static final String PREFS_NAME = "prefs_organizer";
-    private static final String PREFS_IMG_URL_ARRAY_SIZE = "urlImgArray_size";
-    private static final String PREFS_IMG_URL_ARRAY = "urlImgArray";
-    private static final String PREFS_TITLE_PROJECT_ARRAY_SIZE = "mainTitleProject_size";
-    private static final String PREFS_TITLE_PROJECT_ARRAY = "mainTitleProject";
-    private static final String PREFS_DATE_PROJECT_ARRAY_SIZE = "mainDateProject_size";
-    private static final String PREFS_DATE_PROJECT_ARRAY = "mainDateProject";
-    private static final String PREFS_DESCRIPT_PROJECT_ARRAY_SIZE = "mainDescriptProject_size";
-    private static final String PREFS_DESCRIPT_PROJECT_ARRAY = "mainDescriptProject";
-    private static final String PREFS_IDS_PROJECT_ARRAY_SIZE = "mainIdsProject_size";
-    private static final String PREFS_IDS_PROJECT_ARRAY = "mainIdsProject";
 
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String FALSE = "false";
