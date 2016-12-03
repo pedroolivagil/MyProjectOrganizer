@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -211,15 +210,15 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
             default:
             case R.id.checkboxSortByIdPrjct:
                 ProjectManager.setSortBy(ProjectManager.json_project_id_project);
-                Log.i("ORDER", getString(R.string.sortByIdProject));
+                //Log.i("ORDER", getString(R.string.sortByIdProject));
                 break;
             case R.id.checkboxSortByLatUpdt:
                 ProjectManager.setSortBy(ProjectManager.json_project_last_update);
-                Log.i("ORDER", getString(R.string.sortByLastUpdate));
+                //Log.i("ORDER", getString(R.string.sortByLastUpdate));
                 break;
             case R.id.checkboxSortByPrjctName:
                 ProjectManager.setSortBy(ProjectManager.json_project_name);
-                Log.i("ORDER", getString(R.string.sortByNameProject));
+                //Log.i("ORDER", getString(R.string.sortByNameProject));
                 break;
         }
 
@@ -227,12 +226,12 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
         switch (typeSortBy.getCheckedRadioButtonId()) {
             case R.id.checkboxTypeSortByASC:
                 ProjectManager.setTypeSortBy(ProjectManager.TYPE_SORT_BY_ASC);
-                Log.i("ORDER", getString(R.string.typeOrderAscendant));
+                //Log.i("ORDER", getString(R.string.typeOrderAscendant));
                 break;
             default:
             case R.id.checkboxTypeSortByDESC:
                 ProjectManager.setTypeSortBy(ProjectManager.TYPE_SORT_BY_DESC);
-                Log.i("ORDER", getString(R.string.typeOrderDescendant));
+                //Log.i("ORDER", getString(R.string.typeOrderDescendant));
                 break;
         }
         alert.dismiss();

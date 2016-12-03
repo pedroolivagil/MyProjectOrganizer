@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,7 +74,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    if(x < project.getUrlImages().length()) {
+                    if (x < project.getUrlImages().length()) {
                         ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
                     }
                     ivProject.setLayoutParams(ivParams);
@@ -119,7 +118,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
 
     private CardView getTarget(String labelStr, JSONObject form) throws JSONException {
         String valueStr = form.getString(labelStr);
-        Log.e("FORM", "" + labelStr + "; " + valueStr);
+        //Log.e("FORM", "" + labelStr + "; " + valueStr);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -186,7 +185,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         //Log.e(TAG, "x->" + scrollX + "; y->" + scrollY + "; ox->" + oldScrollX + "; xy->" + oldScrollY);
         if (scrollY < 600) {
             alpha = ((scrollY * 100) / 600);
-            Log.e(TAG, "" + alpha);
+            //Log.e(TAG, "" + alpha);
         }
     }
 }

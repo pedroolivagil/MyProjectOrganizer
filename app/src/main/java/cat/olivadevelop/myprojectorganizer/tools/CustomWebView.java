@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.BufferedReader;
@@ -48,7 +47,7 @@ public class CustomWebView extends WebView {
                         "<head>" +
                         "   <style type=\"text/css\">" + loadStyle() + "</style>" +
                         "</head>" +
-                        "<body><p style='font-size:"+Tools.getPX(getContext(),sizeDP)+"px;'>" +
+                        "<body><p style='font-size:" + Tools.getPX(getContext(), sizeDP) + "px;'>" +
                         Tools.capitalize(str)
                         + "</p>" +
                         "</body></html>"
@@ -70,7 +69,7 @@ public class CustomWebView extends WebView {
             } while (linea != null);
             fraw.close();
         } catch (Exception ex) {
-            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
+            //Log.e("Ficheros", "Error al leer fichero desde recurso raw");
         }
         return file.toString();
     }

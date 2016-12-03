@@ -105,6 +105,7 @@ public class Project {
         return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
                 getHomeDir() + "/img/" + name;
     }
+
     public String getHomeImage() {
         //return homeImage;
         return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +

@@ -89,17 +89,17 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                         .borderColor(Color.BLACK).borderWidthDp(0)
                         .cornerRadiusDp(3).oval(false).build();
 
-                Tools.picassoImage(activity,currentProject.getHomeImage(), image, transformation);
+                Tools.picassoImage(activity, currentProject.getHomeImage(), image, transformation);
 
                 LinearLayout label_bg1_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg1_finished_pjct_list);
                 LinearLayout label_bg2_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg2_finished_pjct_list);
                 RelativeLayout label_finished_pjct_list = (RelativeLayout) vi.findViewById(R.id.label_finished_pjct_list);
 
-                if(currentProject.isFinished()){
+                if (currentProject.isFinished()) {
                     label_bg1_finished_pjct_list.setVisibility(View.VISIBLE);
                     label_bg2_finished_pjct_list.setVisibility(View.VISIBLE);
                     label_finished_pjct_list.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     label_bg1_finished_pjct_list.setVisibility(View.GONE);
                     label_bg2_finished_pjct_list.setVisibility(View.GONE);
                     label_finished_pjct_list.setVisibility(View.GONE);

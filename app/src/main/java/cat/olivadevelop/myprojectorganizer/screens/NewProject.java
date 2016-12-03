@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -332,7 +333,11 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                         selectedImage = new File(Tools.getRealPathFromURI(this, data.getData()));
                     }
                 }
-                adapterFilenames.add(selectedImage);
+                if (selectedImage != null) {
+                    adapterFilenames.add(selectedImage);
+                    Log.e(Tools.tagLogger(this), "Current imageName -> " + selectedImage.getName());
+                    //Log.e(Tools.tagLogger(this), "Current imagePath -> " + selectedImage.getPath());
+                }
                 setGrid();
             }
         }

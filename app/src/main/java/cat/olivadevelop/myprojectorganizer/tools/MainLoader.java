@@ -1,7 +1,6 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +59,7 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                     if (jProjects.length() > 0) { // si t0do es correcto
                         for (int z = 0; z < jProjects.length(); z++) {
                             jsonObjectLine = jProjects.getJSONObject(z);
-                            if(jsonObjectLine.getBoolean(json_project_flag_activo)) {
+                            if (jsonObjectLine.getBoolean(json_project_flag_activo)) {
                                 p = new Project();
                                 p.setEmpty(false);
                                 p.setId(jsonObjectLine.getInt(json_project_id_project));
@@ -78,19 +77,19 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                         p = new Project();
                         p.setEmpty(true);
                         projectList.add(p);
-                        Log.e("ADD Project", "false");
+                        //Log.e("ADD Project", "false");
                     }
                 } catch (JSONException e) { // si ocurrió algun error con el json
                     p = new Project();
                     p.setEmpty(true);
                     projectList.add(p);
-                    Log.e("ADD Project", "false");
+                    //Log.e("ADD Project", "false");
                 }
             } else { // si json es null
                 p = new Project();
                 p.setEmpty(true);
                 projectList.add(p);
-                Log.e("ADD Project", "false");
+                //Log.e("ADD Project", "false");
             }
             ProjectManager.setProjectList(projectList);
             return true;
@@ -102,6 +101,6 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        Log.e("LoaderCorrect", "" + aBoolean);
+        //Log.e("LoaderCorrect", "" + aBoolean);
     }
 }

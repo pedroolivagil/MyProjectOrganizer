@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -43,6 +43,8 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
  * Created by Oliva on 26/09/2016.
  * Inicializa el proyecto, con el nombre y el JSON que contiene la información del proyecto
  * Al finalizar, envía el formbody a UploadJSON
+ * <p>
+ * convertir el string de umagen en un fichero y usar getName() para insertarlo en el array de nombres
  */
 public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     // claves fichero json
@@ -88,7 +90,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             response.close();
 
             JSONObject json = new JSONObject(resStr);
-            Log.i("RESULT", "" + resStr);
+            //Log.i("RESULT", "" + resStr);
 
             // insertamos el nuevo proyecto en el JSON
             JSONArray category = json.getJSONArray(CATEGORY);
@@ -106,13 +108,12 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                 JSONObject jsnImages;
                 for (String str : listFileString) {
                     jsnImages = new JSONObject();
-                    String name = str.replace("\\", "").replace(Tools.EXTERNAL_DIR, "").trim();
-                    jsnImages.put(ProjectManager.json_project_images_url, name.trim());
+                    File currentFile = new File(str);
+                    jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     jsnImages.put(ProjectManager.json_project_images_descript, "");
                     jsnArrImages.put(jsnImages);
                     listStringFilesBase64.add(Tools.getImageBase64(str.replace("\\", "").trim()));
-                    listStringFilesNames.add(name);
-                    Log.e("Name", "" + name);
+                    listStringFilesNames.add(currentFile.getName().trim());
                 }
             }
 
@@ -148,7 +149,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     .add("image_names_body_base64", listStringFilesNames.toString());
 
             for (String str : listStringFilesBase64) {
-                Log.e("images_body_base64", str);
+                //Log.e("images_body_base64", str);
             }
 
             return form.build();

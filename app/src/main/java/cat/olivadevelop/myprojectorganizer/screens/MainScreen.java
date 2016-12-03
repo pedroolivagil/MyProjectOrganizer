@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +33,8 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
-        Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
+        //Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
+        //Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);

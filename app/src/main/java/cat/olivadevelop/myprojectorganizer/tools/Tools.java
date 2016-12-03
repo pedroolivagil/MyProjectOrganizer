@@ -289,4 +289,8 @@ public class Tools {
                 .error(R.drawable.ic_close_light).fit().transform(transformation)
                 .centerCrop().into(view);
     }
+
+    public static String tagLogger(Context context) {
+        return context.getClass().getSimpleName();
+    }
 }

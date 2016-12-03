@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.net.URL;
 
@@ -45,7 +44,7 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
         try {
             RequestBody formBody = params[0];
             url = new URL(HOSTNAME + "/php/create_project.php");
-            Log.i("URL", url.toString());
+            //Log.i("URL", url.toString());
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
@@ -53,7 +52,7 @@ public class UploadJSON extends AsyncTask<RequestBody, Void, Boolean> {
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();
-            Log.i("RESULT FINAL", "" + response.message());
+            //Log.i("RESULT FINAL", "" + response.message());
             return true;
         } catch (Exception e) {
             //e.printStackTrace();

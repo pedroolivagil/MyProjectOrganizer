@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Oliva on 21/11/2016.
- *
+ * <p>
  * Generic screen por common code
  */
 
