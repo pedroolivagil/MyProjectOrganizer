@@ -3,6 +3,8 @@ package cat.olivadevelop.myprojectorganizer.tools;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -109,10 +111,11 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                 for (String str : listFileString) {
                     jsnImages = new JSONObject();
                     File currentFile = new File(str);
+                    Bitmap b = BitmapFactory.decodeFile(str.trim());
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     jsnImages.put(ProjectManager.json_project_images_descript, "");
-                    jsnImages.put(ProjectManager.json_project_images_width, "");
-                    jsnImages.put(ProjectManager.json_project_images_height, "");
+                    jsnImages.put(ProjectManager.json_project_images_width, b.getWidth());
+                    jsnImages.put(ProjectManager.json_project_images_height, b.getHeight());
                     jsnArrImages.put(jsnImages);
                     listStringFilesBase64.add(Tools.getImageBase64(str.replace("\\", "").trim()));
                     listStringFilesNames.add(currentFile.getName().trim());

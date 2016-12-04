@@ -58,7 +58,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height15" />
+            android:layout_height="@dimen/height5" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -90,7 +90,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height15" />
+            android:layout_height="@dimen/height5" />
 
         <LinearLayout
             android:id="@+id/layoutWrapperProjectSelected"

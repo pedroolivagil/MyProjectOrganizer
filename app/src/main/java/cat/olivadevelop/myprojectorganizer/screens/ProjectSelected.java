@@ -145,13 +145,11 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
 
     private CardView getTarget(String labelStr, JSONObject form) throws JSONException {
         String valueStr = form.getString(labelStr);
-        //Log.e("FORM", "" + labelStr + "; " + valueStr);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        //layoutParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
 
         LinearLayout target = new LinearLayout(this);
         target.setLayoutParams(layoutParams);
@@ -209,10 +207,8 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
 
     @Override
     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        //Log.e(TAG, "x->" + scrollX + "; y->" + scrollY + "; ox->" + oldScrollX + "; xy->" + oldScrollY);
         if (scrollY < 600) {
             alpha = ((scrollY * 100) / 600);
-            //Log.e(TAG, "" + alpha);
         }
     }
 
