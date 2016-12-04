@@ -25,16 +25,10 @@
         android:orientation="horizontal"
         android:padding="@dimen/mar5">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/ic_close_light"
-            android:tint="@color/colorPrimary" />
-
         <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deletePicture"
+            android:text="@string/configPicture"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/size12" />
 

@@ -75,6 +75,6 @@
     <string name="click_here">Click here</string>
     <string name="add_photo">Add more</string>
     <string name="fail_max_pictures_project">Max. 12 images per project</string>
-    <string name="deletePicture">Delete picture</string>
+    <string name="configPicture">Configure picture</string>
     <string name="ask_yes_no">Are you sure you want delete it?</string>
 </resources>

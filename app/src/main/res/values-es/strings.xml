@@ -76,5 +76,5 @@
     <string name="add_photo">Añadir</string>
     <string name="fail_max_pictures_project">Máx. 12 imágenes por proyecto</string>
     <string name="ask_yes_no">¿Seguro que quieres eliminarlo?</string>
-    <string name="deletePicture">Borrar imagen</string>
+    <string name="configPicture">Configurar imagen</string>
 </resources>

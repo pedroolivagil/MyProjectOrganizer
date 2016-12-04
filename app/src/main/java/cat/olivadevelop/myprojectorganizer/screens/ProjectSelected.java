@@ -106,7 +106,6 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                         frameProjectGallery.addView(ivProject);
                     }
                 }
-
                 // creamos las tarjetas del proyecto
                 JSONObject form = project.getForm();
 
@@ -124,8 +123,6 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                         container.addView(getTarget(labelStr, form));
                     }
                 }
-
-
             } else {
                 msgFailReadProject();
             }
