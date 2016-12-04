@@ -24,6 +24,7 @@
     <dimen name="pad5">5dp</dimen>
     <dimen name="pad8">8dp</dimen>
     <dimen name="pad10">10dp</dimen>
+    <dimen name="pad12">12dp</dimen>
     <dimen name="pad15">15dp</dimen>
     <dimen name="pad24">24dp</dimen>
     <dimen name="snackbar_icon_padding">10dp</dimen>
@@ -65,12 +66,13 @@
     <dimen name="height150">150dp</dimen>
     <dimen name="height200">200dp</dimen>
 
+    <dimen name="width20">20dp</dimen>
     <dimen name="width50">50dp</dimen>
     <dimen name="width70">70dp</dimen>
+    <dimen name="width90">90dp</dimen>
     <dimen name="width100">100dp</dimen>
     <dimen name="width200">200dp</dimen>
-    <dimen name="width90">90dp</dimen>
-    <dimen name="width20">20dp</dimen>
-    <dimen name="pad12">12dp</dimen>
+    <dimen name="width300">300dp</dimen>
+    <dimen name="width500">500dp</dimen>
 
 </resources>

@@ -1,9 +1,13 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +16,7 @@ import android.widget.ScrollView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -22,7 +27,10 @@ import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_descript;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_height;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_url;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_width;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class ProjectSelected extends GenericScreen implements View.OnScrollChangeListener {
@@ -32,6 +40,9 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
     private int id_project_selected;
     private Project project;
     private LinearLayout frameProjectGallery;
+    private Dialog dialogPreviewImg;
+    private HashMap<String, Float> sizes;
+    private SparseArray<HashMap<String, Float>> sizesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,8 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         setContentView(R.layout.activity_project_selected);
 
         id_project_selected = getIntent().getExtras().getInt(ProjectManager.NEW_SELECTED);
+        dialogPreviewImg = dialogImagePreview();
+        sizesList = new SparseArray<HashMap<String, Float>>();
         init();
     }
 
@@ -65,21 +78,35 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(project.getLastUpdate()));
 
                 // Array de imagenes frameProjectGallery
-                frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
-                for (int x = 0; x < project.getUrlImages().length(); x++) {
-                    JSONObject urlImages = project.getUrlImages().getJSONObject(x);
-                    String url = urlImages.getString(json_project_images_url);
-                    ImageView ivProject = new ImageView(this);
-                    LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    if (x < project.getUrlImages().length()) {
-                        ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
+                if (project.getUrlImages().length() > 0) {
+                    frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
+                    sizes = new HashMap<String, Float>();
+                    for (int x = 0; x < project.getUrlImages().length(); x++) {
+                        final int finalX = x;
+                        JSONObject urlImages = project.getUrlImages().getJSONObject(x);
+                        final String url = urlImages.getString(json_project_images_url);
+                        final String descript = urlImages.getString(json_project_images_descript);
+                        ImageView ivProject = new ImageView(this);
+                        LinearLayout.LayoutParams ivParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        if (x < project.getUrlImages().length()) {
+                            ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
+                        }
+                        ivProject.setLayoutParams(ivParams);
+                        ivProject.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                showAlert(url, descript, finalX);
+                            }
+                        });
+                        Tools.picassoImage(this, project.mountUrlImage(url), ivProject);
+                        frameProjectGallery.addView(ivProject);
+                        sizes.put(json_project_images_width, (float) urlImages.getDouble(json_project_images_width));
+                        sizes.put(json_project_images_height, (float) urlImages.getDouble(json_project_images_height));
+                        sizesList.append(x, sizes);
                     }
-                    ivProject.setLayoutParams(ivParams);
-                    Tools.picassoImage(this, project.mountUrlImage(url), ivProject);
-                    frameProjectGallery.addView(ivProject);
                 }
 
                 // creamos las tarjetas del proyecto
@@ -186,6 +213,38 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         if (scrollY < 600) {
             alpha = ((scrollY * 100) / 600);
             //Log.e(TAG, "" + alpha);
+        }
+    }
+
+    public AlertDialog dialogImagePreview() {
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_preview_img, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+
+        return builder.create();
+    }
+
+    private void dismissAlert() {
+        if (dialogPreviewImg != null) {
+            dialogPreviewImg.dismiss();
+        }
+    }
+
+    private void showAlert(String url, String descript, int x) {
+        if (dialogPreviewImg != null) {
+            dialogPreviewImg.show();
+            ImageView iv = (ImageView) dialogPreviewImg.findViewById(R.id.imageSelectedPreview);
+            CustomTextView tv = (CustomTextView) dialogPreviewImg.findViewById(R.id.descriptSelectedPreview);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismissAlert();
+                }
+            });
+            Tools.picassoImageWithoutTransform(this, project.mountUrlImage(url), iv, sizesList.valueAt(x));
+            tv.setTextCapitalized(descript);
         }
     }
 }

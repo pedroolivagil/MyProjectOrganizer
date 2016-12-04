@@ -29,6 +29,7 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -197,8 +198,8 @@ public class Tools {
         return st.substring(0, 1).toUpperCase().concat(st.substring(1));
     }
 
-    public static int getDP(Context context, float dp) {
-        return (int) (dp * context.getResources().getDisplayMetrics().density);
+    public static int getDP(Context context, float px) {
+        return (int) (px * context.getResources().getDisplayMetrics().density);
     }
 
     public static float getPX(Context context, float dimension) {
@@ -279,18 +280,40 @@ public class Tools {
     }
 
     public static void picassoImage(Context c, String url, ImageView view, Transformation transformation) {
-        Picasso.with(c).load(url).placeholder(R.drawable.ic_camera_black_48dp)
-                .error(R.drawable.ic_close_light).fit().transform(transformation)
-                .centerCrop().into(view);
+        Picasso.with(c).load(url).noFade().fit().transform(transformation).centerCrop()
+                .placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light)
+                .into(view);
     }
 
     public static void picassoImage(Context c, File url, ImageView view, Transformation transformation) {
-        Picasso.with(c).load(url).placeholder(R.drawable.ic_camera_black_48dp)
-                .error(R.drawable.ic_close_light).fit().transform(transformation)
-                .centerCrop().into(view);
+        Picasso.with(c).load(url).noFade().fit().transform(transformation).centerCrop()
+                .placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light)
+                .into(view);
+    }
+
+    public static void picassoImageWithoutTransform(Context c, String url, ImageView view, HashMap<String, Float> sizes) {
+        float deseado = Tools.getDP(c, 400);
+        Picasso.with(c).load(url).noFade()
+                .placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light)
+                .resize(
+                        (int) deseado,
+                        (int) Tools.resizeImg(
+                                sizes.get(ProjectManager.json_project_images_width),
+                                sizes.get(ProjectManager.json_project_images_height),
+                                deseado)
+                )
+                .centerCrop()
+                .into(view);
     }
 
     public static String tagLogger(Context context) {
         return context.getClass().getSimpleName();
+    }
+
+    private static float resizeImg(float anchoOriginal, float altoOriginal, float anchoDeseado) {
+        return (anchoDeseado * altoOriginal) / anchoOriginal;
     }
 }

@@ -33,7 +33,6 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     private String projectHeaderImag;
     private String projectBodyImag;
     private List<String> listFileString;
-    //private List<File> listFile;
     private LinearLayout btnAddField;
     private LinearLayout fieldsContainer;
     private int countFields;
@@ -47,7 +46,6 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
         projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
-        //listFile = new ArrayList<File>();
         listFileString = new ArrayList<String>();
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG) != null) {
             projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
@@ -57,7 +55,6 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY) != null) {
             projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
             for (String str : projectBodyImag.split(",")) {
-                //listFile.add(new File(str.replace("[", "").replace("]", "").trim()));
                 listFileString.add(str.replace("[", "").replace("]", "").trim());
             }
         } else {

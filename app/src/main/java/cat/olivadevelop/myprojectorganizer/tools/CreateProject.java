@@ -111,6 +111,8 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     File currentFile = new File(str);
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     jsnImages.put(ProjectManager.json_project_images_descript, "");
+                    jsnImages.put(ProjectManager.json_project_images_width, "");
+                    jsnImages.put(ProjectManager.json_project_images_height, "");
                     jsnArrImages.put(jsnImages);
                     listStringFilesBase64.add(Tools.getImageBase64(str.replace("\\", "").trim()));
                     listStringFilesNames.add(currentFile.getName().trim());

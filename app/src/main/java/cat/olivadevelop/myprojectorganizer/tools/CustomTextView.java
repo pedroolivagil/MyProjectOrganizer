@@ -42,6 +42,10 @@ public class CustomTextView extends TextView {
     }
 
     public void setTextCapitalized(String text) {
-        setText(Tools.capitalize(text));
+        if (text.length() > 0) {
+            setText(Tools.capitalize(text));
+        } else {
+            setText(text);
+        }
     }
 }
