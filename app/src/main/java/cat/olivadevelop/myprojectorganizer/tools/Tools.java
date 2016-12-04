@@ -29,7 +29,6 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -292,20 +291,11 @@ public class Tools {
                 .into(view);
     }
 
-    public static void picassoImageWithoutTransform(Context c, String url, ImageView view, HashMap<String, Float> sizes) {
+    public static void picassoImageWithoutTransform(Context c, String url, ImageView view, float[] sizes) {
         float deseado = Tools.getDP(c, 400);
-        Picasso.with(c).load(url).noFade()
-                .placeholder(R.drawable.ic_camera_black_48dp)
-                .error(R.drawable.ic_close_light)
-                .resize(
-                        (int) deseado,
-                        (int) Tools.resizeImg(
-                                sizes.get(ProjectManager.json_project_images_width),
-                                sizes.get(ProjectManager.json_project_images_height),
-                                deseado)
-                )
-                .centerCrop()
-                .into(view);
+        Picasso.with(c).load(url).noFade().placeholder(R.drawable.ic_camera_black_48dp)
+                .error(R.drawable.ic_close_light).resize((int) deseado, (int) Tools.resizeImg(sizes[0], sizes[1], deseado))
+                .centerCrop().into(view);
     }
 
     public static String tagLogger(Context context) {

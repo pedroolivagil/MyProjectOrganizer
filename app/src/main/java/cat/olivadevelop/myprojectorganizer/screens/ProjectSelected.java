@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import android.widget.ScrollView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -41,8 +39,6 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
     private Project project;
     private LinearLayout frameProjectGallery;
     private Dialog dialogPreviewImg;
-    private HashMap<String, Float> sizes;
-    private SparseArray<HashMap<String, Float>> sizesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,6 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
 
         id_project_selected = getIntent().getExtras().getInt(ProjectManager.NEW_SELECTED);
         dialogPreviewImg = dialogImagePreview();
-        sizesList = new SparseArray<HashMap<String, Float>>();
         init();
     }
 
@@ -80,10 +75,9 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 // Array de imagenes frameProjectGallery
                 if (project.getUrlImages().length() > 0) {
                     frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
-                    sizes = new HashMap<String, Float>();
                     for (int x = 0; x < project.getUrlImages().length(); x++) {
                         final int finalX = x;
-                        JSONObject urlImages = project.getUrlImages().getJSONObject(x);
+                        final JSONObject urlImages = project.getUrlImages().getJSONObject(x);
                         final String url = urlImages.getString(json_project_images_url);
                         final String descript = urlImages.getString(json_project_images_descript);
                         ImageView ivProject = new ImageView(this);
@@ -98,14 +92,18 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                         ivProject.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                showAlert(url, descript, finalX);
+                                try {
+                                    showAlert(url, descript,
+                                            (float) urlImages.getDouble(json_project_images_width),
+                                            (float) urlImages.getDouble(json_project_images_height)
+                                    );
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         Tools.picassoImage(this, project.mountUrlImage(url), ivProject);
                         frameProjectGallery.addView(ivProject);
-                        sizes.put(json_project_images_width, (float) urlImages.getDouble(json_project_images_width));
-                        sizes.put(json_project_images_height, (float) urlImages.getDouble(json_project_images_height));
-                        sizesList.append(x, sizes);
                     }
                 }
 
@@ -228,7 +226,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         }
     }
 
-    private void showAlert(String url, String descript, int x) {
+    private void showAlert(String url, String descript, float w, float h) {
         if (dialogPreviewImg != null) {
             dialogPreviewImg.show();
             ImageView iv = (ImageView) dialogPreviewImg.findViewById(R.id.imageSelectedPreview);
@@ -239,7 +237,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                     dismissAlert();
                 }
             });
-            Tools.picassoImageWithoutTransform(this, project.mountUrlImage(url), iv, sizesList.valueAt(x));
+            Tools.picassoImageWithoutTransform(this, project.mountUrlImage(url), iv, new float[]{w, h});
             tv.setTextCapitalized(descript);
         }
     }

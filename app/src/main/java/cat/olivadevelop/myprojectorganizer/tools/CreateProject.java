@@ -114,6 +114,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     Bitmap b = BitmapFactory.decodeFile(str.trim());
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     jsnImages.put(ProjectManager.json_project_images_descript, "");
+                    jsnImages.put(ProjectManager.json_project_images_upload, currentDate);
                     jsnImages.put(ProjectManager.json_project_images_width, b.getWidth());
                     jsnImages.put(ProjectManager.json_project_images_height, b.getHeight());
                     jsnArrImages.put(jsnImages);

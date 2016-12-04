@@ -41,6 +41,7 @@ public abstract class ProjectManager {
     public static final String json_project_images = "images";
     public static final String json_project_images_url = "url";
     public static final String json_project_images_descript = "description";
+    public static final String json_project_images_upload = "upload";
     public static final String json_project_images_width = "width";
     public static final String json_project_images_height = "height";
     public static final String json_project_form = "form";
