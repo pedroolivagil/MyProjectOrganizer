@@ -227,15 +227,20 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         if (dialogPreviewImg != null) {
             dialogPreviewImg.show();
             ImageView iv = (ImageView) dialogPreviewImg.findViewById(R.id.imageSelectedPreview);
-            CustomTextView tv = (CustomTextView) dialogPreviewImg.findViewById(R.id.descriptSelectedPreview);
-            iv.setOnClickListener(new View.OnClickListener() {
+            ImageView closeView = (ImageView) dialogPreviewImg.findViewById(R.id.closeView);
+            closeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dismissAlert();
                 }
             });
+            CustomTextView tv = (CustomTextView) dialogPreviewImg.findViewById(R.id.descriptSelectedPreview);
+            if (descript != null && !descript.equals("")) {
+                tv.setTextCapitalized(descript);
+            } else {
+                tv.setVisibility(View.GONE);
+            }
             Tools.picassoImageWithoutTransform(this, project.mountUrlImage(url), iv, new float[]{w, h});
-            tv.setTextCapitalized(descript);
         }
     }
 }

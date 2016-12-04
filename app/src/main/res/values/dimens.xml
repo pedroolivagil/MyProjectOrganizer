@@ -74,5 +74,7 @@
     <dimen name="width200">200dp</dimen>
     <dimen name="width300">300dp</dimen>
     <dimen name="width500">500dp</dimen>
+    <dimen name="width30">30dp</dimen>
+    <dimen name="height25">25dp</dimen>
 
 </resources>

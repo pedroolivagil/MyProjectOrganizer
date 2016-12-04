@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/alertDialogSortBy"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/transparentFull"
     android:orientation="vertical"
     android:padding="@dimen/pad5">
 
-    <ImageView
-        android:id="@+id/imageSelectedPreview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:background="@color/transparentFull" />
-
-    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-        android:id="@+id/descriptSelectedPreview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mar5"
-        android:textSize="@dimen/size16"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imageSelectedPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@color/transparentFull" />
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+            android:id="@+id/descriptSelectedPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mar5"
+            android:textSize="@dimen/size16" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/closeView"
+        android:layout_width="@dimen/height25"
+        android:layout_height="@dimen/height25"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/mar5"
+        android:layout_marginTop="@dimen/mar5"
+        android:background="@drawable/border_black_circle"
+        android:src="@drawable/ic_close_light" />
+
+</RelativeLayout>
