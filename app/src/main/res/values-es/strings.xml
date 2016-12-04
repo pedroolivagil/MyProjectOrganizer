@@ -41,13 +41,13 @@
     <string name="description_empty">La descripción esta vacía</string>
     <string name="empty">Vacío</string>
     <string name="more_options">Más opciones</string>
-    <string name="reloading">Recargando...</string>
+    <string name="reloading">Recargando…</string>
     <string name="use_image10mb">Use una imagen igual o inferior a 12M</string>
     <string name="accountSettings">Opciones de cuenta</string>
     <string name="optionCleanPrefs">Limpiar preferéncias de aplicación</string>
     <string name="optionChangeAccount">Cambiar cuenta de email</string>
     <string name="optionDeleteAllProjects">Borrar proyectos</string>
-    <string name="optionOrderBy">Ordenar proyectos por...</string>
+    <string name="optionOrderBy">Ordenar proyectos por…</string>
     <string name="optionDeleteAllProjectsExtra">(no se puede deshacer)</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_save">Aceptar</string>
@@ -58,7 +58,7 @@
     <string name="sortByIdProject">Fecha de creación</string>
     <string name="sortByLastUpdate">Última actualización</string>
     <string name="sortByNameProject">Nombre de proyecto</string>
-    <string name="pgd_uploading_project">Subiendo el proyecto...</string>
+    <string name="pgd_uploading_project">Subiendo el proyecto…</string>
     <string name="cannot_be_connect">Verifique su conexión a internet</string>
     <string name="error_project_selected">Error inesperado con el proyecto seleccionado</string>
     <string name="toolbarProjetSelected">Proyecto seleccionado</string>
@@ -76,6 +76,7 @@
     <string name="add_photo">Añadir</string>
     <string name="fail_max_pictures_project">Máx. 12 imágenes por proyecto</string>
     <string name="ask_yes_no">¿Seguro que quieres eliminarlo?</string>
-    <string name="configPicture">Configurar imagen</string>
-    <string name="close_view">x</string>
+    <string name="configPicture">Configurar</string>
+    <string name="deletePicture">Borrar</string>
+    <string name="add_descripton_image">Añade una breve descripción</string>
 </resources>

@@ -76,5 +76,6 @@
     <dimen name="width500">500dp</dimen>
     <dimen name="width30">30dp</dimen>
     <dimen name="height25">25dp</dimen>
+    <dimen name="size11">11sp</dimen>
 
 </resources>

@@ -85,7 +85,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        if (x < project.getUrlImages().length()) {
+                        if (x < project.getUrlImages().length()-1) {
                             ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
                         }
                         ivProject.setLayoutParams(ivParams);

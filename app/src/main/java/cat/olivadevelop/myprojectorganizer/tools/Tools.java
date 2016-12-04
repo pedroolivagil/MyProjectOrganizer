@@ -29,6 +29,8 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -304,5 +306,25 @@ public class Tools {
 
     private static float resizeImg(float anchoOriginal, float altoOriginal, float anchoDeseado) {
         return (anchoDeseado * altoOriginal) / anchoOriginal;
+    }
+
+    public static List<File> sortFileList(List<File> list, boolean typeSortByDesc) {
+        List<File> newList = new ArrayList<>();
+        if (list != null) {
+            if (list.size() > 1) {
+                if (typeSortByDesc) {
+                    for (int z = 0; z < list.size(); z++) {
+                        newList.add(list.get(z));
+                    }
+                } else {
+                    for (int z = list.size(); z > 0; z--) {
+                        newList.add(list.get(z-1));
+                    }
+                }
+            } else {
+                newList = list;
+            }
+        }
+        return newList;
     }
 }

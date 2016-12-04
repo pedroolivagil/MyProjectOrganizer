@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +44,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     private AlertDialog alertHeader;
     private AlertDialog alertBody;
     private AlertDialog alertSiNo;
+    private AlertDialog alertDescription;
     private LinearLayout btnSelectHeaderTakePicture;
     private GridView gvImgBody;
     private boolean option;
@@ -335,8 +335,6 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 }
                 if (selectedImage != null) {
                     adapterFilenames.add(selectedImage);
-                    Log.e(Tools.tagLogger(this), "Current imageName -> " + selectedImage.getName());
-                    //Log.e(Tools.tagLogger(this), "Current imagePath -> " + selectedImage.getPath());
                 }
                 setGrid();
             }
@@ -345,8 +343,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        alertSiNo = getAlertSiNo(position);
-        alertSiNo.show();
+        alertDescription = getAlertDescription((adapterFilenames.size()-1) - position);
+        alertDescription.show();
     }
 
     private void setGrid() {
@@ -376,6 +374,9 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                     public void onClick(View v) {
                         adapterFilenames.remove(idPhoto);
                         dismissSiNo();
+                        if (alertDescription != null && alertDescription.isShowing()) {
+                            dismissDescription();
+                        }
                         setGrid();
                     }
                 }
@@ -386,6 +387,51 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     private void dismissSiNo() {
         if (alertSiNo != null) {
             alertSiNo.dismiss();
+        }
+    }
+
+    public AlertDialog getAlertDescription(final int idPhoto) {
+        LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_config_image, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+
+        CardView cancel = (CardView) view.findViewById(R.id.action_cancel);
+        CardView accept = (CardView) view.findViewById(R.id.action_accept);
+        CardView delete = (CardView) view.findViewById(R.id.action_delete);
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismissDescription();
+                    }
+                }
+        );
+        accept.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // insertamos la descripcion de la imagen.
+                        // Recomendacion, usar HashMap
+                        setGrid();
+                    }
+                }
+        );
+        delete.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertSiNo = getAlertSiNo(idPhoto);
+                        alertSiNo.show();
+                    }
+                }
+        );
+        return builder.create();
+    }
+
+    private void dismissDescription() {
+        if (alertDescription != null) {
+            alertDescription.dismiss();
         }
     }
 }

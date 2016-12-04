@@ -7,20 +7,17 @@
     <ImageView
         android:id="@+id/imgBodyAdapter"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height70"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="@dimen/height70" />
 
     <LinearLayout
         android:id="@+id/borrarImagen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgBodyAdapter"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="23dp"
-        android:background="#EFFFFFFF"
+        android:layout_marginBottom="22dp"
+        android:background="@color/white"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         android:padding="@dimen/mar5">
@@ -30,7 +27,23 @@
             android:layout_height="wrap_content"
             android:text="@string/configPicture"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/size12" />
+            android:textSize="@dimen/size11" />
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/pad2"
+            android:paddingRight="@dimen/pad2"
+            android:text="@string/separator"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/size11"/>
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deletePicture"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/size11" />
 
     </LinearLayout>
 

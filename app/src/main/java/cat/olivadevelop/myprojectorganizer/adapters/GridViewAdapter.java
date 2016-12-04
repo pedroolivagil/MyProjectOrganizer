@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 /**
@@ -30,7 +31,7 @@ public class GridViewAdapter extends BaseAdapter {
 
     public GridViewAdapter(Activity activity, List<File> urlsImages) {
         this.activity = activity;
-        this.urlsImages = urlsImages;
+        this.urlsImages = Tools.sortFileList(urlsImages, ProjectManager.TYPE_SORT_BY_DESC);
         this.inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

@@ -7,24 +7,24 @@
     android:orientation="vertical"
     android:padding="@dimen/pad24">
 
-    <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
-        android:id="@+id/textView"
+    <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/pad10"
-        android:text="@string/ask_yes_no"
-        android:textSize="@dimen/size18" />
+        android:background="@drawable/border_black"
+        android:hint="@string/add_descripton_image"
+        android:padding="@dimen/card_margin" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="@dimen/height10" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/action_no_dialog"
+            android:id="@+id/action_cancel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/buttonHeight"
             android:layout_gravity="center_horizontal"
@@ -39,13 +39,13 @@
             <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonHeight"
-                android:text="@string/falseValue"
+                android:text="@string/btn_cancel"
                 android:theme="@style/Button.TextView.Center.Black" />
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/action_si_dialog"
+            android:id="@+id/action_accept"
             android:layout_width="match_parent"
             android:layout_height="@dimen/buttonHeight"
             android:layout_gravity="center_horizontal"
@@ -60,10 +60,43 @@
             <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonHeight"
-                android:text="@string/trueValue"
+                android:text="@string/btn_save"
                 android:theme="@style/Button.TextView.Center" />
 
         </android.support.v7.widget.CardView>
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height20" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".1"
+        android:background="@color/black" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height20" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/action_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/buttonHeight"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:theme="@style/ButtonWithoutMin"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:contentPadding="0dp">
+
+        <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttonHeight"
+            android:text="@string/deletePicture"
+            android:theme="@style/Button.TextView.Center" />
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
