@@ -120,4 +120,8 @@ public abstract class ProjectManager {
     public static void setProjectList(ArrayList<Project> projectList) {
         ProjectManager.projectList = projectList;
     }
+
+    public static void update(Project project){
+
+    }
 }

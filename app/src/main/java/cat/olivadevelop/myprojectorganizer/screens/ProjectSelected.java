@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +39,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
     int alpha;
     private int id_project_selected;
     private Project project;
+    private Project projectOptions;
     private LinearLayout frameProjectGallery;
     private Dialog dialogPreviewImg;
 
@@ -48,6 +51,33 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         id_project_selected = getIntent().getExtras().getInt(ProjectManager.NEW_SELECTED);
         dialogPreviewImg = dialogImagePreview();
         init();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_select_project, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_edit_project) {
+        }
+        if (id == R.id.action_delete_project) {
+            /*for (int x = 0; x < ProjectManager.getProjectList().size(); x++) {
+                if (ProjectManager.getProjectList().get(x).getId() == id_project_selected) {
+                    project = ProjectManager.getProjectList().get(x);
+                }
+            }*/
+            if (project != null) {
+                project.setFlag_activo(false);
+                ProjectManager.update(project);
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void init() {

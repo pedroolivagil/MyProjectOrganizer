@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_show_menu"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title="@string/more_options"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_edit_project"
+                android:icon="@drawable/ic_edit_white_24dp"
+                android:title="@string/edit_project"
+                app:showAsAction="ifRoom|withText" />
+            <item
+                android:id="@+id/action_delete_project"
+                android:icon="@drawable/ic_delete_forever_white_48dp"
+                android:title="@string/delete_project"
+                app:showAsAction="ifRoom|withText" />
+        </menu>
+    </item>
+</menu>
