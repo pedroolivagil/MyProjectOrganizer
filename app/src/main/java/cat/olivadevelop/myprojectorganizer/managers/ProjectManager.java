@@ -1,5 +1,7 @@
 package cat.olivadevelop.myprojectorganizer.managers;
 
+import android.app.Activity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +13,8 @@ import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
+import cat.olivadevelop.myprojectorganizer.tools.UpdateJSONFile;
+import okhttp3.RequestBody;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
@@ -22,7 +26,7 @@ public abstract class ProjectManager {
     public static final boolean TYPE_SORT_BY_ASC = true;
     public static final boolean TYPE_SORT_BY_DESC = false;
     public static final int MAX_IMAGES_PROJECT = 12;
-    public static final String CATEGORY = "project";
+    public static final String PROJECT = "project";
     public static final String PROJECT_NAME = "nameProject";
     public static final String PROJECT_IMG = "imageProject";
     public static final String PROJECT_IMG_BODY = "imageProjectBody";
@@ -72,11 +76,6 @@ public abstract class ProjectManager {
         Tools.putInPrefs().putBoolean(TYPE_SORT_BY, typeSortBy).apply();
     }
 
-    public static void cleanTempPrefs() {
-        Tools.putInPrefs().putString(ProjectManager.PROJECT_NAME, null).apply();
-        Tools.putInPrefs().putString(ProjectManager.PROJECT_IMG, null).apply();
-    }
-
     public static JSONArray sortJSON(JSONArray jsonArray, final String key, final boolean asc) throws JSONException {
         JSONArray sortedJsonArray = new JSONArray();
         List<JSONObject> jsonValues = new ArrayList<JSONObject>();
@@ -108,11 +107,6 @@ public abstract class ProjectManager {
         return sortedJsonArray;
     }
 
-    public static void downloadProjects() {
-        MainLoader loader = new MainLoader();
-        loader.execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
-    }
-
     public static ArrayList<Project> getProjectList() {
         return projectList;
     }
@@ -121,7 +115,16 @@ public abstract class ProjectManager {
         ProjectManager.projectList = projectList;
     }
 
-    public static void update(Project project){
+    public static void download() {
+        MainLoader loader = new MainLoader();
+        loader.execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
+    }
 
+    public static void update(Activity activity, RequestBody formBody) {
+        new UpdateJSONFile(activity, HOSTNAME + "/php/create_project.php").execute(formBody);
+    }
+
+    public static void delete(Activity activity, RequestBody formBody) {
+        new UpdateJSONFile(activity, HOSTNAME + "/php/delete_project.php").execute(formBody);
     }
 }

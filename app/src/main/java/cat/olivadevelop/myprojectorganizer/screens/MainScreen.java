@@ -88,7 +88,7 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
 
     private void loadProjects() {
         // descargamos los proyectos y obtenemos el estado
-        ProjectManager.downloadProjects();
+        ProjectManager.download();
         list = (ListView) findViewById(R.id.projectList);
         // My AsyncTask is done and onPostExecute was called
         adapter = new MainAdapter(MainScreen.this, ProjectManager.getProjectList());
@@ -114,15 +114,6 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
                 swipeLayout.setRefreshing(false);
             }
         }, 1000);
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (list != null) {
-            //list.setAdapter(null);
-        }
-        ProjectManager.cleanTempPrefs();
-        super.onDestroy();
     }
 
     @Override

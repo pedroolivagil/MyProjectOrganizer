@@ -20,6 +20,10 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+
+        Tools.init(this);
+        ProjectManager.download();
+
         Thread splashThread = new Thread() {
             @Override
             public void run() {
@@ -45,7 +49,5 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Tools.init(this);
-        ProjectManager.downloadProjects();
     }
 }

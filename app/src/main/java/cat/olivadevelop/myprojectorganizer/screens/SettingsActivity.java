@@ -19,11 +19,11 @@ import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
+import cat.olivadevelop.myprojectorganizer.tools.CreateNewProjectFile;
 import cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
-import cat.olivadevelop.myprojectorganizer.tools.UploadToServer;
 
 public class SettingsActivity extends GenericScreen implements View.OnClickListener {
 
@@ -167,7 +167,7 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
         Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
         Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
         msgSuccess();
-        new UploadToServer(this).execute();
+        new CreateNewProjectFile(this).execute();
     }
 
     public AlertDialog orderByDialog() {

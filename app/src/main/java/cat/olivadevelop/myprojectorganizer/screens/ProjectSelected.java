@@ -25,6 +25,7 @@ import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
+import cat.olivadevelop.myprojectorganizer.tools.DeleteProject;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
@@ -72,11 +73,9 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 }
             }*/
             if (project != null) {
-                project.setFlag_activo(false);
-                ProjectManager.update(project);
+                new DeleteProject(this, project).execute();
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 

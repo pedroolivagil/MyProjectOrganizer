@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.PROJECT;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
@@ -55,7 +55,7 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                     JSONObject jsonObject = new JSONObject(resStr);
                     JSONArray jProjects;
                     JSONObject jsonObjectLine;
-                    jProjects = sortJSON(jsonObject.getJSONArray(CATEGORY), ProjectManager.getSortBy(), ProjectManager.getTypeSortBy());
+                    jProjects = sortJSON(jsonObject.getJSONArray(PROJECT), ProjectManager.getSortBy(), ProjectManager.getTypeSortBy());
                     if (jProjects.length() > 0) { // si t0do es correcto
                         for (int z = 0; z < jProjects.length(); z++) {
                             jsonObjectLine = jProjects.getJSONObject(z);

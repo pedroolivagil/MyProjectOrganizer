@@ -1,6 +1,5 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -14,12 +13,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
@@ -29,7 +25,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.CATEGORY;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.PROJECT;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
@@ -44,7 +40,7 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 /**
  * Created by Oliva on 26/09/2016.
  * Inicializa el proyecto, con el nombre y el JSON que contiene la información del proyecto
- * Al finalizar, envía el formbody a UploadJSON
+ * Al finalizar, envía el formbody a UpdateJSONFile
  * <p>
  * convertir el string de umagen en un fichero y usar getName() para insertarlo en el array de nombres
  */
@@ -96,12 +92,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             JSONObject json = new JSONObject(resStr);
 
             // insertamos el nuevo proyecto en el JSON
-            JSONArray category = json.getJSONArray(CATEGORY);
-
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            sdf.setTimeZone(TimeZone.getDefault());
-            String currentDate = sdf.format(new Date());
+            JSONArray project = json.getJSONArray(PROJECT);
 
             JSONArray jsnArrImages = new JSONArray();
             if (listFileString != null) {
@@ -112,15 +103,15 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     Bitmap b = BitmapFactory.decodeFile(str.trim());
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     if (this.mapDescriptions != null && this.mapDescriptions.size() > 0) {
-                        if(mapDescriptions.get(currentFile.getName().trim()) != null) {
+                        if (mapDescriptions.get(currentFile.getName().trim()) != null) {
                             jsnImages.put(ProjectManager.json_project_images_descript, mapDescriptions.get(currentFile.getName().trim()));
-                        }else{
+                        } else {
                             jsnImages.put(ProjectManager.json_project_images_descript, "");
                         }
                     } else {
                         jsnImages.put(ProjectManager.json_project_images_descript, "");
                     }
-                    jsnImages.put(ProjectManager.json_project_images_upload, currentDate);
+                    jsnImages.put(ProjectManager.json_project_images_upload, Tools.getCurrentDate());
                     jsnImages.put(ProjectManager.json_project_images_width, b.getWidth());
                     jsnImages.put(ProjectManager.json_project_images_height, b.getHeight());
                     jsnArrImages.put(jsnImages);
@@ -135,18 +126,20 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             }
 
             JSONObject newjsonObject = new JSONObject();
-            newjsonObject.put(json_project_id_project, category.length());
+            newjsonObject.put(json_project_id_project, project.length());
             newjsonObject.put(json_project_name, pjtName);
             newjsonObject.put(json_project_flag_activo, true);
-            newjsonObject.put(json_project_create_data, currentDate);
-            newjsonObject.put(json_project_last_update, currentDate);
-            newjsonObject.put(json_project_dir_files, "/project" + (category.length()));
+            newjsonObject.put(json_project_create_data, Tools.getCurrentDate());
+            newjsonObject.put(json_project_last_update, Tools.getCurrentDate());
+            newjsonObject.put(json_project_dir_files, "/project" + (project.length()));
             newjsonObject.put(json_project_home_img, "home.jpg");
             newjsonObject.put(json_project_images, jsnArrImages);
             newjsonObject.put(json_project_form, jsnForm);
 
             // añadimos un nuevo proyecto con un nuevo jsonobject
-            category.put(category.length(), newjsonObject);
+            project.put(project.length(), newjsonObject);
+
+            json.put(json_project_last_update, Tools.getCurrentDate());
 
             /**
              * Terminar de dubir las imágenes a la carpeta
@@ -155,17 +148,12 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             FormBody.Builder form = new FormBody.Builder()
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
-                    .add("projectName", "project" + ((category.length()) - 1))
+                    .add("projectName", "project" + ((project.length()) - 1))
                     .add("img_base64", (projectHeaderImag != null) ? Tools.getImageBase64(projectHeaderImag) : "")
                     .add("images_body_base64", (listStringFilesBase64 != null) ? listStringFilesBase64.toString() : "")
                     .add("image_names_body_base64", (listStringFilesNames != null) ? listStringFilesNames.toString() : "");
 
-            for (String str : listStringFilesBase64) {
-                //Log.e("images_body_base64", str);
-            }
-
             return form.build();
-
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -177,7 +165,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
         super.onPostExecute(formBody);
         progressDialog.dismiss();
         if (formBody != null) {
-            new UploadJSON(activity).execute(formBody);
+            ProjectManager.update(activity, formBody);
         } else {
             Tools.showAlertError(activity);
         }

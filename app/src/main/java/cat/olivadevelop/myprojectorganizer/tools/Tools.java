@@ -1,5 +1,6 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,9 +34,12 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import cat.olivadevelop.myprojectorganizer.R;
@@ -368,5 +372,12 @@ public class Tools {
     public static void showAlertError(Activity a) {
         alertError = Tools.alertError(a);
         alertError.show();
+    }
+
+    public static String getCurrentDate() {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setTimeZone(TimeZone.getDefault());
+        return sdf.format(new Date());
     }
 }
