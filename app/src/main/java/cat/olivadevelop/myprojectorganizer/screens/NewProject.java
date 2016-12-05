@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,9 @@ import android.widget.RadioGroup;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.adapters.GridViewAdapter;
@@ -47,8 +50,9 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
     private AlertDialog alertDescription;
     private LinearLayout btnSelectHeaderTakePicture;
     private GridView gvImgBody;
-    private boolean option;
     private File selectedHeaderImage;
+    private HashMap<String, String> mapDescriptions;
+    private boolean option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
 
         btnPicToGrid = (CardView) findViewById(R.id.addPicToGrid);
         btnPicToGrid.setOnClickListener(this);
+
+        mapDescriptions = new HashMap<String, String>();
     }
 
     public AlertDialog dialogHeaderImg() {
@@ -163,6 +169,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         if (intent != null && code != 0) {
             dismissHeader();
             startActivityForResult(intent, code);
+        } else {
+            Tools.showAlertError(this);
         }
     }
 
@@ -196,6 +204,8 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         if (intent != null && code != 0) {
             dismissBody();
             startActivityForResult(intent, code);
+        }else {
+            Tools.showAlertError(this);
         }
     }
 
@@ -274,8 +284,11 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 if (selectedHeaderImage != null) {
                     nextStep.putExtra(ProjectManager.PROJECT_IMG, selectedHeaderImage.toString());
                 }
-                if (adapterFilenames != null) {
+                if (adapterFilenames != null && adapterFilenames.size() > 0) {
                     nextStep.putExtra(ProjectManager.PROJECT_IMG_BODY, adapterFilenames.toString());
+                }
+                if (mapDescriptions != null && mapDescriptions.size() > 0) {
+                    nextStep.putExtra(ProjectManager.PROJECT_IMG_DESCRIPTION, mapDescriptions.toString());
                 }
                 startActivity(nextStep);
             } else {
@@ -343,13 +356,18 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        alertDescription = getAlertDescription((adapterFilenames.size()-1) - position);
+        alertDescription = getAlertDescription((adapterFilenames.size() - 1) - position, adapterFilenames);
         alertDescription.show();
     }
 
     private void setGrid() {
         gvImgBody.setAdapter(new GridViewAdapter(this, adapterFilenames));
         gvImgBody.setOnItemClickListener(this);
+        if (mapDescriptions.size() > 0) {
+            for (Map.Entry keys : mapDescriptions.entrySet()) {
+                Log.e(Tools.tagLogger(this), "Descripcion " + keys.getKey() + ":" + keys.getValue());
+            }
+        }
     }
 
     public AlertDialog getAlertSiNo(final int idPhoto) {
@@ -390,12 +408,13 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         }
     }
 
-    public AlertDialog getAlertDescription(final int idPhoto) {
+    public AlertDialog getAlertDescription(final int idPhoto, final List<File> namePhoto) {
         LayoutInflater inflater = getLayoutInflater();
         final View view = inflater.inflate(R.layout.dialog_config_image, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
 
+        final CustomEditText descriptionProject = (CustomEditText) view.findViewById(R.id.descriptionProject);
         CardView cancel = (CardView) view.findViewById(R.id.action_cancel);
         CardView accept = (CardView) view.findViewById(R.id.action_accept);
         CardView delete = (CardView) view.findViewById(R.id.action_delete);
@@ -411,8 +430,10 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // insertamos la descripcion de la imagen.
-                        // Recomendacion, usar HashMap
+                        if (!descriptionProject.getText().toString().equals("")) {
+                            mapDescriptions.put(namePhoto.get(idPhoto).getName(), descriptionProject.getText().toString().trim());
+                        }
+                        dismissDescription();
                         setGrid();
                     }
                 }

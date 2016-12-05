@@ -60,9 +60,11 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     private List<String> listFileString;
     private List<String> listStringFilesBase64;
     private ArrayList<String> listStringFilesNames;
+    private HashMap<String, String> mapDescriptions;
 
 
-    public CreateProject(Activity activity, String pjtName, HashMap<String, String> values, String projectHeaderImag, List<String> listFileString) {
+    public CreateProject(Activity activity, String pjtName, HashMap<String, String> values, String projectHeaderImag,
+                         List<String> listFileString, HashMap<String, String> mapDescriptions) {
         this.pjtName = pjtName;
         this.clsPjtName = pjtName.toLowerCase().replaceAll("\\W\\s", "");
         this.activity = activity;
@@ -72,6 +74,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
         this.listFileString = listFileString;
         this.listStringFilesBase64 = new ArrayList<String>();
         this.listStringFilesNames = new ArrayList<String>();
+        this.mapDescriptions = mapDescriptions;
     }
 
     private String getString(int id_string) {
@@ -88,11 +91,9 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();
-            // close response
             response.close();
 
             JSONObject json = new JSONObject(resStr);
-            //Log.i("RESULT", "" + resStr);
 
             // insertamos el nuevo proyecto en el JSON
             JSONArray category = json.getJSONArray(CATEGORY);
@@ -102,9 +103,6 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
             sdf.setTimeZone(TimeZone.getDefault());
             String currentDate = sdf.format(new Date());
 
-            /* Hay que implementar las acciones de captura y/o recogida de imágenes dentro del
-             * proyecto y subirlas igual que la imagen de cabecera
-             */
             JSONArray jsnArrImages = new JSONArray();
             if (listFileString != null) {
                 JSONObject jsnImages;
@@ -113,7 +111,11 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     File currentFile = new File(str);
                     Bitmap b = BitmapFactory.decodeFile(str.trim());
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
-                    jsnImages.put(ProjectManager.json_project_images_descript, "");
+                    if (this.mapDescriptions != null && this.mapDescriptions.size() > 0) {
+                        jsnImages.put(ProjectManager.json_project_images_descript, mapDescriptions.get(currentFile.getName().trim()));
+                    } else {
+                        jsnImages.put(ProjectManager.json_project_images_descript, "");
+                    }
                     jsnImages.put(ProjectManager.json_project_images_upload, currentDate);
                     jsnImages.put(ProjectManager.json_project_images_width, b.getWidth());
                     jsnImages.put(ProjectManager.json_project_images_height, b.getHeight());
@@ -150,9 +152,9 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     .add("id_client", "" + Tools.getUserID())
                     .add("jsonObject", json.toString())
                     .add("projectName", "project" + ((category.length()) - 1))
-                    .add("img_base64", Tools.getImageBase64(projectHeaderImag))
-                    .add("images_body_base64", listStringFilesBase64.toString())
-                    .add("image_names_body_base64", listStringFilesNames.toString());
+                    .add("img_base64", (projectHeaderImag != null) ? Tools.getImageBase64(projectHeaderImag) : "")
+                    .add("images_body_base64", (listStringFilesBase64 != null) ? listStringFilesBase64.toString() : "")
+                    .add("image_names_body_base64", (listStringFilesNames != null) ? listStringFilesNames.toString() : "");
 
             for (String str : listStringFilesBase64) {
                 //Log.e("images_body_base64", str);
@@ -170,7 +172,11 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
     protected void onPostExecute(RequestBody formBody) {
         super.onPostExecute(formBody);
         progressDialog.dismiss();
-        new UploadJSON(activity).execute(formBody);
+        if (formBody != null) {
+            new UploadJSON(activity).execute(formBody);
+        } else {
+            Tools.showAlertError(activity);
+        }
     }
 
     @Override

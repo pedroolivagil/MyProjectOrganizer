@@ -26,6 +26,7 @@ public abstract class ProjectManager {
     public static final String PROJECT_NAME = "nameProject";
     public static final String PROJECT_IMG = "imageProject";
     public static final String PROJECT_IMG_BODY = "imageProjectBody";
+    public static final String PROJECT_IMG_DESCRIPTION = "imageProjectDescriptions";
     public static final String PROJECTS_FILENAME = "projects.json";
     public static final String NEW_SELECTED = "new_selected";
     public static final String SORT_BY = "sortBy";

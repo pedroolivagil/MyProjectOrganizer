@@ -1,5 +1,6 @@
 package cat.olivadevelop.myprojectorganizer.tools;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -15,7 +16,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +34,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,6 +67,7 @@ public class Tools {
     private static final String FALSE = "false";
     private static SharedPreferences prefs;
     private static String currentBooleanValue;
+    private static AlertDialog alertError;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
@@ -195,7 +201,11 @@ public class Tools {
 
     public static CharSequence capitalize(String string) {
         StringBuilder st = new StringBuilder(string);
-        return st.substring(0, 1).toUpperCase().concat(st.substring(1));
+        CharSequence retorno = "";
+        if (string != null && string.length() > 0) {
+            retorno = st.substring(0, 1).toUpperCase().concat(st.substring(1));
+        }
+        return retorno;
     }
 
     public static int getDP(Context context, float px) {
@@ -301,7 +311,7 @@ public class Tools {
     }
 
     public static String tagLogger(Context context) {
-        return context.getClass().getSimpleName();
+        return context.getClass().getSimpleName().toUpperCase();
     }
 
     private static float resizeImg(float anchoOriginal, float altoOriginal, float anchoDeseado) {
@@ -318,7 +328,7 @@ public class Tools {
                     }
                 } else {
                     for (int z = list.size(); z > 0; z--) {
-                        newList.add(list.get(z-1));
+                        newList.add(list.get(z - 1));
                     }
                 }
             } else {
@@ -326,5 +336,37 @@ public class Tools {
             }
         }
         return newList;
+    }
+
+    public static HashMap<String, String> convertToHashMap(String stringExtra) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        for (String current : stringExtra.replace("{", "").replace("}", "").split(",")) {
+            String[] keyMap = current.trim().split("=");
+            map.put(keyMap[0].trim(), keyMap[1].trim());
+        }
+        return map;
+    }
+
+    private static AlertDialog alertError(Activity a) {
+        LayoutInflater inflater = a.getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_error, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        builder.setView(view);
+
+        CardView cancel = (CardView) view.findViewById(R.id.action_ok);
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertError.dismiss();
+                    }
+                }
+        );
+        return builder.create();
+    }
+
+    public static void showAlertError(Activity a) {
+        alertError = Tools.alertError(a);
+        alertError.show();
     }
 }

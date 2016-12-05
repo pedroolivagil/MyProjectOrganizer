@@ -3,6 +3,7 @@ package cat.olivadevelop.myprojectorganizer.screens;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     private LinearLayout fieldsContainer;
     private int countFields;
     private int LIMIT_EDTEXT = 150;
+    private HashMap<String, String> mapDescriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,16 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
 
         projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
         listFileString = new ArrayList<String>();
+        mapDescriptions = new HashMap<String, String>();
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG) != null) {
             projectHeaderImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG);
         } else {
             projectHeaderImag = null;
+        }
+        if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG_DESCRIPTION) != null) {
+            Log.e(Tools.tagLogger(this), getIntent().getStringExtra(ProjectManager.PROJECT_IMG_DESCRIPTION));
+            //mapDescriptions = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_DESCRIPTION);
+            mapDescriptions = Tools.convertToHashMap(getIntent().getStringExtra(ProjectManager.PROJECT_IMG_DESCRIPTION));
         }
         if (getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY) != null) {
             projectBodyImag = getIntent().getStringExtra(ProjectManager.PROJECT_IMG_BODY);
@@ -87,11 +95,10 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_publish_project) {
+        if (item.getItemId() == R.id.action_publish_project) {
             HashMap<String, String> values = new HashMap<>();
-            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CustomCheckBox) findViewById(R.id.isFinished)).isChecked())); // checkbox finished
-            //values.put(getString(R.string.label_description), ((CustomEditText) findViewById(R.id.projectDescript)).getText().toString()); // descript
+            // checkbox finished
+            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CustomCheckBox) findViewById(R.id.isFinished)).isChecked()));
             for (int x = 1; x <= countFields; x++) {
                 LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
                 LinearLayout lyChild = (LinearLayout) ly.getChildAt(x); // container cells
@@ -105,9 +112,11 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
                     values.put(label.getText().toString(), value.getText().toString());
                 }
             }
-            // button clicked
-            //Log.i("Button create", "Clicked");
-            new CreateProject(this, projectName, values, projectHeaderImag, listFileString).execute();
+            if (checkAllFields()) {
+                new CreateProject(this, projectName, values, projectHeaderImag, listFileString, mapDescriptions).execute();
+            } else {
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.complete_fields, R.drawable.ic_warning_white_24dp).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -205,9 +214,34 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         /**
          * comprobamos que las celdas, label no estan vacía si su value esta rellenado.
          */
-        for (int x = 0; x < countFields; x++) {
+        int errors = 0;
+        LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
+        LinearLayout lyChild = (LinearLayout) ly.getChildAt(1); // container cells
+        lyChild = (LinearLayout) lyChild.getChildAt(0); // container cells
 
+        CustomEditText label = (CustomEditText) lyChild.getChildAt(0); // label
+        CustomEditText value = (CustomEditText) lyChild.getChildAt(1); // value
+
+        if (!value.getText().toString().equals("") && label.getText().toString().equals("")) {
+            errors++;
         }
-        return true;
+        if (value.getText().toString().equals("") && !label.getText().toString().equals("")) {
+            errors++;
+        }
+        for (int x = 2; x <= countFields; x++) {
+            lyChild = (LinearLayout) ly.getChildAt(x); // container cells
+            lyChild = (LinearLayout) lyChild.getChildAt(0); // container cells
+
+            label = (CustomEditText) lyChild.getChildAt(0); // label
+            value = (CustomEditText) lyChild.getChildAt(1); // value
+
+            if (!value.getText().toString().equals("") && label.getText().toString().equals("")) {
+                errors++;
+            }
+            if (value.getText().toString().equals("") && !label.getText().toString().equals("")) {
+                errors++;
+            }
+        }
+        return errors == 0;
     }
 }
