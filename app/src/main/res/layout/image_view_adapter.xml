@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -36,7 +37,7 @@
             android:paddingRight="@dimen/pad2"
             android:text="@string/separator"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/size11"/>
+            android:textSize="@dimen/size11" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:layout_width="wrap_content"
@@ -46,5 +47,31 @@
             android:textSize="@dimen/size11" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCornerDescript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginTop="-3dp"
+        android:rotation="180"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_signal_cellular_4_bar_white_24dp" />
+
+    <ImageView
+        android:id="@+id/imgCornerDescriptBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginTop="-6dp"
+        android:rotation="180"
+        android:visibility="gone"
+        app:srcCompat="@drawable/corner_config" />
 
 </RelativeLayout>

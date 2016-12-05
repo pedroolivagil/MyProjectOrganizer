@@ -82,5 +82,5 @@
     <string name="separator" translatable="false">/</string>
     <string name="add_descripton_image">Add a short description</string>
     <string name="message_error">Sorry, an unexpected error occurred.</string>
-    <string name="complete_fields" >Fields with values need a label</string>
+    <string name="complete_fields" >Fields with values need a label and vice versa</string>
 </resources>

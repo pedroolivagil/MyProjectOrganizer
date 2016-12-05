@@ -112,7 +112,11 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
                     Bitmap b = BitmapFactory.decodeFile(str.trim());
                     jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
                     if (this.mapDescriptions != null && this.mapDescriptions.size() > 0) {
-                        jsnImages.put(ProjectManager.json_project_images_descript, mapDescriptions.get(currentFile.getName().trim()));
+                        if(mapDescriptions.get(currentFile.getName().trim()) != null) {
+                            jsnImages.put(ProjectManager.json_project_images_descript, mapDescriptions.get(currentFile.getName().trim()));
+                        }else{
+                            jsnImages.put(ProjectManager.json_project_images_descript, "");
+                        }
                     } else {
                         jsnImages.put(ProjectManager.json_project_images_descript, "");
                     }

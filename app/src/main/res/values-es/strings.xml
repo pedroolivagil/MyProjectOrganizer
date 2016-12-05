@@ -80,5 +80,5 @@
     <string name="deletePicture">Borrar</string>
     <string name="add_descripton_image">Añade una breve descripción</string>
     <string name="message_error">Lo sentimos, ha ocurrido un error inesperado</string>
-    <string name="complete_fields">Los campos con valores necesitan una etiqueta</string>
+    <string name="complete_fields">Los campos con valores necesitan una etiqueta y viceversa</string>
 </resources>

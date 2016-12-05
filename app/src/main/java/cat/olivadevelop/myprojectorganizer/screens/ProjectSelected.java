@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,6 @@ import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_p
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class ProjectSelected extends GenericScreen implements View.OnScrollChangeListener {
 
-    private static final String TAG = "PROJECT_SELECTED";
     int alpha;
     private int id_project_selected;
     private Project project;
@@ -85,7 +85,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        if (x < project.getUrlImages().length()-1) {
+                        if (x < project.getUrlImages().length() - 1) {
                             ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
                         }
                         ivProject.setLayoutParams(ivParams);
@@ -125,9 +125,11 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 }
             } else {
                 msgFailReadProject();
+                Log.e(Tools.tagLogger(this), "id_project_selected == 0");
             }
         } catch (JSONException e) {
             msgFailReadProject();
+            Log.e(Tools.tagLogger(this), "JSON ERROR");
         }
     }
 
