@@ -1,6 +1,8 @@
-package cat.olivadevelop.myprojectorganizer.tools;
+package cat.olivadevelop.myprojectorganizer.managers;
 
+import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,10 +12,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import cat.olivadevelop.myprojectorganizer.managers.Project;
-import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.PROJECT;
@@ -33,26 +35,35 @@ import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.sortJS
  * <p>
  * Descarga los proyectos del usuario
  */
-public class MainLoader extends AsyncTask<String, Void, Boolean> {
+public class MainLoader extends AsyncTask<RequestBody, Void, Boolean> {
+
+    private String url;
+    private Activity activity;
+
+    public MainLoader(Activity activity, String url) {
+        this.activity = activity;
+        this.url = url;
+    }
 
     @Override
-    protected Boolean doInBackground(String... urls) {
+    protected Boolean doInBackground(RequestBody...  formbody) {
         try {
-            URL url = new URL(urls[0]);
+            URL url = new URL(this.url);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
+                    .post(formbody[0])
                     .build();
             Response response = client.newCall(request).execute();
-            String resStr = response.body().string();
+            String json = response.body().string();
 
             Project p;
             ArrayList<Project> projectList = new ArrayList<>();
             ProjectManager.setProjectList(projectList);
 
-            if (!resStr.equals("")) {
+            if (!json.equals("")) {
                 try {
-                    JSONObject jsonObject = new JSONObject(resStr);
+                    JSONObject jsonObject = new JSONObject(json);
                     JSONArray jProjects;
                     JSONObject jsonObjectLine;
                     jProjects = sortJSON(jsonObject.getJSONArray(PROJECT), ProjectManager.getSortBy(), ProjectManager.getTypeSortBy());
@@ -77,19 +88,19 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
                         p = new Project();
                         p.setEmpty(true);
                         projectList.add(p);
-                        //Log.e("ADD Project", "false");
+                        Log.e(Tools.tagLogger(activity), "Error leyendo los proyectos, no hay proyectos");
                     }
                 } catch (JSONException e) { // si ocurrió algun error con el json
                     p = new Project();
                     p.setEmpty(true);
                     projectList.add(p);
-                    //Log.e("ADD Project", "false");
+                    Log.e(Tools.tagLogger(activity), "Error leyendo los proyectos, error de lectura del JSON");
                 }
             } else { // si json es null
                 p = new Project();
                 p.setEmpty(true);
                 projectList.add(p);
-                //Log.e("ADD Project", "false");
+                Log.e(Tools.tagLogger(activity), "Error leyendo los proyectos, JSON es null");
             }
             ProjectManager.setProjectList(projectList);
             return true;
@@ -101,6 +112,5 @@ public class MainLoader extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        //Log.e("LoaderCorrect", "" + aBoolean);
     }
 }

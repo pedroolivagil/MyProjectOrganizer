@@ -18,8 +18,8 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.CreateNewProjectFile;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
-import cat.olivadevelop.myprojectorganizer.tools.CreateNewProjectFile;
 import cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;

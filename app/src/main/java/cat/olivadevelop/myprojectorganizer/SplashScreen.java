@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         Tools.init(this);
-        ProjectManager.download();
+        ProjectManager.download(this);
 
         Thread splashThread = new Thread() {
             @Override

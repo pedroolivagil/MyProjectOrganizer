@@ -16,26 +16,7 @@ import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_p
  */
 
 public class Project {
-    /*
-    "id_project": 0,
-    "name": "Proyecto de prueba simple",
-    "create_data": "23-10-2016",
-    "last_update": "23-10-2016",
-    "dir_files": "/project0",
-    "home_img": "home.jpg",
-    "images": [
-        "url 1",
-        "url 2",
-        "url 3"
-    ],
-    "form": {
-        "Agradecimientos": "A mi pareja",
-        "description": "Descripción simple para el proyecto de prueba. Esto tiene un límite de caracteres que se mostrarán como información en la pantalla de proyectos.",
-        "Autor": "Pedro Oliva Gil (OlivaDevelop)",
-        "Tiempo": "4 semanas",
-        "finished": "false"
-    }
-    */
+
     private int id;
     private String name;
     private String createDate;

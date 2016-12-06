@@ -11,9 +11,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import cat.olivadevelop.myprojectorganizer.tools.MainLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
-import cat.olivadevelop.myprojectorganizer.tools.UpdateJSONFile;
+import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
@@ -115,9 +114,9 @@ public abstract class ProjectManager {
         ProjectManager.projectList = projectList;
     }
 
-    public static void download() {
-        MainLoader loader = new MainLoader();
-        loader.execute(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
+    public static void download(Activity activity) {
+        FormBody.Builder form = new FormBody.Builder().add("id_client", Tools.getUserID());
+        new MainLoader(activity, HOSTNAME + "/php/read_project.php").execute(form.build());
     }
 
     public static void update(Activity activity, RequestBody formBody) {

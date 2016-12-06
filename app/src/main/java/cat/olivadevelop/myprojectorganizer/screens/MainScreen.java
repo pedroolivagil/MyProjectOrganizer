@@ -88,7 +88,7 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
 
     private void loadProjects() {
         // descargamos los proyectos y obtenemos el estado
-        ProjectManager.download();
+        ProjectManager.download(this);
         list = (ListView) findViewById(R.id.projectList);
         // My AsyncTask is done and onPostExecute was called
         adapter = new MainAdapter(MainScreen.this, ProjectManager.getProjectList());

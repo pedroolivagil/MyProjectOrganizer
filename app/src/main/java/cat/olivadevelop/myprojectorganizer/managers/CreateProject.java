@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.tools;
+package cat.olivadevelop.myprojectorganizer.managers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
+import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

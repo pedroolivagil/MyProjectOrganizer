@@ -21,11 +21,11 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.managers.DeleteProject;
 import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
-import cat.olivadevelop.myprojectorganizer.tools.DeleteProject;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
