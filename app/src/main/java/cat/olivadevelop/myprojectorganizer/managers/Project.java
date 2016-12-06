@@ -7,7 +7,16 @@ import org.json.JSONObject;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FINISH_PJT;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_descript;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_last_update;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_name;
 
 /**
  * Created by Oliva on 03/11/2016.
@@ -26,7 +35,7 @@ public class Project {
     private JSONArray urlImages;
     private JSONObject form;
     private boolean empty;
-    private boolean flag_activo;
+    private boolean flagActivo;
 
     public Project() {
     }
@@ -82,15 +91,11 @@ public class Project {
     }
 
     public String mountUrlImage(String name) {
-        //return homeImage;
-        return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
-                getHomeDir() + "/img/" + name;
+        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + getHomeDir() + "/" + Tools.IMAGE_DIR + "/" + name;
     }
 
     public String getHomeImage() {
-        //return homeImage;
-        return Tools.HOSTNAME + "/clients/" + Tools.getUserID() +
-                getHomeDir() + "/" + homeImage;
+        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + getHomeDir() + "/" + homeImage;
     }
 
     public void setHomeImage(String homeImage) {
@@ -129,11 +134,25 @@ public class Project {
         }
     }
 
-    public boolean isFlag_activo() {
-        return flag_activo;
+    public boolean isFlagActivo() {
+        return flagActivo;
     }
 
-    public void setFlag_activo(boolean flag_activo) {
-        this.flag_activo = flag_activo;
+    public void setFlagActivo(boolean flagActivo) {
+        this.flagActivo = flagActivo;
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put(json_project_id_project, getId());
+        json.put(json_project_name, getName());
+        json.put(json_project_flag_activo, isFlagActivo());
+        json.put(json_project_create_data, getCreateDate());
+        json.put(json_project_last_update, getLastUpdate());
+        json.put(json_project_dir_files, getHomeDir());
+        json.put(json_project_home_img, "home.jpg");
+        json.put(json_project_images, getUrlImages());
+        json.put(json_project_form, getForm());
+        return json;
     }
 }

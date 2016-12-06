@@ -73,6 +73,7 @@ public class MainLoader extends AsyncTask<RequestBody, Void, Boolean> {
                             if (jsonObjectLine.getBoolean(json_project_flag_activo)) {
                                 p = new Project();
                                 p.setEmpty(false);
+                                p.setFlagActivo(jsonObjectLine.getBoolean(json_project_flag_activo));
                                 p.setId(jsonObjectLine.getInt(json_project_id_project));
                                 p.setName(jsonObjectLine.getString(json_project_name));
                                 p.setCreateDate(jsonObjectLine.getString(json_project_create_data));

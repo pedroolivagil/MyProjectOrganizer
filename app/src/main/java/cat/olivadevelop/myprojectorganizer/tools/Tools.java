@@ -56,6 +56,8 @@ public class Tools {
     //public static final String HOSTNAME = "http://projects.codeduo.cat";
     //public static final String HOSTNAME = "http://10.0.2.2/myprojectsorg";
     public static final String HOSTNAME = "http://192.168.1.43/myprojectsorg";
+    public static final String CLIENT_DIR = "clients";
+    public static final String IMAGE_DIR = "img";
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
     public static final String PREFS_USER_ID = "id_user";
     public static final String PREFS_USER_EMAIL = "email";

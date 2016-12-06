@@ -115,11 +115,10 @@ public abstract class ProjectManager {
     }
 
     public static void download(Activity activity) {
-        FormBody.Builder form = new FormBody.Builder().add("id_client", Tools.getUserID());
-        new MainLoader(activity, HOSTNAME + "/php/read_project.php").execute(form.build());
+        new MainLoader(activity, HOSTNAME + "/php/read_project.php").execute(new FormBody.Builder().add("id_client", Tools.getUserID()).build());
     }
 
-    public static void update(Activity activity, RequestBody formBody) {
+    public static void addProject(Activity activity, RequestBody formBody) {
         new UpdateJSONFile(activity, HOSTNAME + "/php/create_project.php").execute(formBody);
     }
 

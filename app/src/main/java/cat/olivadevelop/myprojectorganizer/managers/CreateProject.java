@@ -165,7 +165,7 @@ public class CreateProject extends AsyncTask<Void, Void, RequestBody> {
         super.onPostExecute(formBody);
         progressDialog.dismiss();
         if (formBody != null) {
-            ProjectManager.update(activity, formBody);
+            ProjectManager.addProject(activity, formBody);
         } else {
             Tools.showAlertError(activity);
         }

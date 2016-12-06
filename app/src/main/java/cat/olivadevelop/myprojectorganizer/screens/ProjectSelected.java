@@ -92,6 +92,8 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 mainContainer.setOnScrollChangeListener(this);
                 LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
 
+                Log.e(Tools.tagLogger(this), project.toJSON().toString());
+
                 ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
                 Tools.picassoImage(this, project.getHomeImage(), image);
 
