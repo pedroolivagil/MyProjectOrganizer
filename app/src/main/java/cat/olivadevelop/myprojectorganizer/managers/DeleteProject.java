@@ -2,28 +2,19 @@ package cat.olivadevelop.myprojectorganizer.managers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
 
 import cat.olivadevelop.myprojectorganizer.R;
+import cat.olivadevelop.myprojectorganizer.screens.MainScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.PROJECT;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_last_update;
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
 
 /**
  * Created by Oliva on 26/09/2016.
@@ -32,15 +23,16 @@ import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
  * <p>
  * convertir el string de umagen en un fichero y usar getName() para insertarlo en el array de nombres
  */
-public class DeleteProject extends AsyncTask<Void, Void, RequestBody> {
-    private Project project;
+public class DeleteProject extends AsyncTask<RequestBody, Void, Boolean> {
+
+    private String url;
     private Activity activity;
     private ProgressDialog progressDialog;
 
 
-    public DeleteProject(Activity activity, Project project) {
+    public DeleteProject(Activity activity, String url) {
         this.activity = activity;
-        this.project = project;
+        this.url = url;
     }
 
     private String getString(int id_string) {
@@ -48,48 +40,31 @@ public class DeleteProject extends AsyncTask<Void, Void, RequestBody> {
     }
 
     @Override
-    protected RequestBody doInBackground(Void... urls) {
+    protected Boolean doInBackground(RequestBody... formbody) {
+        Boolean retorno = false;
         try {
-            URL url = new URL(HOSTNAME + "/clients/" + Tools.getUserID() + "/" + ProjectManager.PROJECTS_FILENAME);
+            URL url = new URL(this.url);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
+                    .post(formbody[0])
                     .build();
             Response response = client.newCall(request).execute();
             String resStr = response.body().string();
-            response.close();
-            JSONObject json = new JSONObject(resStr);
-
-            JSONArray projects = json.getJSONArray(PROJECT);
-
-            for (int x = 0; x < projects.length(); x++) {
-                JSONObject currentProject = projects.getJSONObject(x);
-                if (currentProject.getInt(json_project_id_project) == this.project.getId()) {
-                    currentProject.put(json_project_last_update, Tools.getCurrentDate());
-                    currentProject.put(json_project_flag_activo, false);
-                }
-            }
-            json.put(json_project_last_update, Tools.getCurrentDate());
-
-            // actualizamos el json del server
-            FormBody.Builder form = new FormBody.Builder()
-                    .add("id_client", "" + Tools.getUserID())
-                    .add("jsonObject", json.toString());
-
-            return form.build();
-
-        } catch (IOException | JSONException e) {
+            retorno = Tools.parseBoolean(resStr);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return retorno;
     }
 
     @Override
-    protected void onPostExecute(RequestBody formBody) {
-        super.onPostExecute(formBody);
+    protected void onPostExecute(Boolean aBoolean) {
+        super.onPostExecute(aBoolean);
         progressDialog.dismiss();
-        if (formBody != null) {
-            ProjectManager.delete(activity, formBody);
+        if (aBoolean) {
+            Intent intent = new Intent(activity, MainScreen.class);
+            activity.startActivity(intent);
         } else {
             Tools.showAlertError(activity);
         }

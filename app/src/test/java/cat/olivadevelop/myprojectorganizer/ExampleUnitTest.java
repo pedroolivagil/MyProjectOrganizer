@@ -2,14 +2,16 @@ package cat.olivadevelop.myprojectorganizer;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.UUID;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
 public class ExampleUnitTest {
+
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void generateID() throws Exception {
+        String test = UUID.randomUUID().toString().replace("-", "");
+        System.out.print("UUID: " + test + "; " + test.length());
     }
 }

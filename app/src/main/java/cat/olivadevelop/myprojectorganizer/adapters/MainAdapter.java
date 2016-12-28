@@ -95,7 +95,7 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                 LinearLayout label_bg2_finished_pjct_list = (LinearLayout) vi.findViewById(R.id.label_bg2_finished_pjct_list);
                 RelativeLayout label_finished_pjct_list = (RelativeLayout) vi.findViewById(R.id.label_finished_pjct_list);
 
-                if (currentProject.isFinished()) {
+                if (currentProject.isFlagFinished()) {
                     label_bg1_finished_pjct_list.setVisibility(View.VISIBLE);
                     label_bg2_finished_pjct_list.setVisibility(View.VISIBLE);
                     label_finished_pjct_list.setVisibility(View.VISIBLE);
@@ -105,7 +105,7 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
                     label_finished_pjct_list.setVisibility(View.GONE);
                 }
 
-                if (!String.valueOf(currentProject.getId()).equals("")) {
+                if (!currentProject.getId().equals("")) {
                     btnSelectProject.setTag(currentProject.getId());
                 }
                 btnSelectProject.setOnClickListener(this);
@@ -124,9 +124,9 @@ public class MainAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if ((Integer) v.getTag() >= 0) {
+        if (!v.getTag().equals("")) {
             Intent projectSelected = new Intent(activity, ProjectSelected.class);
-            projectSelected.putExtra(ProjectManager.NEW_SELECTED, (Integer) v.getTag());
+            projectSelected.putExtra(ProjectManager.PROJECT_SELECTED, v.getTag().toString());
             activity.startActivity(projectSelected);
         }
     }

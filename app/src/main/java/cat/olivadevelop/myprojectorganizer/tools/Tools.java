@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
@@ -45,17 +44,15 @@ import java.util.UUID;
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
-
 /**
  * Created by Oliva on 26/09/2016.
  */
 public class Tools {
 
     //public static final String HOSTNAME = "http://projects.codeduo.cat";
-    //public static final String HOSTNAME = "http://10.0.2.2/myprojectsorg";
-    public static final String HOSTNAME = "http://192.168.1.43/myprojectsorg";
+    public static final String SERVER = "10.0.2.2";
+    public static final String HOSTNAME = "http://" + SERVER + "/myprojectsorg";
+    //public static final String HOSTNAME = "http://192.168.1.43/myprojectsorg";
     public static final String CLIENT_DIR = "clients";
     public static final String IMAGE_DIR = "img";
     public static final String EXTERNAL_DIR = Environment.getExternalStorageDirectory() + "/MyProjectPictures/";
@@ -66,18 +63,38 @@ public class Tools {
     public static final String FONT_BOLD = "fonts/Ubuntu-Bold.ttf";
     public static final String FONT_ITALIC = "fonts/Ubuntu-Italic.ttf";
     public static final String FONT_BOLD_ITALIC = "fonts/Ubuntu-BoldItalic.ttf";
-
+    public static final String PATTERN_EDIT_TEXT = "[ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzáéíóúýàèìòùäëïöüÿâêîôûçñÁÉÍÓÚÝÀÈÌÒÙÄËÏÖÜŸÂÊÎÔÛÇÑ1234567890,;.:_/*-+!·$%&/()=?¿ºª|@#~€¬]*";
     private static final String PREFS_NAME = "prefs_organizer";
-
     private static final String CRYPT_KEY = "myprojectorganizerolivadevelop";
     private static final String FALSE = "false";
     private static SharedPreferences prefs;
     private static String currentBooleanValue;
     private static AlertDialog alertError;
+    private static boolean projectListResult;
 
     public static void init(Context c) {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
         ProjectManager.setDefaultPrefs();
+        setProjectListResult(false);
+    }
+
+    private static boolean isNetworkActive(Context c) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
+        return (actNetInfo != null && actNetInfo.isConnected());
+    }
+
+    public static Boolean isNetworkAvailable(Context c) {
+        if (isNetworkActive(c)) {
+            try {
+                Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 " + SERVER);
+                int val = p.waitFor();
+                return (val == 0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public static String getMD5(String input) {
@@ -102,7 +119,11 @@ public class Tools {
     }
 
     public static String generateID() {
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public static String generateID(int length) {
+        return generateID().substring(0, length);
     }
 
     public static Snackbar newSnackBar(View v, Context cnxt, int string) {
@@ -250,41 +271,21 @@ public class Tools {
         Tools.currentBooleanValue = currentBooleanValue;
     }
 
-
-    public static boolean verificaConexion(Context ctx) {
-        boolean bConectado = false;
-        ConnectivityManager connec = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (SDK_INT >= LOLLIPOP) {
-            Network[] redes = connec.getAllNetworks();
-            for (Network red : redes) {
-                NetworkInfo subRed = connec.getNetworkInfo(red);
-                // ¿Tenemos conexión? ponemos a true
-                if (subRed.getState() == NetworkInfo.State.CONNECTED) {
-                    bConectado = true;
-                }
-            }
-        } else {
-            NetworkInfo[] redes = connec.getAllNetworkInfo();
-            for (NetworkInfo red : redes) {
-                // ¿Tenemos conexión? ponemos a true
-                if (red.getState() == NetworkInfo.State.CONNECTED) {
-                    bConectado = true;
-                }
-            }
-        }
-        return bConectado;
-    }
-
     public static String getImageBase64(String url) {
         if (url != null) {
             Bitmap bm = Tools.resizeBitmap(BitmapFactory.decodeFile(url.trim()));
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.JPEG, 90, bao);
             byte[] ba = bao.toByteArray();
-            return Base64.encodeToString(ba, Base64.DEFAULT);
+            //return Base64.encodeToString(ba, Base64.DEFAULT);
+            return Tools.encode64(ba);
         } else {
             return null;
         }
+    }
+
+    public static String encode64(byte[] str) {
+        return Base64.encodeToString(str, Base64.DEFAULT);
     }
 
     public static void picassoImage(Context c, File url, ImageView view) {
@@ -381,5 +382,17 @@ public class Tools {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.setTimeZone(TimeZone.getDefault());
         return sdf.format(new Date());
+    }
+
+    public static boolean isprojectListResult() {
+        return projectListResult;
+    }
+
+    public static void setProjectListResult(boolean projectListResult) {
+        Tools.projectListResult = projectListResult;
+    }
+
+    public static boolean parseBoolean(String string) {
+        return string.trim().equals("1");
     }
 }

@@ -15,13 +15,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.DeleteProject;
 import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
@@ -29,16 +29,19 @@ import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_descript;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_height;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_url;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images_width;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets_label;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets_value;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class ProjectSelected extends GenericScreen implements View.OnScrollChangeListener {
 
     int alpha;
-    private int id_project_selected;
+    private String id_project_selected;
     private Project project;
     private Project projectOptions;
     private LinearLayout frameProjectGallery;
@@ -49,9 +52,14 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_selected);
 
-        id_project_selected = getIntent().getExtras().getInt(ProjectManager.NEW_SELECTED);
+        id_project_selected = getIntent().getExtras().getString(ProjectManager.PROJECT_SELECTED);
         dialogPreviewImg = dialogImagePreview();
-        init();
+        try {
+            downloadProjectInfo();
+            init();
+        } catch (InterruptedException | ExecutionException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,42 +81,50 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 }
             }*/
             if (project != null) {
-                new DeleteProject(this, project).execute();
+                try {
+                    ProjectManager.delete(this, project);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void init() {
-        try {
-            if (id_project_selected >= 0) {
-                for (int x = 0; x < ProjectManager.getProjectList().size(); x++) {
-                    if (ProjectManager.getProjectList().get(x).getId() == id_project_selected) {
-                        project = ProjectManager.getProjectList().get(x);
-                    }
-                }
-                setTitle(Tools.capitalize(project.getName()));
-                ScrollView mainContainer = (ScrollView) findViewById(R.id.activity_project_selected);
-                mainContainer.setOnScrollChangeListener(this);
-                LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
+    private synchronized void downloadProjectInfo() throws ExecutionException, InterruptedException {
+        project = ProjectManager.downloadById(this, id_project_selected);
+    }
 
+    private synchronized void init() throws InterruptedException, JSONException {
+        // iniciamos el projectView
+        if (project != null && !project.isEmpty()) {
+            setTitle(Tools.capitalize(project.getName()));
+            ScrollView mainContainer = (ScrollView) findViewById(R.id.activity_project_selected);
+            mainContainer.setOnScrollChangeListener(this);
+            LinearLayout container = (LinearLayout) findViewById(R.id.layoutWrapperProjectSelected);
+
+            try {
                 Log.e(Tools.tagLogger(this), project.toJSON().toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
-                Tools.picassoImage(this, project.getHomeImage(), image);
+            ImageView image = (ImageView) findViewById(R.id.headerImgPrjSelected);
+            Tools.picassoImage(this, project.getHomeImage(), image);
 
-                CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
-                title.setTextCapitalized(project.getName());
+            CustomTextView title = (CustomTextView) findViewById(R.id.titleProjectSelected);
+            title.setTextCapitalized(project.getName());
 
-                CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
-                subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(project.getLastUpdate()));
+            CustomTextView subTitle = (CustomTextView) findViewById(R.id.subTitleProjectSelected);
+            subTitle.setTextCapitalized(getString(R.string.card_last_update).concat(" ").concat(project.getLastUpdate()));
 
-                // Array de imagenes frameProjectGallery
-                if (project.getUrlImages().length() > 0) {
-                    frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
-                    for (int x = 0; x < project.getUrlImages().length(); x++) {
-                        final int finalX = x;
-                        final JSONObject urlImages = project.getUrlImages().getJSONObject(x);
+            // Array de imagenes frameProjectGallery
+            if (project.getProjectImages().length() > 0) {
+                frameProjectGallery = (LinearLayout) findViewById(R.id.frameProjectGallery);
+                for (int x = 0; x < project.getProjectImages().length(); x++) {
+                    final int finalX = x;
+                    final JSONObject urlImages = project.getProjectImages().getJSONObject(x);
+                    if (Tools.parseBoolean(urlImages.getString(json_project_flag_activo))) {
                         final String url = urlImages.getString(json_project_images_url);
                         final String descript = urlImages.getString(json_project_images_descript);
                         ImageView ivProject = new ImageView(this);
@@ -116,7 +132,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT
                         );
-                        if (x < project.getUrlImages().length() - 1) {
+                        if (x < project.getProjectImages().length() - 1) {
                             ivParams.setMargins(0, 0, Tools.getDP(this, 8), 0);
                         }
                         ivProject.setLayoutParams(ivParams);
@@ -137,30 +153,23 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                         frameProjectGallery.addView(ivProject);
                     }
                 }
-                // creamos las tarjetas del proyecto
-                JSONObject form = project.getForm();
-
-                //añadimos la tarjetas de información obligatorias, descripción y terminado
-                container.addView(getTarget(ProjectManager.FINISH_PJT, form));
-                container.addView(getTarget(ProjectManager.json_project_descript, form));
-
-                // añadimos las tarjetas de información creadas por el usuario
-                String labelStr;
-                Iterator<String> allLabels = form.keys();
-                while (allLabels.hasNext()) {
-                    labelStr = allLabels.next();
-                    if ((!labelStr.equals(ProjectManager.json_project_descript))
-                            && (!labelStr.equals(ProjectManager.FINISH_PJT))) {
-                        container.addView(getTarget(labelStr, form));
-                    }
-                }
-            } else {
-                msgFailReadProject();
-                Log.e(Tools.tagLogger(this), "id_project_selected == 0");
             }
-        } catch (JSONException e) {
+
+            //añadimos la tarjetas de información obligatorias, descripción y terminado
+            container.addView(getTarget(ProjectManager.json_project_flag_finish, String.valueOf(project.isFlagFinished())));
+            container.addView(getTarget(ProjectManager.json_project_descript, project.getDescription()));
+
+            // añadimos las tarjetas de información creadas por el usuario
+            JSONArray targets = project.getTarjetas();
+            if (targets.length() > 0) {
+                for (int x = 0; x < targets.length(); x++) {
+                    JSONObject target = targets.getJSONObject(x);
+                    container.addView(getTarget(target.getString(json_project_targets_label), target.getString(json_project_targets_value)));
+                }
+            }
+        } else {
             msgFailReadProject();
-            Log.e(Tools.tagLogger(this), "JSON ERROR");
+            Log.e(Tools.tagLogger(this), "id_project_selected == 0");
         }
     }
 
@@ -171,6 +180,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
                 .show();
     }
 
+    @Deprecated
     private CardView getTarget(String labelStr, JSONObject form) throws JSONException {
         String valueStr = form.getString(labelStr);
 
@@ -192,7 +202,67 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
             case ProjectManager.json_project_descript:
                 tvLabel.setTextCapitalized(getString(R.string.label_description));
                 break;
-            case ProjectManager.FINISH_PJT:
+            case ProjectManager.json_project_flag_finish:
+                tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
+                break;
+            default:
+                tvLabel.setTextCapitalized(labelStr);
+                break;
+        }
+
+        LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        tvParams.setMargins(0, Tools.getDP(this, 8), 0, 0);
+
+        CustomWebView webView = new CustomWebView(this);
+        webView.setLayoutParams(tvParams);
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
+        if (Tools.isBooleanValue(valueStr)) {
+            webView.setText(Tools.getCurrentBooleanValueAsString(this));
+        } else {
+            webView.setText(valueStr);
+        }
+
+        target.addView(tvLabel);
+        target.addView(webView);
+
+        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        cardParams.setMargins(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+
+        CardView cardView = new CardView(this);
+        cardView.setContentPadding(Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8), Tools.getDP(this, 8));
+        cardView.setCardElevation(Tools.getDP(this, 5));
+        cardView.setLayoutParams(cardParams);
+        cardView.addView(target);
+        return cardView;
+    }
+
+    private CardView getTarget(String labelStr, String valueStr) throws JSONException {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        LinearLayout target = new LinearLayout(this);
+        target.setLayoutParams(layoutParams);
+        target.setOrientation(LinearLayout.VERTICAL);
+        target.setPadding(Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24), Tools.getDP(this, 24));
+        target.setBackgroundResource(R.color.white);
+
+        CustomTextView tvLabel = new CustomTextView(this);
+        tvLabel.setBold();
+        tvLabel.setTextSize(Tools.getPX(this, getResources().getDimension(R.dimen.size18)));
+        switch (labelStr) {
+            case ProjectManager.json_project_descript:
+                tvLabel.setTextCapitalized(getString(R.string.label_description));
+                break;
+            case ProjectManager.json_project_flag_finish:
                 tvLabel.setTextCapitalized(getString(R.string.projectIsFinalized));
                 break;
             default:

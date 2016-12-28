@@ -59,7 +59,7 @@
     <string name="sortByLastUpdate">Última actualización</string>
     <string name="sortByNameProject">Nombre de proyecto</string>
     <string name="pgd_uploading_project">Subiendo el proyecto…</string>
-    <string name="cannot_be_connect">Verifique su conexión a internet</string>
+    <string name="cannot_be_connect">No se puede conectar con el servidor</string>
     <string name="error_project_selected">Error inesperado con el proyecto seleccionado</string>
     <string name="toolbarProjetSelected">Proyecto seleccionado</string>
     <string name="falseValue">No</string>

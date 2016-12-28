@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,7 @@ import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-import static cat.olivadevelop.myprojectorganizer.tools.Tools.verificaConexion;
+import static java.lang.Thread.sleep;
 
 
 public class MainScreen extends GenericScreen implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -33,8 +34,6 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Log.i(Tools.PREFS_USER_ID, Tools.getUserID());
-        //Log.i(Tools.PREFS_USER_EMAIL, Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, ""));
 
         if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
             Intent settings = new Intent(this, SettingsActivity.class);
@@ -88,32 +87,62 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
 
     private void loadProjects() {
         // descargamos los proyectos y obtenemos el estado
-        ProjectManager.download(this);
-        list = (ListView) findViewById(R.id.projectList);
-        // My AsyncTask is done and onPostExecute was called
-        adapter = new MainAdapter(MainScreen.this, ProjectManager.getProjectList());
-        list.setAdapter(adapter);
-        list.setOnScrollListener(new AbsListView.OnScrollListener() {
+        ProjectManager.download(this, swipeLayout);
+        new Thread(new Runnable() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int filaSuperior = (list == null || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();    //Estamos en el elemento superior
-                if (swipeLayout != null) {
-                    swipeLayout.setEnabled(filaSuperior >= 0);  //Activamos o desactivamos el swipe layout segun corresponda
+            public void run() {
+                try {
+                    int waited = 0;
+                    int splashTime = 10000;
+                    while (waited < splashTime) {
+                        sleep(100);
+                        if (!Tools.isprojectListResult()) {
+                            waited += 100;
+                        } else {
+                            showProjects();
+                            break;
+                        }
+                        Log.e(Tools.tagLogger(MainScreen.this), "THREAD -> " + Tools.isprojectListResult());
+                    }
+                    Log.e(Tools.tagLogger(MainScreen.this), "THREAD FINAL -> " + Tools.isprojectListResult());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        });
-        list.postDelayed(new Runnable() {
+        }).start();
+    }
+
+    private void showProjects() {
+        runOnUiThread(new Runnable() {
+            @Override
             public void run() {
-                // Se supone que aqui hemos realizado las tareas necesarias de refresco,
-                // y que ya podemos ocultar la barra de progreso
-                swipeLayout.setRefreshing(false);
+                list = (ListView) findViewById(R.id.projectList);
+                // My AsyncTask is done and onPostExecute was called
+                adapter = new MainAdapter(MainScreen.this, ProjectManager.getProjectList());
+                list.setAdapter(adapter);
+                list.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                        int filaSuperior = (list == null || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();    //Estamos en el elemento superior
+                        if (swipeLayout != null) {
+                            swipeLayout.setEnabled(filaSuperior >= 0);  //Activamos o desactivamos el swipe layout segun corresponda
+                        }
+                    }
+                });
+                list.postDelayed(new Runnable() {
+                    public void run() {
+                        // Se supone que aqui hemos realizado las tareas necesarias de refresco,
+                        // y que ya podemos ocultar la barra de progreso
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 1000);
             }
-        }, 1000);
+        });
     }
 
     @Override
@@ -122,16 +151,16 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
     }
 
     public void autoRefresh() {
-        if (!verificaConexion(this)) {
-            Tools.newSnackBar(this.getCurrentFocus(), this, R.string.cannot_be_connect).show();
+        if (!Tools.isNetworkAvailable(this)) {
+            Tools.newSnackBar(findViewById(R.id.swipeRefresh), this, R.string.cannot_be_connect).show();
+            if (swipeLayout != null) {
+                swipeLayout.setRefreshing(false);
+            }
         } else {
             if (swipeLayout != null) {
-                //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
-                //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
                 swipeLayout.setRefreshing(true);
                 loadProjects();
             }
-
         }
     }
 }

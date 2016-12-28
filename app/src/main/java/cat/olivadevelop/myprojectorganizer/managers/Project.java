@@ -6,17 +6,17 @@ import org.json.JSONObject;
 
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.FINISH_PJT;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_create_data;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_descript;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_dir_files;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_activo;
-import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_form;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_flag_finish;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_home_img;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_id_project;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_images;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_last_update;
 import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_name;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets;
 
 /**
  * Created by Oliva on 03/11/2016.
@@ -26,27 +26,28 @@ import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_p
 
 public class Project {
 
-    private int id;
+    private String id;
+    private boolean empty;
+    private boolean flagActivo;
+    private boolean flagFinished;
     private String name;
     private String createDate;
     private String lastUpdate;
-    private String homeDir;
+    private String userRoot;
     private String homeImage;
-    private JSONArray urlImages;
-    private JSONObject form;
-    private boolean empty;
-    private boolean flagActivo;
+    private String description;
+    private JSONArray projectImages;
+    private JSONArray tarjetas;
 
     public Project() {
     }
 
     /* Getters y Setters*/
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setIdProject(String id) {
         this.id = id;
     }
 
@@ -82,56 +83,28 @@ public class Project {
         this.lastUpdate = lastUpdate;
     }
 
-    public String getHomeDir() {
-        return homeDir;
+    public String getUserRoot() {
+        return userRoot;
     }
 
-    public void setHomeDir(String homeDir) {
-        this.homeDir = homeDir;
+    public void setUserRoot(String userRoot) {
+        this.userRoot = userRoot;
     }
 
-    public String mountUrlImage(String name) {
-        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + getHomeDir() + "/" + Tools.IMAGE_DIR + "/" + name;
+    public JSONArray getProjectImages() {
+        return projectImages;
     }
 
-    public String getHomeImage() {
-        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + getHomeDir() + "/" + homeImage;
+    public void setProjectImages(JSONArray projectImages) {
+        this.projectImages = projectImages;
     }
 
-    public void setHomeImage(String homeImage) {
-        this.homeImage = homeImage;
+    public JSONArray getTarjetas() {
+        return tarjetas;
     }
 
-    public JSONArray getUrlImages() {
-        return urlImages;
-    }
-
-    public void setUrlImages(JSONArray urlImages) {
-        this.urlImages = urlImages;
-    }
-
-    public JSONObject getForm() {
-        return form;
-    }
-
-    public void setForm(JSONObject form) {
-        this.form = form;
-    }
-
-    public String getDescription() {
-        try {
-            return getForm().getString(json_project_descript).trim();
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-
-    public boolean isFinished() {
-        try {
-            return getForm().getBoolean(FINISH_PJT);
-        } catch (JSONException e) {
-            return false;
-        }
+    public void setTarjetas(JSONArray tarjetas) {
+        this.tarjetas = tarjetas;
     }
 
     public boolean isFlagActivo() {
@@ -142,17 +115,47 @@ public class Project {
         this.flagActivo = flagActivo;
     }
 
+    public boolean isFlagFinished() {
+        return flagFinished;
+    }
+
+    public void setFlagFinished(boolean flagFinished) {
+        this.flagFinished = flagFinished;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getHomeImage() {
+        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + "/" + getUserRoot() + "/" + homeImage;
+    }
+
+    public void setHomeImage(String homeImage) {
+        this.homeImage = homeImage;
+    }
+
+    public String mountUrlImage(String name) {
+        return Tools.HOSTNAME + "/" + Tools.CLIENT_DIR + "/" + Tools.getUserID() + "/" + getUserRoot() + "/" + Tools.IMAGE_DIR + "/" + name;
+    }
+
     public JSONObject toJSON() throws JSONException {
         JSONObject json = new JSONObject();
         json.put(json_project_id_project, getId());
         json.put(json_project_name, getName());
+        json.put(json_project_descript, getDescription());
         json.put(json_project_flag_activo, isFlagActivo());
+        json.put(json_project_flag_finish, isFlagFinished());
         json.put(json_project_create_data, getCreateDate());
         json.put(json_project_last_update, getLastUpdate());
-        json.put(json_project_dir_files, getHomeDir());
-        json.put(json_project_home_img, "home.jpg");
-        json.put(json_project_images, getUrlImages());
-        json.put(json_project_form, getForm());
+        json.put(json_project_dir_files, getUserRoot());
+        json.put(json_project_home_img, homeImage);
+        json.put(json_project_images, getProjectImages());
+        json.put(json_project_targets, getTarjetas());
         return json;
     }
 }

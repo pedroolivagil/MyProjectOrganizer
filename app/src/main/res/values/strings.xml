@@ -59,7 +59,7 @@
     <string name="sortByLastUpdate">Last updated project</string>
     <string name="sortByNameProject">Project name</string>
     <string name="sortByIdProject">Creation date</string>
-    <string name="cannot_be_connect">Check your internet connection</string>
+    <string name="cannot_be_connect">Cannot be connected to server</string>
     <string name="toolbarProjetSelected">Project selected</string>
     <string name="error_project_selected">Unexpected error with selected project</string>
     <string name="falseValue">No</string>

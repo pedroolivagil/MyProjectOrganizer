@@ -1,5 +1,7 @@
 package cat.olivadevelop.myprojectorganizer.screens;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -14,12 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.CreateProject;
+import cat.olivadevelop.myprojectorganizer.managers.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomCheckBox;
 import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
@@ -27,9 +34,14 @@ import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.GenericScreen;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets_id_tarjeta;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets_label;
+import static cat.olivadevelop.myprojectorganizer.managers.ProjectManager.json_project_targets_value;
+
 public class NewProjectFinish extends GenericScreen implements View.OnClickListener {
 
     static ScrollView scrollview;
+    private Project project;
     private String projectName;
     private String projectHeaderImag;
     private String projectBodyImag;
@@ -37,8 +49,10 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     private LinearLayout btnAddField;
     private LinearLayout fieldsContainer;
     private int countFields;
-    private int LIMIT_EDTEXT = 150;
+    private int LIMIT_EDTEXT = 255;
     private HashMap<String, String> mapDescriptions;
+    private List<String> listStringFilesBase64;
+    private List<String> listStringFilesNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +61,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         scrollview = ((ScrollView) findViewById(R.id.scroll_project_finish));
 
+        project = new Project();
         projectName = getIntent().getStringExtra(ProjectManager.PROJECT_NAME);
         listFileString = new ArrayList<String>();
         mapDescriptions = new HashMap<String, String>();
@@ -68,6 +83,8 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         } else {
             projectBodyImag = null;
         }
+        this.listStringFilesBase64 = new ArrayList<String>();
+        this.listStringFilesNames = new ArrayList<String>();
 
         CustomTextView textView = (CustomTextView) findViewById(R.id.nameProjectPreview);
         textView.setText(projectName);
@@ -85,6 +102,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         countFields = 0;
         generateNewField(-1, R.string.description, false);
 
+        project.setName(projectName);
     }
 
     @Override
@@ -96,24 +114,83 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_publish_project) {
-            HashMap<String, String> values = new HashMap<>();
-            // checkbox finished
-            values.put("" + ProjectManager.FINISH_PJT, String.valueOf(((CustomCheckBox) findViewById(R.id.isFinished)).isChecked()));
-            for (int x = 1; x <= countFields; x++) {
-                LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
-                LinearLayout lyChild = (LinearLayout) ly.getChildAt(x); // container cells
-                lyChild = (LinearLayout) lyChild.getChildAt(0); // container cells
 
-                CustomEditText label = (CustomEditText) lyChild.getChildAt(0); // label
-                CustomEditText value = (CustomEditText) lyChild.getChildAt(1); // value
+            LinearLayout ly = (LinearLayout) findViewById(R.id.fieldsContainer); // main container
+            LinearLayout lyChild = (LinearLayout) ly.getChildAt(1); // container cells
+            LinearLayout lyChild2 = (LinearLayout) lyChild.getChildAt(0); // container cells
+
+            CustomEditText label; // label
+            CustomEditText value = (CustomEditText) lyChild2.getChildAt(1); // value
+
+            // creamos el proyecto
+            project.setFlagFinished(((CustomCheckBox) findViewById(R.id.isFinished)).isChecked());
+            project.setHomeImage(ProjectManager.DEFAULT_PROJECT_IMG_NAME);
+            project.setDescription(value.getText().toString());
+            project.setFlagActivo(true);
+            project.setIdProject(Tools.generateID(20));
+
+            JSONArray tarjetas = new JSONArray();
+            for (int x = 2; x <= countFields; x++) {
+                lyChild = (LinearLayout) ly.getChildAt(x); // container cells
+                lyChild2 = (LinearLayout) lyChild.getChildAt(0); // container cells
+
+                label = (CustomEditText) lyChild2.getChildAt(0); // label
+                value = (CustomEditText) lyChild2.getChildAt(1); // value
 
                 // si ninguno de las dos celdas estan vacías agregamos los valores al hashmap
                 if (!(label.getText().toString().equals("") && value.getText().toString().equals(""))) {
-                    values.put(label.getText().toString(), value.getText().toString());
+                    try {
+                        JSONObject tarjeta = new JSONObject();
+                        tarjeta.put(json_project_targets_id_tarjeta, Tools.generateID(20));
+                        tarjeta.put(json_project_targets_label, label.getText().toString());
+                        tarjeta.put(json_project_targets_value, value.getText().toString());
+                        tarjetas.put(tarjeta);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
+            JSONArray imagenes = new JSONArray();
+            try {
+                if (listFileString != null) {
+                    JSONObject jsnImages;
+                    for (String str : listFileString) {
+                        jsnImages = new JSONObject();
+                        File currentFile = new File(str);
+                        Bitmap b = BitmapFactory.decodeFile(str.trim());
+                        jsnImages.put(ProjectManager.json_project_images_id_imagen,Tools.generateID(20));
+                        jsnImages.put(ProjectManager.json_project_images_url, currentFile.getName().trim());
+                        jsnImages.put(ProjectManager.json_project_images_width, b.getWidth());
+                        jsnImages.put(ProjectManager.json_project_images_height, b.getHeight());
+                        if (this.mapDescriptions != null && this.mapDescriptions.size() > 0) {
+                            if (mapDescriptions.get(currentFile.getName().trim()) != null) {
+                                jsnImages.put(ProjectManager.json_project_images_descript, mapDescriptions.get(currentFile.getName().trim()));
+                            } else {
+                                jsnImages.put(ProjectManager.json_project_images_descript, "");
+                            }
+                        } else {
+                            jsnImages.put(ProjectManager.json_project_images_descript, "");
+                        }
+                        imagenes.put(jsnImages);
+                        listStringFilesBase64.add(Tools.getImageBase64(str.replace("\\", "").trim()));
+                        listStringFilesNames.add(currentFile.getName().trim());
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            project.setTarjetas(tarjetas);
+            project.setProjectImages(imagenes);
+            project.setUserRoot(Tools.generateID());
+
             if (checkAllFields()) {
-                new CreateProject(this, projectName, values, projectHeaderImag, listFileString, mapDescriptions).execute();
+                try {
+                    ProjectManager.create(this, this.project, this.projectHeaderImag, this.listStringFilesBase64, this.listStringFilesNames);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.complete_fields, R.drawable.ic_warning_white_24dp).show();
             }
@@ -199,6 +276,9 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         value.setHint(getString(idStringValue));
         value.setBackgroundResource(R.color.white);
         value.setPadding(10, 20, 10, 20);
+        if (!labelText) {
+            value.setMaxLength(350);
+        }
 
         // insertamos los editText en el linear
         ly.addView(label);

@@ -76,6 +76,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         btnSelectHeaderTakePicture.setOnClickListener(this);
 
         editPjctName = (CustomEditText) findViewById(R.id.edtProjectName);
+        editPjctName.setMaxLength(128);
         alertHeader = dialogHeaderImg();
         alertBody = dialogBodyImg();
 
@@ -204,7 +205,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         if (intent != null && code != 0) {
             dismissBody();
             startActivityForResult(intent, code);
-        }else {
+        } else {
             Tools.showAlertError(this);
         }
     }
@@ -415,6 +416,12 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
         builder.setView(view);
 
         final CustomEditText descriptionProject = (CustomEditText) view.findViewById(R.id.descriptionProject);
+        if (mapDescriptions != null && mapDescriptions.size() > 0) {
+            if (namePhoto != null && namePhoto.get(idPhoto) != null && mapDescriptions.get(namePhoto.get(idPhoto).getName()) != null
+                    && !mapDescriptions.get(namePhoto.get(idPhoto).getName()).equals("")) {
+                descriptionProject.setTextCapitalized(mapDescriptions.get(namePhoto.get(idPhoto).getName().trim()));
+            }
+        }
         CardView cancel = (CardView) view.findViewById(R.id.action_cancel);
         CardView accept = (CardView) view.findViewById(R.id.action_accept);
         CardView delete = (CardView) view.findViewById(R.id.action_delete);
@@ -431,7 +438,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                     @Override
                     public void onClick(View v) {
                         if (!descriptionProject.getText().toString().equals("")) {
-                            mapDescriptions.put(namePhoto.get(idPhoto).getName(), descriptionProject.getText().toString().trim());
+                            mapDescriptions.put(namePhoto.get(idPhoto).getName(), descriptionProject.getText().toString().trim().replace(",", ";"));
                         }
                         dismissDescription();
                         setGrid();
