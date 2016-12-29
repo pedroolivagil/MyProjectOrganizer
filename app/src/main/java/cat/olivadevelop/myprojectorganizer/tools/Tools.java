@@ -189,10 +189,6 @@ public class Tools {
         return Tools.getPrefs().getString(Tools.PREFS_USER_ID, "");
     }
 
-    public static String getUserEmail() {
-        return Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, "");
-    }
-
     public static Bitmap getResizedBitmap(Bitmap bm, float scaleXY) {
         if (bm != null) {
             int width = bm.getWidth();

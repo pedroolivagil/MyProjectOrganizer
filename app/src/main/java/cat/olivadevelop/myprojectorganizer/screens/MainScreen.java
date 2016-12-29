@@ -35,9 +35,9 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
-            Intent settings = new Intent(this, SettingsActivity.class);
-            startActivity(settings);
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) == null) {
+            Intent welcome = new Intent(this, WelcomeScreen.class);
+            startActivity(welcome);
         } else {
             //Obtenemos una referencia al viewgroup SwipeLayout
             swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);

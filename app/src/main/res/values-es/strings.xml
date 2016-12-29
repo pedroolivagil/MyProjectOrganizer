@@ -83,4 +83,7 @@
     <string name="complete_fields">Los campos con valores necesitan una etiqueta y viceversa</string>
     <string name="delete_project">Borrar proyecto</string>
     <string name="edit_project">Editar proyecto</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="username">Tu dirección email</string>
+    <string name="password">Tu contraseña</string>
 </resources>

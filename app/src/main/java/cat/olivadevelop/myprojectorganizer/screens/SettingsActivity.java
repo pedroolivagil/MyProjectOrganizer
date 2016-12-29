@@ -18,7 +18,6 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.CreateNewProjectFile;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomRadioButton;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
@@ -58,7 +57,7 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
         optionSortBy = (LinearLayout) findViewById(R.id.optionSortBy);
         optionSortBy.setOnClickListener(this);
 
-        if (Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null) == null) {
+        if (Tools.getPrefs().getString(Tools.PREFS_USER_ID, null) == null) {
             setEmail();
         } else {
             putEmailInPrefs.setText(Tools.getPrefs().getString(Tools.PREFS_USER_EMAIL, null));
@@ -164,10 +163,9 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
     }
 
     public void saveEmail() {
-        Tools.putInPrefs().putString(Tools.PREFS_USER_EMAIL, putEmailInPrefs.getText().toString()).apply();
         Tools.putInPrefs().putString(Tools.PREFS_USER_ID, Tools.encrypt(putEmailInPrefs.getText().toString())).apply();
         msgSuccess();
-        new CreateNewProjectFile(this).execute();
+        //new CreateNewProjectFile(this).execute();
     }
 
     public AlertDialog orderByDialog() {
