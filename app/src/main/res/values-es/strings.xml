@@ -86,9 +86,14 @@
     <string name="welcome">Bienvenido</string>
     <string name="username">Tu dirección email</string>
     <string name="password">Tu contraseña</string>
-    <string name="signon">Registrarse</string>
-    <string name="in">en la</string>
+    <string name="welcome_signon">Registrarse</string>
     <string name="app">APP</string>
-    <string name="signonwebtoo">Con este registro también podrás acceder a la web (próximamente)</string>
-    <string name="more_security">Y para más seguridad para ti...</string>
+    <string name="new_user_in">en la</string>
+    <string name="new_user_signonwebtoo">Con este registro también podrás acceder a la web (próximamente)</string>
+    <string name="new_user_more_security">Y para más seguridad para ti...</string>
+    <string name="new_user_nif">NIF</string>
+    <string name="new_user_phone">Número de teléfono</string>
+    <string name="new_user_state">Provincia</string>
 </resources>
+
+

@@ -11,7 +11,7 @@ import android.widget.RadioButton;
  * Created by Oliva on 01/11/2016.
  */
 
-public class CustomRadioButton extends RadioButton {
+public class CustomRadioButton extends RadioButton implements Custom {
     public CustomRadioButton(Context context) {
         super(context);
         init();
@@ -33,7 +33,7 @@ public class CustomRadioButton extends RadioButton {
         init();
     }
 
-    private void init() {
+    public void init() {
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
     }
 

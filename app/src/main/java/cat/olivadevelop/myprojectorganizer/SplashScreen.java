@@ -41,9 +41,4 @@ public class SplashScreen extends AppCompatActivity {
         };
         splashThread.start();
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

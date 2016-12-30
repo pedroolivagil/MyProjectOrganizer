@@ -11,11 +11,13 @@ import android.widget.EditText;
 
 import java.util.regex.Pattern;
 
+import cat.olivadevelop.myprojectorganizer.R;
+
 /**
  * Created by Oliva on 01/11/2016.
  */
 
-public class CustomEditText extends EditText {
+public class CustomEditText extends EditText implements Custom {
     public CustomEditText(Context context) {
         super(context);
         init(255);
@@ -37,7 +39,14 @@ public class CustomEditText extends EditText {
         init(255);
     }
 
-    private void init(int maxChars) {
+    @Override
+    public void init() {
+        setBackgroundResource(R.drawable.border_black);
+        setPadding(Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f));
+    }
+
+    public void init(int maxChars) {
+        this.init();
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
         setMaxLength(maxChars);
     }
@@ -65,4 +74,5 @@ public class CustomEditText extends EditText {
         };
         this.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(maxChars)});
     }
+
 }

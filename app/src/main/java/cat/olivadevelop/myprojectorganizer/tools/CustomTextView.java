@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Created by Oliva on 31/10/2016.
  */
 
-public class CustomTextView extends TextView {
+public class CustomTextView extends TextView implements Custom {
     public CustomTextView(Context context) {
         super(context);
         init();
@@ -33,7 +33,7 @@ public class CustomTextView extends TextView {
         init();
     }
 
-    private void init() {
+    public void init() {
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
     }
 

@@ -75,11 +75,6 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
         if (id == R.id.action_edit_project) {
         }
         if (id == R.id.action_delete_project) {
-            /*for (int x = 0; x < ProjectManager.getProjectList().size(); x++) {
-                if (ProjectManager.getProjectList().get(x).getId() == id_project_selected) {
-                    project = ProjectManager.getProjectList().get(x);
-                }
-            }*/
             if (project != null) {
                 try {
                     ProjectManager.delete(this, project);

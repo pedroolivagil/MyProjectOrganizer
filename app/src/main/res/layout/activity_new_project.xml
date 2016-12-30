@@ -21,9 +21,7 @@
             android:id="@+id/edtProjectName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_black"
-            android:hint="@string/p_name"
-            android:padding="@dimen/card_margin" />
+            android:hint="@string/p_name" />
 
         <Space
             android:layout_width="match_parent"

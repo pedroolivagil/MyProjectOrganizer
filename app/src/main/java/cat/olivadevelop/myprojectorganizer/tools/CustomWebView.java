@@ -16,22 +16,30 @@ import cat.olivadevelop.myprojectorganizer.R;
  * Created by Oliva on 01/11/2016.
  */
 
-public class CustomWebView extends WebView {
+public class CustomWebView extends WebView implements Custom {
     public CustomWebView(Context context) {
         super(context);
+        init();
     }
 
     public CustomWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
+    @Override
+    public void init() {
     }
 
     public void setText(String str) {

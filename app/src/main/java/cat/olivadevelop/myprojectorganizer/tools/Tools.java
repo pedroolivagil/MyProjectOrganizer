@@ -391,4 +391,5 @@ public class Tools {
     public static boolean parseBoolean(String string) {
         return string.trim().equals("1");
     }
+
 }

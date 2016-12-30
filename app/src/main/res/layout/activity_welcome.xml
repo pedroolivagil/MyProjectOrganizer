@@ -48,17 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"
-            android:background="@drawable/border_black"
-            android:hint="@string/username"
-            android:padding="@dimen/pad10" />
+            android:hint="@string/username" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar20"
-            android:background="@drawable/border_black"
-            android:hint="@string/password"
-            android:padding="@dimen/pad10" />
+            android:hint="@string/password" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/signin"
@@ -95,7 +91,7 @@
             <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/buttonHeight"
-                android:text="@string/signon"
+                android:text="@string/welcome_signon"
                 android:theme="@style/Button.TextView.Center" />
 
         </android.support.v7.widget.CardView>

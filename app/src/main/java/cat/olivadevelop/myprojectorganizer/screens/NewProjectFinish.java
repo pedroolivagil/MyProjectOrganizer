@@ -257,7 +257,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
             label.setHint(getString(idStringLabel));
             label.setHintTextColor(getResources().getColor(R.color.white));
             label.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            label.setPadding(0, 10, 0, 10);
+            //label.setPadding(0, 10, 0, 10);
         } else {
             label.setVisibility(View.GONE);
             label.setText(ProjectManager.json_project_descript);
@@ -275,7 +275,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
         value.setFilters(new InputFilter[]{new InputFilter.LengthFilter(LIMIT_EDTEXT)});
         value.setHint(getString(idStringValue));
         value.setBackgroundResource(R.color.white);
-        value.setPadding(10, 20, 10, 20);
+        //value.setPadding(10, 20, 10, 20);
         if (!labelText) {
             value.setMaxLength(350);
         }

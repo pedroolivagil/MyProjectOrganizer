@@ -11,7 +11,7 @@ import android.widget.CheckBox;
  * Created by Oliva on 01/11/2016.
  */
 
-public class CustomCheckBox extends CheckBox {
+public class CustomCheckBox extends CheckBox implements Custom {
     public CustomCheckBox(Context context) {
         super(context);
         init();
@@ -33,7 +33,7 @@ public class CustomCheckBox extends CheckBox {
         init();
     }
 
-    private void init() {
+    public void init() {
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
     }
 

@@ -11,9 +11,7 @@
         android:id="@+id/descriptionProject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_black"
-        android:hint="@string/add_descripton_image"
-        android:padding="@dimen/card_margin" />
+        android:hint="@string/add_descripton_image" />
 
     <Space
         android:layout_width="match_parent"
