@@ -21,18 +21,33 @@
     <color name="transparentAll">#00000000</color>
     <color name="transparent">#66000000</color>-->
 
-   <!-- <color name="colorPrimaryDark">#263238</color>
+    <!--<color name="colorPrimaryDark">#263238</color>
     <color name="colorPrimary">#37474f</color>
-    <color name="colorPrimaryAlpha">#5537474f</color>-->
-    <color name="colorPrimary">#E91E63</color>
-    <color name="colorPrimaryDark">#C2185B</color>
-    <color name="colorPrimaryAlpha">#55F8BBD0</color>
-    <!--<color name="colorPrimaryLight">#43c4fd</color>-->
-    <color name="colorPrimaryLight">#F8BBD0</color>
-    <!--<color name="colorAccent">#009688</color>-->
-    <color name="colorAccent">#FF9800</color>
+    <color name="colorPrimaryAlpha">#5537474f</color>
+    <color name="colorPrimaryLight">#43c4fd</color>
+    <color name="colorAccent">#009688</color>
     <color name="colorAccentAlphaZero">#00009688</color>
     <color name="colorAlert">#c04f5a</color>
+    <color name="primaryText">#212121</color>
+    <color name="primaryLight">#D7CCC8</color>
+    <color name="secondaryText">#757575</color>
+    <color name="secondaryLight">#ceedea</color>
+    <color name="divider">#DDDDDD</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="transparentFull">#00000000</color>
+    <color name="transparentBlack">#66000000</color>
+    <color name="transparentWhite">#CCFFFFFF</color>
+    <color name="black">#000000</color>-->
+
+    <!-- Rosado -->
+    <color name="colorPrimary">#d81b60</color>
+    <color name="colorPrimaryDark">#880e4f</color>
+    <color name="colorPrimaryAlpha">#f8bbd0</color>
+    <color name="colorPrimaryLight">#f8bbd0</color>
+    <color name="colorAccent">#6a1b9a</color>
+    <color name="colorAccentAlphaZero">#00009688</color>
+    <color name="colorAlert">#f48fb1</color>
     <color name="primaryText">#212121</color>
     <color name="primaryLight">#D7CCC8</color>
     <color name="secondaryText">#757575</color>

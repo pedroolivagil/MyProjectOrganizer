@@ -57,7 +57,8 @@
             android:name=".screens.ProjectSelected"
             android:label="@string/toolbarProjetSelected"
             android:parentActivityName=".screens.MainScreen" />
-        <activity android:name=".screens.WelcomeScreen"></activity>
+        <activity android:name=".screens.WelcomeScreen" />
+        <activity android:name=".screens.SignOnScreen"></activity>
     </application>
 
 </manifest>

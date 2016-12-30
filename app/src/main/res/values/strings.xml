@@ -88,5 +88,10 @@
     <string name="welcome">Welcome</string>
     <string name="username">Your email address</string>
     <string name="password">Your password</string>
-    <string name="login">Log In</string>
+    <string name="copyright" translatable="false">OlivaDevelop &#169; 2016</string>
+    <string name="signon">Sign On in</string>
+    <string name="in">in the</string>
+    <string name="app">APP</string>
+    <string name="signonwebtoo">With this registration you can also access the web (coming soon)</string>
+    <string name="more_security">And for more security for you...</string>
 </resources>
