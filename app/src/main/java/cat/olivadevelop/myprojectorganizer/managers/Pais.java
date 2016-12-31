@@ -50,6 +50,10 @@ public class Pais {
         } else {
             name = getNombre();
         }
-        return ("(" + getISO().toUpperCase() + ")").concat(" ").concat(name);
+        String iso = "";
+        if (!getISO().equals("00")) {
+            iso = ("(" + getISO().toUpperCase() + ")").concat(" ");
+        }
+        return iso.concat(name);
     }
 }

@@ -42,7 +42,11 @@ public class CustomEditText extends EditText implements Custom {
     @Override
     public void init() {
         setBackgroundResource(R.drawable.border_black);
-        setPadding(Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f), Tools.getDP(getContext(), 8f));
+        setPadding(getDP(getContext(), 8f), getDP(getContext(), 8f), getDP(getContext(), 8f), getDP(getContext(), 8f));
+    }
+
+    private int getDP(Context context, float px) {
+        return (int) (px * context.getResources().getDisplayMetrics().density);
     }
 
     public void init(int maxChars) {

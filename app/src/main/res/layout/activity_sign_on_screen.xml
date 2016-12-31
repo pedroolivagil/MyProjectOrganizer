@@ -18,12 +18,13 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <cat.olivadevelop.myprojectorganizer.tools.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar20"
             android:text="@string/new_user_signonwebtoo"
-            android:textSize="@dimen/size16"/>
+            android:textSize="@dimen/size16" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
             android:layout_width="match_parent"
@@ -63,10 +64,29 @@
             android:hint="@string/new_user_phone"
             android:padding="@dimen/pad10" />
 
-        <cat.olivadevelop.myprojectorganizer.tools.CustomSpinner
-            android:id="@+id/spinner_paises"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mar10">
+
+            <cat.olivadevelop.myprojectorganizer.tools.CustomSpinner
+                android:id="@+id/spinner_paises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/mar10"
+                android:paddingTop="@dimen/pad2"
+                android:src="@drawable/ic_collapse_00008"
+                android:tint="@color/colorPrimary"/>
+
+        </RelativeLayout>
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
             android:layout_width="match_parent"
