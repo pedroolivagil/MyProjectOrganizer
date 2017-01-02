@@ -27,6 +27,7 @@
             android:textSize="@dimen/size16" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
+            android:id="@+id/new_user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"
@@ -34,6 +35,7 @@
             android:padding="@dimen/pad10" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
+            android:id="@+id/new_user_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"
@@ -50,6 +52,7 @@
             android:textSize="@dimen/size16" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
+            android:id="@+id/new_user_nif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"
@@ -57,11 +60,13 @@
             android:padding="@dimen/pad10" />
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
-            android:id="@+id/customEditText"
+            android:id="@+id/new_user_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"
             android:hint="@string/new_user_phone"
+            android:inputType="phone"
+            android:maxLines="1"
             android:padding="@dimen/pad10" />
 
         <RelativeLayout
@@ -89,6 +94,7 @@
         </RelativeLayout>
 
         <cat.olivadevelop.myprojectorganizer.tools.CustomEditText
+            android:id="@+id/new_user_prov"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/mar10"

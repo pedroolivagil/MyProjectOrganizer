@@ -10,12 +10,18 @@ import java.util.concurrent.ExecutionException;
 import cat.olivadevelop.myprojectorganizer.R;
 import cat.olivadevelop.myprojectorganizer.managers.Pais;
 import cat.olivadevelop.myprojectorganizer.managers.PaisManager;
+import cat.olivadevelop.myprojectorganizer.tools.CustomEditText;
 import cat.olivadevelop.myprojectorganizer.tools.CustomSpinner;
 import cat.olivadevelop.myprojectorganizer.tools.PermisionsActivity;
 
 public class SignOnScreen extends PermisionsActivity {
 
     CustomSpinner spinner_paises;
+    CustomEditText new_user_email;
+    CustomEditText new_user_pass;
+    CustomEditText new_user_nif;
+    CustomEditText new_user_phone;
+    CustomEditText new_user_prov;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +47,17 @@ public class SignOnScreen extends PermisionsActivity {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+        new_user_email = (CustomEditText) findViewById(R.id.new_user_email);
+        new_user_pass = (CustomEditText) findViewById(R.id.new_user_pass);
+        new_user_nif = (CustomEditText) findViewById(R.id.new_user_nif);
+        new_user_phone = (CustomEditText) findViewById(R.id.new_user_phone);
+        new_user_prov = (CustomEditText) findViewById(R.id.new_user_prov);
+
+        new_user_email.setMaxLength(255);
+        new_user_pass.setMaxLength(32);
+        new_user_nif.setMaxLength(12);
+        new_user_phone.setMaxLength(15);
+        new_user_prov.setMaxLength(80);
     }
 }

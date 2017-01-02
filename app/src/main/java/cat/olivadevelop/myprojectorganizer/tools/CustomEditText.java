@@ -52,7 +52,10 @@ public class CustomEditText extends EditText implements Custom {
     public void init(int maxChars) {
         this.init();
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
-        setMaxLength(maxChars);
+        this.setMaxLength(maxChars);
+        this.setMaxLines(1);
+        this.setLines(1);
+        this.setSingleLine(true);
     }
 
     public void setBold() {
