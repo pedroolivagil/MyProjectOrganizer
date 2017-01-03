@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.managers;
+package cat.olivadevelop.myprojectorganizer.manageData;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

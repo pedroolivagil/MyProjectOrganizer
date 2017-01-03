@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.Project;
+import cat.olivadevelop.myprojectorganizer.entities.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;
 import cat.olivadevelop.myprojectorganizer.tools.CustomWebView;

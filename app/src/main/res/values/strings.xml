@@ -97,4 +97,5 @@
     <string name="new_user_nif">NIF</string>
     <string name="new_user_phone">Phone number</string>
     <string name="new_user_state">State</string>
+    <string name="pgd_creating_user">Creating user...</string>
 </resources>

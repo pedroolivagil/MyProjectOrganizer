@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.managers;
+package cat.olivadevelop.myprojectorganizer.entities;
 
 /**
  * Created by Oliva on 30/12/2016.

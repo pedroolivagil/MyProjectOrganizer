@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.managers;
+package cat.olivadevelop.myprojectorganizer.manageData;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 
+import cat.olivadevelop.myprojectorganizer.entities.Project;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

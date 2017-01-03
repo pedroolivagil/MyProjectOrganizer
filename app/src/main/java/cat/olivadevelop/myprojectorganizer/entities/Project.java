@@ -1,4 +1,4 @@
-package cat.olivadevelop.myprojectorganizer.managers;
+package cat.olivadevelop.myprojectorganizer.entities;
 
 import org.json.JSONArray;
 import org.json.JSONException;

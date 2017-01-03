@@ -18,7 +18,7 @@ import com.squareup.picasso.Transformation;
 import java.util.ArrayList;
 
 import cat.olivadevelop.myprojectorganizer.R;
-import cat.olivadevelop.myprojectorganizer.managers.Project;
+import cat.olivadevelop.myprojectorganizer.entities.Project;
 import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 import cat.olivadevelop.myprojectorganizer.screens.ProjectSelected;
 import cat.olivadevelop.myprojectorganizer.tools.CustomTextView;

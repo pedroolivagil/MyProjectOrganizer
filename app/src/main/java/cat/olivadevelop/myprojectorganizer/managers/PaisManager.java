@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import cat.olivadevelop.myprojectorganizer.entities.Pais;
+import cat.olivadevelop.myprojectorganizer.manageData.CountryLoader;
 import cat.olivadevelop.myprojectorganizer.tools.Tools;
 
 import static cat.olivadevelop.myprojectorganizer.tools.Tools.HOSTNAME;
