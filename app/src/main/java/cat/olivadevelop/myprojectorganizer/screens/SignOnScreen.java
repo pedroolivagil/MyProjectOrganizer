@@ -2,7 +2,6 @@ package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -91,8 +90,7 @@ public class SignOnScreen extends PermisionsActivity implements View.OnClickList
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // acabar de establecer el idioma al seleccionar
-        Log.e("ITEM_CLICK", "pos: " + position + "; id: " + id + "; view:" + view + "; parent: " + parent);
-        Log.e("ITEM_CLICK", "ONLY PARENT" + parent.getItemAtPosition(position));
+        currentPais = ((Pais) parent.getItemAtPosition(position)).getId();
     }
 
     @Override
