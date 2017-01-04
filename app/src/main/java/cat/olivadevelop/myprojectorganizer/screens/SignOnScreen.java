@@ -2,6 +2,7 @@ package cat.olivadevelop.myprojectorganizer.screens;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -20,13 +21,14 @@ import cat.olivadevelop.myprojectorganizer.tools.PermisionsActivity;
 
 public class SignOnScreen extends PermisionsActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    CardView signon;
-    CustomSpinner spinner_paises;
-    CustomEditText new_user_email;
-    CustomEditText new_user_pass;
-    CustomEditText new_user_nif;
-    CustomEditText new_user_phone;
-    CustomEditText new_user_prov;
+    private CardView signupuser;
+    private CustomSpinner spinner_paises;
+    private CustomEditText new_user_email;
+    private CustomEditText new_user_pass;
+    private CustomEditText new_user_nif;
+    private CustomEditText new_user_phone;
+    private CustomEditText new_user_prov;
+    private Pais currentPais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,8 @@ public class SignOnScreen extends PermisionsActivity implements View.OnClickList
             setPermissionCamera();
         }
 
-        signon = (CardView) findViewById(R.id.signon);
+        signupuser = (CardView) findViewById(R.id.signupuser);
+        signupuser.setOnClickListener(this);
         new_user_email = (CustomEditText) findViewById(R.id.new_user_email);
         new_user_pass = (CustomEditText) findViewById(R.id.new_user_pass);
         new_user_nif = (CustomEditText) findViewById(R.id.new_user_nif);
@@ -68,20 +71,23 @@ public class SignOnScreen extends PermisionsActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == signon) {
+        if (v == signupuser) {
             signOnDB();
         }
     }
 
     private void signOnDB() {
         if (new_user_email != null && new_user_pass != null) {
-            User user = new User(new_user_email.getText().toString(), new_user_pass.getText().toString());
+            User user = new User();
+            user.setCorreo(new_user_email.getText().toString());
+            user.setEncryptedPassword(new_user_pass.getText().toString());
             user.setEncryptedID(new_user_email.getText().toString());
             user.setNif(new_user_nif.getText().toString());
             user.setPhone(new_user_phone.getText().toString());
             user.setPoblacion(new_user_prov.getText().toString());
-            user.setPais(new Pais());
+            user.setPais(getCurrentPais());
             //UserManager.create(this, user);
+            Log.e("USER", "" + user.toString());
         } else {
             // mensaje email y password obligatorios
         }
@@ -90,11 +96,18 @@ public class SignOnScreen extends PermisionsActivity implements View.OnClickList
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // acabar de establecer el idioma al seleccionar
-        currentPais = ((Pais) parent.getItemAtPosition(position)).getId();
+        currentPais = ((Pais) parent.getItemAtPosition(position));
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public Pais getCurrentPais() {
+        if (currentPais == null) {
+            currentPais = new Pais(0, "", "");
+        }
+        return currentPais;
     }
 }

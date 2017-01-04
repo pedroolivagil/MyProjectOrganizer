@@ -119,7 +119,7 @@
             android:padding="@dimen/pad10" />
 
         <android.support.v7.widget.CardView
-            android:id="@+id/signon"
+            android:id="@+id/signupuser"
             android:layout_width="match_parent"
             android:layout_height="@dimen/buttonHeight"
             android:layout_gravity="center_horizontal"

@@ -35,7 +35,7 @@ public class User {
     }
 
     public void setEncryptedID(String id_usuario) {
-        this.id_usuario = Tools.encrypt(id_usuario);
+        this.id_usuario = Tools.encrypt(id_usuario).toUpperCase();
     }
 
     public String getCorreo() {
@@ -52,6 +52,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setEncryptedPassword(String password) {
+        this.password = Tools.encrypt(password);
     }
 
     public String getFecha_alta() {
@@ -100,5 +103,20 @@ public class User {
 
     public void setPoblacion(String poblacion) {
         this.poblacion = poblacion;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id_usuario='" + id_usuario + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", fecha_alta='" + fecha_alta + '\'' +
+                ", flag_activo='" + flag_activo + '\'' +
+                ", nif='" + nif + '\'' +
+                ", phone='" + phone + '\'' +
+                ", pais=" + pais +
+                ", poblacion='" + poblacion + '\'' +
+                '}';
     }
 }
