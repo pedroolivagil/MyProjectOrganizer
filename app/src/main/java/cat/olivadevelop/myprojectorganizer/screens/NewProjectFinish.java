@@ -192,7 +192,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
                     e.printStackTrace();
                 }
             } else {
-                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.complete_fields, R.drawable.ic_warning_white_24dp).show();
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.complete_fields, R.drawable.ic_warning_white_24dp);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -202,7 +202,7 @@ public class NewProjectFinish extends GenericScreen implements View.OnClickListe
     public void onClick(View v) {
         if (v == btnAddField) {
             if (countFields >= 10) {
-                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.err_max_fields, R.drawable.ic_warning_white_24dp).show();
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.err_max_fields, R.drawable.ic_warning_white_24dp);
             } else {
                 generateNewField(R.string.type_field, R.string.value_field, true);
                 scrollview.post(new Runnable() {

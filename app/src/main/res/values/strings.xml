@@ -89,13 +89,16 @@
     <string name="username">Your email address</string>
     <string name="password">Your password</string>
     <string name="copyright" translatable="false">OlivaDevelop &#169; 2016</string>
-    <string name="welcome_signon">Sign On in</string>
+    <string name="welcome_signon">Sign Up</string>
     <string name="app">APP</string>
     <string name="new_user_in">in the</string>
     <string name="new_user_signonwebtoo">With this registration you can also access the web (coming soon)</string>
-    <string name="new_user_more_security">And for more security for you...</string>
+    <string name="new_user_more_security">And for more security for you…</string>
     <string name="new_user_nif">NIF</string>
     <string name="new_user_phone">Phone number</string>
     <string name="new_user_state">State</string>
-    <string name="pgd_creating_user">Creating user...</string>
+    <string name="pgd_creating_user">Creating user…</string>
+    <string name="new_user_accept_conditions">I accept the terms and conditions</string>
+    <string name="new_user_notermschecked">You have to accept the terms</string>
+    <string name="new_user_fieldsrequired">Email and password are required</string>
 </resources>

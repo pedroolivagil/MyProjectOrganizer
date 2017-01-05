@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -50,6 +53,10 @@ import cat.olivadevelop.myprojectorganizer.managers.ProjectManager;
 public class Tools {
 
     //public static final String HOSTNAME = "http://projects.codeduo.cat";
+    public static final int REQUEST_CODE = 1;
+    public static final int INFO_CODE = 1;
+    public static final int WARN_CODE = 2;
+    public static final int ERRO_CODE = 3;
     public static final String SERVER = "10.0.2.2";
     public static final String HOSTNAME = "http://" + SERVER + "/myprojectsorg";
     //public static final String HOSTNAME = "http://192.168.1.43/myprojectsorg";
@@ -76,6 +83,11 @@ public class Tools {
         prefs = c.getSharedPreferences(Tools.PREFS_NAME, Context.MODE_PRIVATE);
         ProjectManager.setDefaultPrefs();
         setProjectListResult(false);
+    }
+
+    public static void getDeviceEmails(Activity a) {
+        Intent googlePicker = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE}, true, null, null, null, null);
+        a.startActivityForResult(googlePicker, REQUEST_CODE);
     }
 
     private static boolean isNetworkActive(Context c) {
@@ -126,21 +138,21 @@ public class Tools {
         return generateID().substring(0, length);
     }
 
-    public static Snackbar newSnackBar(View v, Context cnxt, int string) {
-        return Snackbar.make(v, cnxt.getString(string), Snackbar.LENGTH_LONG);
+    public static void newSnackBar(View v, String string) {
+        Snackbar.make(v, string, Snackbar.LENGTH_LONG).show();
     }
 
-    public static Snackbar newSnackBar(View v, String string) {
-        return Snackbar.make(v, string, Snackbar.LENGTH_LONG);
+    public static void newSnackBar(View v, Context cnxt, int string) {
+        Snackbar.make(v, cnxt.getString(string), Snackbar.LENGTH_LONG).show();
     }
 
-    public static Snackbar newSnackBarWithIcon(View v, Context cnxt, int string, int icon) {
+    public static void newSnackBarWithIcon(View v, Context cnxt, int string, int icon) {
         Snackbar snackbar = Snackbar.make(v, string, Snackbar.LENGTH_LONG);
         View snackbarLayout = snackbar.getView();
         TextView textView = (TextView) snackbarLayout.findViewById(android.support.design.R.id.snackbar_text);
         textView.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
         textView.setCompoundDrawablePadding(cnxt.getResources().getDimensionPixelOffset(R.dimen.snackbar_icon_padding));
-        return snackbar;
+        snackbar.show();
     }
 
     public static Uri getImageContentUri(Context context, File imageFile) {

@@ -79,5 +79,6 @@
     <dimen name="size11">11sp</dimen>
     <dimen name="size28">28sp</dimen>
     <dimen name="size26">26sp</dimen>
+    <dimen name="mar40">40dp</dimen>
 
 </resources>

@@ -30,7 +30,7 @@ public class WelcomeScreen extends GenericScreen implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v == signon){
-            Intent sign = new Intent(this,SignOnScreen.class);
+            Intent sign = new Intent(this,SignUpScreen.class);
             startActivity(sign);
         }
     }

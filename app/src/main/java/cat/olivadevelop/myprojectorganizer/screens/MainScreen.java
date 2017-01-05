@@ -152,7 +152,7 @@ public class MainScreen extends GenericScreen implements View.OnClickListener, S
 
     public void autoRefresh() {
         if (!Tools.isNetworkAvailable(this)) {
-            Tools.newSnackBar(findViewById(R.id.swipeRefresh), this, R.string.cannot_be_connect).show();
+            Tools.newSnackBar(findViewById(R.id.swipeRefresh), this, R.string.cannot_be_connect);
             if (swipeLayout != null) {
                 swipeLayout.setRefreshing(false);
             }

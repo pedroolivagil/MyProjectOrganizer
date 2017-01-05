@@ -97,12 +97,12 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
             if (!putEmailInPrefs.getText().toString().equals("")) {
                 saveEmail();
             } else {
-                Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp).show();
+                Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.notnull_field, R.drawable.ic_warning_white_24dp);
             }
             return true;
         } else if (id == R.id.action_clear_prefs) {
             Tools.putInPrefs().clear().apply();
-            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.prefs_clean, R.drawable.ic_warning_white_24dp).show();
+            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.prefs_clean, R.drawable.ic_warning_white_24dp);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -117,7 +117,7 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
             showAlert();
         }
         if (v == optionDelAllProjects) {
-            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.soon, R.drawable.ic_warning_white_24dp).show();
+            Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.soon, R.drawable.ic_warning_white_24dp);
         }
         if (v == optionSeeAllPermissions) { // desactivado
             Intent intent = new Intent();
@@ -237,6 +237,6 @@ public class SettingsActivity extends GenericScreen implements View.OnClickListe
     }
 
     public void msgSuccess() {
-        Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp).show();
+        Tools.newSnackBarWithIcon(findViewById(R.id.activity_settings), this, R.string.settings_updated, R.drawable.ic_info_white_24dp);
     }
 }

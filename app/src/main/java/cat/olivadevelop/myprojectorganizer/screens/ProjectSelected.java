@@ -171,8 +171,7 @@ public class ProjectSelected extends GenericScreen implements View.OnScrollChang
     private void msgFailReadProject() {
         Tools.newSnackBarWithIcon(findViewById(R.id.activity_project_selected), this,
                 R.string.error_project_selected,
-                R.drawable.ic_warning_white_24dp)
-                .show();
+                R.drawable.ic_warning_white_24dp);
     }
 
     @Deprecated

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +46,7 @@ public class CreateUser extends AsyncTask<RequestBody, Void, Boolean> {
                     .build();
             Response response = client.newCall(request).execute();
             retorno = response.body().string();
+            Log.e("", retorno);
             response.close();
         } catch (IOException e) {
             e.printStackTrace();

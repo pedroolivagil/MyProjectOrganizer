@@ -157,7 +157,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                     code = TAKE_PICTURE;
                     insertMedia(headerFilename);
                 } else {
-                    Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_perms_camera_storage, R.drawable.ic_warning_white_24dp).show();
+                    Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_perms_camera_storage, R.drawable.ic_warning_white_24dp);
                     setPermissionCamera();
                     setPermissionStorage();
                 }
@@ -192,7 +192,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                     code = TAKE_PICTURE;
                     insertMedia(bodyFilename);
                 } else {
-                    Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_perms_camera_storage, R.drawable.ic_warning_white_24dp).show();
+                    Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_perms_camera_storage, R.drawable.ic_warning_white_24dp);
                     setPermissionCamera();
                     setPermissionStorage();
                 }
@@ -234,7 +234,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 alertBody.show();
             }
         } else {
-            Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_max_pictures_project, R.drawable.ic_warning_white_24dp).show();
+            Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_max_pictures_project, R.drawable.ic_warning_white_24dp);
         }
     }
 
@@ -293,7 +293,7 @@ public class NewProject extends PermisionsActivity implements View.OnClickListen
                 }
                 startActivity(nextStep);
             } else {
-                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp).show();
+                Tools.newSnackBarWithIcon(getWindow().getCurrentFocus(), this, R.string.fail_pjt_name, R.drawable.ic_warning_white_24dp);
             }
             return true;
         }

@@ -7,6 +7,8 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
 
+import cat.olivadevelop.myprojectorganizer.R;
+
 /**
  * Created by Oliva on 01/11/2016.
  */
@@ -34,6 +36,7 @@ public class CustomCheckBox extends CheckBox implements Custom {
     }
 
     public void init() {
+        setBackgroundResource(R.drawable.border_black);
         this.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Tools.FONT_DEFAULT));
     }
 

@@ -94,6 +94,10 @@
     <string name="new_user_nif">NIF</string>
     <string name="new_user_phone">Número de teléfono</string>
     <string name="new_user_state">Provincia</string>
+    <string name="new_user_accept_conditions">Acepto los términos y condiciones</string>
+    <string name="pgd_creating_user">Creando usuario...</string>
+    <string name="new_user_notermschecked">Tienes aceptar los términos</string>
+    <string name="new_user_fieldsrequired">Email y contraseña son obligatorios</string>
 </resources>
 
 
